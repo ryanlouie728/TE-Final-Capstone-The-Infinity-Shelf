@@ -32,12 +32,12 @@ body {
 #app {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 1fr 200px;
+  grid-template-columns: 1fr;
   grid-template-rows: 100px 1fr 100px;
   grid-template-areas: 
-    "nav nav"
-    "body body"
-    "footer footer";
+    "nav"
+    "body"
+    "footer";
 }
 
 header {
@@ -65,7 +65,6 @@ header {
     width: 200px;
     background-color: lightgray;
     border: solid 2px darkgray;
-    
 }
 
 </style>
