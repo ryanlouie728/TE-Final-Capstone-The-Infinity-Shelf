@@ -26,8 +26,9 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
+      //change requiresAuth back to true
     },
     {
       path: "/login",
