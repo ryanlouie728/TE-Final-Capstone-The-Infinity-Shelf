@@ -1,0 +1,69 @@
+package com.techelevator.dao;
+
+import com.techelevator.model.SimpleComicDto;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+public class JdbcComicDao implements ComicDao {
+    private final JdbcTemplate jdbcTemplate;
+
+    public JdbcComicDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<SimpleComicDto> listSimple() {
+        String sql =
+                "SELECT * " +
+                "FROM comic;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
+        return simpleComicDtoListMapper(rowSet);
+    }
+
+    @Override
+    public List<SimpleComicDto> listSimpleByCollection(int collectionId) {
+        String sql =
+                "SELECT comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "FROM comic " +
+                "JOIN collection_comic AS coll_com ON coll_com.comic_id = comic.comic_id " +
+                "WHERE coll_com.coll_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId);
+        return simpleComicDtoListMapper(rowSet);
+    }
+
+    @Override
+    public void createComic(SimpleComicDto comic) {
+        String sql =
+                "INSERT INTO comic (title, issue_number, description, thumbnail) " +
+                "VALUES (?, ?, ?, ?);";
+        jdbcTemplate.update(sql, comic.getTitle(), comic.getIssueNumber(), comic.getDescription(), comic.getThumbnailUrl());
+    }
+
+    public List<SimpleComicDto> simpleComicDtoListMapper(SqlRowSet rowSet) {
+        List<SimpleComicDto> comics = new ArrayList<>();
+        while (rowSet.next()) {
+            comics.add(simpleComicDtoMapper(rowSet));
+        }
+        return comics;
+    }
+
+    public SimpleComicDto simpleComicDtoMapper(SqlRowSet rowSet) {
+        try {
+            SimpleComicDto comic = new SimpleComicDto();
+            comic.setTitle(rowSet.getString("title"));
+            comic.setIssueNumber(rowSet.getString("issue_number"));
+            comic.setDescription(rowSet.getString("description"));
+            comic.setThumbnailUrl(rowSet.getString("thumbnail"));
+            return comic;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+}
