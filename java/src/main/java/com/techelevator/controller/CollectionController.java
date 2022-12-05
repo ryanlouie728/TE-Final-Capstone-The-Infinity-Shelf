@@ -4,6 +4,7 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.model.SimpleCollectionDto;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,5 +20,15 @@ public class CollectionController {
     @GetMapping("/simple/{userId}")
     public List<SimpleCollectionDto> listSimpleByUserId(@PathVariable Integer userId) {
         return collectionDao.listCollectionsByUserId(userId);
+    }
+
+    @PostMapping("")
+    public void createCollection(@Valid @RequestBody SimpleCollectionDto collection) {
+        collectionDao.createCollection(collection);
+    }
+
+    @PutMapping("")
+    public void updateCollection(@Valid @RequestBody SimpleCollectionDto collection) {
+        collectionDao.updateCollection(collection);
     }
 }

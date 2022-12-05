@@ -1,12 +1,27 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotNull;
+
 public class SimpleCollectionDto {
+
+    private Integer collectionId;
+    @NotNull
     private Integer userId;
+    @NotNull
     private String collectionName;
+
     private String collectionDescription;
     private String collectionCoverUrl;
 
     private Boolean collectionPublic;
+
+    public Integer getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(Integer collectionId) {
+        this.collectionId = collectionId;
+    }
 
     public Integer getUserId() {
         return userId;

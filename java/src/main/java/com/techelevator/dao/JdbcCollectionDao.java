@@ -19,11 +19,28 @@ public class JdbcCollectionDao implements CollectionDao {
     @Override
     public List<SimpleCollectionDto> listCollectionsByUserId(int userId) {
         String sql =
-                "SELECT user_id, coll_name, coll_description, coll_cover, coll_public " +
+                "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
                 "FROM collection " +
                 "WHERE user_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
         return simpleCollectionDtoListMapper(rowSet);
+    }
+
+    @Override
+    public void createCollection(SimpleCollectionDto collection) {
+        String sql =
+                "INSERT INTO collection (user_id, coll_name) " +
+                "VALUES (?, ?);";
+        jdbcTemplate.update(sql, collection.getUserId(), collection.getCollectionName());
+    }
+
+    @Override
+    public void updateCollection(SimpleCollectionDto collection) {
+        String sql =
+                "UPDATE collection " +
+                "SET coll_name = ?, coll_description = ?, coll_cover = ?, coll_public = ? " +
+                "WHERE coll_id = ?;";
+        jdbcTemplate.update(sql, collection.getCollectionName(), collection.getCollectionDescription(), collection.getCollectionCoverUrl(), collection.getCollectionPublic(), collection.getCollectionId());
     }
 
     private List<SimpleCollectionDto> simpleCollectionDtoListMapper(SqlRowSet rowSet) {
@@ -37,6 +54,7 @@ public class JdbcCollectionDao implements CollectionDao {
     private  SimpleCollectionDto simpleCollectionDtoMapper(SqlRowSet rowSet) {
         try {
             SimpleCollectionDto collection = new SimpleCollectionDto();
+            collection.setCollectionId(rowSet.getInt("coll_id"));
             collection.setUserId(rowSet.getInt("user_id"));
             collection.setCollectionName(rowSet.getString("coll_name"));
             collection.setCollectionDescription(rowSet.getString("coll_description"));
