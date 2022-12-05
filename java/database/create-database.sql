@@ -1,14 +1,4 @@
-BEGIN TRANSACTION;
-
-DROP TABLE IF EXISTS users, comic, collection, collection_comic CASCADE;
-
-CREATE TABLE users (
-	user_id SERIAL,
-	username varchar(50) NOT NULL UNIQUE,
-	password_hash varchar(200) NOT NULL,
-	role varchar(50) NOT NULL,
-	CONSTRAINT PK_user PRIMARY KEY (user_id)
-);
+DROP TABLE IF EXISTS comic, collection, collection_comic CASCADE;
 
 
 CREATE TABLE comic (
@@ -26,7 +16,6 @@ CREATE TABLE collection (
 	coll_name VARCHAR(150),
 	coll_description VARCHAR(250),
 	coll_cover VARCHAR(250),
-	coll_public BOOLEAN DEFAULT false,
 	CONSTRAINT PK_collection PRIMARY KEY (coll_id),
 	CONSTRAINT FK_collection_cover FOREIGN KEY (coll_cover) REFERENCES comic(thumbnail),
 	CONSTRAINT FK_collection_user FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -39,6 +28,3 @@ CREATE TABLE collection_comic (
 	CONSTRAINT FK_collection_comic_coll_id FOREIGN KEY (coll_id) REFERENCES collection(coll_id),
 	CONSTRAINT FK_collection_comic_comic_id FOREIGN KEY (comic_id) REFERENCES comic(comic_id)
 );
-
-
-COMMIT TRANSACTION;
