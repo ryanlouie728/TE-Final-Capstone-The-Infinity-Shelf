@@ -10,4 +10,6 @@ public interface CollectionDao {
     void createCollection(SimpleCollectionDto collection);
 
     void updateCollection(SimpleCollectionDto collection);
+
+    List<SimpleCollectionDto> listPublicCollections();
 }

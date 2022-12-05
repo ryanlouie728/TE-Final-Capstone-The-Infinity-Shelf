@@ -43,6 +43,16 @@ public class JdbcCollectionDao implements CollectionDao {
         jdbcTemplate.update(sql, collection.getCollectionName(), collection.getCollectionDescription(), collection.getCollectionCoverUrl(), collection.getCollectionPublic(), collection.getCollectionId());
     }
 
+    @Override
+    public List<SimpleCollectionDto> listPublicCollections() {
+        String sql =
+                "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
+                "FROM collection " +
+                "WHERE coll_public = true;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
+        return simpleCollectionDtoListMapper(rowSet);
+    }
+
     private List<SimpleCollectionDto> simpleCollectionDtoListMapper(SqlRowSet rowSet) {
         List<SimpleCollectionDto> collections = new ArrayList<>();
         while (rowSet.next()) {

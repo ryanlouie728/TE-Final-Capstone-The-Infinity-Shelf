@@ -28,7 +28,7 @@ public class JdbcComicDao implements ComicDao {
     @Override
     public List<SimpleComicDto> listSimpleByCollection(int collectionId) {
         String sql =
-                "SELECT comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail " +
                 "FROM comic " +
                 "JOIN collection_comic AS coll_com ON coll_com.comic_id = comic.comic_id " +
                 "WHERE coll_com.coll_id = ?;";
@@ -55,6 +55,7 @@ public class JdbcComicDao implements ComicDao {
     public SimpleComicDto simpleComicDtoMapper(SqlRowSet rowSet) {
         try {
             SimpleComicDto comic = new SimpleComicDto();
+            comic.setId(rowSet.getInt("comic_id"));
             comic.setTitle(rowSet.getString("title"));
             comic.setIssueNumber(rowSet.getString("issue_number"));
             comic.setDescription(rowSet.getString("description"));

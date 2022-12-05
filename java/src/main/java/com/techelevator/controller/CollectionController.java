@@ -31,4 +31,9 @@ public class CollectionController {
     public void updateCollection(@Valid @RequestBody SimpleCollectionDto collection) {
         collectionDao.updateCollection(collection);
     }
+
+    @GetMapping("")
+    public List<SimpleCollectionDto> listPublicCollections() {
+        return collectionDao.listPublicCollections();
+    }
 }

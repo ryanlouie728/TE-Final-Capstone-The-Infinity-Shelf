@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 
 public class SimpleComicDto {
 
+
+    private Integer id;
     @NotNull
     @NotBlank(message = "The title field must not be blank")
     private String title;
@@ -13,6 +15,14 @@ public class SimpleComicDto {
     private String issueNumber;
     private String description;
     private String thumbnailUrl;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

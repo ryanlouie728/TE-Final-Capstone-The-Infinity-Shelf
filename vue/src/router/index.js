@@ -6,7 +6,9 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Collections from '../views/Collections.vue'
-import CollectionDetails from '../components/CollectionDetails.vue'
+import CollectionDetails from '../views/CollectionDetails.vue'
+import PublicCollections from '../views/PublicCollections.vue'
+
 Vue.use(Router)
 
 /**
@@ -32,13 +34,24 @@ const router = new Router({
       //change requiresAuth back to true
     },
     {
-      path: '/collections/:id',
-      name: 'collection-details',
-      component: CollectionDetails
-    },
-    {
       path: '/collections',
       name: 'collections',
+      component: PublicCollections,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/collections/:id',
+      name: 'collection-details',
+      component: CollectionDetails,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/collections/:username',
+      name: 'user-collections',
       component: Collections,
       meta: {
         requiresAuth: true

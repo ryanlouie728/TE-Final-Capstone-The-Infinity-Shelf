@@ -7,5 +7,8 @@ const http = axios.create({
 export default {
     listByUserId(id) {
         return http.get(`/collections/simple/${id}`)
+    },
+    listPublic() {
+        return http.get(`/collections`)
     }
 }
