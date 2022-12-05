@@ -61,4 +61,11 @@ header {
   flex-direction: row;
 }
 
+#sidebar {
+    width: 200px;
+    background-color: lightgray;
+    border: solid 2px darkgray;
+    
+}
+
 </style>
