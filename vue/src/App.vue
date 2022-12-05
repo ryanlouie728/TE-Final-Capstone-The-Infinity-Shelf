@@ -6,23 +6,59 @@
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: '' }">All Collections</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: '' }">My Collections</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
+      <router-link v-bind:to="{ name: 'collections' }">My Collections</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
+      <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
     </div>
-    <router-view />
+    <router-view id="router-view" />
   </div>
 </template>
 
 <style>
+html {
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 8px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  grid-template-rows: 100px 1fr 100px;
+  grid-template-areas: 
+    "nav nav"
+    "body body"
+    "footer footer";
+}
+
+header {
+  grid-area: nav;
+}
+
 #nav {
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    background-color: #BFBDB8;
-    border-top: solid 1px black;
-    border-bottom: solid 1px black;
+  grid-area: nav;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  background-color: #BFBDB8;
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+}
+
+#router-view {
+  grid-area: body;
+  display: flex;
+  flex-direction: row;
 }
 
 </style>
