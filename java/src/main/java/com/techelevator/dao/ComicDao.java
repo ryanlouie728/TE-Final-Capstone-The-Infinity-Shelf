@@ -12,4 +12,8 @@ public interface ComicDao {
 
     void createComic(SimpleComicDto comic);
 
+    void createComicList(List<SimpleComicDto> comics);
+
+    List<SimpleComicDto> listSimpleByTitle(String title);
+
 }

@@ -36,12 +36,41 @@ public class JdbcComicDao implements ComicDao {
         return simpleComicDtoListMapper(rowSet);
     }
 
+    private Boolean comicExists(SimpleComicDto comic) {
+        String sql =
+                "SELECT comic.title " +
+                "FROM comic " +
+                "WHERE comic.comic_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, comic.getId());
+        return rowSet.next();
+    }
+
     @Override
     public void createComic(SimpleComicDto comic) {
         String sql =
-                "INSERT INTO comic (title, issue_number, description, thumbnail) " +
-                "VALUES (?, ?, ?, ?);";
-        jdbcTemplate.update(sql, comic.getTitle(), comic.getIssueNumber(), comic.getDescription(), comic.getThumbnailUrl());
+                "INSERT INTO comic (comic_id, title, issue_number, description, thumbnail) " +
+                "VALUES (?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql,comic.getId(), comic.getTitle(), comic.getIssueNumber(), comic.getDescription(), comic.getThumbnailUrl());
+    }
+
+    @Override
+    public void createComicList(List<SimpleComicDto> comics) {
+        for (SimpleComicDto comic : comics) {
+            if (!comicExists(comic)) {
+                createComic(comic);
+            }
+        }
+    }
+
+    @Override
+    public List<SimpleComicDto> listSimpleByTitle(String title) {
+        title = "%" + title + "%";
+        String sql =
+                "SELECT comic_id, title, issue_number, description, thumbnail " +
+                "FROM comic " +
+                "WHERE title ILIKE ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, title);
+        return simpleComicDtoListMapper(rowSet);
     }
 
     public List<SimpleComicDto> simpleComicDtoListMapper(SqlRowSet rowSet) {

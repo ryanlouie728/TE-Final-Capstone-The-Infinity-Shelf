@@ -18,10 +18,6 @@ public abstract class BaseService {
     private String API_BASE = "https://gateway.marvel.com/v1/public/";
     protected RestTemplate restTemplate = new RestTemplate();
 
-    public BaseService(String endpoint) {
-
-    }
-
     public Map<String,String> getBaseParams() {
         String ts = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         String hash = getMd5(ts + "90c51b8bd6d1f8bb56a93ef7b1169f08dd57e5f3" + "f6cf199b6d9288752e9f8dc52e8d5f97");
@@ -29,16 +25,12 @@ public abstract class BaseService {
         params.put("ts", ts);
         params.put("apikey", "f6cf199b6d9288752e9f8dc52e8d5f97");
         params.put("hash", hash);
+        params.put("noVariants", "true");
         return params;
     }
 
     public Map<String,String> getBaseParams(Map<String, String> extraParams) {
-        String ts = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-        String hash = getMd5(ts + "90c51b8bd6d1f8bb56a93ef7b1169f08dd57e5f3" + "f6cf199b6d9288752e9f8dc52e8d5f97");
-        Map<String, String> params = new HashMap<>();
-        params.put("ts", ts);
-        params.put("apikey", "f6cf199b6d9288752e9f8dc52e8d5f97");
-        params.put("hash", hash);
+        Map<String, String> params = getBaseParams();
         params.putAll(extraParams);
         return params;
     }
@@ -50,11 +42,11 @@ public abstract class BaseService {
     }
 
     public String getApiUrl(String endpoint) {
-
         String url = UriComponentsBuilder.fromHttpUrl(API_BASE + endpoint)
                 .queryParam("apikey", "{apikey}")
                 .queryParam("ts", "{ts}")
                 .queryParam("hash", "{hash}")
+                .queryParam("noVariants", "{noVariants}")
                 .encode()
                 .toUriString();
         return url;
@@ -64,7 +56,8 @@ public abstract class BaseService {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(API_BASE + endpoint)
                 .queryParam("apikey", "{apikey}")
                 .queryParam("ts", "{ts}")
-                .queryParam("hash", "{hash}");
+                .queryParam("hash", "{hash}")
+                .queryParam("noVariants", "{noVariants}");
         for (Map.Entry<String, String> param : extraParams.entrySet()) {
             builder.queryParam(param.getKey(), "{" + param.getKey()+ "}");
         }

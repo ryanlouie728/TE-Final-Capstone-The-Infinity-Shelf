@@ -15,14 +15,20 @@ import java.util.List;
 @RequestMapping("/comics")
 public class ComicController {
     private ComicDao comicDao;
+    private ComicService comicService = new RestComicService();
 
     public ComicController(ComicDao comicDao) {
         this.comicDao = comicDao;
     }
 
     @GetMapping("/simple")
-    public List<SimpleComicDto> list() {
-        return comicDao.listSimple();
+    public List<SimpleComicDto> list(@RequestParam(defaultValue = "", name = "title") String title) {
+        if (title.isBlank()) {
+            return comicDao.listSimple();
+        } else {
+            comicDao.createComicList(comicService.getComicsByTitle(title));
+            return comicDao.listSimpleByTitle(title);
+        }
     }
 
     @GetMapping("/simple/{collectionId}")
@@ -37,7 +43,9 @@ public class ComicController {
 
     @GetMapping("/api/{title}")
     public List<SimpleComicDto> listComicsByTitle(@PathVariable String title) {
-        return new RestComicService().getComicsByTitle(title);
+        List<SimpleComicDto> apiComics = comicService.getComicsByTitle(title);
+
+        return apiComics;
     }
 
 }

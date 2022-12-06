@@ -12,7 +12,7 @@ CREATE TABLE users (
 
 
 CREATE TABLE comic (
-	comic_id serial,
+	comic_id int UNIQUE,
 	title varchar(150) NOT NULL,
 	issue_number varchar(10),
 	description text,
