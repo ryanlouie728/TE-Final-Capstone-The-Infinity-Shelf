@@ -16,7 +16,10 @@ export default {
 
     addComic(comic) {
         return http.post('/comics', comic);
-    }
+    },
 
+    listSimpleByTitle(title) {
+        return http.get(`/comics/simple?title=${title}`)
+    }
 
 }

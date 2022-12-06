@@ -68,7 +68,8 @@ public class JdbcComicDao implements ComicDao {
         String sql =
                 "SELECT comic_id, title, issue_number, description, thumbnail " +
                 "FROM comic " +
-                "WHERE title ILIKE ?";
+                "WHERE title ILIKE ? " +
+                "LIMIT 20;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, title);
         return simpleComicDtoListMapper(rowSet);
     }

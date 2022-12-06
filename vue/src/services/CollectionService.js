@@ -13,5 +13,8 @@ export default {
     },
     createCollection(collection) {
         return http.post('/collections', collection);
+    },
+    addComicToCollection(collectionId, comicId) {
+        return http.post(`/collections/${collectionId}/${comicId}`)
     }
 }

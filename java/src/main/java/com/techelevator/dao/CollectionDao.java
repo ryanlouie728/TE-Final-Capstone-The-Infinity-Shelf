@@ -12,4 +12,6 @@ public interface CollectionDao {
     void updateCollection(SimpleCollectionDto collection);
 
     List<SimpleCollectionDto> listPublicCollections();
+
+    void addComicToCollection(Integer collectionId, Integer comicId);
 }

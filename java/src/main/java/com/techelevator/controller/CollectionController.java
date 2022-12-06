@@ -36,4 +36,11 @@ public class CollectionController {
     public List<SimpleCollectionDto> listPublicCollections() {
         return collectionDao.listPublicCollections();
     }
+
+    @PostMapping("/{collectionId}/{comicId}")
+    public void addComicToCollection(@PathVariable Integer collectionId, @PathVariable Integer comicId) {
+        collectionDao.addComicToCollection(collectionId, comicId);
+    }
+
+
 }

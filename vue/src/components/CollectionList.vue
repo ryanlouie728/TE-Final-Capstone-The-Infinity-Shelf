@@ -59,7 +59,6 @@ export default {
 }
 
 .collection-thumbnail {
-    
     height: 100%;
     width: auto;
     margin-right: 10px;

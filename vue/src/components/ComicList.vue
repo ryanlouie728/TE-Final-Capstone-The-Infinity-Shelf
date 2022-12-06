@@ -1,10 +1,10 @@
 <template>
   <div class="comic-list">
-    <div class="comic" v-for="comic in this.comics" v-bind:key="comic.id">
-        <img v-if="comic.thumbnail" v-bind:src="(comic.thumbnail)"/>
+    <div class="comic" v-for="comic in this.comics" v-bind:key="comic.id" v-on:click.prevent="clicked(comic.id)">
+        <img class="thumbnail" v-if="comic.thumbnailUrl" v-bind:src="(comic.thumbnailUrl)"/>
         <div class="comic-text">
             <h3 class="comic-title">{{comic.title}}</h3>
-            <p class="comic-description">{{comic.description}}</p>
+            <!-- <p class="comic-description">{{comic.description}}</p> -->
         </div>
     </div>
   </div>
@@ -13,7 +13,18 @@
 <script>
 export default {
     props: ['comics'],
-    name: 'comic-list'
+    name: 'comic-list',
+    data() {
+        return {
+            clickedId: ''
+        }
+    },
+    methods: {
+        clicked(id) {
+            this.clickedId = id;
+            this.$emit('clicked')
+        }
+    }
 }
 </script>
 
@@ -21,18 +32,22 @@ export default {
 .comic-list {
     flex-grow: 1;
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    
+    flex-direction: column;
+
 }
 
 .comic {
+    box-sizing: border-box;
     border: solid 2px black;
-    height: fit-content;
-    width: 200px;
+    height: 75px;
+    width: 100%;
     padding: 5px;
+    display: flex;
 } 
 
-
-
+.thumbnail {
+    height: 100%;
+    width: auto;
+    margin-right: 10px;
+}
 </style>

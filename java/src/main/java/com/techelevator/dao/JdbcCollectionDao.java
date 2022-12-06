@@ -53,6 +53,25 @@ public class JdbcCollectionDao implements CollectionDao {
         return simpleCollectionDtoListMapper(rowSet);
     }
 
+    private Boolean comicInCollection(Integer collectionId, Integer comicId) {
+        String sql =
+                "SELECT comic_id " +
+                "FROM collection_comic " +
+                "WHERE coll_id = ? " +
+                "AND comic_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId, comicId);
+        return rowSet.next();
+    }
+
+    @Override
+    public void addComicToCollection(Integer collectionId, Integer comicId) {
+        if (comicInCollection(collectionId, comicId)) return;
+        String sql =
+                "INSERT INTO collection_comic (coll_id, comic_id) " +
+                "VALUES (?, ?);";
+        jdbcTemplate.update(sql, collectionId, comicId);
+    }
+
     private List<SimpleCollectionDto> simpleCollectionDtoListMapper(SqlRowSet rowSet) {
         List<SimpleCollectionDto> collections = new ArrayList<>();
         while (rowSet.next()) {
