@@ -33,15 +33,15 @@ body {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr 100px;
+  grid-template-rows: 75px 50px 1fr 100px;
   grid-template-areas: 
+    "title"
     "nav"
     "body"
     "footer";
 }
-
-header {
-  grid-area: nav;
+header.h1 {
+  grid-area: title;
 }
 
 #nav {
@@ -50,6 +50,7 @@ header {
   margin-bottom: 0.2em;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
+  height: fit-content;
   background-color: #BFBDB8;
   border-top: solid 1px black;
   border-bottom: solid 1px black;

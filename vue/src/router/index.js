@@ -29,9 +29,8 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
-      //change requiresAuth back to true
     },
     {
       path: '/collections',
