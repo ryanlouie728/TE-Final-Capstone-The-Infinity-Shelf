@@ -13,13 +13,11 @@ export default {
     listSimpleByCollectionId(collectionId) {
         return http.get(`/comics/simple/${collectionId}`);
     },
-
     addComic(comic) {
         return http.post('/comics', comic);
     },
-
     listSimpleByTitle(title) {
-        return http.get(`/comics/simple?title=${title}`)
+        return http.get(`/comics?title=${title}`)
     }
 
 }

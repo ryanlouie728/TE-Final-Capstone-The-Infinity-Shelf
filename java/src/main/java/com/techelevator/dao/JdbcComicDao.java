@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.ComicDto;
 import com.techelevator.model.SimpleComicDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -12,8 +13,11 @@ import java.util.List;
 public class JdbcComicDao implements ComicDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcComicDao(JdbcTemplate jdbcTemplate) {
+    private final CharacterDao characterDao;
+
+    public JdbcComicDao(JdbcTemplate jdbcTemplate, CharacterDao characterDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.characterDao = characterDao;
     }
 
     @Override
@@ -36,7 +40,7 @@ public class JdbcComicDao implements ComicDao {
         return simpleComicDtoListMapper(rowSet);
     }
 
-    private Boolean comicExists(SimpleComicDto comic) {
+    private Boolean comicExists(ComicDto comic) {
         String sql =
                 "SELECT comic.title " +
                 "FROM comic " +
@@ -54,10 +58,19 @@ public class JdbcComicDao implements ComicDao {
     }
 
     @Override
-    public void createComicList(List<SimpleComicDto> comics) {
-        for (SimpleComicDto comic : comics) {
+    public void createComic(ComicDto comic) {
+        String sql =
+                "INSERT INTO comic (comic_id, title, issue_number, description, thumbnail) " +
+                "VALUES (?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql,comic.getId(), comic.getTitle(), comic.getIssueNumber(), comic.getDescription(), comic.getThumbnailUrl());
+    }
+
+    @Override
+    public void createComicList(List<ComicDto> comics) {
+        for (ComicDto comic : comics) {
             if (!comicExists(comic)) {
                 createComic(comic);
+                characterDao.createCharacterList(comic.getCharacters());
             }
         }
     }

@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.ComicDao;
+import com.techelevator.model.ComicDto;
 import com.techelevator.model.SimpleComicDto;
 import com.techelevator.services.ComicService;
 import com.techelevator.services.RestComicService;
@@ -23,12 +24,13 @@ public class ComicController {
 
     @GetMapping("/simple")
     public List<SimpleComicDto> list(@RequestParam(defaultValue = "", name = "title") String title) {
-        if (title.isBlank()) {
-            return comicDao.listSimple();
-        } else {
-            comicDao.createComicList(comicService.getComicsByTitle(title));
-            return comicDao.listSimpleByTitle(title);
-        }
+        return comicDao.listSimple();
+//        if (title.isBlank()) {
+//            return comicDao.listSimple();
+//        } else {
+//            comicDao.createComicList(comicService.getComicsByTitle(title));
+//            return comicDao.listSimpleByTitle(title);
+//        }
     }
 
     @GetMapping("/simple/{collectionId}")
@@ -41,11 +43,22 @@ public class ComicController {
         comicDao.createComic(comic);
     }
 
-    @GetMapping("/api/{title}")
-    public List<SimpleComicDto> listComicsByTitle(@PathVariable String title) {
-        List<SimpleComicDto> apiComics = comicService.getComicsByTitle(title);
+//    @GetMapping("/api/{title}")
+//    public List<SimpleComicDto> listComicsByTitle(@PathVariable String title) {
+//        List<SimpleComicDto> apiComics = comicService.getComicsByTitle(title);
+//        return apiComics;
+//    }
 
-        return apiComics;
+    @GetMapping("")
+    public List<ComicDto> listComicsByTitle(@RequestParam(defaultValue = "") String title) {
+        List<ComicDto> comics;
+        if (title.isBlank()) {
+            comics = comicService.getComicsDto();
+        } else {
+            comics = comicService.getComicsDtoByTitle(title);
+        }
+        comicDao.createComicList(comics);
+        return comics;
     }
 
 }
