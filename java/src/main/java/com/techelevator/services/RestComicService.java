@@ -31,7 +31,7 @@ public class RestComicService extends BaseService implements ComicService{
     @Override
     public List<ComicDto> getComicsDtoByTitle(String title) {
         Map<String, String> extraParams = new HashMap<>();
-        extraParams.put("title", title);
+        extraParams.put("titleStartsWith", title);
         HttpEntity<?> entity = getBaseEntity();
         Map<String, String> params = getBaseParams(extraParams);
         String url = getApiUrl("comics", extraParams);

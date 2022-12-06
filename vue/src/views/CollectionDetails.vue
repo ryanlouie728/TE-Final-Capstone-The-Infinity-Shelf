@@ -1,6 +1,6 @@
 <template>
   <div id="collection-details">
-    <comic-list v-bind:comics="this.comics" />
+    <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
     </div>
@@ -20,7 +20,8 @@ export default {
   data() {
     return {
       comics: [],
-      addingComic: false
+      addingComic: false,
+      removingComic: false
     }
   },
   methods: {
@@ -31,6 +32,18 @@ export default {
           this.comics = response.data;
         }
       })
+    },
+    comicClicked() {
+      if (this.removingComic) {
+        console.log("remove")
+      } else {
+        this.$router.push({
+          name: 'comic-details',
+          params: {
+            id: this.$refs.comics.clickedId
+          }
+        })
+      }
     },
     comicAdded() {
       this.addingComic = false;
