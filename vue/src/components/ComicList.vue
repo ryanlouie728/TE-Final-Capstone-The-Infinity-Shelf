@@ -18,5 +18,21 @@ export default {
 </script>
 
 <style>
+.comic-list {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
+
+.comic {
+    border: solid 2px black;
+    height: fit-content;
+    width: 200px;
+    padding: 5px;
+} 
+
+
 
 </style>
