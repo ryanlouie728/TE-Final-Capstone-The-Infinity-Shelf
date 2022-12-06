@@ -3,6 +3,8 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.ComicDao;
 import com.techelevator.model.SimpleComicDto;
+import com.techelevator.services.ComicService;
+import com.techelevator.services.RestComicService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,6 +33,11 @@ public class ComicController {
     @PostMapping("")
     public void addComic(@Valid @RequestBody SimpleComicDto comic) {
         comicDao.createComic(comic);
+    }
+
+    @GetMapping("/api/{title}")
+    public List<SimpleComicDto> listComicsByTitle(@PathVariable String title) {
+        return new RestComicService().getComicsByTitle(title);
     }
 
 }
