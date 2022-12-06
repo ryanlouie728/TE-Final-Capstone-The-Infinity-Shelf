@@ -4,8 +4,8 @@
       <h1>Comic Book Collection</h1>
     </header>
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'collections' }">All Collections</router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'collections' }">Home</router-link>&nbsp;|&nbsp;
+      <!-- <router-link v-bind:to="{ name: 'collections' }">All Collections</router-link>&nbsp;|&nbsp; -->
       <router-link v-bind:to="{ name: 'user-collections', params: { username: this.$store.state.user.username } }">My Collections</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
       <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
