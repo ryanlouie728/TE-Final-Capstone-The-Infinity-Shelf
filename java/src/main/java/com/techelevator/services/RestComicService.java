@@ -12,16 +12,10 @@ import java.util.Map;
 
 public class RestComicService extends BaseService implements ComicService{
 
-
-    public RestComicService() {
-        super("comics");
-    }
-
     @Override
     public List<SimpleComicDto> getComicsByTitle(String title) {
         Map<String, String> extraParams = new HashMap<>();
         extraParams.put("title", title);
-
         HttpEntity<?> entity = getBaseEntity();
         Map<String, String> params = getBaseParams(extraParams);
         String url = getApiUrl("comics", extraParams);
@@ -31,7 +25,7 @@ public class RestComicService extends BaseService implements ComicService{
         JsonArray comics = object.getAsJsonObject("data").getAsJsonArray("results");
         return mapJsonArrayToList(comics);
     }
-    
+
     private List<SimpleComicDto> mapJsonArrayToList(JsonArray array) {
         List<SimpleComicDto> comics = new ArrayList<>();
         for (JsonElement comic : array) {
