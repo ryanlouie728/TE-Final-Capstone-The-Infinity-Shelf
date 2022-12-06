@@ -10,5 +10,8 @@ export default {
     },
     listPublic() {
         return http.get(`/collections`)
+    },
+    createCollection(collection) {
+        return http.post('/collections', collection);
     }
 }

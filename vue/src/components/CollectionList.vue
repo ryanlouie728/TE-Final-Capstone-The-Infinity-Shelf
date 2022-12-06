@@ -1,10 +1,10 @@
 <template>
     <div id = "collection-list">
-        <div class = "collection" v-for          = "coll in this.collections" v-bind:key = "coll.collectionId" v-on:click="openCollection(coll.collectionId)">
-            <img class = "collection-thumbnail" v-if = "coll.collectionCoverUrl" v-bind:src  = "coll.collectionCoverUrl">
-            <div class = "collection-text">
-                <h3  class = "collection-name"> {{ coll.collectionName }} </h3>
-                <p   class = "collection-description"> {{ coll.collectionDescription }} </p>
+        <div class="collection" v-for="coll in this.collections" v-bind:key="coll.collectionId" v-on:click="openCollection(coll.collectionId)">
+            <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
+            <div class="collection-text">
+                <h3  class="collection-name"> {{ coll.collectionName }} </h3>
+                <p   class="collection-description"> {{ coll.collectionDescription }} </p>
             </div>
         </div>
     </div>

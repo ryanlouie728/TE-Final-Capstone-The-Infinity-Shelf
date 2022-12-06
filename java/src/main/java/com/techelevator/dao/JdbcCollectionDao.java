@@ -29,9 +29,9 @@ public class JdbcCollectionDao implements CollectionDao {
     @Override
     public void createCollection(SimpleCollectionDto collection) {
         String sql =
-                "INSERT INTO collection (user_id, coll_name) " +
-                "VALUES (?, ?);";
-        jdbcTemplate.update(sql, collection.getUserId(), collection.getCollectionName());
+                "INSERT INTO collection (user_id, coll_name, coll_description) " +
+                "VALUES (?, ?, ?);";
+        jdbcTemplate.update(sql, collection.getUserId(), collection.getCollectionName(), collection.getCollectionDescription());
     }
 
     @Override

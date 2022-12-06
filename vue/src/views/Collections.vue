@@ -1,8 +1,9 @@
 <template>
   <div class = "user-collections">
-    <collection-list v-bind:collections="collections" />
+    <collection-list v-bind:collections="this.collections" />
+    <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
     <div id="sidebar">
-
+        <button v-on:click.prevent="creatingCollection = true">New Collection</button>
     </div>
   </div>
 </template>
@@ -10,12 +11,14 @@
 <script>
 import collectionService from '../services/CollectionService';
 import CollectionList from '../components/CollectionList.vue'
+import CreateCollection from '../components/CreateCollection.vue';
 
 export default {
-  components: { CollectionList },
+    components: { CollectionList, CreateCollection},
     name: "user-collections",
     data() {
         return {
+            creatingCollection: false,
             collections: []
         }
     }, 
@@ -27,6 +30,10 @@ export default {
                     this.collections = response.data
                 }
             })
+        },
+        collectionCreated() {
+            this.getCollections(),
+            this.creatingCollection = false;
         }
     },
     created() {

@@ -49,7 +49,7 @@ const router = new Router({
       }
     },
     {
-      path: '/collections/:username',
+      path: '/:username/collections',
       name: 'user-collections',
       component: Collections,
       meta: {
