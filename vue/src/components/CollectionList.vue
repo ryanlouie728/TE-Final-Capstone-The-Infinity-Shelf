@@ -1,8 +1,8 @@
 <template>
     <div id = "collection-list">
         <div class="banner">
-            <h2 v-if="this.$route.name == 'collections'">Public</h2>
-            <h2 v-if="this.$route.name == 'user-collections'">User</h2>
+            <h2 v-if="this.$route.name == 'collections'">Public Collections</h2>
+            <h2 v-if="this.$route.name == 'user-collections'">User Collections</h2>
         </div>
         <div class="collection" v-for="coll in this.collections" v-bind:key="coll.collectionId" v-on:click="openCollection(coll.collectionId)">
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
@@ -41,7 +41,7 @@ export default {
 }
 
 .collection {
-    border: solid 2px black;
+    border: solid 2px var(--dark-accent);
     height: 75px;
     padding: 5px;
     display: flex;
@@ -49,7 +49,8 @@ export default {
 }
 
 .collection:hover {
-    background-color: lightgrey;
+    background-color: var(--medium-accent);
+    
 }
 
 .collection-text {
@@ -72,9 +73,8 @@ export default {
 }
 
 .banner {
-    background-color: red;
     width: 100%;
-    height: 100px;
+    height: fit-content;
     margin-bottom: 5px;
 }
 </style>
