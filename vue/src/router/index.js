@@ -8,6 +8,7 @@ import store from '../store/index'
 import Collections from '../views/Collections.vue'
 import CollectionDetails from '../views/CollectionDetails.vue'
 import PublicCollections from '../views/PublicCollections.vue'
+import ComicDetails from '../views/ComicDetails.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,14 @@ const router = new Router({
       path: '/collections/:id',
       name: 'collection-details',
       component: CollectionDetails,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/comics/:id',
+      name: 'comic-details',
+      component: ComicDetails,
       meta: {
         requiresAuth: true
       }
