@@ -25,6 +25,7 @@
 </template>
 
 <style>
+
 :root{
   --dark-accent: #000505;
   --medium-accent: #3B3355;
@@ -32,6 +33,7 @@
   --main-background: #BFCDE0;
   --white: #FEFCFD;
 }
+
 
 html {
   box-sizing: border-box;

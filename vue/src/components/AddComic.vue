@@ -136,8 +136,4 @@ function dragElement(elmnt) {
 #comic-list-holder {
   overflow: auto;
 }
-
-.comic:hover {
-  background-color: var(--main-background);
-}
 </style>

@@ -29,6 +29,7 @@ export default {
 </script>
 
 <style>
+
 .comic-list {
     display: flex;
     flex-direction: row;
@@ -38,6 +39,7 @@ export default {
 }
 
 .comic {
+    cursor: pointer;
     box-sizing: border-box;
     border: solid 2px var(--dark-accent);
     width: 120px;
@@ -49,6 +51,10 @@ export default {
     margin-right: 2px;
     margin-bottom: 2px;
     padding: 5px 0px;
+}
+
+.comic:hover {
+    background-color: var(--medium-accent);
 }
 
 .comic-title {

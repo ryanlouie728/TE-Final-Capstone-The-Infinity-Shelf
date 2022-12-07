@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, comic, collection, collection_comic, character, creator CASCADE;
+DROP TABLE IF EXISTS users, user_friend, comic, collection, collection_comic, character, creator CASCADE;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -10,6 +10,13 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE TABLE user_friend (
+    user_id int NOT NULL,
+    friend_id int NOT NULL,
+    CONSTRAINT PK_user_friend PRIMARY KEY (user_id, friend_id),
+    CONSTRAINT FK_user_user FOREIGN KEY (user_id) REFERENCES users(user_id),
+    CONSTRAINT FK_user_friend FOREIGN KEY (friend_id) REFERENCES users(user_id)
+);
 
 CREATE TABLE comic (
 	comic_id int UNIQUE,
