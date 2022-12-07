@@ -83,6 +83,7 @@ header.h1 {
   align-items: center;
   margin-right: 5px;
   padding: 0px 5px;
+  cursor:pointer;
 }
 
 .nav-link-holder:hover {
@@ -90,16 +91,13 @@ header.h1 {
   color: var(--dark-accent);
 }
 
-.nav-link {
-  padding-top: 5px;
-  height: 100%;
-  width: 100%;
-  color: var(--white);
+.nav-link-holder > * {
   font-weight: bold;
   text-decoration: none;
+  color: var(--white);
 }
 
-.nav-link:hover {
+.nav-link-holder:hover > * {
   color: var(--dark-accent);
 }
 

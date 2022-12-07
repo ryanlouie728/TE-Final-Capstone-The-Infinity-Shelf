@@ -39,7 +39,7 @@ export default {
 
 .comic {
     box-sizing: border-box;
-    border: solid 2px black;
+    border: solid 2px var(--dark-accent);
     width: 120px;
     height: 200px;
     display: flex;
