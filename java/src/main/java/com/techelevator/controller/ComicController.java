@@ -61,4 +61,9 @@ public class ComicController {
         return comics;
     }
 
+    @GetMapping("/{collectionId}")
+    public List<ComicDto> listComicsByCollectionId(@PathVariable Integer collectionId) {
+        return comicDao.listComicsByCollectionId(collectionId);
+    }
+
 }

@@ -26,18 +26,38 @@ public class JdbcCreatorDao implements CreatorDao {
     }
 
     @Override
-    public void createCreator(CreatorDto creatorDto) {
+    public void createCreator(CreatorDto creatorDto, Integer comicId) {
         String sql =
                 "INSERT INTO creator (creator_id, name, thumbnail, role) " +
-                "VALUES (?, ?, ?, ?);";
-        jdbcTemplate.update(sql, creatorDto.getCreatorId(), creatorDto.getName(), creatorDto.getThumbnail(), creatorDto.getRole());
+                "VALUES (?, ?, ?, ?);" +
+                "INSERT INTO creator_comic (creator_id, comic_id) " +
+                "VALUES (?, ?);";
+        jdbcTemplate.update(sql, creatorDto.getCreatorId(), creatorDto.getName(), creatorDto.getThumbnail(), creatorDto.getRole(), creatorDto.getCreatorId(), comicId);
     }
 
     @Override
-    public void createCreatorList(List<CreatorDto> creators) {
+    public void createCreatorList(List<CreatorDto> creators, Integer comicId) {
         for (CreatorDto creator : creators) {
             if (creatorExists(creator)) continue;
-            createCreator(creator);
+            createCreator(creator, comicId);
         }
     }
+
+    @Override
+    public List<CreatorDto> listByComicId(Integer comicId) {
+        return null;
+    }
+
+
+    private CreatorDto creatorMapper(SqlRowSet rowSet) {
+//        try {
+//            CreatorDto creator;
+//            //creator.setCreatorId(rowSet.getInt("creator_id"));
+//            return creator;
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+        return null;
+    }
+
 }

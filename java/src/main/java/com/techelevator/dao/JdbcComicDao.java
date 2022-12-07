@@ -72,8 +72,8 @@ public class JdbcComicDao implements ComicDao {
         for (ComicDto comic : comics) {
             if (!comicExists(comic)) {
                 createComic(comic);
-                characterDao.createCharacterList(comic.getCharacters());
-                creatorDao.createCreatorList(comic.getCreators());
+                characterDao.createCharacterList(comic.getCharacters(), comic.getId());
+                creatorDao.createCreatorList(comic.getCreators(), comic.getId());
             }
         }
     }
@@ -90,7 +90,18 @@ public class JdbcComicDao implements ComicDao {
         return simpleComicDtoListMapper(rowSet);
     }
 
-    public List<SimpleComicDto> simpleComicDtoListMapper(SqlRowSet rowSet) {
+    @Override
+    public List<ComicDto> listComicsByCollectionId(Integer collectionId) {
+        String sql =
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "FROM comic " +
+                "JOIN collection_comic ON comic.comic_id = collection_comic.comic_id " +
+                "WHERE collection_comic.coll_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId);
+        return comicListMapper(rowSet);
+    }
+
+    private List<SimpleComicDto> simpleComicDtoListMapper(SqlRowSet rowSet) {
         List<SimpleComicDto> comics = new ArrayList<>();
         while (rowSet.next()) {
             comics.add(simpleComicDtoMapper(rowSet));
@@ -98,7 +109,7 @@ public class JdbcComicDao implements ComicDao {
         return comics;
     }
 
-    public SimpleComicDto simpleComicDtoMapper(SqlRowSet rowSet) {
+    private SimpleComicDto simpleComicDtoMapper(SqlRowSet rowSet) {
         try {
             SimpleComicDto comic = new SimpleComicDto();
             comic.setId(rowSet.getInt("comic_id"));
@@ -106,6 +117,30 @@ public class JdbcComicDao implements ComicDao {
             comic.setIssueNumber(rowSet.getString("issue_number"));
             comic.setDescription(rowSet.getString("description"));
             comic.setThumbnailUrl(rowSet.getString("thumbnail"));
+            return comic;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private List<ComicDto> comicListMapper(SqlRowSet rowSet) {
+        List<ComicDto> comics = new ArrayList<>();
+        while (rowSet.next()) {
+            comics.add(comicMapper(rowSet));
+        }
+        return comics;
+    }
+
+    private ComicDto comicMapper(SqlRowSet rowSet) {
+        try {
+            ComicDto comic = new ComicDto();
+            comic.setId(rowSet.getInt("comic_id"));
+            comic.setTitle(rowSet.getString("title"));
+            comic.setIssueNumber(rowSet.getString("issue_number"));
+            comic.setDescription(rowSet.getString("description"));
+            comic.setThumbnailUrl(rowSet.getString("thumbnail"));
+            comic.setCharacters(characterDao.listByComicId(comic.getId()));
             return comic;
         } catch (Exception e) {
             System.out.println(e.getMessage());

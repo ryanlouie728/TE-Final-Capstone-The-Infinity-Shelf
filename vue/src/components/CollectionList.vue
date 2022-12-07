@@ -1,5 +1,9 @@
 <template>
     <div id = "collection-list">
+        <div class="banner">
+            <h2 v-if="this.$route.name == 'collections'">Public</h2>
+            <h2 v-if="this.$route.name == 'user-collections'">User</h2>
+        </div>
         <div class="collection" v-for="coll in this.collections" v-bind:key="coll.collectionId" v-on:click="openCollection(coll.collectionId)">
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
             <div class="collection-text">
@@ -23,6 +27,9 @@ export default {
                 }
             })
         }
+    },
+    created() {
+        console.log(this.$route.name)
     }
 }
 </script>
@@ -62,5 +69,12 @@ export default {
     height: 100%;
     width: auto;
     margin-right: 10px;
+}
+
+.banner {
+    background-color: red;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 5px;
 }
 </style>
