@@ -15,6 +15,8 @@ public interface ComicDao {
 
     void createComicList(List<ComicDto> comics);
 
+    ComicDto getComicById(Integer comicId);
+
     List<SimpleComicDto> listSimpleByTitle(String title);
 
     List<ComicDto> listComicsByCollectionId(Integer collectionId);

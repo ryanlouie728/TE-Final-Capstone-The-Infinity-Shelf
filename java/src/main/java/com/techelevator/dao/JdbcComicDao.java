@@ -101,6 +101,19 @@ public class JdbcComicDao implements ComicDao {
         return comicListMapper(rowSet);
     }
 
+    @Override
+    public ComicDto getComicById(Integer comicId) {
+        String sql =
+                "SELECT comic_id, title, issue_number, description, thumbnail " +
+                "FROM comic " +
+                "WHERE comic_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, comicId);
+        if (rowSet.next()) {
+            return comicMapper(rowSet);
+        }
+        return null;
+    }
+
     private List<SimpleComicDto> simpleComicDtoListMapper(SqlRowSet rowSet) {
         List<SimpleComicDto> comics = new ArrayList<>();
         while (rowSet.next()) {

@@ -43,12 +43,6 @@ public class ComicController {
         comicDao.createComic(comic);
     }
 
-//    @GetMapping("/api/{title}")
-//    public List<SimpleComicDto> listComicsByTitle(@PathVariable String title) {
-//        List<SimpleComicDto> apiComics = comicService.getComicsByTitle(title);
-//        return apiComics;
-//    }
-
     @GetMapping("")
     public List<ComicDto> listComicsByTitle(@RequestParam(defaultValue = "") String title) {
         List<ComicDto> comics;
@@ -61,9 +55,9 @@ public class ComicController {
         return comics;
     }
 
-    @GetMapping("/{collectionId}")
-    public List<ComicDto> listComicsByCollectionId(@PathVariable Integer collectionId) {
-        return comicDao.listComicsByCollectionId(collectionId);
+    @GetMapping("/{comicId}")
+    public ComicDto getComicById(@PathVariable Integer comicId) {
+        return comicDao.getComicById(comicId);
     }
 
 }

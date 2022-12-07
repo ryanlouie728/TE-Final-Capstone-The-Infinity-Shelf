@@ -17,6 +17,9 @@ export default {
     addComicToCollection(collectionId, comicId) {
         return http.post(`/collections/${collectionId}/${comicId}`)
     },
+    removeComicFromCollection(collectionId, comicId) {
+        return http.delete(`/collections/${collectionId}/${comicId}`)
+    },
     getCollectionById(collectionId) {
         return http.get(`/collections/${collectionId}`)
     }

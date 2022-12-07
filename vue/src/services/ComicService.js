@@ -9,7 +9,6 @@ export default {
     list(){
         return http.get('/comics/simple');
     },
-
     listSimpleByCollectionId(collectionId) {
         return http.get(`/comics/simple/${collectionId}`);
     },
@@ -17,7 +16,10 @@ export default {
         return http.post('/comics', comic);
     },
     listSimpleByTitle(title) {
-        return http.get(`/comics?title=${title}`)
+        return http.get(`/comics?title=${title}`);
+    },
+    getComicById(id) {
+        return http.get(`/comics/${id}`);
     }
 
 }

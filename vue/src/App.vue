@@ -23,13 +23,14 @@ html {
 body {
   box-sizing: border-box;
   margin: 0px;
-  padding: 8px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 #app {
+  box-sizing: border-box;
+  padding: 8px;
   flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr;

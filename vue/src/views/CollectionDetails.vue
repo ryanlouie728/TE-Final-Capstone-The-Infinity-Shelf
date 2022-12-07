@@ -35,7 +35,10 @@ export default {
   name: 'collection-details',
   data() {
     return {
-      collection: {},
+      collection: {
+        characterCounts: [],
+        creatorCounts: []
+      },
       comics: [],
       addingComic: false,
       removingComic: false
@@ -47,7 +50,6 @@ export default {
       .then(response => {
         if (response.status == 200) {
           this.collection = response.data
-          console.log(this.collection)
         }
       })
     },
