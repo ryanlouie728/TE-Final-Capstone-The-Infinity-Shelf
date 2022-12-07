@@ -43,6 +43,13 @@ public class CollectionController {
         collectionDao.addComicToCollection(collectionId, comicId);
     }
 
+    @DeleteMapping("/{collectionId}/{comicId}")
+    public void removeComicFromCollection(@PathVariable Integer collectionId, @PathVariable Integer comicId) {
+        collectionDao.removeComicFromCollection(collectionId, comicId);
+    }
+
+    @DeleteMapping("/{collectionId}/{comicId}")
+
     @GetMapping("/{collectionId}")
     public CollectionDto getCollectionById(@PathVariable Integer collectionId) {
         return collectionDao.getByCollectionId(collectionId);

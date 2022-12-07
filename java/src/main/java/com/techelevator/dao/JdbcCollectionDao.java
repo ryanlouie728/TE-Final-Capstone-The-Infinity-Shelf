@@ -76,6 +76,16 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public void removeComicFromCollection(Integer collectionId, Integer comicId) {
+        String sql =
+                "DELETE " +
+                "FROM collection_comic " +
+                "WHERE coll_id = ?" +
+                "AND comic_id = ?;";
+        jdbcTemplate.update(sql, collectionId, comicId);
+    }
+
+    @Override
     public CollectionDto getByCollectionId(Integer collectionId) {
         String sql =
                 "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +

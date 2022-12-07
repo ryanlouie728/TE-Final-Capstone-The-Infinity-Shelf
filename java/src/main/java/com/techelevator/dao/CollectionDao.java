@@ -15,6 +15,7 @@ public interface CollectionDao {
     List<SimpleCollectionDto> listPublicCollections();
 
     void addComicToCollection(Integer collectionId, Integer comicId);
+    void removeComicFromCollection(Integer collectionId, Integer comicId);
 
     CollectionDto getByCollectionId(Integer collectionId);
 }
