@@ -2,8 +2,9 @@
   <div class="add-comic" id="add-comic">
     <div id="drag-handle">Add Comic to Collection</div>
     <div id="search-bar">
-      <input v-model="title" type="text">
-      <button v-on:click.prevent="search()">Search</button>
+      <input id="search-bar" v-model="title" type="text" @keyup.enter="search()" ref="refText">
+      <button id="search" v-on:click.prevent="search()">Search</button>
+      <button v-on:click.prevent="cancel()">Cancel</button>
     </div>
     <div id="comic-list-holder">
       <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
@@ -15,6 +16,7 @@
 import ComicList from './ComicList.vue'
 import ComicService from '../services/ComicService';
 import CollectionService from '../services/CollectionService';
+
 export default {
   components: { ComicList },
   data() {
@@ -40,14 +42,17 @@ export default {
           this.$emit('added');
         }
       })
-    }
+    },
+    cancel() {
+      this.$emit('added')
+    },
+    
   },
   mounted() {
     dragElement(document.getElementById("add-comic"));
-  }
+  },
 }
-
-
+  
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById("drag-handle")) {

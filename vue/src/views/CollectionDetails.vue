@@ -1,11 +1,13 @@
 <template>
-  <div id="collection-details">
+   <div id="collection-details">
     <comic-list v-bind:comics="this.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
     </div>
     <add-comic v-if="addingComic" @added="comicAdded()" />
   </div>
+
+ 
 </template>
 
 <script>
@@ -44,5 +46,6 @@ export default {
 </script>
 
 <style>
+
 
 </style>
