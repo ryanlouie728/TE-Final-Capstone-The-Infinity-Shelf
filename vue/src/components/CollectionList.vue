@@ -46,11 +46,12 @@ export default {
     padding: 5px;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 }
 
 .collection:hover {
     background-color: var(--medium-accent);
-    
+    color: var(--white);
 }
 
 .collection-text {

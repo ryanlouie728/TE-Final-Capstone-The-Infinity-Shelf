@@ -100,7 +100,7 @@ function dragElement(elmnt) {
 .add-comic {
   width: 500px;
   height: 500px;
-  background-color: darkgray;
+  background-color: var(--light-accent);
   position: fixed;
   left: calc(50vw - 100px);
   top: calc(50vh - 100px);
@@ -120,8 +120,8 @@ function dragElement(elmnt) {
 }
 
 #drag-handle {
-  background-color: black;
-  color: white;
+  background-color: var(--dark-accent);
+  color: var(--white);
   width: 100%;
   height: 20px;
   cursor: move;
@@ -133,6 +133,6 @@ function dragElement(elmnt) {
 }
 
 .comic:hover {
-  background-color: lightgray;
+  background-color: var(--light-accent);
 }
 </style>
