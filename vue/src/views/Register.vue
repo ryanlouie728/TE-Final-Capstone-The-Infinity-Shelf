@@ -4,8 +4,8 @@
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
-      </div>
-      <label for="username" class="sr-only">Username</label>
+      </div><br>
+      <label for="username" class="sr-only">Username</label>&nbsp;
       <input
         type="text"
         id="username"
@@ -14,8 +14,8 @@
         v-model="user.username"
         required
         autofocus
-      />
-      <label for="password" class="sr-only">Password</label>
+      /><br><br>
+      <label for="password" class="sr-only">Password</label>&nbsp;&nbsp;
       <input
         type="password"
         id="password"
@@ -23,7 +23,8 @@
         placeholder="Password"
         v-model="user.password"
         required
-      />
+      /><br><br>
+      <label for="username" class="sr-only">Confirm Password</label>&nbsp;
       <input
         type="password"
         id="confirmPassword"
@@ -31,8 +32,8 @@
         placeholder="Confirm Password"
         v-model="user.confirmPassword"
         required
-      />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+      /><br><br>
+      <router-link :to="{ name: 'login' }">Have an account?</router-link><br><br>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
