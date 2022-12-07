@@ -34,7 +34,7 @@ export default {
     flex-direction: row;
     width: 100%;
     flex-wrap: wrap;
-
+    align-content: flex-start;
 }
 
 .comic {
@@ -47,6 +47,7 @@ export default {
     align-items: center;
     justify-content: center;
     margin-right: 2px;
+    margin-bottom: 2px;
 }
 
 .comic-title {
