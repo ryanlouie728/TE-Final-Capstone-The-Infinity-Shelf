@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CollectionDao;
+import com.techelevator.model.CollectionDto;
 import com.techelevator.model.SimpleCollectionDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +41,11 @@ public class CollectionController {
     @PostMapping("/{collectionId}/{comicId}")
     public void addComicToCollection(@PathVariable Integer collectionId, @PathVariable Integer comicId) {
         collectionDao.addComicToCollection(collectionId, comicId);
+    }
+
+    @GetMapping("/{collectionId}")
+    public CollectionDto getCollectionById(@PathVariable Integer collectionId) {
+        return collectionDao.getByCollectionId(collectionId);
     }
 
 

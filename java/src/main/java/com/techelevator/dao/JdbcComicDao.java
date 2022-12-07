@@ -141,6 +141,7 @@ public class JdbcComicDao implements ComicDao {
             comic.setDescription(rowSet.getString("description"));
             comic.setThumbnailUrl(rowSet.getString("thumbnail"));
             comic.setCharacters(characterDao.listByComicId(comic.getId()));
+            comic.setCreators(creatorDao.listByComicId(comic.getId()));
             return comic;
         } catch (Exception e) {
             System.out.println(e.getMessage());

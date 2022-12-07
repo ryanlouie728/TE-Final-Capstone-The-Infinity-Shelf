@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -45,18 +46,34 @@ public class JdbcCreatorDao implements CreatorDao {
 
     @Override
     public List<CreatorDto> listByComicId(Integer comicId) {
-        return null;
+        String sql =
+                "SELECT creator.creator_id, creator.name, creator.thumbnail, creator.role " +
+                "FROM creator " +
+                "JOIN creator_comic AS cc ON creator.creator_id = cc.creator_id " +
+                "WHERE cc.comic_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, comicId);
+        return creatorListMapper(rowSet);
     }
 
+    private List<CreatorDto> creatorListMapper(SqlRowSet rowSet) {
+        List<CreatorDto> creators = new ArrayList<>();
+        while (rowSet.next()) {
+            creators.add(creatorMapper(rowSet));
+        }
+        return creators;
+    }
 
     private CreatorDto creatorMapper(SqlRowSet rowSet) {
-//        try {
-//            CreatorDto creator;
-//            //creator.setCreatorId(rowSet.getInt("creator_id"));
-//            return creator;
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            CreatorDto creator = new CreatorDto();
+            creator.setCreatorId(rowSet.getInt("creator_id"));
+            creator.setName(rowSet.getString("name"));
+            creator.setThumbnail(rowSet.getString("thumbnail"));
+            creator.setRole(rowSet.getString("role"));
+            return creator;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 

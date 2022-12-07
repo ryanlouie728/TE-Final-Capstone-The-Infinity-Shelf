@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.CollectionDto;
 import com.techelevator.model.SimpleCollectionDto;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface CollectionDao {
     List<SimpleCollectionDto> listPublicCollections();
 
     void addComicToCollection(Integer collectionId, Integer comicId);
+
+    CollectionDto getByCollectionId(Integer collectionId);
 }

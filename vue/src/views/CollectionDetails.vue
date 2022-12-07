@@ -1,6 +1,6 @@
 <template>
   <div id="collection-details">
-    <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
+    <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
     </div>
@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import ComicList from '../components/ComicList.vue'
-import ComicService from '../services/ComicService';
+import ComicList from '../components/ComicList.vue';
 import AddComic from '../components/AddComic.vue'
+import CollectionService from '../services/CollectionService';
 
 
 export default {
@@ -21,17 +21,18 @@ export default {
   name: 'collection-details',
   data() {
     return {
+      collection: {},
       comics: [],
       addingComic: false,
       removingComic: false
     }
   },
   methods: {
-    getComics() {
-      ComicService.listSimpleByCollectionId(this.$route.params.id)
+    getCollection() {
+      CollectionService.getCollectionById(this.$route.params.id)
       .then(response => {
         if (response.status == 200) {
-          this.comics = response.data;
+          this.collection = response.data
         }
       })
     },
@@ -49,11 +50,11 @@ export default {
     },
     comicAdded() {
       this.addingComic = false;
-      this.getComics();
+      this.getCollection();
     }
   },
   created() {
-    this.getComics();
+    this.getCollection();
   }
 }
 </script>

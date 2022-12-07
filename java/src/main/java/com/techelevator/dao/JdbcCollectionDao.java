@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.CollectionDto;
 import com.techelevator.model.SimpleCollectionDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,9 +12,11 @@ import java.util.List;
 @Component
 public class JdbcCollectionDao implements CollectionDao {
     private final JdbcTemplate jdbcTemplate;
+    private final ComicDao comicDao;
 
-    public JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
+    public JdbcCollectionDao(JdbcTemplate jdbcTemplate, ComicDao comicDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.comicDao = comicDao;
     }
 
     @Override
@@ -72,6 +75,19 @@ public class JdbcCollectionDao implements CollectionDao {
         jdbcTemplate.update(sql, collectionId, comicId);
     }
 
+    @Override
+    public CollectionDto getByCollectionId(Integer collectionId) {
+        String sql =
+                "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
+                "FROM collection " +
+                "WHERE coll_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId);
+        if (rowSet.next()) {
+            return collectionMapper(rowSet);
+        }
+        return null;
+    }
+
     private List<SimpleCollectionDto> simpleCollectionDtoListMapper(SqlRowSet rowSet) {
         List<SimpleCollectionDto> collections = new ArrayList<>();
         while (rowSet.next()) {
@@ -89,6 +105,18 @@ public class JdbcCollectionDao implements CollectionDao {
             collection.setCollectionDescription(rowSet.getString("coll_description"));
             collection.setCollectionCoverUrl(rowSet.getString("coll_cover"));
             collection.setCollectionPublic(rowSet.getBoolean("coll_public"));
+            return collection;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private CollectionDto collectionMapper(SqlRowSet rowSet) {
+        try {
+            SimpleCollectionDto simple = simpleCollectionDtoMapper(rowSet);
+            CollectionDto collection = new CollectionDto(simple);
+            collection.setComics(comicDao.listComicsByCollectionId(collection.getCollectionId()));
             return collection;
         } catch (Exception e) {
             System.out.println(e.getMessage());
