@@ -12,10 +12,13 @@ public interface CollectionDao {
 
     void updateCollection(SimpleCollectionDto collection);
 
+    void deleteCollection(Integer collectionId);
+
     List<SimpleCollectionDto> listPublicCollections();
 
     void addComicToCollection(Integer collectionId, Integer comicId);
     void removeComicFromCollection(Integer collectionId, Integer comicId);
 
     CollectionDto getByCollectionId(Integer collectionId);
+
 }

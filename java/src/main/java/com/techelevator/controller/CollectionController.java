@@ -33,6 +33,11 @@ public class CollectionController {
         collectionDao.updateCollection(collection);
     }
 
+    @DeleteMapping("/{collectionId}")
+    public void deleteCollection(@PathVariable Integer collectionId) {
+        collectionDao.deleteCollection(collectionId);
+    }
+
     @GetMapping("")
     public List<SimpleCollectionDto> listPublicCollections() {
         return collectionDao.listPublicCollections();
@@ -48,7 +53,7 @@ public class CollectionController {
         collectionDao.removeComicFromCollection(collectionId, comicId);
     }
 
-    @DeleteMapping("/{collectionId}/{comicId}")
+
 
     @GetMapping("/{collectionId}")
     public CollectionDto getCollectionById(@PathVariable Integer collectionId) {
