@@ -1,11 +1,11 @@
 <template>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
+      <h1 id="banner" class="h3 mb-3 font-weight-normal">Create Account</h1>
+      <div id="alerts" class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
-      </div><br>
-      <label for="username" class="sr-only">Username</label>&nbsp;
+      </div>
+      <label id="username-title" for="username" class="sr-only">Username</label>
       <input
         type="text"
         id="username"
@@ -14,8 +14,8 @@
         v-model="user.username"
         required
         autofocus
-      /><br><br>
-      <label for="password" class="sr-only">Password</label>&nbsp;&nbsp;
+      />
+      <label id="password-title" for="password" class="sr-only">Password</label>
       <input
         type="password"
         id="password"
@@ -23,8 +23,8 @@
         placeholder="Password"
         v-model="user.password"
         required
-      /><br><br>
-      <label for="username" class="sr-only">Confirm Password</label>&nbsp;
+      />
+      <label id="confirm-password-title" for="username" class="sr-only">Confirm Password</label>
       <input
         type="password"
         id="confirmPassword"
@@ -32,9 +32,9 @@
         placeholder="Confirm Password"
         v-model="user.confirmPassword"
         required
-      /><br><br>
-      <router-link :to="{ name: 'login' }">Have an account?</router-link><br><br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      />
+      <router-link :to="{ name: 'login' }" id="account">Have an account?</router-link>
+      <button id="register" class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
     </form>
@@ -91,4 +91,65 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.form-register {
+  display: grid;
+  grid-template-columns: 150px 200px;
+  row-gap: 10px;
+  grid-template-areas: 
+    "banner banner"
+    "alerts alerts"
+    "u-title u-input"
+    "p-title p-input"
+    "cp-title cp-input"
+    "account register";
+}
+
+
+#banner {
+  grid-area: banner;
+}
+
+#alerts {
+  grid-area: alerts;
+}
+
+#username-title {
+  grid-area: u-title;
+
+}
+
+#username {
+  grid-area: u-input;
+
+}
+
+#password-title {
+  grid-area: p-title;
+
+}
+
+#password {
+  grid-area: p-input;
+
+}
+
+#confirm-password-title {
+  grid-area: cp-title;
+}
+
+#confirmPassword {
+  grid-area: cp-input;
+}
+
+#account {
+  grid-area: account;
+  justify-self: center;
+}
+
+#register {
+  grid-area: register;
+  justify-self: center;
+}
+
+</style>

@@ -58,8 +58,6 @@ header.h1 {
 
 #router-view {
   grid-area: body;
-  display: flex;
-  flex-direction: row;
 }
 
 #sidebar {

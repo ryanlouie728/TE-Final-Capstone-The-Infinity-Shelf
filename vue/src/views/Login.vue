@@ -1,38 +1,40 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-      <div
+      <h1 id="banner" class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <div id="alerts"
         class="alert alert-danger"
         role="alert"
         v-if="invalidCredentials"
       >Invalid username and password!</div>
-      <div
+      <div id="alerts"
         class="alert alert-success"
         role="alert"
         v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div><br>
-      <label for="username" class="sr-only">Username</label>&nbsp;
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      /><br><br>
-      <label for="password" class="sr-only">Password</label>&nbsp;&nbsp;
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      /><br><br>
-      <router-link :to="{ name: 'register' }">Need an account?</router-link><br><br>
-      <button class="sign-in" type="submit">Sign in</button>
+      >Thank you for registering, please sign in.</div>
+
+        <label id="username-title" for="username" class="sr-only">Username</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          v-model="user.username"
+          required
+          autofocus
+        />
+        <label id="password-title" for="password" class="sr-only">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required
+        />
+
+      <router-link :to="{ name: 'register' }" id="register">Need an account?</router-link>
+      <button id="sign-in" class="sign-in" type="submit">Sign in</button>
     </form>
   </div>
 </template>
@@ -75,5 +77,56 @@ export default {
 };
 </script>
 <style>
+
+.form-signin {
+  display: grid;
+  grid-template-columns: 150px 200px;
+  row-gap: 10px;
+  grid-template-areas: 
+    "banner banner"
+    "alerts alerts"
+    "u-title u-input"
+    "p-title p-input"
+    "register sign-in";
+}
+
+
+#banner {
+  grid-area: banner;
+}
+
+#alerts {
+  grid-area: alerts;
+}
+
+#username-title {
+  grid-area: u-title;
+
+}
+
+#username {
+  grid-area: u-input;
+
+}
+
+#password-title {
+  grid-area: p-title;
+
+}
+
+#password {
+  grid-area: p-input;
+
+}
+
+#register {
+  grid-area: register;
+  justify-self: center;
+}
+
+#sign-in {
+  grid-area: sign-in;
+  justify-self: center;
+}
 
 </style>
