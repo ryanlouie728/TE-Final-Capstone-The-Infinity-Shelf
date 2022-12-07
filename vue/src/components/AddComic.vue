@@ -2,7 +2,7 @@
   <div class="add-comic" id="add-comic">
     <div id="drag-handle">Add Comic to Collection</div>
     <div id="search-bar">
-      <input id="search-bar" v-model="title" type="text" @keyup.enter="search()" ref="refText">
+      <input id="search-bar-input" v-model="title" type="text" @keyup.enter="search()" ref="refText">
       <button id="search" v-on:click.prevent="search()">Search</button>
       <button v-on:click.prevent="cancel()">Cancel</button>
     </div>
@@ -46,10 +46,14 @@ export default {
     cancel() {
       this.$emit('added')
     },
+    focusSearch() {
+      document.getElementById("search-bar-input").focus();
+    }
     
   },
   mounted() {
     dragElement(document.getElementById("add-comic"));
+    this.focusSearch();
   },
 }
   
@@ -98,7 +102,7 @@ function dragElement(elmnt) {
 
 <style>
 .add-comic {
-  width: 500px;
+  width: 505px;
   height: 500px;
   background-color: var(--light-accent);
   position: fixed;
@@ -107,6 +111,7 @@ function dragElement(elmnt) {
   display: flex;
   flex-direction: column;
   align-items: left;
+  border: solid 2px black;
 }
 #search-bar {
   width: 100%;
