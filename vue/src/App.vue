@@ -16,17 +16,17 @@
 
 <style>
 :root{
-  --black: #000505;
-  --violet: #3B3355;
-  --navy: #5D5D81;
-  --blue: #BFCDE0;
+  --dark-accent: #000505;
+  --medium-accent: #3B3355;
+  --light-accent: #5D5D81;
+  --main-background: #BFCDE0;
   --white: #FEFCFD;
 }
 
 html {
   box-sizing: border-box;
   min-height: 100vh;
-  background-color: var(--white);
+  background-color: var(--main-background);
 }
 
 body {
@@ -61,9 +61,9 @@ header.h1 {
   padding-top: 0.2em;
   padding-bottom: 0.2em;
   height: fit-content;
-  background-color: var(--blue);
-  border-top: solid 2px var(--black);
-  border-bottom: solid 2px var(--black);
+  background-color: var(--white);
+  border-top: solid 2px var(--dark-accent);
+  border-bottom: solid 2px var(--dark-accent);
 }
 
 #router-view {
@@ -72,8 +72,8 @@ header.h1 {
 
 #sidebar {
     width: 200px;
-    background-color: var(--blue);
-    border: solid 2px var(--black);
+    background-color: var(--light-accent);
+    border: solid 2px var(--dark-accent);
 }
 
 </style>
