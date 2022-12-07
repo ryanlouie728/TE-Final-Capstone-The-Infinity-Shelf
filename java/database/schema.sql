@@ -57,6 +57,7 @@ CREATE TABLE character_comic (
 CREATE TABLE creator (
     creator_id int NOT NULL,
     name VARCHAR(150) NOT NULL,
+    role VARCHAR(50),
     thumbnail VARCHAR(250),
     CONSTRAINT PK_creator PRIMARY KEY (creator_id)
 );

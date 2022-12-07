@@ -3,6 +3,7 @@ package com.techelevator.services;
 import com.google.gson.*;
 import com.techelevator.model.CharacterDto;
 import com.techelevator.model.ComicDto;
+import com.techelevator.model.CreatorDto;
 import com.techelevator.model.SimpleComicDto;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -106,6 +107,8 @@ public class RestComicService extends BaseService implements ComicService{
 
         JsonObject characters = element.getAsJsonObject().get("characters").getAsJsonObject();
         comic.setCharacters(mapCharacterList(characters.getAsJsonArray("items")));
+        JsonObject creators = element.getAsJsonObject().get("creators").getAsJsonObject();
+        comic.setCreators(mapCreatorList(creators.getAsJsonArray("items")));
         return comic;
     }
 
@@ -133,6 +136,38 @@ public class RestComicService extends BaseService implements ComicService{
         }
 
         return character;
+    }
+
+    private List<CreatorDto> mapCreatorList(JsonArray array) {
+        List<CreatorDto> creators = new ArrayList<>();
+        for (JsonElement creator : array) {
+            creators.add(mapCreator(creator));
+        }
+        return creators;
+    }
+
+    private CreatorDto mapCreator(JsonElement element) {
+        CreatorDto creator = new CreatorDto();
+        JsonObject object = element.getAsJsonObject();
+
+        JsonElement uri = object.get("resourceURI");
+        if (!uri.isJsonNull()) {
+            String url = uri.getAsString();
+            creator.setCreatorId(Integer.parseInt(url.substring(url.lastIndexOf("/") + 1)));
+        } else {
+            creator.setCreatorId(null);
+        }
+        JsonElement name = object.get("name");
+        if (!name.isJsonNull()) {
+            creator.setName(name.getAsString());
+        }
+
+        JsonElement role = object.get("role");
+        if (!role.isJsonNull()) {
+            creator.setRole(role.getAsString());
+        }
+
+        return creator;
     }
 
     private List<SimpleComicDto> mapJsonArrayToList(JsonArray array) {

@@ -14,10 +14,12 @@ public class JdbcComicDao implements ComicDao {
     private final JdbcTemplate jdbcTemplate;
 
     private final CharacterDao characterDao;
+    private final CreatorDao creatorDao;
 
-    public JdbcComicDao(JdbcTemplate jdbcTemplate, CharacterDao characterDao) {
+    public JdbcComicDao(JdbcTemplate jdbcTemplate, CharacterDao characterDao, CreatorDao creatorDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.characterDao = characterDao;
+        this.creatorDao = creatorDao;
     }
 
     @Override
@@ -71,6 +73,7 @@ public class JdbcComicDao implements ComicDao {
             if (!comicExists(comic)) {
                 createComic(comic);
                 characterDao.createCharacterList(comic.getCharacters());
+                creatorDao.createCreatorList(comic.getCreators());
             }
         }
     }
