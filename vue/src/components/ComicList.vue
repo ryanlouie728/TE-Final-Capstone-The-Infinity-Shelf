@@ -41,13 +41,14 @@ export default {
     box-sizing: border-box;
     border: solid 2px var(--dark-accent);
     width: 120px;
-    height: 200px;
+    height: 215px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-right: 2px;
     margin-bottom: 2px;
+    padding: 5px 0px;
 }
 
 .comic-title {
@@ -56,7 +57,6 @@ export default {
 
 .comic-text {
     text-align: center;
-    height: 25px;
 }
 
 .thumbnail {
