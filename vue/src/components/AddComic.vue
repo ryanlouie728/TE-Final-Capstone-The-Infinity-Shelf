@@ -138,6 +138,6 @@ function dragElement(elmnt) {
 }
 
 .comic:hover {
-  background-color: var(--light-accent);
+  background-color: var(--main-background);
 }
 </style>
