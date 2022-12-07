@@ -53,8 +53,6 @@ public class CollectionController {
         collectionDao.removeComicFromCollection(collectionId, comicId);
     }
 
-
-
     @GetMapping("/{collectionId}")
     public CollectionDto getCollectionById(@PathVariable Integer collectionId) {
         return collectionDao.getByCollectionId(collectionId);

@@ -17,7 +17,7 @@ public class JdbcCharacteDao implements CharacterDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Boolean characterExists(CharacterDto characterDto) {
+    private Boolean characterExists(CharacterDto characterDto) {
         String sql =
                 "SELECT name " +
                 "FROM character " +
@@ -26,22 +26,40 @@ public class JdbcCharacteDao implements CharacterDao{
         return rowSet.next();
     }
 
+    public Boolean characterComicExists(CharacterDto character, Integer comicId) {
+        String sql =
+                "SELECT comic_id " +
+                "FROM character_comic AS cc " +
+                "WHERE cc.char_id = ? " +
+                "AND cc.comic_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, character.getCharacterId(), comicId);
+        return rowSet.next();
+    }
 
     @Override
-    public void createCharacter(CharacterDto character, Integer comicId) {
+    public void createCharacter(CharacterDto character) {
         String sql =
                 "INSERT INTO character (char_id, name, thumbnail) " +
-                "VALUES (?, ?, ?);" +
+                "VALUES (?, ?, ?);";
+        jdbcTemplate.update(sql, character.getCharacterId(), character.getName(), character.getThumbnail());
+    }
+
+    private void createCharacterComic(CharacterDto character, Integer comicId) {
+        String sql =
                 "INSERT INTO character_comic (char_id, comic_id) " +
                 "VALUES (?, ?);";
-        jdbcTemplate.update(sql, character.getCharacterId(), character.getName(), character.getThumbnail(), character.getCharacterId(), comicId);
+        jdbcTemplate.update(sql, character.getCharacterId(), comicId);
     }
 
     @Override
     public void createCharacterList(List<CharacterDto> characters, Integer comicId) {
         for (CharacterDto character : characters) {
-            if (characterExists(character)) continue;
-            createCharacter(character, comicId);
+            if (!characterExists(character)) {
+                createCharacter(character);
+            }
+            if (!characterComicExists(character, comicId)) {
+                createCharacterComic(character, comicId);
+            }
         }
     }
 

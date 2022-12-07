@@ -17,7 +17,7 @@ public class JdbcCreatorDao implements CreatorDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Boolean creatorExists(CreatorDto creator) {
+    private Boolean creatorExists(CreatorDto creator) {
         String sql =
                 "SELECT name " +
                 "FROM creator " +
@@ -26,21 +26,41 @@ public class JdbcCreatorDao implements CreatorDao {
         return rowSet.next();
     }
 
+    public Boolean creatorComicExists(CreatorDto creator, Integer comicId) {
+        String sql =
+                "SELECT creator_id " +
+                "FROM creator_comic " +
+                "WHERE creator_id = ? " +
+                "AND comic_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, creator.getCreatorId(), comicId);
+        return rowSet.next();
+    }
+
     @Override
-    public void createCreator(CreatorDto creatorDto, Integer comicId) {
+    public void createCreator(CreatorDto creatorDto) {
         String sql =
                 "INSERT INTO creator (creator_id, name, thumbnail, role) " +
-                "VALUES (?, ?, ?, ?);" +
+                "VALUES (?, ?, ?, ?);";
+        jdbcTemplate.update(sql, creatorDto.getCreatorId(), creatorDto.getName(), creatorDto.getThumbnail(), creatorDto.getRole());
+    }
+
+    private void createCreatorComic(CreatorDto creatorDto, Integer comicId) {
+        String sql =
                 "INSERT INTO creator_comic (creator_id, comic_id) " +
                 "VALUES (?, ?);";
-        jdbcTemplate.update(sql, creatorDto.getCreatorId(), creatorDto.getName(), creatorDto.getThumbnail(), creatorDto.getRole(), creatorDto.getCreatorId(), comicId);
+        jdbcTemplate.update(sql, creatorDto.getCreatorId(), comicId);
     }
 
     @Override
     public void createCreatorList(List<CreatorDto> creators, Integer comicId) {
         for (CreatorDto creator : creators) {
-            if (creatorExists(creator)) continue;
-            createCreator(creator, comicId);
+            if (!creatorExists(creator)) {
+                createCreator(creator);
+            }
+            if (!creatorComicExists(creator, comicId)) {
+                createCreatorComic(creator, comicId);
+            }
+
         }
     }
 

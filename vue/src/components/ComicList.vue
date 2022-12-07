@@ -30,24 +30,36 @@ export default {
 
 <style>
 .comic-list {
-    flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
 
 }
 
 .comic {
     box-sizing: border-box;
     border: solid 2px black;
-    height: 75px;
-    width: 100%;
-    padding: 5px;
+    width: 120px;
+    height: 200px;
     display: flex;
-} 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
+}
+
+.comic-title {
+    font-size: .5rem;
+}
+
+.comic-text {
+    text-align: center;
+    height: 25px;
+}
 
 .thumbnail {
-    height: 100%;
-    width: auto;
-    margin-right: 10px;
+    height: auto;
+    width: 92%;
 }
 </style>

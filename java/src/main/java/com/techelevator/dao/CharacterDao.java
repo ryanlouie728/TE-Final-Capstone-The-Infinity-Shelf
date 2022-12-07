@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CharacterDao {
 
-    void createCharacter(CharacterDto character, Integer comicId);
+    void createCharacter(CharacterDto character);
 
     void createCharacterList(List<CharacterDto> characters, Integer comicId);
 

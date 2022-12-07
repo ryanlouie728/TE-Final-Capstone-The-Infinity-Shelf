@@ -1,9 +1,7 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CollectionDto {
 
@@ -20,8 +18,8 @@ public class CollectionDto {
     private Boolean collectionPublic;
     private List<ComicDto> comics;
 
-    private Map<String, Integer> characterCounts = new HashMap<>();
-    private Map<String, Integer> creatorCounts = new HashMap<>();
+    private List<Count> characterCounts = new ArrayList<>();
+    private List<Count> creatorCounts = new ArrayList<>();
 
     public Integer getCollectionId() {
         return collectionId;
@@ -75,19 +73,19 @@ public class CollectionDto {
         return comics;
     }
 
-    public Map<String, Integer> getCharacterCounts() {
+    public List<Count> getCharacterCounts() {
         return characterCounts;
     }
 
-    public void setCharacterCounts(Map<String, Integer> characterCounts) {
+    public void setCharacterCounts(List<Count> characterCounts) {
         this.characterCounts = characterCounts;
     }
 
-    public Map<String, Integer> getCreatorCounts() {
+    public List<Count> getCreatorCounts() {
         return creatorCounts;
     }
 
-    public void setCreatorCounts(Map<String, Integer> creatorCounts) {
+    public void setCreatorCounts(List<Count> creatorCounts) {
         this.creatorCounts = creatorCounts;
     }
 
@@ -112,26 +110,48 @@ public class CollectionDto {
     }
 
     private void countCharacters() {
+        Map<String, Integer> characters = new HashMap<>();
         for (ComicDto comic : comics) {
             for (CharacterDto character : comic.getCharacters()) {
-                if (!characterCounts.containsKey(character.getName())) {
-                    characterCounts.put(character.getName(), 1);
+                if (!characters.containsKey(character.getName())) {
+                    characters.put(character.getName(), 1);
                 } else {
-                    characterCounts.put(character.getName(), characterCounts.get(character.getName()) + 1);
+                    characters.put(character.getName(), characters.get(character.getName()) + 1);
                 }
             }
+        }
+        var sorted = entriesSortedByValues(characters);
+        for (Map.Entry<String, Integer> character : sorted) {
+            characterCounts.add(new Count(character.getKey(), character.getValue()));
         }
     }
 
     private void countCreators() {
+        Map<String, Integer> creators = new HashMap<>();
         for (ComicDto comic : comics) {
             for (CreatorDto creator : comic.getCreators()) {
-                if (!creatorCounts.containsKey(creator.getName())) {
-                    creatorCounts.put(creator.getName(), 1);
+                if (!creators.containsKey(creator.getName())) {
+                    creators.put(creator.getName(), 1);
                 } else {
-                    creatorCounts.put(creator.getName(), creatorCounts.get(creator.getName()) + 1);
+                    creators.put(creator.getName(), creators.get(creator.getName()) + 1);
                 }
             }
         }
+        for (Map.Entry<String, Integer> character : entriesSortedByValues(creators)) {
+            creatorCounts.add(new Count(character.getKey(), character.getValue()));
+        }
+    }
+
+    <K,V extends Comparable<? super V>> SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
+        SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
+                new Comparator<Map.Entry<K,V>>() {
+                    @Override public int compare(Map.Entry<K,V> e1, Map.Entry<K,V> e2) {
+                        int res= e2.getValue().compareTo(e1.getValue());
+                        return res != 0 ? res : 1; // Special fix to preserve items with equal values
+                    }
+                }
+        );
+        sortedEntries.addAll(map.entrySet());
+        return sortedEntries;
     }
 }
