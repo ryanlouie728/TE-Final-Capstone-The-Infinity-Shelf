@@ -4,11 +4,21 @@
       <h1>Comic Book Collection</h1>
     </header>
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'collections' }">All Collections</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'user-collections', params: { username: this.$store.state.user.username } }">My Collections</router-link>&nbsp;|&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
+      <div class="nav-link-holder">
+        <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      </div>
+      <div class="nav-link-holder">
+        <router-link class="nav-link" v-bind:to="{ name: 'collections' }">All Collections</router-link>
+      </div>
+      <div class="nav-link-holder">
+        <router-link class="nav-link" v-bind:to="{ name: 'user-collections', params: { username: this.$store.state.user.username } }">My Collections</router-link>
+      </div>
+      <div class="nav-link-holder" v-if="this.$store.state.token != ''">
+        <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
+      </div>
+      <div class="nav-link-holder" v-if="this.$store.state.token == ''">
+        <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
+      </div>
     </div>
     <router-view id="router-view" />
   </div>
@@ -56,14 +66,41 @@ header.h1 {
 
 #nav {
   grid-area: nav;
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  height: fit-content;
-  background-color: var(--white);
+  padding: 0px 5px;
+  height: 30px;
+  background-color: var(--light-accent);
   border-top: solid 2px var(--dark-accent);
   border-bottom: solid 2px var(--dark-accent);
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-holder {
+  height: 80%;
+  background-color: var(--medium-accent);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  padding: 0px 5px;
+}
+
+.nav-link-holder:hover {
+  background-color: var(--main-background);
+  color: var(--dark-accent);
+}
+
+.nav-link {
+  padding-top: 5px;
+  height: 100%;
+  width: 100%;
+  color: var(--white);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--dark-accent);
 }
 
 #router-view {
