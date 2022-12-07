@@ -2,18 +2,26 @@
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 id="banner" class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-      <div id="alerts"
+      <div
+        id="alerts"
         class="alert alert-danger"
         role="alert"
         v-if="invalidCredentials"
-      >Invalid username and password!</div>
-      <div id="alerts"
+      >
+        Invalid username and password!
+      </div>
+      <div
+        id="alerts"
         class="alert alert-success"
         role="alert"
         v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div>
-      <div id="username">
-        <label id="username-title" for="username" class="sr-only">Username</label>
+      >
+        Thank you for registering, please sign in.
+      </div>
+      <div class="username-group">
+        <label id="username-title" for="username" class="sr-only"
+          >Username</label
+        >
         <input
           type="text"
           id="username"
@@ -24,8 +32,10 @@
           autofocus
         />
       </div>
-      <div id="password">
-        <label id="password-title" for="password" class="sr-only">Password</label>
+      <div class="password-group">
+        <label id="password-title" for="password" class="sr-only"
+          >Password</label
+        >
         <input
           type="password"
           id="password"
@@ -35,7 +45,9 @@
           required
         />
       </div>
-      <router-link :to="{ name: 'register' }" id="register">Need an account?</router-link>
+      <router-link :to="{ name: 'register' }" id="register"
+        >Need an account?</router-link
+      >
       <button id="sign-in" class="sign-in" type="submit">Sign in</button>
     </form>
   </div>
@@ -51,93 +63,45 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
       },
-      invalidCredentials: false
+      invalidCredentials: false,
     };
   },
   methods: {
     login() {
       authService
         .login(this.user)
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
             this.$router.push("/");
           }
         })
-        .catch(error => {
+        .catch((error) => {
           const response = error.response;
 
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
 .form-signin {
   display: flex;
   flex-direction: column;
-  column-gap: 5px;
+  row-gap: 5px;
 }
-
-
-
-
-/* 
-.form-signin {
-  display: grid;
-  grid-template-columns: 150px 200px;
-  row-gap: 10px;
-  grid-template-areas: 
-    "banner banner"
-    "alerts alerts"
-    "u-title u-input"
-    "p-title p-input"
-    "register sign-in";
+#username, #password{
+  margin-left: 5px;
 }
-
-
-#banner {
-  grid-area: banner;
+.username-group, .password-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-
-#alerts {
-  grid-area: alerts;
-}
-
-#username-title {
-  grid-area: u-title;
-
-}
-
-#username {
-  grid-area: u-input;
-
-}
-
-#password-title {
-  grid-area: p-title;
-
-}
-
-#password {
-  grid-area: p-input;
-
-}
-
-#register {
-  grid-area: register;
-  justify-self: center;
-}
-
-#sign-in {
-  grid-area: sign-in;
-  justify-self: center;
-} */
-
 </style>
