@@ -75,6 +75,19 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
+    public void createDefaultUserCollection(Integer userId) {
+        String sql =
+                "INSERT INTO collection (user_id, coll_name) " +
+                        "VALUES (?, ?) " +
+                        "RETURNING coll_id;";
+        Integer coll_id = jdbcTemplate.queryForObject(sql, Integer.class, userId, "default");
+        sql =
+                "INSERT INTO user_collection (user_id, coll_id) " +
+                        "VALUES (?, ?);";
+        jdbcTemplate.update(sql, userId, coll_id);
+    }
+
+    @Override
     public User findByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
 
@@ -87,12 +100,11 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean create(String username, String password, String role) {
-        String insertUserSql = "insert into users (username,password_hash,role) values (?,?,?)";
+    public Integer create(String username, String password, String role) {
+        String insertUserSql = "insert into users (username,password_hash,role) values (?,?,?) RETURNING user_id;";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
-
-        return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
+        return jdbcTemplate.queryForObject(insertUserSql, Integer.class, username, password_hash, ssRole);
     }
 
     @Override

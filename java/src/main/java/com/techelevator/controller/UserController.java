@@ -31,6 +31,7 @@ public class UserController {
         UserDto user = userDao.getUserDtoById(userId);
         user.setFriends(friendDao.getFriendsById(userId));
         user.setCollections(collectionDao.listCollectionsByUserId(userId));
+        user.setBase(collectionDao.getBaseCollectionByUserId(user.getId()));
         return user;
     }
 

@@ -1,14 +1,17 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.ComicDto;
 import com.techelevator.model.trade.TradeComicDto;
 import com.techelevator.model.trade.TradeDto;
 import com.techelevator.model.trade.TradeUserDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcTradeDao implements TradeDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -22,9 +25,25 @@ public class JdbcTradeDao implements TradeDao {
     }
 
     @Override
-    public List<TradeComicDto> getTradesByUserId(Integer userId) {
+    public List<TradeDto> getTradesByUserId(Integer userId) {
         String sql =
-                "SELECT ";
+                "SELECT trade.trade_id, trade.status " +
+                "FROM trade " +
+                "JOIN trade_user ON trade.trade_id = trade_user.trade_id " +
+                "WHERE trade_user.user_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        return tradeListMapper(rowSet);
+    }
+
+
+    @Override
+    public Boolean createTrade(TradeDto trade) {
+        for (TradeComicDto comic : trade.getComics()) {
+            if (!comicDao.userHasComic(comic.getFrom().getId(), comic.getComicDto().getId())) {
+                return false;
+            }
+        }
+
 
         return null;
     }
@@ -45,6 +64,15 @@ public class JdbcTradeDao implements TradeDao {
                 "WHERE trade_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, tradeId);
         return tradeUserListMapper(rowSet);
+    }
+
+
+    private List<TradeDto> tradeListMapper(SqlRowSet rowSet) {
+        List<TradeDto> trades = new ArrayList<>();
+        while (rowSet.next()) {
+            trades.add(tradeMapper(rowSet));
+        }
+        return trades;
     }
 
     private TradeDto tradeMapper(SqlRowSet rowSet) {

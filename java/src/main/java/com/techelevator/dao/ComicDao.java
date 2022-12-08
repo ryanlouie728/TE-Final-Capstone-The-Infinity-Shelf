@@ -21,6 +21,9 @@ public interface ComicDao {
     ComicDto getComicById(Integer comicId);
 
     List<SimpleComicDto> listSimpleByTitle(String title);
+    List<SimpleComicDto> listSimpleByUserId(Integer userId);
+
+    Boolean userHasComic(Integer userId, Integer comicId);
 
     List<ComicDto> listComicsByCollectionId(Integer collectionId);
 

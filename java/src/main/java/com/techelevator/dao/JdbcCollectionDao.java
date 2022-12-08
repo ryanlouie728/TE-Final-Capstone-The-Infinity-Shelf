@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.CollectionDto;
 import com.techelevator.model.SimpleCollectionDto;
+import com.techelevator.model.login.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,20 @@ public class JdbcCollectionDao implements CollectionDao {
                 "INSERT INTO collection (user_id, coll_name, coll_description) " +
                 "VALUES (?, ?, ?);";
         jdbcTemplate.update(sql, collection.getUserId(), collection.getCollectionName(), collection.getCollectionDescription());
+    }
+
+    @Override
+    public CollectionDto getBaseCollectionByUserId(Integer userId) {
+        String sql =
+                "SELECT collection.coll_id, collection.user_id, collection.coll_name, collection.coll_description, collection.coll_cover, collection.coll_public " +
+                "FROM collection " +
+                "JOIN user_collection ON collection.coll_id = user_collection.coll_id " +
+                "WHERE user_collection.user_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        if (rowSet.next()) {
+            return collectionMapper(rowSet);
+        }
+        return null;
     }
 
     @Override

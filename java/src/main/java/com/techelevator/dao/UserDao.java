@@ -18,5 +18,7 @@ public interface UserDao {
 
     int findIdByUsername(String username);
 
-    boolean create(String username, String password, String role);
+    Integer create(String username, String password, String role);
+
+    void createDefaultUserCollection(Integer userId);
 }

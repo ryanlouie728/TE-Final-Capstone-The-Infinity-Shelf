@@ -44,6 +44,31 @@ public class JdbcComicDao implements ComicDao {
     }
 
     @Override
+    public List<SimpleComicDto> listSimpleByUserId(Integer userId) {
+        String sql =
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "FROM comic " +
+                "JOIN collection_comic AS coll_com ON coll_com.comic_id = comic.comic_id " +
+                "JOIN collection ON coll_com.coll_id = collection.coll_id " +
+                "WHERE collection.user_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        return simpleComicDtoListMapper(rowSet);
+    }
+
+    @Override
+    public Boolean userHasComic(Integer userId, Integer comicId) {
+        String sql =
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "FROM comic " +
+                "JOIN collection_comic AS coll_com ON coll_com.comic_id = comic.comic_id " +
+                "JOIN collection ON coll_com.coll_id = collection.coll_id " +
+                "WHERE collection.user_id = ? " +
+                "AND comic.id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId, comicId);
+        return rowSet.next();
+    }
+
+    @Override
     public List<SimpleComicDto> listSimpleByCollectionList(List<SimpleCollectionDto> collections) {
         List<SimpleComicDto> comics = new ArrayList<>();
         for (SimpleCollectionDto collection : collections) {
