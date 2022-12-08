@@ -9,6 +9,7 @@ import java.util.List;
 public interface CollectionDao {
 
 
+    Integer getBaseCollectionIdByUserId(Integer userId);
     CollectionDto getBaseCollectionByUserId(Integer userId);
     List<SimpleCollectionDto> listCollectionsByUserId(int userId);
 
