@@ -7,7 +7,7 @@
       <button v-on:click.prevent="cancel()">Cancel</button>
     </div>
     <div id="comic-list-holder">
-      <div v-if="comicsEmpty">
+      <div v-if="comicsEmpty" id="empty-message">
         <p>No Search Results</p>
       </div>
       <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
@@ -139,6 +139,10 @@ function dragElement(elmnt) {
   width: 100%;
   height: 20px;
   cursor: move;
+  text-align: center;
+}
+
+#empty-message {
   text-align: center;
 }
 

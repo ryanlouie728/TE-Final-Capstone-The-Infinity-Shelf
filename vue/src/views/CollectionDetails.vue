@@ -92,8 +92,9 @@ export default {
 
 .count-list {
   margin: 5px;
-  border: solid 2px gray;
+  border: solid 2px var(--main-background);
   text-align: center;
+  padding: 5px;
 }
 
 .count-title {
@@ -107,4 +108,7 @@ export default {
   margin-bottom: 2px;
 }
 
+#counts {
+  width: 200px;
+}
 </style>

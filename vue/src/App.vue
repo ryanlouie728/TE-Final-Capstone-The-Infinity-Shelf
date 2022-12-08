@@ -120,6 +120,7 @@ header.h1 {
   margin-top: 10px;
   margin-inline: auto;
   width: max-content;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
