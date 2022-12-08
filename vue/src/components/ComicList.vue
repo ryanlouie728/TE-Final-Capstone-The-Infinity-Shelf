@@ -16,12 +16,14 @@
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
     </div>
+    <!-- <div class="comic" v-if="showAdd">Add New Comic</div> 
+    work on this to get blank card to add new-->
   </div>
 </template>
 
 <script>
 export default {
-    props: ['comics'],
+    props: ['comics',' drag', 'showAdd'],
     name: 'comic-list',
     data() {
         return {
