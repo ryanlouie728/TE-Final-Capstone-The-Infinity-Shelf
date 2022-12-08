@@ -6,7 +6,7 @@
       <button id="search" v-on:click.prevent="search()">Search</button>
       <button v-on:click.prevent="cancel()">Cancel</button>
     </div>
-    <div id="comic-list-holder">
+    <div class="comic-list-holder">
       <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
     </div>
   </div>
@@ -133,7 +133,5 @@ function dragElement(elmnt) {
   text-align: center;
 }
 
-#comic-list-holder {
-  overflow: auto;
-}
+
 </style>
