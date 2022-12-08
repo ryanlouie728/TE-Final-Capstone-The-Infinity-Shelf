@@ -42,6 +42,7 @@ export default {
     height: 75px;
     padding: 5px;
     display: flex;
+    margin-bottom: 5px;
     flex-direction: row;
     cursor: pointer;
 }
