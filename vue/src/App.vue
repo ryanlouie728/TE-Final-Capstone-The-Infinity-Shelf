@@ -117,7 +117,7 @@ header.h1 {
 
 #sidebar > button {
   display: block;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-inline: auto;
   width: max-content;
 }
