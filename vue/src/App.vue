@@ -69,7 +69,6 @@ body {
 }
 #header {
   grid-area: title;
-  text-align: center;
 
 }
 
@@ -81,8 +80,6 @@ body {
   border-top: solid 2px var(--dark-accent);
   border-bottom: solid 2px var(--dark-accent);
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .nav-link-holder {
