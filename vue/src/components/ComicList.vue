@@ -77,4 +77,11 @@ export default {
   height: auto;
   width: 92%;
 }
+
+.comic-list-holder {
+  overflow: auto;
+  width: 100%;
+}
+
+
 </style>

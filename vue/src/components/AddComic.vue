@@ -142,7 +142,5 @@ function dragElement(elmnt) {
   text-align: center;
 }
 
-#comic-list-holder {
-  overflow: auto;
-}
+
 </style>

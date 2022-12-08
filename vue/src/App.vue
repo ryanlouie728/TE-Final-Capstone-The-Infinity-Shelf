@@ -115,4 +115,20 @@ header.h1 {
     border: solid 2px var(--dark-accent);
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--medium-accent);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 </style>
