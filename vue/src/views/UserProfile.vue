@@ -1,6 +1,11 @@
 <template>
   <div class = "user-profile">
-    <collection-list v-bind:collections="this.user.collections" />
+    <div id="left-pane">
+        <collection-list v-bind:collections="this.user.collections" />
+        <h2>Uncatagorized Comics</h2>
+        <comic-list v-bind:comics="this.user.base.comics" />
+    </div>
+    
     <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
     <!-- <trade v-bind:user="user" v-if="trading" @tradeCreated="tradeCreated()" /> -->
     <div id="sidebar">
@@ -18,18 +23,22 @@
 
 <script>
 import CollectionList from '../components/CollectionList.vue'
+import ComicList from '../components/ComicList.vue';
 import CreateCollection from '../components/CreateCollection.vue';
 
 import UserService from '../services/UserService';
 
 export default {
-    components: { CollectionList, CreateCollection},
+    components: { CollectionList, CreateCollection, ComicList},
     name: "user-profile",
     data() {
         return {
             creatingCollection: false,
             trading: false,
             user: {
+                base: {
+                    comics: []
+                },
                 collections: []
             }
         }
@@ -58,6 +67,17 @@ export default {
 </script>
 
 <style>
+#collection-list {
+    flex-grow: 0;
+    margin-bottom: 5px;
+}
+#left-pane {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
 #friend-list {
     width: auto;
     padding: 10px;
