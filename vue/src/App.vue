@@ -13,6 +13,9 @@
       <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'user-profile', params: { username: this.$store.state.user.username } }">Profile</router-link>
       </div>
+      <div class="nav-link-holder">
+        <router-link class="nav-link" v-bind:to="{ name: 'trade'}">Trade</router-link>
+      </div>
       <div class="nav-link-holder" v-if="this.$store.state.token != ''">
         <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
       </div>

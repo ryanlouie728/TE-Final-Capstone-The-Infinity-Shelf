@@ -20,14 +20,16 @@
 <script>
 import ComicService from '../services/ComicService';
 import UserService from '../services/UserService';
-import ComicList from './ComicList.vue';
+import ComicList from '../components/ComicList.vue';
 
 export default {
   components: { ComicList },
     name: 'trade',
-    props: ['user'],
     data() {
         return {
+            user: {
+                collections: []
+            },
             userInput: '',
             users: [],
             userComics: [],
@@ -37,6 +39,17 @@ export default {
         }
     },
     methods: {
+        getUser() {
+            UserService.getProfileById(this.$store.state.user.id)
+            .then(response => {
+                if (response.status == 200) {
+                    this.user = response.data;
+                }
+            })
+            .then(() => {
+                this.getCurrentUserComics();
+            })
+        },
         getUsers() {
             UserService.getByUsername(this.userInput)
             .then(response => {
@@ -99,6 +112,9 @@ export default {
             })
         }
     },
+    created() {
+        this.getUser()
+    },
     mounted() {
         this.getUsers();
         this.getCurrentUserComics();
@@ -108,12 +124,10 @@ export default {
 
 <style>
 .trade {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     background-color: var(--medium-accent);
-    position: fixed;
-    width: 66vw;
-    top: calc(25vh - 100px);
-    left: calc(25vw - 100px);
-    height: fit-content;
 }
 
 #user-select {

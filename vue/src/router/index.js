@@ -9,6 +9,8 @@ import Collections from '../views/UserProfile.vue'
 import CollectionDetails from '../views/CollectionDetails.vue'
 import PublicCollections from '../views/PublicCollections.vue'
 import ComicDetails from '../views/ComicDetails.vue'
+import Trade from '../views/Trade.vue'
+
 
 Vue.use(Router)
 
@@ -61,6 +63,14 @@ const router = new Router({
       path: '/:username',
       name: 'user-profile',
       component: Collections,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/trade',
+      name: 'trade',
+      component: Trade,
       meta: {
         requiresAuth: true
       }
