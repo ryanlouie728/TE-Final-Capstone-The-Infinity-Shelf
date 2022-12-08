@@ -5,7 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import Collections from '../views/Collections.vue'
+import Collections from '../views/UserProfile.vue'
 import CollectionDetails from '../views/CollectionDetails.vue'
 import PublicCollections from '../views/PublicCollections.vue'
 import ComicDetails from '../views/ComicDetails.vue'
@@ -58,8 +58,8 @@ const router = new Router({
       }
     },
     {
-      path: '/:username/collections',
-      name: 'user-collections',
+      path: '/:username',
+      name: 'user-profile',
       component: Collections,
       meta: {
         requiresAuth: true

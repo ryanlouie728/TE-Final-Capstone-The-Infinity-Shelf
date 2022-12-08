@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.model.UserDto;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -82,6 +83,19 @@ public class JdbcUserDao implements UserDao {
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
     }
 
+    @Override
+    public UserDto getUserDtoById(Integer userId) {
+        String sql =
+                "SELECT user_id, username " +
+                "FROM users " +
+                "WHERE user_id = ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        if (rowSet.next()) {
+            return userDtoMapper(rowSet);
+        }
+        return null;
+    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
@@ -91,4 +105,19 @@ public class JdbcUserDao implements UserDao {
         user.setActivated(true);
         return user;
     }
+
+    private UserDto userDtoMapper(SqlRowSet rowSet) {
+        try {
+            UserDto user = new UserDto();
+            user.setId(rowSet.getInt("user_id"));
+            user.setUsername(rowSet.getString("username"));
+
+            return user;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
 }
