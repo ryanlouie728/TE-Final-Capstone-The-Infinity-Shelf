@@ -20,6 +20,5 @@ export default {
     },
     getComicById(id) {
         return http.get(`/comics/${id}`);
-    }
-
+    },
 }

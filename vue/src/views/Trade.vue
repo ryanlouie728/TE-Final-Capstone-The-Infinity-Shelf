@@ -4,15 +4,34 @@
     <datalist id="usernames">
         <option v-for="user in this.users"  v-bind:key="user.id" :value="user.username">{{user.username}}</option>
     </datalist>
-    <p>My Comics</p>
-    <div class="comic-list-holder">
-        <comic-list ref="userComics" @clicked="userComicClicked()" class="trade-comic-list" v-bind:comics="userComics"></comic-list>
+    <div class="trade-block" id="current-comics">
+        <div class="trade-title-block">
+            <h3>{{user.username}}</h3>
+            <h3>{{userInput}}</h3>
+        </div>
+        <div class="trade-list-block">
+            <div class="trade-comic-list-holder">
+                <comic-list ref="userComics" @clicked="userComicClicked()" class="trade-comic-list" v-bind:comics="userComics"></comic-list>
+            </div>
+            <div class="trade-comic-list-holder">
+                <comic-list ref="tradeComics" @clicked="tradeComicClicked()" class="trade-comic-list" v-bind:comics="tradeComics"></comic-list>
+            </div>
+        </div>
     </div>
-    <div class="comic-list-holder">
-        <comic-list ref="selectedUserComics" @clicked="selectedUserComicClicked()" class="trade-comic-list" v-bind:comics="userSelectedComics"></comic-list>
-    </div>
-    <div class="comic-list-holder">
-        <comic-list ref="tradeComics" @clicked="selectedUserComicClicked()" class="trade-comic-list" v-bind:comics="tradeComics"></comic-list>
+    <div class="trade-block" id="proposed-trade">
+
+        <div class="trade-title-block">
+            <h3>{{user.username}}</h3>
+            <h3>{{userInput}}</h3>
+        </div>
+        <div class="trade-list-block">
+            <div class="trade-comic-list-holder">
+                <comic-list ref="selectedUserComics" @clicked="selectedUserComicClicked()" class="trade-comic-list" v-bind:comics="userSelectedComics"></comic-list>
+            </div>
+            <div class="trade-comic-list-holder">
+                <comic-list ref="selectedTradeComics" @clicked="selectedTradeComicClicked()" class="trade-comic-list" v-bind:comics="tradeSelectedComics"></comic-list>
+            </div>
+        </div>
     </div>
   </div>
 </template>
@@ -85,6 +104,20 @@ export default {
             this.userSelectedComics.splice(this.userSelectedComics.indexOf(comic), 1)
             this.userComics.push(comic)
         },
+        tradeComicClicked() {
+            let comic = this.tradeComics.find(comic => {
+                return comic.id == this.$refs.tradeComics.clickedId;
+            })
+            this.tradeSelectedComics.push(comic);
+            this.tradeComics.splice(this.tradeComics.indexOf(comic), 1);
+        },
+        selectedTradeComicClicked() {
+            let comic = this.tradeSelectedComics.find(comic => {
+                return comic.id == this.$refs.selectedTradeComics.clickedId;
+            })
+            this.tradeSelectedComics.splice(this.tradeSelectedComics.indexOf(comic), 1);
+            this.tradeComics.push(comic);
+        },
         userSelected() {
             let selected = this.users.find(user => {
                 return user.username == this.userInput;
@@ -127,23 +160,39 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--medium-accent);
+    background-color: var(--light-accent);
+}
+
+.trade-block {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+}
+
+.trade-title-block {
+    display: flex;
+    justify-content: space-around;
+}
+
+.trade-list-block {
+    display: flex;
+    justify-content: space-between;
 }
 
 #user-select {
     width: 100px;
 }
 
-.comic-list-holder {
+.trade-comic-list-holder {
     display: flex;
     height: 185px;
     overflow: auto;
-    width: 95%;
-    border: solid 1px var(--dark-accent);
+    width: 47.5%;
+    border: inset 2px var(--medium-accent);
 }
 
 .trade-comic-list {
-    width: 100%;
+    /* background-color: var(--medium-accent); */
 }
 
 .trade-comic-list .comic {

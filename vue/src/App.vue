@@ -115,10 +115,20 @@ header.h1 {
   border: solid 2px var(--dark-accent);
 }
 
-#sidebar > button {
-  margin-top: 5px;
-  display: block;
-  margin-inline: auto;
-  width: max-content;
+::-webkit-scrollbar {
+    width: 10px;
 }
+
+::-webkit-scrollbar-track {
+  background: var(--medium-accent);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 </style>
