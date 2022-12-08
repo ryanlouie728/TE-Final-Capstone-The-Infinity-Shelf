@@ -6,6 +6,7 @@
       v-bind:key="comic.id"
       v-on:click.prevent="clicked(comic.id)"
       v-on:mousedown="mouseDown(comic.id)"
+      :class="{ selected: selected.includes(comic)}"
     >
       <img
         class="thumbnail"
@@ -17,26 +18,45 @@
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
     </div>
-    <div v-on:click.prevent="addComicEvent()" class="comic" id="add-comic-card" v-if="showAdd">
+    <div v-on:click.prevent="addComicEvent()" class="comic comic-list-action-card" id="add-comic-card" v-if="showAdd">
         <h5>+</h5>
         <p>Add New Comic</p>
     </div> 
+    <div v-on:click.prevent="toggleRemove()" class="comic comic-list-action-card" id="remove-comic-card" v-if="showRemove" :class="{ selected: removing}">
+        <h5>-</h5>
+        <p>Remove Comic</p>
+    </div>
+    <div v-on:click.prevent="submitSelect()" class="comic comic-list-action-card" id="remove-comic-card" v-if="showRemove">
+        <p>Sumbit</p>
+    </div>
   </div>
 </template>
 
 <script>
+import CollectionService from '../services/CollectionService';
 export default {
-    props: ['comics', 'drag', 'showAdd'],
+    props: ['comics', 'drag', 'showAdd', 'showRemove', 'base'],
     name: 'comic-list',
     data() {
         return {
+            selected: [],
+            removing: false,
             clickedId: ''
         }
     },
     methods: {
         clicked(id) {
-            this.clickedId = id;
-            this.$emit('clicked')
+            if (!this.removing) {
+                this.clickedId = id;
+                this.$emit('clicked')
+            } else {
+                let comic = this.comics.find(comic => {
+                    return comic.id == id;
+                })
+                this.selected.push(comic)
+                console.log(this.selected);
+            }
+            
         },
         mouseDown(id) {
             if (this.drag) {
@@ -49,12 +69,33 @@ export default {
             if (this.drag) {
                 let comics = document.querySelectorAll(".comic");
                 for (let comic of comics) {
-                    dragElement(comic);
+                    dragElement(comic, this.resetComicsEvent);
+                }
+            }
+        },
+        toggleRemove() {
+            if (this.removing) {
+                this.removing = false;
+                this.selected = [];
+            } else {
+                this.removing = true;
+            }
+        },
+        submitSelect() {
+            if (this.removing) {
+                for (let comic of this.selected) {
+                    CollectionService.removeComicFromCollection(this.base.collectionId, comic.id).then(
+                        this.resetComicsEvent(),
+                        this.toggleRemove()
+                    )
                 }
             }
         },
         addComicEvent() {
             this.$emit('addComic');
+        },
+        resetComicsEvent() {
+            this.$emit('resetComics')
         }
     },
     created() {
@@ -62,7 +103,7 @@ export default {
     }
 }
 
-function dragElement(elmnt) {
+function dragElement(elmnt, reset) {
     
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   elmnt.onmousedown = dragMouseDown;
@@ -111,6 +152,7 @@ function dragElement(elmnt) {
     elmnt.style.display = 'none';
     document.onmouseup = null;
     document.onmousemove = null;
+    reset();
   }
 }
 </script>
@@ -161,19 +203,30 @@ function dragElement(elmnt) {
   width: 100%;
 }
 
-#add-comic-card {
+.comic-list-action-card {
     justify-content: center;
 }
+.comic-list-action-card:hover {
+    background-color: var(--main-background);
+}
 
-#add-comic-card > h5 {
+.comic-list-action-card > h5 {
     margin: 0px;
     font-size: 5rem;
     line-height: 50%;
 }
 
-#add-comic-card > p {
+.comic-list-action-card > p {
     font-size: 1.25rem;
     margin: 0px;
+}
+
+.selected {
+    background-color: var(--medium-accent);
+}
+
+.selected:hover {
+    background-color: var(--medium-accent);
 }
 
 

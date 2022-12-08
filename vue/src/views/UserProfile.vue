@@ -5,16 +5,19 @@
         ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" 
         @dropped="comicDropped()"
         @addCollection="creatingCollection = true"
+        @resetComics="getUser()"
         />
         <h2>Uncatagorized Comics</h2>
-        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="true" @addComic="addingComic = true"/>
+        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="true" v-bind:showRemove="true"
+        v-bind:base="this.user.base"
+        @addComic="addingComic = true"/>
     </div>
     
     <create-collection v-if="creatingCollection" 
     @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
     <div id="sidebar">
-        <button v-on:click.prevent="creatingCollection = true">New Collection</button>
+        <!-- <button v-on:click.prevent="creatingCollection = true">New Collection</button> -->
         <!-- <button v-on:click.prevent="addingComic = true">Add Comic</button> -->
         <div id="friend-list">
             <h4 id="friend-list-title">Friends</h4>
@@ -77,7 +80,7 @@ export default {
             this.getUser();
         },
         comicClicked() {
-            if (!window.event.ctrlKey) {
+            if (!window.event.ctrlKey && !this.$refs.uncategorized.removing) {
                 this.$router.push({
                     name: 'comic-details',
                     params: {
@@ -99,17 +102,19 @@ export default {
                     CollectionService.removeComicFromCollection(this.user.base.collectionId, comicId)
                     .then(() => {
                         this.getUser();
+                        this.resetComicFormat();
                     })
                 }
             })
         },
         mouseUp() {
-
-            this.getUser();
-            this.resetComicFormat();
+            if (!this.$refs.uncategorized.removing) {
+                this.getUser();
+            }
+        
+            
         },
         resetComicFormat() {
-            console.log('reset');
             let comics = document.querySelectorAll(".comic");
             for (let comic of comics) {
                 comic.style.display = 'flex';
