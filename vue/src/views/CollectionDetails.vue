@@ -3,7 +3,7 @@
     <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
-      
+      <button v-on:click.prevent="">Delete Comics</button>
       <div id="counts">
         <div class="count-list">
           <h5 class="count-title">Top Character Appearances</h5>

@@ -15,6 +15,9 @@
         <h3 class="comic-title">{{ comic.title }}</h3>
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
+      <div>
+        <input type="checkbox">
+      </div>
     </div>
   </div>
 </template>
