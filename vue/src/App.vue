@@ -110,9 +110,9 @@ header.h1 {
 }
 
 #sidebar {
-    width: 200px;
-    background-color: var(--light-accent);
-    border: solid 2px var(--dark-accent);
+  width: 200px;
+  background-color: var(--light-accent);
+  border: solid 2px var(--dark-accent);
 }
 
 ::-webkit-scrollbar {
