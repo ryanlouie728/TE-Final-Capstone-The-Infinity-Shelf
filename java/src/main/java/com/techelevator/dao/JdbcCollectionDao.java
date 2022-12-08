@@ -21,12 +21,23 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public Integer getBaseCollectionIdByUserId(Integer userId) {
+        String sql =
+                "SELECT coll_id " +
+                "FROM user_collection " +
+                "WHERE user_id = ?;";
+        return jdbcTemplate.queryForObject(sql, Integer.class, userId);
+    }
+
+    @Override
     public List<SimpleCollectionDto> listCollectionsByUserId(int userId) {
+        Integer baseId = getBaseCollectionIdByUserId(userId);
         String sql =
                 "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
                 "FROM collection " +
-                "WHERE user_id = ?;";
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+                "WHERE user_id = ? " +
+                "AND coll_id != ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId, baseId);
         return simpleCollectionDtoListMapper(rowSet);
     }
 
