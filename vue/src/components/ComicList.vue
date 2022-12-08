@@ -17,12 +17,14 @@
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
     </div>
+
+    <div class="comic" v-if="showAdd">Test</div>
   </div>
 </template>
 
 <script>
 export default {
-    props: ['comics', 'drag'],
+    props: ['comics', 'drag', 'showAdd'],
     name: 'comic-list',
     data() {
         return {
