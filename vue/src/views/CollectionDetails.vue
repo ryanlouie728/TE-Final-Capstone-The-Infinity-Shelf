@@ -3,7 +3,7 @@
     <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
-      
+      <!-- <button v-on:click.prevent="">Delete Comics</button> -->
       <div id="counts">
         <div class="count-list">
           <h5 class="count-title">Top Character Appearances</h5>
@@ -59,12 +59,12 @@ export default {
         this.selectedComics.push(this.$refs.comics.clickedId);
         console.log(this.selectedComics);
 
-        // CollectionService.removeComicFromCollection(this.collection.collectionId, this.$refs.comics.clickedId)
-        // .then(response => {
-        //   if (response.status == 200) {
-        //     this.getCollection();
-        //   }
-        // })
+        CollectionService.removeComicFromCollection(this.collection.collectionId, this.$refs.comics.clickedId)
+        .then(response => {
+          if (response.status == 200) {
+            this.getCollection();
+          }
+        })
       } else {
         this.$router.push({
           name: 'comic-details',
