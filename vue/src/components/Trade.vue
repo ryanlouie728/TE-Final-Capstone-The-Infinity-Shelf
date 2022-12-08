@@ -1,8 +1,8 @@
 <template>
   <div class="trade">
-    <input v-on:keyup="getUsers()" @change="UserSelected" v-model="userInput" type="text" list="usernames">
+    <input v-on:keyup="getUsers()" @change="userSelected" v-model="userInput" type="text" list="usernames">
     <datalist id="usernames">
-        <option v-for="user in this.users" v-on:click="userSelected(user.id)" v-bind:key="user.id" :value="user.username">{{user.username}}</option>
+        <option v-for="user in this.users"  v-bind:key="user.id" :value="user.username">{{user.username}}</option>
     </datalist>
     <p>My Comics</p>
     <div class="comic-list-holder">
@@ -10,6 +10,9 @@
     </div>
     <div class="comic-list-holder">
         <comic-list ref="selectedUserComics" @clicked="selectedUserComicClicked()" class="trade-comic-list" v-bind:comics="userSelectedComics"></comic-list>
+    </div>
+    <div class="comic-list-holder">
+        <comic-list ref="tradeComics" @clicked="selectedUserComicClicked()" class="trade-comic-list" v-bind:comics="tradeComics"></comic-list>
     </div>
   </div>
 </template>
@@ -69,8 +72,31 @@ export default {
             this.userSelectedComics.splice(this.userSelectedComics.indexOf(comic), 1)
             this.userComics.push(comic)
         },
-        UserSelected() {
-            console.log(this.userInput)
+        userSelected() {
+            let selected = this.users.find(user => {
+                return user.username == this.userInput;
+            })
+            if (this.userInput == "" || typeof selected == 'undefined') {
+                this.tradeComics = [];
+                return;
+            }
+            
+            UserService.getProfileById(selected.id)
+            .then(response => {
+                if (response.status == 200) {
+                    this.tradeComics = [];
+                    for (let collection of response.data.collections) {
+                        ComicService.listSimpleByCollectionId(collection.collectionId)
+                        .then(response => {
+                            if (response.status == 200) {
+                                this.tradeComics.push(...response.data)
+                            }
+                        })
+                    }
+                } else {
+                    this.tradeComics = [];
+                }
+            })
         }
     },
     mounted() {
