@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.ComicDto;
+import com.techelevator.model.SimpleCollectionDto;
 import com.techelevator.model.SimpleComicDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -40,6 +41,15 @@ public class JdbcComicDao implements ComicDao {
                 "WHERE coll_com.coll_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId);
         return simpleComicDtoListMapper(rowSet);
+    }
+
+    @Override
+    public List<SimpleComicDto> listSimpleByCollectionList(List<SimpleCollectionDto> collections) {
+        List<SimpleComicDto> comics = new ArrayList<>();
+        for (SimpleCollectionDto collection : collections) {
+            comics.addAll(listSimpleByCollection(collection.getCollectionId()));
+        }
+        return comics;
     }
 
     private Boolean comicExists(ComicDto comic) {

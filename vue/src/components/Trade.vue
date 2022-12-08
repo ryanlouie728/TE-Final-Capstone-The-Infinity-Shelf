@@ -4,22 +4,33 @@
     <datalist id="usernames">
         <option v-for="user in this.users" v-on:click="userSelected(user.id)" v-bind:key="user.id" :value="user.username">{{user.username}}</option>
     </datalist>
-    <!-- <select id="user-select" name="user">
-
-    </select> -->
-    <!-- <input id="" type="text"> -->
+    <p>My Comics</p>
+    <div class="comic-list-holder">
+        <comic-list ref="userComics" @clicked="userComicClicked()" class="trade-comic-list" v-bind:comics="userComics"></comic-list>
+    </div>
+    <div class="comic-list-holder">
+        <comic-list ref="selectedUserComics" @clicked="selectedUserComicClicked()" class="trade-comic-list" v-bind:comics="userSelectedComics"></comic-list>
+    </div>
   </div>
 </template>
 
 <script>
+import ComicService from '../services/ComicService';
 import UserService from '../services/UserService';
+import ComicList from './ComicList.vue';
 
 export default {
+  components: { ComicList },
     name: 'trade',
+    props: ['user'],
     data() {
         return {
             userInput: '',
-            users: []
+            users: [],
+            userComics: [],
+            userSelectedComics: [],
+            tradeComics: [],
+            tradeSelectedComics: []
         }
     },
     methods: {
@@ -32,27 +43,71 @@ export default {
                 }
             })
         },
+        getCurrentUserComics() {
+            for (let collection of this.user.collections) {
+                ComicService.listSimpleByCollectionId(collection.collectionId)
+                .then(response => {
+                    if (response.status == 200) {
+                        this.userComics.push(...response.data)
+                    }
+                })
+            }
+        },
+        userComicClicked() {
+            let comic = this.userComics.find(comic => {
+                return comic.id == this.$refs.userComics.clickedId;
+            });
+            // console.log(comic)
+            // console.log(this.userComics)
+            this.userSelectedComics.push(comic)
+            this.userComics.splice(this.userComics.indexOf(comic), 1)
+        },
+        selectedUserComicClicked() {
+            let comic = this.userSelectedComics.find(comic => {
+                return comic.id == this.$refs.selectedUserComics.clickedId;
+            })
+            this.userSelectedComics.splice(this.userSelectedComics.indexOf(comic), 1)
+            this.userComics.push(comic)
+        },
         UserSelected() {
             console.log(this.userInput)
         }
     },
-    created() {
+    mounted() {
         this.getUsers();
+        this.getCurrentUserComics();
     }
 }
 </script>
 
 <style>
 .trade {
-    background-color: var(--dark-accent);
+    background-color: var(--medium-accent);
     position: fixed;
-    width: 200px;
-    top: calc(50vh - 100px);
-    left: calc(50vw - 100px);
-    height: 200px;
+    width: 66vw;
+    top: calc(25vh - 100px);
+    left: calc(25vw - 100px);
+    height: fit-content;
 }
 
 #user-select {
     width: 100px;
+}
+
+.comic-list-holder {
+    display: flex;
+    height: 185px;
+    overflow: auto;
+    width: 95%;
+    border: solid 1px var(--dark-accent);
+}
+
+.trade-comic-list {
+    width: 100%;
+}
+
+.trade-comic-list .comic {
+    width: 100px;
+    height: 179px;
 }
 </style>

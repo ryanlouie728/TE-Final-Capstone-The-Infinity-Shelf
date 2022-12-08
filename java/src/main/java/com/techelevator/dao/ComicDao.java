@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.ComicDto;
+import com.techelevator.model.SimpleCollectionDto;
 import com.techelevator.model.SimpleComicDto;
 
 import java.util.List;
@@ -10,6 +11,8 @@ public interface ComicDao {
     List<SimpleComicDto> listSimple();
 
     List<SimpleComicDto> listSimpleByCollection(int collectionId);
+
+    List<SimpleComicDto> listSimpleByCollectionList(List<SimpleCollectionDto> collections);
 
     void createComic(SimpleComicDto comic);
 

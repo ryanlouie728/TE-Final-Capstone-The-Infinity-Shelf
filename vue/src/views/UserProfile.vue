@@ -2,7 +2,7 @@
   <div class = "user-profile">
     <collection-list v-bind:collections="this.user.collections" />
     <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
-    <trade v-if="trading" @tradeCreated="tradeCreated()" />
+    <trade v-bind:user="user" v-if="trading" @tradeCreated="tradeCreated()" />
     <div id="sidebar">
         <button v-on:click.prevent="creatingCollection = true">New Collection</button>
         <button v-on:click.prevent="trading = true">New Trade</button>
@@ -28,8 +28,10 @@ export default {
     data() {
         return {
             creatingCollection: false,
-            trading: true,
-            user: {}
+            trading: false,
+            user: {
+                collections: []
+            }
         }
     }, 
     methods: {
