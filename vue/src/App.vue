@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1>Comic Book Collection</h1>
+      <h1>The Infinity Shelf</h1>
       
     </header>
     <div id="nav">
@@ -70,7 +70,7 @@ body {
 #header {
   grid-area: title;
   text-align: center;
-  
+
 }
 
 #nav {
