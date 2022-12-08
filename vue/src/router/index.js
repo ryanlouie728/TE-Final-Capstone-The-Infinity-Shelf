@@ -36,6 +36,14 @@ const router = new Router({
       }
     },
     {
+      path: '/trade',
+      name: 'trade',
+      component: Trade,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/collections',
       name: 'collections',
       component: PublicCollections,
@@ -63,14 +71,6 @@ const router = new Router({
       path: '/:username',
       name: 'user-profile',
       component: Collections,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/trade',
-      name: 'trade',
-      component: Trade,
       meta: {
         requiresAuth: true
       }
