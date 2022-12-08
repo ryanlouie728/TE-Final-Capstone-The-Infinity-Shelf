@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1>The Infinity Shelf</h1>
-      
+      <h1>The Infinity Shelf
+        <img id="thanos" src="images/thanos-gangnam.gif" height="50px">
+      </h1>
+     
     </header>
     <div id="nav">
       <div class="nav-link-holder">
@@ -72,6 +74,7 @@ body {
 
 }
 
+
 #nav {
   grid-area: nav;
   padding: 0px 5px;
@@ -80,6 +83,7 @@ body {
   border-top: solid 2px var(--dark-accent);
   border-bottom: solid 2px var(--dark-accent);
   display: flex;
+  align-items: center;
 }
 
 .nav-link-holder {
