@@ -17,8 +17,8 @@
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
     </div>
-
-    <div class="comic" v-if="showAdd">Test</div>
+    <!-- <div class="comic" v-if="showAdd">Add New Comic</div> 
+    work on this to get blank card to add new-->
   </div>
 </template>
 

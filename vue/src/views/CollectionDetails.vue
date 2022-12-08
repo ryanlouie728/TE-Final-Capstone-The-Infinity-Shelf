@@ -36,6 +36,7 @@ import CollectionService from '../services/CollectionService';
 
 export default {
   components: { ComicList, AddComic },
+  props: ['collection-details', 'adding-comic'],
   name: 'collection-details',
   data() {
     return {
