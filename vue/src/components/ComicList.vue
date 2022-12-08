@@ -5,6 +5,7 @@
       v-for="comic in this.comics"
       v-bind:key="comic.id"
       v-on:click.prevent="clicked(comic.id)"
+      v-on:mousedown="mouseDown(comic.id)"
     >
       <img
         class="thumbnail"
@@ -21,11 +22,12 @@
 
 <script>
 export default {
-    props: ['comics'],
+    props: ['comics', 'drag'],
     name: 'comic-list',
     data() {
         return {
-            clickedId: ''
+            clickedId: '',
+            return: true
         }
     },
     methods: {
@@ -33,7 +35,85 @@ export default {
             this.clickedId = id;
             this.$emit('clicked')
         },
+        mouseDown(id) {
+            if (this.drag) {
+                window.event.preventDefault();
+            }
+            this.clickedId = id;
+            this.$emit('down');
+        },
+        addDragEvents() {
+            if (this.drag) {
+                let comics = document.querySelectorAll(".comic");
+                for (let comic of comics) {
+                    dragElement(comic, this.return);
+                }
+            }
+        }
+    },
+    created() {
+        
     }
+}
+
+function dragElement(elmnt, shouldReturn) {
+    
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  elmnt.onmousedown = dragMouseDown;
+
+  function makeElementFixed() {
+    
+    let left = elmnt.offsetLeft;
+    let top = elmnt.offsetTop;
+    elmnt.style.position = 'absolute';
+    elmnt.style.zIndex = -1;
+    elmnt.style.top = top + 'px';
+    elmnt.style.left = left + 'px';
+  }
+
+
+
+  function dragMouseDown(e) {
+    if (!window.event.ctrlKey) {
+        return;
+    }
+    makeElementFixed();
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    if (shouldReturn) {
+        elmnt.style.position = 'static';
+        elmnt.style.zIndex = '';
+        elmnt.style.top = '';
+        elmnt.style.left = '';
+    } else {
+        elmnt.style.display = 'none';
+    }
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
 </script>
 
