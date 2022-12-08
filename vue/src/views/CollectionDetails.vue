@@ -2,10 +2,10 @@
   <div id="collection-details">
     <div id="left-pane">
       <h2 banner>Comics in the {{this.collection.collectionName}} Collection</h2>
-      <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" />
+      <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true"/>
     </div>
     <div id="sidebar">
-      <button v-on:click.prevent="addingComic = true">Add Comic</button>
+      <!-- <button v-on:click.prevent="addingComic = true">Add Comic</button> -->
       <!-- <button v-on:click.prevent="">Delete Comics</button> -->
       <div id="counts">
         <div class="count-list">
@@ -36,7 +36,7 @@ import CollectionService from '../services/CollectionService';
 
 export default {
   components: { ComicList, AddComic },
-  props: ['collection-details', 'adding-comic'],
+  props: ['collection-details'],
   name: 'collection-details',
   data() {
     return {

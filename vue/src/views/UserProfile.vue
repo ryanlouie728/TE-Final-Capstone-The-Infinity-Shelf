@@ -3,7 +3,7 @@
     <div id="left-pane">
         <collection-list ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" @dropped="comicDropped()"/>
         <h2>Uncatagorized Comics</h2>
-        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" />
+        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="true" @addComic="addingComic = true"/>
     </div>
     
     <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
@@ -57,6 +57,7 @@ export default {
             })
             .then(() => {
                 this.$refs.uncategorized.addDragEvents();
+                this.resetComicFormat();
             })
         },
         collectionCreated() {
@@ -83,6 +84,7 @@ export default {
             }
         },
         comicDropped() {
+            this.returnComic = false;
             let collId = this.$refs.collections.dragTargetId;
             let comicId = this.$refs.uncategorized.clickedId;
             this.$refs.uncategorized.return = false;
@@ -96,9 +98,21 @@ export default {
                 }
             })
         },
-        mouseUp() {        
-            this.dragging = false;
-            
+        mouseUp() {
+
+            this.getUser();
+            this.resetComicFormat();
+        },
+        resetComicFormat() {
+            console.log('reset');
+            let comics = document.querySelectorAll(".comic");
+            for (let comic of comics) {
+                comic.style.display = 'flex';
+                comic.style.position = '';
+                comic.style.zIndex = '';
+                comic.style.top = '';
+                comic.style.left = '';
+            }
         }
     },
     created() {

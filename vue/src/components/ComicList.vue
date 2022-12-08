@@ -17,8 +17,10 @@
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
     </div>
-    <!-- <div class="comic" v-if="showAdd">Add New Comic</div> 
-    work on this to get blank card to add new-->
+    <div v-on:click.prevent="addComicEvent()" class="comic" id="add-comic-card" v-if="showAdd">
+        <h5>+</h5>
+        <p>Add New Comic</p>
+    </div> 
   </div>
 </template>
 
@@ -28,8 +30,7 @@ export default {
     name: 'comic-list',
     data() {
         return {
-            clickedId: '',
-            return: true
+            clickedId: ''
         }
     },
     methods: {
@@ -48,9 +49,12 @@ export default {
             if (this.drag) {
                 let comics = document.querySelectorAll(".comic");
                 for (let comic of comics) {
-                    dragElement(comic, this.return);
+                    dragElement(comic);
                 }
             }
+        },
+        addComicEvent() {
+            this.$emit('addComic');
         }
     },
     created() {
@@ -58,7 +62,7 @@ export default {
     }
 }
 
-function dragElement(elmnt, shouldReturn) {
+function dragElement(elmnt) {
     
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   elmnt.onmousedown = dragMouseDown;
@@ -104,15 +108,7 @@ function dragElement(elmnt, shouldReturn) {
   }
 
   function closeDragElement() {
-    if (shouldReturn) {
-        elmnt.style.position = 'static';
-        elmnt.style.zIndex = '';
-        elmnt.style.top = '';
-        elmnt.style.left = '';
-    } else {
-        elmnt.style.display = 'none';
-    }
-    /* stop moving when mouse button is released:*/
+    elmnt.style.display = 'none';
     document.onmouseup = null;
     document.onmousemove = null;
   }
@@ -165,6 +161,20 @@ function dragElement(elmnt, shouldReturn) {
   width: 100%;
 }
 
+#add-comic-card {
+    justify-content: center;
+}
+
+#add-comic-card > h5 {
+    margin: 0px;
+    font-size: 5rem;
+    line-height: 50%;
+}
+
+#add-comic-card > p {
+    font-size: 1.25rem;
+    margin: 0px;
+}
 
 
 </style>
