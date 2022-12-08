@@ -40,9 +40,9 @@ export default {
         characterCounts: [],
         creatorCounts: []
       },
-      comics: [],
       addingComic: false,
-      removingComic: false,
+      removingComic: true,
+      selectedComics: [],
     }
   },
   methods: {
@@ -56,7 +56,15 @@ export default {
     },
     comicClicked() {
       if (this.removingComic) {
-        console.log("remove")
+        this.selectedComics.push(this.$refs.comics.clickedId);
+        console.log(this.selectedComics);
+
+        // CollectionService.removeComicFromCollection(this.collection.collectionId, this.$refs.comics.clickedId)
+        // .then(response => {
+        //   if (response.status == 200) {
+        //     this.getCollection();
+        //   }
+        // })
       } else {
         this.$router.push({
           name: 'comic-details',
