@@ -1,5 +1,6 @@
 <template>
   <div id="collection-details">
+    <h2 banner>Comics in the {{this.collection.collectionName}} Collection</h2>
     <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
