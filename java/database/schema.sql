@@ -27,6 +27,33 @@ CREATE TABLE comic (
 	CONSTRAINT PK_comic PRIMARY KEY (comic_id)
 );
 
+CREATE TABLE trade (
+    trade_id serial,
+    status VARCHAR(15) DEFAULT 'pending',
+    CONSTRAINT PK_trade PRIMARY KEY (trade_id)
+);
+
+CREATE TABLE trade_user (
+    trade_id int NOT NULL,
+    user_id int NOT NULL,
+    role VARCHAR(15) NOT NULL, --sender recipient
+    CONSTRAINT PK_trade_user PRIMARY KEY (trade_id, user_id),
+    CONSTRAINT FK_trade_user_trade FOREIGN KEY (trade_id) REFERENCES trade(trade_id),
+    CONSTRAINT FK_trade_user_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE trade_comic (
+    trade_id int NOT NULL,
+    from_id int NOT NULL,
+    to_id int NOT NULL,
+    comic_id int NOT NULL,
+    CONSTRAINT PK_trade_comic PRIMARY KEY (trade_id, comic_id),
+    CONSTRAINT FK_trade_comic_trade FOREIGN KEY (trade_id) REFERENCES trade(trade_id),
+    CONSTRAINT FK_trade_comic_from FOREIGN KEY (from_id) REFERENCES users(user_id),
+    CONSTRAINT FK_trade_comic_to FOREIGN KEY (to_id) REFERENCES users(user_id),
+    CONSTRAINT FK_trade_comic_comic FOREIGN KEY (comic_id) REFERENCES comic(comic_id)
+);
+
 CREATE TABLE collection (
 	coll_id serial,
 	user_id int NOT NULL,
@@ -76,6 +103,8 @@ CREATE TABLE creator_comic (
     CONSTRAINT FK_creator_comic_creator_id FOREIGN KEY (creator_id) REFERENCES creator(creator_id),
     CONSTRAINT FK_creator_comic_comic_id FOREIGN KEY (comic_id) REFERENCES comic(comic_id)
 );
+
+
 
 
 COMMIT TRANSACTION;
