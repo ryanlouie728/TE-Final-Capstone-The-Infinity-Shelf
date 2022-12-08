@@ -1,14 +1,13 @@
 <template>
-  <div class = "user-profile">
+  <div @mouseup="mouseUp()" class = "user-profile">
     <div id="left-pane">
-        <collection-list v-bind:collections="this.user.collections" />
+        <collection-list ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" @dropped="comicDropped()"/>
         <h2>Uncatagorized Comics</h2>
-        <comic-list v-bind:comics="this.user.base.comics" />
+        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" />
     </div>
     
     <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
-    <!-- <trade v-bind:user="user" v-if="trading" @tradeCreated="tradeCreated()" /> -->
     <div id="sidebar">
         <button v-on:click.prevent="creatingCollection = true">New Collection</button>
         <button v-on:click.prevent="addingComic = true">Add Comic</button>
@@ -29,6 +28,7 @@ import CreateCollection from '../components/CreateCollection.vue';
 import AddComic from '../components/AddComic.vue'
 
 import UserService from '../services/UserService';
+import CollectionService from '../services/CollectionService';
 
 export default {
     components: { CollectionList, CreateCollection, ComicList, AddComic},
@@ -38,6 +38,7 @@ export default {
             creatingCollection: false,
             trading: false,
             addingComic: false,
+            dragging: false,
             user: {
                 base: {
                     comics: []
@@ -54,6 +55,9 @@ export default {
                     this.user = response.data;
                 }
             })
+            .then(() => {
+                this.$refs.uncategorized.addDragEvents();
+            })
         },
         collectionCreated() {
             this.getUser(),
@@ -65,12 +69,45 @@ export default {
         comicAdded() {
             this.addingComic = false;
             this.getUser();
+        },
+        comicClicked() {
+            if (!window.event.ctrlKey) {
+                this.$router.push({
+                    name: 'comic-details',
+                    params: {
+                        id: this.$refs.uncategorized.clickedId
+                    }
+                })
+            } else {
+                this.dragging = true;
+            }
+        },
+        comicDropped() {
+            let collId = this.$refs.collections.dragTargetId;
+            let comicId = this.$refs.uncategorized.clickedId;
+            this.$refs.uncategorized.return = false;
+            CollectionService.addComicToCollection(collId, comicId)
+            .then(response => {
+                if (response.status == 200) {
+                    CollectionService.removeComicFromCollection(this.user.base.collectionId, comicId)
+                    .then(() => {
+                        this.getUser();
+                    })
+                }
+            })
+        },
+        mouseUp() {        
+            this.dragging = false;
+            
         }
     },
     created() {
         this.getUser();
+        
     }
 }
+
+
 </script>
 
 <style>
