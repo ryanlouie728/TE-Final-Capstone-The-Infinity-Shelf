@@ -63,6 +63,18 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
+    public List<UserDto> findAllByUsername(String username) {
+        username = "%" + username + "%";
+        String sql =
+                "SELECT user_id, username " +
+                "FROM users " +
+                "WHERE username ILIKE ? " +
+                "AND role NOT ILIKE '%admin%';";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, username);
+        return userDtoListMapper(rowSet);
+    }
+
+    @Override
     public User findByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
 
@@ -88,7 +100,7 @@ public class JdbcUserDao implements UserDao {
         String sql =
                 "SELECT user_id, username " +
                 "FROM users " +
-                "WHERE user_id = ?";
+                "WHERE user_id = ? ";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
         if (rowSet.next()) {
             return userDtoMapper(rowSet);
@@ -104,6 +116,14 @@ public class JdbcUserDao implements UserDao {
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
         user.setActivated(true);
         return user;
+    }
+
+    private List<UserDto> userDtoListMapper(SqlRowSet rowSet) {
+        List<UserDto> users = new ArrayList<>();
+        while (rowSet.next()) {
+            users.add(userDtoMapper(rowSet));
+        }
+        return users;
     }
 
     private UserDto userDtoMapper(SqlRowSet rowSet) {

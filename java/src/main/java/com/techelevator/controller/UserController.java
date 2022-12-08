@@ -5,7 +5,10 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.FriendDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.UserDto;
+import com.techelevator.model.login.User;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -30,4 +33,10 @@ public class UserController {
         user.setCollections(collectionDao.listCollectionsByUserId(userId));
         return user;
     }
+
+    @GetMapping("")
+    public List<UserDto> getUsers(@RequestParam(name = "username") String username) {
+        return userDao.findAllByUsername(username);
+    }
+
 }

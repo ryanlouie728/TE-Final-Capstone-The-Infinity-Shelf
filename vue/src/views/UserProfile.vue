@@ -2,8 +2,10 @@
   <div class = "user-profile">
     <collection-list v-bind:collections="this.user.collections" />
     <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
+    <trade v-if="trading" @tradeCreated="tradeCreated()" />
     <div id="sidebar">
         <button v-on:click.prevent="creatingCollection = true">New Collection</button>
+        <button v-on:click.prevent="trading = true">New Trade</button>
         <div id="friend-list">
             <h4 id="friend-list-title">Friends</h4>
             <div class="friend" v-for="friend in this.user.friends" v-bind:key="friend.id">
@@ -17,14 +19,16 @@
 <script>
 import CollectionList from '../components/CollectionList.vue'
 import CreateCollection from '../components/CreateCollection.vue';
+import Trade from '../components/Trade.vue';
 import UserService from '../services/UserService';
 
 export default {
-    components: { CollectionList, CreateCollection},
+    components: { CollectionList, CreateCollection, Trade},
     name: "user-profile",
     data() {
         return {
             creatingCollection: false,
+            trading: true,
             user: {}
         }
     }, 
@@ -40,6 +44,9 @@ export default {
         collectionCreated() {
             this.getUser(),
             this.creatingCollection = false;
+        },
+        tradeCreated() {
+            console.log("trade");
         }
     },
     created() {

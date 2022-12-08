@@ -6,6 +6,9 @@ const http = axios.create({
 
 export default {
     getProfileById(id) {
-        return http.get(`/users/${id}`)
+        return http.get(`/users/${id}`);
+    },
+    getByUsername(username) {
+        return http.get(`/users?username=${username}`);
     }
 }
