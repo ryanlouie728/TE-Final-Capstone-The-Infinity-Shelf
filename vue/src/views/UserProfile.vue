@@ -1,16 +1,21 @@
 <template>
   <div @mouseup="mouseUp()" class = "user-profile">
     <div id="left-pane">
-        <collection-list ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" @dropped="comicDropped()"/>
+        <collection-list 
+        ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" 
+        @dropped="comicDropped()"
+        @addCollection="creatingCollection = true"
+        />
         <h2>Uncatagorized Comics</h2>
         <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="true" @addComic="addingComic = true"/>
     </div>
     
-    <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
+    <create-collection v-if="creatingCollection" 
+    @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
     <div id="sidebar">
         <button v-on:click.prevent="creatingCollection = true">New Collection</button>
-        <button v-on:click.prevent="addingComic = true">Add Comic</button>
+        <!-- <button v-on:click.prevent="addingComic = true">Add Comic</button> -->
         <div id="friend-list">
             <h4 id="friend-list-title">Friends</h4>
             <div class="friend" v-for="friend in this.user.friends" v-bind:key="friend.id">

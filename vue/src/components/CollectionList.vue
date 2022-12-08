@@ -18,6 +18,9 @@
                 <p class="collection-description"> {{ coll.collectionDescription }} </p>
             </div>
         </div>
+        <div v-on:click.prevent="addCollectionEvent()" class="collection" id="add-collection-card">
+            <h5>Add New Collection</h5>
+        </div>
     </div>
 </template>
 
@@ -48,6 +51,9 @@ export default {
             if (this.dragging) {
                 this.$emit('dropped')
             }
+        },
+        addCollectionEvent() {
+            this.$emit('addCollection')
         }
     }
 }
@@ -102,5 +108,16 @@ export default {
     width: 100%;
     height: fit-content;
     margin-bottom: 5px;
+}
+
+#add-collection-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#add-collection-card > h5 {
+    font-size: 1.25rem;
 }
 </style>
