@@ -3,6 +3,7 @@
     <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" />
     <div id="sidebar">
       <button v-on:click.prevent="addingComic = true">Add Comic</button>
+      
       <div id="counts">
         <div class="count-list">
           <h5 class="count-title">Top Character Appearances</h5>
@@ -41,7 +42,7 @@ export default {
       },
       comics: [],
       addingComic: false,
-      removingComic: false
+      removingComic: false,
     }
   },
   methods: {
@@ -68,7 +69,7 @@ export default {
     comicAdded() {
       this.addingComic = false;
       this.getCollection();
-    }
+    },
   },
   created() {
     this.getCollection();

@@ -7,6 +7,9 @@
       <button v-on:click.prevent="cancel()">Cancel</button>
     </div>
     <div id="comic-list-holder">
+      <div v-if="comicsEmpty">
+        <p>No Search Results</p>
+      </div>
       <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
     </div>
   </div>
@@ -22,7 +25,8 @@ export default {
   data() {
     return {
       title: '',
-      comics: []
+      comics: [],
+      comicsEmpty: false
     }
   },
   methods: {
@@ -31,6 +35,11 @@ export default {
       .then(response => {
         if (response.status == 200) {
           this.comics = response.data;
+          if (this.comics.length == 0) {
+            this.comicsEmpty = true;
+          } else {
+            this.comicsEmpty = false;
+          }
         }
       })
     },
