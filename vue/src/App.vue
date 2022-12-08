@@ -2,6 +2,7 @@
   <div id="app">
     <header id="header">
       <h1>Comic Book Collection</h1>
+      
     </header>
     <div id="nav">
       <div class="nav-link-holder">
@@ -28,6 +29,7 @@
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Bubbles&display=swap");
 
 :root{
   --dark-accent: #000505;
@@ -49,6 +51,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 #app {
@@ -64,8 +67,10 @@ body {
     "body"
     "footer";
 }
-header.h1 {
+#header {
   grid-area: title;
+  text-align: center;
+  
 }
 
 #nav {
@@ -77,6 +82,7 @@ header.h1 {
   border-bottom: solid 2px var(--dark-accent);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .nav-link-holder {

@@ -41,7 +41,7 @@ export default {
         creatorCounts: []
       },
       addingComic: false,
-      removingComic: true,
+      removingComic: false,
       selectedComics: [],
     }
   },
@@ -59,12 +59,12 @@ export default {
         this.selectedComics.push(this.$refs.comics.clickedId);
         console.log(this.selectedComics);
 
-        // CollectionService.removeComicFromCollection(this.collection.collectionId, this.$refs.comics.clickedId)
-        // .then(response => {
-        //   if (response.status == 200) {
-        //     this.getCollection();
-        //   }
-        // })
+        CollectionService.removeComicFromCollection(this.collection.collectionId, this.$refs.comics.clickedId)
+        .then(response => {
+          if (response.status == 200) {
+            this.getCollection();
+          }
+        })
       } else {
         this.$router.push({
           name: 'comic-details',
