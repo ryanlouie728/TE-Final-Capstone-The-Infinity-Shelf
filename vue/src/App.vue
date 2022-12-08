@@ -115,6 +115,13 @@ header.h1 {
   border: solid 2px var(--dark-accent);
 }
 
+#sidebar > button {
+  display: block;
+  margin-top: 5px;
+  margin-inline: auto;
+  width: max-content;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
