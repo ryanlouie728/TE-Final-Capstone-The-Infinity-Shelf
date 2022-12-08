@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <add-comic v-if="addingComic" @added="comicAdded()" />
+    <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
   </div>
 
  

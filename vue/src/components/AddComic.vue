@@ -22,6 +22,7 @@ import CollectionService from '../services/CollectionService';
 
 export default {
   components: { ComicList },
+  props: ['collection'],
   data() {
     return {
       title: '',
@@ -44,7 +45,7 @@ export default {
       })
     },
     comicClicked() {
-      CollectionService.addComicToCollection(this.$route.params.id, this.$refs.comics.clickedId)
+      CollectionService.addComicToCollection(this.collection.collectionId, this.$refs.comics.clickedId)
       .then(response => {
         if (response.status == 200) {
           this.title = '';
@@ -145,6 +146,8 @@ function dragElement(elmnt) {
 #empty-message {
   text-align: center;
 }
-
+#comic-list-holder {
+  overflow: auto;
+}
 
 </style>

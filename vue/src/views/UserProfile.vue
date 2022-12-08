@@ -7,10 +7,11 @@
     </div>
     
     <create-collection v-if="creatingCollection" @collectionCreated="collectionCreated()"/>
+    <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
     <!-- <trade v-bind:user="user" v-if="trading" @tradeCreated="tradeCreated()" /> -->
     <div id="sidebar">
         <button v-on:click.prevent="creatingCollection = true">New Collection</button>
-        <!-- <button v-on:click.prevent="trading = true">New Trade</button> -->
+        <button v-on:click.prevent="addingComic = true">Add Comic</button>
         <div id="friend-list">
             <h4 id="friend-list-title">Friends</h4>
             <div class="friend" v-for="friend in this.user.friends" v-bind:key="friend.id">
@@ -25,16 +26,18 @@
 import CollectionList from '../components/CollectionList.vue'
 import ComicList from '../components/ComicList.vue';
 import CreateCollection from '../components/CreateCollection.vue';
+import AddComic from '../components/AddComic.vue'
 
 import UserService from '../services/UserService';
 
 export default {
-    components: { CollectionList, CreateCollection, ComicList},
+    components: { CollectionList, CreateCollection, ComicList, AddComic},
     name: "user-profile",
     data() {
         return {
             creatingCollection: false,
             trading: false,
+            addingComic: false,
             user: {
                 base: {
                     comics: []
@@ -58,6 +61,10 @@ export default {
         },
         tradeCreated() {
             console.log("trade");
+        },
+        comicAdded() {
+            this.addingComic = false;
+            this.getUser();
         }
     },
     created() {
