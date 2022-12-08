@@ -59,7 +59,7 @@ export default {
 
 <style>
 #friend-list {
-    width: 100%;
+    width: auto;
     padding: 10px;
     display: flex;
     flex-direction: column;

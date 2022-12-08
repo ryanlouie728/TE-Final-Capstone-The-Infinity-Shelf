@@ -121,6 +121,14 @@ body {
   border: solid 2px var(--dark-accent);
 }
 
+#sidebar > button {
+  display: block;
+  margin-top: 10px;
+  margin-inline: auto;
+  width: max-content;
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
