@@ -6,6 +6,8 @@ public class UserDto {
 
     private int id;
     private String username;
+
+    private CollectionDto base;
     private List<FriendDto> friends;
     private List<SimpleCollectionDto> collections;
 
@@ -23,6 +25,14 @@ public class UserDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public CollectionDto getBase() {
+        return base;
+    }
+
+    public void setBase(CollectionDto base) {
+        this.base = base;
     }
 
     public List<FriendDto> getFriends() {

@@ -100,7 +100,7 @@ public class JdbcUserDaoTests extends BaseDaoTests {
     public void create_user_creates_a_user() {
         User newUser = new User(-1, "new", "user", "ROLE_USER");
 
-        boolean userWasCreated = sut.create(newUser.getUsername(), newUser.getPassword(), "ROLE_USER");
+        boolean userWasCreated = sut.create(newUser.getUsername(), newUser.getPassword(), "ROLE_USER") != null;
 
         Assert.assertTrue(userWasCreated);
 

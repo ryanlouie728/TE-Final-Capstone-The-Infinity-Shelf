@@ -2,10 +2,14 @@ package com.techelevator.dao;
 
 import com.techelevator.model.CollectionDto;
 import com.techelevator.model.SimpleCollectionDto;
+import com.techelevator.model.login.User;
 
 import java.util.List;
 
 public interface CollectionDao {
+
+
+    CollectionDto getBaseCollectionByUserId(Integer userId);
     List<SimpleCollectionDto> listCollectionsByUserId(int userId);
 
     void createCollection(SimpleCollectionDto collection);

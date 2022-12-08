@@ -65,6 +65,14 @@ CREATE TABLE collection (
 	CONSTRAINT FK_collection_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE user_collection (
+    user_id int NOT NULL,
+    coll_id int NOT NULL,
+    CONSTRAINT PK_user_collection PRIMARY KEY (user_id, coll_id),
+    CONSTRAINT FK_user_collection_user FOREIGN KEY (user_id) REFERENCES users(user_id),
+    CONSTRAINT FK_user_collection_coll FOREIGN KEY (coll_id) REFERENCES collection(coll_id)
+);
+
 CREATE TABLE collection_comic (
 	coll_id int NOT NULL,
 	comic_id int NOT NULL,

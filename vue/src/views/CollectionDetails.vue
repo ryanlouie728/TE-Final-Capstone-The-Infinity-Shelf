@@ -41,7 +41,7 @@ export default {
         creatorCounts: []
       },
       addingComic: false,
-      removingComic: true,
+      removingComic: false,
       selectedComics: [],
     }
   },
