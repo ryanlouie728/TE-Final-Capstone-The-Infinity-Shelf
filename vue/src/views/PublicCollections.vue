@@ -1,6 +1,8 @@
 <template>
   <div class="public-collections">
-    <collection-list v-bind:collections="collections" />
+    <div id="left-pane">
+      <collection-list v-bind:collections="collections" />
+    </div>
     <div id="sidebar"></div>
   </div>
 </template>
