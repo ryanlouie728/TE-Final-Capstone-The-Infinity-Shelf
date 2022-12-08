@@ -2,7 +2,7 @@
     <div id = "collection-list">
         <div class="banner">
             <h2 v-if="this.$route.name == 'collections'">Public Collections</h2>
-            <h2 v-if="this.$route.name == 'user-collections'">User Collections</h2>
+            <h2 v-if="this.$route.name == 'user-profile'">User Collections</h2>
         </div>
         <div class="collection" v-for="coll in this.collections" v-bind:key="coll.collectionId" v-on:click="openCollection(coll.collectionId)">
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
