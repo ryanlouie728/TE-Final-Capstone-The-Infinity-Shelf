@@ -11,9 +11,10 @@
     <input type="radio" name="private" id="private" value="false" v-model="privacy">
     <label for="private">Private</label>
 
-    <label for="collection-cover">Collection Cover Image</label>
-    <select name="collection-cover" id="collection-cover">
-    </select>
+    <label for="collection-cover">Select A Collection Cover Image</label>
+    <ul name="collection-cover" id="collection-cover">
+        <li class="cover-images" v-for="comic in collection.comics" v-bind:key="comic.id"><img v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" /></li>
+    </ul>
       </form>
 
     <div class="button-holder">
@@ -34,6 +35,7 @@ export default {
     data(){
         return{
             privacy: this.collection.collectionPublic,
+            coverUrl: '',
             components: {UserService},
             collectionUpdate: {
                 collectionName: '', 
@@ -43,6 +45,10 @@ export default {
     }
     },
     methods: {
+        setCover(comic){
+            this.coverUrl = comic.thumbnailUrl;
+            this.update();
+        },
         update(){
             console.log(this.privacy);
             const collUpdate = {
@@ -51,7 +57,7 @@ export default {
                 collectionDescription: this.collectionUpdate.collectionDescription != '' ? this.collectionUpdate.collectionDescription : this.collection.collectionDescription,
                 collectionId: this.collection.collectionId,
                 collectionPublic: this.privacy,
-                collectionCoverUrl: this.collection.collectionCoverUrl,
+                collectionCoverUrl: this.coverUrl != '' ? this.coverUrl: this.collection.collectionCoverUrl,
                 comics: this.collection.comics,
                 characterCounts: this.collection.characterCounts,
                 creatorCounts: this.collection.creatorCounts
