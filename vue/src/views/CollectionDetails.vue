@@ -21,11 +21,8 @@
         <button v-on:click="updatingCollection = !updatingCollection">
           Update Collection
         </button>
+        <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
       </div>
-      <update-collection
-        v-if="updatingCollection"
-        v-bind:collection="this.collection"
-      />
       <div id="remove-collection">
         <remove-collection v-bind:collection="this.collection" />
       </div>
