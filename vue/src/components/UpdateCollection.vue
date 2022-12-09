@@ -61,12 +61,11 @@ export default {
                     window.location.reload();
                 }
             });
-            }
         },
         cancel(){
             window.location.reload();
         }
-
+    }
 }
 </script>
 
