@@ -13,7 +13,7 @@
 
     <label for="collection-cover">Select A Collection Cover Image</label>
     <ul name="collection-cover" id="collection-cover">
-        <li class="cover-images" v-for="comic in collection.comics" v-bind:key="comic.id"><img v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" /></li>
+        <li v-for="comic in collection.comics" v-bind:key="comic.id"><img class="cover-images" v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" /></li>
     </ul>
       </form>
 
@@ -27,7 +27,6 @@
 
 <script>
 import CollectionService from "../services/CollectionService"
-import UserService from "../services/UserService"
 
 export default {
     name: "update-collection",
@@ -36,7 +35,6 @@ export default {
         return{
             privacy: this.collection.collectionPublic,
             coverUrl: '',
-            components: {UserService},
             collectionUpdate: {
                 collectionName: '', 
                 collectionDescription: '',
@@ -47,7 +45,6 @@ export default {
     methods: {
         setCover(comic){
             this.coverUrl = comic.thumbnailUrl;
-            this.update();
         },
         update(){
             console.log(this.privacy);
@@ -76,5 +73,11 @@ export default {
 </script>
 
 <style>
-
+.cover-images{
+    height: 164px;
+    width: 104px;
+}
+ul{
+   list-style-type: none;
+}
 </style>
