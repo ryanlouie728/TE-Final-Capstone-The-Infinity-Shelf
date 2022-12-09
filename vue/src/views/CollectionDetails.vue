@@ -137,15 +137,8 @@ export default {
 #counts {
   width: 200px;
 }
-<<<<<<< HEAD
-
-.description-text {
-  text-align: center;
-  font-size: .75rem;
-=======
 #cover-image{
   height: 316px;
   width: 200px;
->>>>>>> 43e6bfcbe646f1d0f404f86a680fecb291ae8fb5
 }
 </style>

@@ -180,6 +180,7 @@ function dragElement(elmnt, reset) {
   margin-right: 2px;
   margin-bottom: 2px;
   padding: 5px 0px;
+  border-radius: 9px;
 }
 
 .comic:hover {
@@ -202,10 +203,12 @@ function dragElement(elmnt, reset) {
 .comic-list-holder {
   overflow: auto;
   width: 100%;
+  
 }
 
 .comic-list-action-card {
     justify-content: center;
+    border-radius: 9px;
 }
 .comic-list-action-card:hover {
     background-color: var(--main-background);
