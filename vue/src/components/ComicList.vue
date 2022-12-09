@@ -3,9 +3,9 @@
     <div
       class="comic"
       v-for="comic in this.comics"
-      v-bind:key="comic.id"
-      v-on:click.prevent="clicked(comic.id)"
-      v-on:mousedown="mouseDown(comic.id)"
+      v-bind:key="(comic.id + '-' + comic.collectionId)"
+      v-on:click.prevent="clicked(comic)"
+      v-on:mousedown="mouseDown(comic)"
       :class="{ selected: selected.includes(comic)}"
     >
       <img
@@ -45,24 +45,25 @@ export default {
         }
     },
     methods: {
-        clicked(id) {
+        clicked(clicked) {
             if (!this.removing) {
-                this.clickedId = id;
+                this.clickedId = clicked.id;
                 this.$emit('clicked')
             } else {
                 let comic = this.comics.find(comic => {
-                    return comic.id == id;
+                    console.log(comic)
+                    return (comic.id + '-' + comic.collectionId) == (clicked.id + '-' + clicked.collectionId);
                 })
                 this.selected.push(comic)
                 console.log(this.selected);
             }
             
         },
-        mouseDown(id) {
+        mouseDown(clicked) {
             if (this.drag) {
                 window.event.preventDefault();
             }
-            this.clickedId = id;
+            this.clickedId = clicked.id;
             this.$emit('down');
         },
         addDragEvents() {

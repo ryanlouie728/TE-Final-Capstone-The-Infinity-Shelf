@@ -1,5 +1,5 @@
 <template>
-  <div class="update-collection">
+  <div class="update-collection" v-on:keyup.enter="update" v-on:keyup.esc="cancel">
       <form action="update()">
     <label for="title-input">Title: </label>
     <input v-model="collectionUpdate.collectionName" id="title-input" name="title-input" type="text"/>
