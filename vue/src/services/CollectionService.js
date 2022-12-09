@@ -25,5 +25,8 @@ export default {
     },
     updateCollection(collection) {
         return http.put('/collections', collection);
+    },
+    deleteCollection(collectionId){
+        return http.delete(`collections/${collectionId}`);
     }
 }

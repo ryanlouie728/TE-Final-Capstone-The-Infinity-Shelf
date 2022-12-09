@@ -75,7 +75,7 @@ public class JdbcCollectionDao implements CollectionDao {
     @Override
     public void deleteCollection(Integer collectionId) {
         String sql =
-                "DELTE " +
+                "DELETE " +
                 "FROM collection_comic " +
                 "WHERE coll_id = ?;" +
                 "DELETE " +
@@ -165,6 +165,7 @@ public class JdbcCollectionDao implements CollectionDao {
             SimpleCollectionDto simple = simpleCollectionDtoMapper(rowSet);
             CollectionDto collection = new CollectionDto(simple);
             collection.setComics(comicDao.listComicsByCollectionId(collection.getCollectionId()));
+            collection.count();
             collection.count(); //TODO this throws null-pointer exception
             return collection;
         } catch (Exception e) {
