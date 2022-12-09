@@ -171,6 +171,7 @@ function dragElement(elmnt, reset) {
   cursor: pointer;
   box-sizing: border-box;
   border: solid 2px var(--dark-accent);
+  background-color: #fdf5e8;
   width: 120px;
   height: 215px;
   display: flex;
@@ -196,7 +197,7 @@ function dragElement(elmnt, reset) {
 }
 
 .thumbnail {
-  height: auto;
+  height: 80%;
   width: 92%;
 }
 
