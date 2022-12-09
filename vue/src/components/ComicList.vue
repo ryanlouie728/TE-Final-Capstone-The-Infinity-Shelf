@@ -52,7 +52,7 @@ export default {
             } else {
                 let comic = this.comics.find(comic => {
                     console.log(comic)
-                    return (comic.id + '-' + comic.collectionId) == (clicked.id + '-' + clicked.collectionId);
+                    return (comic.id == clicked.id) && (comic.collectionId == clicked.collectionId);
                 })
                 this.selected.push(comic)
                 console.log(this.selected);

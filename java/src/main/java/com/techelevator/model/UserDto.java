@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import com.techelevator.model.friends.FriendDto;
+
 import java.util.List;
 
 public class UserDto {
