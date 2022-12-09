@@ -25,6 +25,9 @@
       </div>
     </div>
     <router-view id="router-view" />
+    <footer id="footer">
+      <h4>Copyright</h4>
+    </footer>
   </div>
 </template>
 
@@ -137,7 +140,7 @@ body {
   width: 200px;
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
-  border-radius: 9px;
+  border-radius: 9px 9px 0 0;
 }
 
 #sidebar > button {
@@ -146,6 +149,13 @@ body {
   margin-inline: auto;
   width: max-content;
   cursor: pointer;
+}
+
+#footer {
+  
+  background-color: var(--light-accent);
+  border: solid 2px var(--dark-accent);
+  border-radius: 9px 0 9px 9px;
 }
 
 ::-webkit-scrollbar {

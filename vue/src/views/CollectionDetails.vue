@@ -7,13 +7,13 @@
       <p>{{this.collection.collectionDescription}}</p>
       <h3>Privacy</h3>
       <p>This collection is {{collectionPrivacy()}}</p>
-      <h2 banner>Comics in the {{this.collection.collectionName}} Collection</h2>
-      <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true"/>
       <div id="update-collection">
         <button v-on:click="updatingCollection = !updatingCollection">Update Collection</button>
       </div>
       <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
       <remove-collection v-bind:collection="this.collection" />
+      <h2 banner>Comics in the {{this.collection.collectionName}} Collection</h2>
+      <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true"/>
     </div>
     <div id="sidebar">
       <div id="counts">
