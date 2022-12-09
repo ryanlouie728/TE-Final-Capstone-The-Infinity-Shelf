@@ -4,36 +4,38 @@
       <div id="cover-holder">
         <img id="cover" v-bind:src="this.comic.thumbnailUrl" />
         <h1 id="comic-title">{{ this.comic.title }}</h1>
-        <div class="count-list">
-          <h2 class="creator-title">Creators</h2>
-          <div
-            class="count-row"
-            v-for="creator in this.comic.creators"
-            v-bind:key="creator.name"
-          >
-            <h4 class="count-role">{{ creator.role.toUpperCase() }}</h4>
-            <h4 class="count-name">{{ creator.name }}</h4>
-          </div>
-        </div>
       </div>
+      <div id="comic-detail">
+        <p> {{ this.comic.description }} </p>
+      </div>
+      <div id="character-text">
+        <h2 class="character-title">Characters</h2>
 
-      <div id="comic-text">
-        <p>{{ this.comic.description }}</p>
-      </div>
-    </div>
-    <div id="sidebar">
-      <div id="counts">
-        <div class="count-list">
-          <h5 class="count-title">Characters</h5>
           <div
             class="count-row"
             v-for="character in this.comic.characters"
             v-bind:key="character.name"
           >
-            <h6 class="count-name">{{ character.name }}</h6>
+            <h4 class="count-name">{{ character.name }}</h4>
           </div>
+        
+      </div>  
+      <div id="creator-text">
+        <h2 class="creator-title">Creators</h2>
+        <div
+          class="count-row"
+          v-for="creator in this.comic.creators"
+          v-bind:key="creator.name"
+        >
+          <h3 class="count-role">{{ creator.role.toUpperCase() }}:</h3>
+          <h4 class="count-name">{{ creator.name }}</h4>
         </div>
       </div>
+  
+        
+    </div>
+    <div id="sidebar">
+      
     </div>
   </div>
 </template>
@@ -59,6 +61,12 @@ export default {
         }
       });
     },
+    getCreators() {
+
+    },
+    getCharacters() {
+
+    }
   },
   created() {
     this.getComic();
@@ -82,6 +90,13 @@ body {
 #main-panel {
   width: 100%;
   display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#main-panel div {
+  padding: 5px;
+
 }
 
 #cover-holder {
@@ -92,6 +107,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-right: 10px;
 }
 
 #cover {
@@ -104,9 +120,55 @@ body {
   font-size: 1.75rem;
 }
 
-#comic-text {
-  flex-grow: 1;
+#creator-text {
+  width: 50%;
+  max-width: 200px;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
 }
+
+.count-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.count-row h3{
+  margin: 2px;
+}
+
+.count-row h4{
+  margin: 4px 2px 2px 2px;
+
+}
+
+#character-text {
+  flex-grow: 1;
+  width: 50%;
+  max-width: 350px;
+  max-height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+/* .character-title {
+  display: block;
+} */
+#comic-detail {
+  width: 50%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+
 .count-list {
   font-size: 1rem;
 }
