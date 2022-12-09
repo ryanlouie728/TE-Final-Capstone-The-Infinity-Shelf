@@ -27,6 +27,9 @@ export default {
         return http.put('/collections', collection);
     },
     deleteCollection(collectionId){
-        return http.delete(`collections/${collectionId}`);
+        return http.delete(`/collections/${collectionId}`);
+    },
+    getCollectionsByUserId(userId) {
+        return http.get(`/collections/user/${userId}`)
     }
 }

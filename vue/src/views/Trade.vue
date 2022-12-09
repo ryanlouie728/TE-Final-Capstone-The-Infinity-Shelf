@@ -40,6 +40,7 @@
 import ComicService from '../services/ComicService';
 import UserService from '../services/UserService';
 import ComicList from '../components/ComicList.vue';
+import CollectionService from '../services/CollectionService';
 
 export default {
   components: { ComicList },
@@ -59,21 +60,18 @@ export default {
         }
     },
     methods: {
-        getUser() {
-            UserService.getProfileById(this.$store.state.user.id)
-            .then(response => {
-                if (response.status == 200) {
-                    this.user = response.data;
-                    console.log(this.user)
+        getUserCollections() {
+            CollectionService.getCollectionsByUserId(this.$store.state.user.id)
+            .then(respone => {
+                if (respone.status == 200) {
+                    this.setUserComics(respone.data)
                 }
             })
-            .then(() => {
-                this.getCurrentUserComics();
-            })
         },
-        getUserCollections() {
-            for (let collection of this.user.collections) {
-                console.log(collection)
+        setUserComics(collections) {
+            this.userComics = []
+            for (let collection of collections) {
+                this.userComics.push(...collection.comics)
             }
         },
         getUsers() {
@@ -83,16 +81,6 @@ export default {
                     this.users = response.data;
                 }
             })
-        },
-        getCurrentUserComics() {
-            for (let collection of this.user.collections) {
-                ComicService.listSimpleByCollectionId(collection.collectionId)
-                .then(response => {
-                    if (response.status == 200) {
-                        this.userComics.push(...response.data)
-                    }
-                })
-            }
         },
         userComicClicked() {
             let comic = this.userComics.find(comic => {
@@ -150,11 +138,11 @@ export default {
         }
     },
     created() {
-        this.getUser()
+        this.getUserCollections()
     },
     mounted() {
         this.getUsers();
-        this.getCurrentUserComics();
+        //this.getCurrentUserComics();
     }
 }
 </script>
@@ -193,10 +181,6 @@ export default {
     overflow: auto;
     width: 47.5%;
     border: inset 2px var(--medium-accent);
-}
-
-.trade-comic-list {
-    /* background-color: var(--medium-accent); */
 }
 
 .trade-comic-list .comic {

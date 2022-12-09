@@ -25,5 +25,6 @@ public interface CollectionDao {
     void removeComicFromCollection(Integer collectionId, Integer comicId);
 
     CollectionDto getByCollectionId(Integer collectionId);
+    List<CollectionDto> getCollectionsByUserId(Integer userId);
 
 }
