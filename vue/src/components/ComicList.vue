@@ -27,7 +27,7 @@
         <p>Remove Comic</p>
     </div>
     <div v-on:click.prevent="submitSelect()" class="comic comic-list-action-card" id="remove-comic-card" v-if="showRemove">
-        <p>Sumbit</p>
+        <p>Submit</p>
     </div>
   </div>
 </template>
