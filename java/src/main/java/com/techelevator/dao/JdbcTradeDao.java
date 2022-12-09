@@ -17,11 +17,13 @@ public class JdbcTradeDao implements TradeDao {
     private final JdbcTemplate jdbcTemplate;
     private final ComicDao comicDao;
     private final UserDao userDao;
+    private final CollectionDao collectionDao;
 
-    public JdbcTradeDao(JdbcTemplate jdbcTemplate, ComicDao comicDao, UserDao userDao) {
+    public JdbcTradeDao(JdbcTemplate jdbcTemplate, ComicDao comicDao, UserDao userDao, CollectionDao collectionDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.comicDao = comicDao;
         this.userDao = userDao;
+        this.collectionDao = collectionDao;
     }
 
     @Override
@@ -35,14 +37,37 @@ public class JdbcTradeDao implements TradeDao {
         return tradeListMapper(rowSet);
     }
 
+    private Integer createTradeRecord() {
+        String sql =
+                "INSERT INTO trade (status) " +
+                "VALUES ('pending') " +
+                "RETURNING trade_id;";
+        Integer tradeId = jdbcTemplate.queryForObject(sql, Integer.class);
+        return tradeId;
+    }
+
+    private Boolean createTradeUsers(TradeDto trade) {
+        String sql =
+                "INSERT INTO trade_user (trade_id, user_id, role) " +
+                "VALUES (";
+
+        return false;
+    }
+
 
     @Override
     public Boolean createTrade(TradeDto trade) {
         for (TradeComicDto comic : trade.getComics()) {
-            if (!comicDao.userHasComic(comic.getFrom().getId(), comic.getComicDto().getId())) {
+            if (!collectionDao.collectionHasComic(comic.getComicDto().getCollectionId(), comic.getComicDto().getId())) {
                 return false;
             }
         }
+        Integer id = createTradeRecord();
+        if (id == null) {
+            return false;
+        }
+
+
 
         return null;
     }

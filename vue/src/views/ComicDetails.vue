@@ -107,7 +107,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-right: 10px;
+  
 }
 
 #cover {

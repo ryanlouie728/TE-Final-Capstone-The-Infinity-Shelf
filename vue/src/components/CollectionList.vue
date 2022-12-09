@@ -2,7 +2,7 @@
     <div id = "collection-list">
         <div class="banner">
             <h2 v-if="this.$route.name == 'collections'">Public Collections</h2>
-            <h2 v-if="this.$route.name == 'user-profile'">User Collections</h2>
+            <h2 v-if="this.$route.name == 'user-profile'">Your Collections</h2>
         </div>
         <div 
             class="collection" 
@@ -10,7 +10,8 @@
             v-bind:key="coll.collectionId" 
             v-on:click="openCollection(coll.collectionId)"
             v-on:mouseup="mouseUp()" 
-            @mouseover="mouseOver(coll.collectionId)"   
+            @mouseover="mouseOver(coll.collectionId)"
+            @mouseOut="dragTargetId = ''"
         > 
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
             <div class="collection-text">
@@ -74,6 +75,7 @@ export default {
     flex-direction: row;
     cursor: pointer;
     pointer-events: all;
+    border-radius: 9px;
 }
 
 .collection:hover {
@@ -115,6 +117,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    border-radius: 9px;
 }
 
 #add-collection-card > h5 {

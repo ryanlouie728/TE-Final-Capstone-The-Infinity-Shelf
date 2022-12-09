@@ -18,6 +18,16 @@ CREATE TABLE user_friend (
     CONSTRAINT FK_user_friend FOREIGN KEY (friend_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE friend_request (
+    request_id serial,
+    to_id int NOT NULl,
+    from_id int NOT NULL,
+    status VARCHAR(15) DEFAULT 'pending', -- pending accepted rejected canceled
+    CONSTRAINT PK_friend_request PRIMARY KEY (request_id),
+    CONSTRAINT FK_friend_request_to FOREIGN KEY (to_id) REFERENCES users(user_id),
+    CONSTRAINT FK_friend_request_from FOREIGN KEY (from_id) REFERENCES users(user_id)
+);
+
 CREATE TABLE comic (
 	comic_id int UNIQUE,
 	title varchar(150) NOT NULL,

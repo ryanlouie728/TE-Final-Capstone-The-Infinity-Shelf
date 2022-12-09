@@ -21,6 +21,17 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public Boolean collectionHasComic(Integer collectionId, Integer comicId) {
+        String sql =
+                "SELECT coll_id " +
+                "FROM collection_comic " +
+                "WHERE coll_id = ? " +
+                "AND comic_ic = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId, comicId);
+        return rowSet.next();
+    }
+
+    @Override
     public Integer getBaseCollectionIdByUserId(Integer userId) {
         String sql =
                 "SELECT coll_id " +
@@ -136,6 +147,16 @@ public class JdbcCollectionDao implements CollectionDao {
         return null;
     }
 
+    @Override
+    public List<CollectionDto> getCollectionsByUserId(Integer userId) {
+        String sql =
+                "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
+                "FROM collection " +
+                "WHERE user_id = ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        return collectionListMapper(rowSet);
+    }
+
     private List<SimpleCollectionDto> simpleCollectionDtoListMapper(SqlRowSet rowSet) {
         List<SimpleCollectionDto> collections = new ArrayList<>();
         while (rowSet.next()) {
@@ -160,13 +181,20 @@ public class JdbcCollectionDao implements CollectionDao {
         return null;
     }
 
+    private List<CollectionDto> collectionListMapper(SqlRowSet rowSet) {
+        List<CollectionDto> collections = new ArrayList<>();
+        while (rowSet.next()) {
+            collections.add(collectionMapper(rowSet));
+        }
+        return collections;
+    }
+
     private CollectionDto collectionMapper(SqlRowSet rowSet) {
         try {
             SimpleCollectionDto simple = simpleCollectionDtoMapper(rowSet);
             CollectionDto collection = new CollectionDto(simple);
             collection.setComics(comicDao.listComicsByCollectionId(collection.getCollectionId()));
             collection.count();
-            collection.count(); //TODO this throws null-pointer exception
             return collection;
         } catch (Exception e) {
             System.out.println(e.getMessage());

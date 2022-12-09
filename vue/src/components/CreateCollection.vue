@@ -1,6 +1,6 @@
 <template>
   <div class="create-collection">
-    <label for="title-input">Title:</label>
+    <label for="title-input">Collection Title:</label>
     <input v-model="collection.collectionName" id="title-input" name="title-input" type="text"/>
     <label for="description-input">Description</label>
     <textarea v-model="collection.collectionDescription" />
