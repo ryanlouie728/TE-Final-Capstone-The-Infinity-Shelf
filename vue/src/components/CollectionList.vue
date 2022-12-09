@@ -10,7 +10,8 @@
             v-bind:key="coll.collectionId" 
             v-on:click="openCollection(coll.collectionId)"
             v-on:mouseup="mouseUp()" 
-            @mouseover="mouseOver(coll.collectionId)"   
+            @mouseover="mouseOver(coll.collectionId)"
+            @mouseOut="dragTargetId = ''"
         > 
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
             <div class="collection-text">

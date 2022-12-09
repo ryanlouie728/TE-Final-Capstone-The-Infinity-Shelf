@@ -21,6 +21,17 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public Boolean collectionHasComic(Integer collectionId, Integer comicId) {
+        String sql =
+                "SELECT coll_id " +
+                "FROM collection_comic " +
+                "WHERE coll_id = ? " +
+                "AND comic_ic = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId, comicId);
+        return rowSet.next();
+    }
+
+    @Override
     public Integer getBaseCollectionIdByUserId(Integer userId) {
         String sql =
                 "SELECT coll_id " +

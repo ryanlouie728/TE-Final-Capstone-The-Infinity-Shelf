@@ -17,16 +17,16 @@
     <create-collection v-if="creatingCollection" 
     @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
-    <div id="sidebar">
-        <!-- <button v-on:click.prevent="creatingCollection = true">New Collection</button> -->
-        <!-- <button v-on:click.prevent="addingComic = true">Add Comic</button> -->
+    <sidebar v-bind:friends="this.user.friends" />
+
+    <!-- <div id="sidebar">
         <div id="friend-list">
             <h4 id="friend-list-title">Friends</h4>
             <div class="friend" v-for="friend in this.user.friends" v-bind:key="friend.id">
                 <p>{{ friend.friendName }}</p>
             </div>
         </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -38,9 +38,10 @@ import AddComic from '../components/AddComic.vue'
 
 import UserService from '../services/UserService';
 import CollectionService from '../services/CollectionService';
+import Sidebar from '../components/Sidebar.vue';
 
 export default {
-    components: { CollectionList, CreateCollection, ComicList, AddComic},
+    components: { CollectionList, CreateCollection, ComicList, AddComic, Sidebar},
     name: "user-profile",
     data() {
         return {
@@ -112,8 +113,6 @@ export default {
             if (!this.$refs.uncategorized.removing) {
                 this.getUser();
             }
-        
-            
         },
         resetComicFormat() {
             let comics = document.querySelectorAll(".comic");
