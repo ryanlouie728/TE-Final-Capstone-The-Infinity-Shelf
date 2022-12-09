@@ -1,18 +1,20 @@
 <template>
   <div class="update-collection">
+      <form action="update()">
     <label for="title-input">Title:</label>
     <input v-model="collectionUpdate.collectionName" id="title-input" name="title-input" type="text"/>
     <label for="description-input">Description</label>
     <textarea v-model="collectionUpdate.collectionDescription" />
     <label for="privacy-boolean">Collection Privacy</label>
-    <select name="privacy-boolean" id="privacy-boolean">
-        <option value="Public">Public</option>
-        <option value="Private">Private</option>
-    </select>
+    <input type="radio" name="public" id="public" value="true" v-model="privacy">
+    <label for="public">Public</label>
+    <input type="radio" name="private" id="private" value="false" v-model="privacy">
+    <label for="private">Private</label>
 
     <label for="collection-cover">Collection Cover Image</label>
     <select name="collection-cover" id="collection-cover">
     </select>
+      </form>
 
     <div class="button-holder">
         <button v-on:click.prevent="update()">Update</button>
@@ -31,6 +33,7 @@ export default {
     props: ["collection"],
     data(){
         return{
+            privacy: this.collection.collectionPublic,
             components: {UserService},
             collectionUpdate: {
                 collectionName: '', 
@@ -41,13 +44,13 @@ export default {
     },
     methods: {
         update(){
-            if(this.collectionUpdate.collectionName != '' || this.collectionUpdate.collectionDescription != ''){
+            console.log(this.privacy);
             const collUpdate = {
                 userId: this.collection.userId,
                 collectionName: this.collectionUpdate.collectionName != '' ? this.collectionUpdate.collectionName : this.collection.collectionName,
                 collectionDescription: this.collectionUpdate.collectionDescription != '' ? this.collectionUpdate.collectionDescription : this.collection.collectionDescription,
                 collectionId: this.collection.collectionId,
-                collectionPublic: this.collection.collectionPublic,
+                collectionPublic: this.privacy,
                 collectionCoverUrl: this.collection.collectionCoverUrl,
                 comics: this.collection.comics,
                 characterCounts: this.collection.characterCounts,
@@ -63,7 +66,6 @@ export default {
         cancel(){
             window.location.reload();
         }
-    }
 
 }
 </script>
