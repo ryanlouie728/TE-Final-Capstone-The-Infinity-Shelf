@@ -3,6 +3,10 @@
     <div id="left-pane">
       <h2 banner>Comics in the {{this.collection.collectionName}} Collection</h2>
       <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true"/>
+      <div id="update-collection">
+        <button v-on:click="updatingCollection = !updatingCollection">Update Collection</button>
+      </div>
+      <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
     </div>
     <div id="sidebar">
       <!-- <button v-on:click.prevent="addingComic = true">Add Comic</button> -->
@@ -23,7 +27,7 @@
       </div>
     </div>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
-    <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
+    
   </div>
 
  
@@ -47,7 +51,7 @@ export default {
         creatorCounts: []
       },
       addingComic: false,
-      updatingCollection: true,
+      updatingCollection: false,
       removingComic: false,
       selectedComics: [],
     }
