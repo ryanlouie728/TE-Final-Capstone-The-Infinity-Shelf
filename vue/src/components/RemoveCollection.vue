@@ -12,11 +12,13 @@ export default {
     props: ['collection'],
     methods: {
         removeCollection(){
+            if(confirm('Are you sure?')){
             CollectionService.deleteCollection(this.collection.collectionId).then((response) => {
                 if(response.status == 200){
                     this.$router.push({name: 'collections'});
                 }
             });
+            }
         }
     }
 }
