@@ -37,9 +37,9 @@ public class FriendController {
         return friendDao.getFriendPageByUserId(userId);
     }
 
-    @PutMapping("/accept/{requestId}")
-    public void acceptFriendRequest() {
-
+    @PostMapping("/accept/{requestId}")
+    public void acceptFriendRequest(@PathVariable Integer requestId) {
+        friendDao.acceptFriendRequest(requestId);
     }
 
 

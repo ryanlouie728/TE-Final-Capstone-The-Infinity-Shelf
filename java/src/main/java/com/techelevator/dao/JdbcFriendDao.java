@@ -80,8 +80,18 @@ public class JdbcFriendDao implements FriendDao {
         String sql =
                 "UPDATE friend_request " +
                 "SET status = 'accepted' " +
-                "WHERE request_id = ?;";
-        jdbcTemplate.update(sql, requestId);
+                "WHERE request_id = ? " +
+                "RETURNING to_id, from_id;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, requestId);
+        rowSet.next();
+        Integer toId = rowSet.getInt("to_id");
+        Integer fromId = rowSet.getInt("from_id");
+        sql =
+                "INSERT INTO user_friend (user_id, friend_id) " +
+                "VALUES (?, ?); " +
+                "INSERT INTO user_friend (user_id, friend_id) " +
+                "VALUES (?, ?); ";
+        jdbcTemplate.update(sql, toId, fromId, fromId, toId);
     }
 
     @Override
