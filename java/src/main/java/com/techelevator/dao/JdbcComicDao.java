@@ -139,7 +139,7 @@ public class JdbcComicDao implements ComicDao {
     @Override
     public ComicDto getComicById(Integer comicId) {
         String sql =
-                "SELECT comic_id, title, issue_number, description, thumbnail, " +
+                "SELECT comic_id, title, issue_number, description, thumbnail " +
                 "FROM comic " +
                 "WHERE comic_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, comicId);

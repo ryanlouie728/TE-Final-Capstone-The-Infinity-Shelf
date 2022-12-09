@@ -13,7 +13,8 @@
 
     <label for="collection-cover">Select A Collection Cover Image</label>
     <ul name="collection-cover" id="collection-cover">
-        <li v-for="comic in collection.comics" v-bind:key="comic.id"><img class="cover-images" v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" /></li>
+        <li v-for="comic in collection.comics" v-bind:key="comic.id"><img class="cover-images" v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" 
+    /></li>
     </ul>
       </form>
 
