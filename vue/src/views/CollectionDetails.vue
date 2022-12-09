@@ -121,6 +121,7 @@ export default {
   border: solid 2px var(--main-background);
   text-align: center;
   padding: 5px;
+  border-radius: 9px;
 }
 
 .count-title {

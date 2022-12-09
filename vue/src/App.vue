@@ -75,14 +75,14 @@ body {
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;
+
 }
 
 #header > img {
   height: 80px;
   display: flex;
   flex-direction: row;
-  
-  
+
 }
 
 
@@ -105,7 +105,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-right: 5px;
-  padding: 0px 5px;
+  padding: 0px 15px;
   cursor:pointer;
   border-radius: 9px;
   letter-spacing: .125rem;
@@ -114,6 +114,7 @@ body {
 .nav-link-holder:hover {
   background-color: var(--main-background);
   color: var(--dark-accent);
+  font-size: 150%;
  
 }
 
