@@ -27,7 +27,7 @@
         </div>
         <div class="count-list">
           <h5 class="count-title">Collection Description</h5>
-          <div>
+          <div class="description-text">
             <p> {{ collection.collectionDescription }} </p>
           </div>
         </div>
@@ -129,5 +129,10 @@ export default {
 
 #counts {
   width: 200px;
+}
+
+.description-text {
+  text-align: center;
+  font-size: .75rem;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="update-collection">
       <form action="update()">
-    <label for="title-input">Title:</label>
+    <label for="title-input">Title: </label>
     <input v-model="collectionUpdate.collectionName" id="title-input" name="title-input" type="text"/>
-    <label for="description-input">Description</label>
-    <textarea v-model="collectionUpdate.collectionDescription" />
+    <label for="description-input">Description: </label>
+    <textarea v-model="collectionUpdate.collectionDescription" @keyup.enter="update()"/>
     <label for="privacy-boolean">Collection Privacy</label>
     <input type="radio" name="public" id="public" value="true" v-model="privacy">
     <label for="public">Public</label>
