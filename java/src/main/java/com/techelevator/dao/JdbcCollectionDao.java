@@ -75,7 +75,7 @@ public class JdbcCollectionDao implements CollectionDao {
     @Override
     public void deleteCollection(Integer collectionId) {
         String sql =
-                "DELTE " +
+                "DELETE " +
                 "FROM collection_comic " +
                 "WHERE coll_id = ?;" +
                 "DELETE " +

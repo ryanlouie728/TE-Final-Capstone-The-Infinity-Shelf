@@ -7,6 +7,7 @@
         <button v-on:click="updatingCollection = !updatingCollection">Update Collection</button>
       </div>
       <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
+      <remove-collection v-bind:collection="this.collection" />
     </div>
     <div id="sidebar">
       <!-- <button v-on:click.prevent="addingComic = true">Add Comic</button> -->
@@ -35,13 +36,14 @@
 
 <script>
 import ComicList from '../components/ComicList.vue';
-import AddComic from '../components/AddComic.vue'
+import AddComic from '../components/AddComic.vue';
 import CollectionService from '../services/CollectionService';
-import UpdateCollection from '../components/UpdateCollection.vue'
+import UpdateCollection from '../components/UpdateCollection.vue';
+import RemoveCollection from '../components/RemoveCollection.vue';
 
 
 export default {
-  components: { ComicList, AddComic, UpdateCollection },
+  components: { ComicList, AddComic, UpdateCollection, RemoveCollection },
   props: ['collection-details'],
   name: 'collection-details',
   data() {
