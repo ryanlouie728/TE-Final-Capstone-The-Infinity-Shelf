@@ -23,6 +23,12 @@
             <h6 class="count-name">{{creator.name}}</h6>
           </div>
         </div>
+        <div class="count-list">
+          <h5 class="count-title">Collection Description</h5>
+          <div>
+            <p> {{ collection.collectionDescription }} </p>
+          </div>
+        </div>
       </div>
     </div>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
