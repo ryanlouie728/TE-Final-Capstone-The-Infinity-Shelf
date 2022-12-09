@@ -25,12 +25,6 @@ public class ComicController {
     @GetMapping("/simple")
     public List<SimpleComicDto> list(@RequestParam(defaultValue = "", name = "title") String title) {
         return comicDao.listSimple();
-//        if (title.isBlank()) {
-//            return comicDao.listSimple();
-//        } else {
-//            comicDao.createComicList(comicService.getComicsByTitle(title));
-//            return comicDao.listSimpleByTitle(title);
-//        }
     }
 
     @GetMapping("/simple/{collectionId}")

@@ -137,7 +137,8 @@ public class CollectionDto {
                 }
             }
         }
-        for (Map.Entry<String, Integer> character : entriesSortedByValues(creators)) {
+        var sorted = entriesSortedByValues(creators);
+        for (Map.Entry<String, Integer> character : sorted) {
             creatorCounts.add(new Count(character.getKey(), character.getValue()));
         }
     }

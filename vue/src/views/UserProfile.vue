@@ -2,6 +2,7 @@
   <div @mouseup="mouseUp()" class = "user-profile">
     <div id="left-pane">
         <collection-list 
+        v-bind:showAdd="true"
         ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" 
         @dropped="comicDropped()"
         @addCollection="creatingCollection = true"

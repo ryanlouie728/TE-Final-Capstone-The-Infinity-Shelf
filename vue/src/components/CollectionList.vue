@@ -18,7 +18,7 @@
                 <p class="collection-description"> {{ coll.collectionDescription }} </p>
             </div>
         </div>
-        <div v-on:click.prevent="addCollectionEvent()" class="collection" id="add-collection-card">
+        <div v-if="showAdd" v-on:click.prevent="addCollectionEvent()" class="collection" id="add-collection-card">
             <h5>Add New Collection</h5>
         </div>
     </div>
@@ -27,7 +27,7 @@
 <script>
 export default {
     name: 'collection-list',
-    props: ['collections', 'dragging'],
+    props: ['collections', 'dragging', 'showAdd'],
     data() {
         return {
             dragTargetId: ''

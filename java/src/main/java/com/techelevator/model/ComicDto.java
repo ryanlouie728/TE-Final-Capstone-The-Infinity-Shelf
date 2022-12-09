@@ -7,6 +7,7 @@ import java.util.List;
 public class ComicDto {
 
     private Integer id;
+    private Integer collectionId;
     @NotNull
     @NotBlank(message = "The title field must not be blank")
     private String title;
@@ -18,12 +19,21 @@ public class ComicDto {
     private List<CharacterDto> characters;
     private List<CreatorDto> creators;
 
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(Integer collectionId) {
+        this.collectionId = collectionId;
     }
 
     public String getTitle() {

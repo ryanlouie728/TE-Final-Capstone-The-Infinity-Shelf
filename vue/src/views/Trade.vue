@@ -49,6 +49,7 @@ export default {
             user: {
                 collections: []
             },
+            userCollections: [],
             userInput: '',
             users: [],
             userComics: [],
@@ -63,18 +64,23 @@ export default {
             .then(response => {
                 if (response.status == 200) {
                     this.user = response.data;
+                    console.log(this.user)
                 }
             })
             .then(() => {
                 this.getCurrentUserComics();
             })
         },
+        getUserCollections() {
+            for (let collection of this.user.collections) {
+                console.log(collection)
+            }
+        },
         getUsers() {
             UserService.getByUsername(this.userInput)
             .then(response => {
                 if (response.status == 200) {
                     this.users = response.data;
-                    //console.log(this.users);
                 }
             })
         },
@@ -92,8 +98,6 @@ export default {
             let comic = this.userComics.find(comic => {
                 return comic.id == this.$refs.userComics.clickedId;
             });
-            // console.log(comic)
-            // console.log(this.userComics)
             this.userSelectedComics.push(comic)
             this.userComics.splice(this.userComics.indexOf(comic), 1)
         },

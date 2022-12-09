@@ -35,7 +35,7 @@ public class JdbcComicDao implements ComicDao {
     @Override
     public List<SimpleComicDto> listSimpleByCollection(int collectionId) {
         String sql =
-                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail, coll_com.coll_id " +
                 "FROM comic " +
                 "JOIN collection_comic AS coll_com ON coll_com.comic_id = comic.comic_id " +
                 "WHERE coll_com.coll_id = ?;";
@@ -128,7 +128,7 @@ public class JdbcComicDao implements ComicDao {
     @Override
     public List<ComicDto> listComicsByCollectionId(Integer collectionId) {
         String sql =
-                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail " +
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail, collection_comic.coll_id " +
                 "FROM comic " +
                 "JOIN collection_comic ON comic.comic_id = collection_comic.comic_id " +
                 "WHERE collection_comic.coll_id = ?;";
@@ -139,7 +139,7 @@ public class JdbcComicDao implements ComicDao {
     @Override
     public ComicDto getComicById(Integer comicId) {
         String sql =
-                "SELECT comic_id, title, issue_number, description, thumbnail " +
+                "SELECT comic_id, title, issue_number, description, thumbnail, " +
                 "FROM comic " +
                 "WHERE comic_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, comicId);
@@ -188,6 +188,12 @@ public class JdbcComicDao implements ComicDao {
             comic.setIssueNumber(rowSet.getString("issue_number"));
             comic.setDescription(rowSet.getString("description"));
             comic.setThumbnailUrl(rowSet.getString("thumbnail"));
+            try {
+                Integer collectionId = rowSet.getInt("coll_id");
+                comic.setCollectionId(collectionId);
+            }catch (Exception ignored) {
+                comic.setCollectionId(null);
+            }
             comic.setCharacters(characterDao.listByComicId(comic.getId()));
             comic.setCreators(creatorDao.listByComicId(comic.getId()));
             return comic;
