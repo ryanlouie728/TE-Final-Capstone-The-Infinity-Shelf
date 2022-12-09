@@ -1,6 +1,12 @@
 <template>
   <div id="collection-details">
     <div id="left-pane">
+      <h1>{{this.collection.collectionName}}</h1>
+      <img v-bind:src="this.collection.collectionCoverUrl" alt="" id="cover-image">
+      <h2>Description</h2>
+      <p>{{this.collection.collectionDescription}}</p>
+      <h3>Privacy</h3>
+      <p>This collection is {{collectionPrivacy()}}</p>
       <h2 banner>Comics in the {{this.collection.collectionName}} Collection</h2>
       <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true"/>
       <div id="update-collection">
@@ -25,7 +31,7 @@
         </div>
         <div class="count-list">
           <h5 class="count-title">Collection Description</h5>
-          <div>
+          <div class="description-text">
             <p> {{ collection.collectionDescription }} </p>
           </div>
         </div>
@@ -63,6 +69,9 @@ export default {
     }
   },
   methods: {
+    collectionPrivacy(){
+      return this.collection.collectionPublic ? 'Public' : 'Private';
+    },
     getCollection() {
       CollectionService.getCollectionById(this.$route.params.id)
       .then(response => {
@@ -126,6 +135,10 @@ export default {
 }
 
 #counts {
+  width: 200px;
+}
+#cover-image{
+  height: 316px;
   width: 200px;
 }
 </style>

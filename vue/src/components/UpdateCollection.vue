@@ -1,10 +1,10 @@
 <template>
-  <div class="update-collection">
+  <div class="update-collection" v-on:keyup.enter="update" v-on:keyup.esc="cancel">
       <form action="update()">
-    <label for="title-input">Title:</label>
+    <label for="title-input">Title: </label>
     <input v-model="collectionUpdate.collectionName" id="title-input" name="title-input" type="text"/>
-    <label for="description-input">Description</label>
-    <textarea v-model="collectionUpdate.collectionDescription" />
+    <label for="description-input">Description: </label>
+    <textarea v-model="collectionUpdate.collectionDescription" @keyup.enter="update()"/>
     <label for="privacy-boolean">Collection Privacy</label>
     <input type="radio" name="public" id="public" value="true" v-model="privacy">
     <label for="public">Public</label>
@@ -13,8 +13,9 @@
 
     <label for="collection-cover">Select A Collection Cover Image</label>
     <ul name="collection-cover" id="collection-cover">
-        <li v-for="comic in collection.comics" v-bind:key="comic.id"><img class="cover-images" v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" 
-    /></li>
+        <template v-for="comic in collection.comics">
+            <li v-bind:key="comic.id" v-if="!isSelected(comic)"><img class="cover-images" v-on:click="setCover(comic)" v-bind:src="comic.thumbnailUrl" /></li>
+        </template>
     </ul>
       </form>
 
@@ -47,8 +48,14 @@ export default {
         setCover(comic){
             this.coverUrl = comic.thumbnailUrl;
         },
+        isSelected(comic){
+            if(comic.thumbnailUrl === this.collection.collectionCoverUrl){
+                return true;
+            }else{
+                return false;
+            }
+        },
         update(){
-            console.log(this.privacy);
             const collUpdate = {
                 userId: this.collection.userId,
                 collectionName: this.collectionUpdate.collectionName != '' ? this.collectionUpdate.collectionName : this.collection.collectionName,

@@ -2,7 +2,7 @@
   <div id="app">
     <header id="header">
       <h1>The Infinity Shelf
-        <img id="thanos" src="images/thanos-gangnam.gif" height="50px">
+        <img id="thanos" src="images/thanos-gangnam.gif" height="100px">
       </h1>
      
     </header>
@@ -84,6 +84,7 @@ body {
   border-bottom: solid 2px var(--dark-accent);
   display: flex;
   align-items: center;
+  border-radius: 9px;
 }
 
 .nav-link-holder {
@@ -95,6 +96,7 @@ body {
   margin-right: 5px;
   padding: 0px 5px;
   cursor:pointer;
+  border-radius: 9px;
 }
 
 .nav-link-holder:hover {
@@ -106,6 +108,7 @@ body {
   font-weight: bold;
   text-decoration: none;
   color: var(--white);
+  letter-spacing: .125rem;
 }
 
 .nav-link-holder:hover > * {
@@ -120,6 +123,7 @@ body {
   width: 200px;
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
+  border-radius: 9px;
 }
 
 #sidebar > button {
