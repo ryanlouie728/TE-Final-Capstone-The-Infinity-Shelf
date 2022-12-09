@@ -23,6 +23,7 @@
       </div>
     </div>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
+    <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
   </div>
 
  
@@ -32,10 +33,11 @@
 import ComicList from '../components/ComicList.vue';
 import AddComic from '../components/AddComic.vue'
 import CollectionService from '../services/CollectionService';
+import UpdateCollection from '../components/UpdateCollection.vue'
 
 
 export default {
-  components: { ComicList, AddComic },
+  components: { ComicList, AddComic, UpdateCollection },
   props: ['collection-details'],
   name: 'collection-details',
   data() {
@@ -45,6 +47,7 @@ export default {
         creatorCounts: []
       },
       addingComic: false,
+      updatingCollection: true,
       removingComic: false,
       selectedComics: [],
     }

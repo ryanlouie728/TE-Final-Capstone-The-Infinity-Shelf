@@ -22,5 +22,8 @@ export default {
     },
     getCollectionById(collectionId) {
         return http.get(`/collections/${collectionId}`)
+    },
+    updateCollection(collection) {
+        return http.put('/collections', collection);
     }
 }

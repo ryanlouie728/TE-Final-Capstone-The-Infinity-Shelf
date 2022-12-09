@@ -165,7 +165,7 @@ public class JdbcCollectionDao implements CollectionDao {
             SimpleCollectionDto simple = simpleCollectionDtoMapper(rowSet);
             CollectionDto collection = new CollectionDto(simple);
             collection.setComics(comicDao.listComicsByCollectionId(collection.getCollectionId()));
-            collection.count();
+            //collection.count(); TODO this throws null-pointer exception
             return collection;
         } catch (Exception e) {
             System.out.println(e.getMessage());
