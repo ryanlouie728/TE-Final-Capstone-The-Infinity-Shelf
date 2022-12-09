@@ -27,7 +27,7 @@
         <p>Remove Comic</p>
     </div>
     <div v-on:click.prevent="submitSelect()" class="comic comic-list-action-card" id="remove-comic-card" v-if="(showRemove && removing)">
-        <p>Sumbit</p>
+        <p>Submit</p>
     </div>
   </div>
 </template>
@@ -223,6 +223,7 @@ function dragElement(elmnt, reset) {
 .comic-list-action-card > p {
     font-size: 1.25rem;
     margin: 0px;
+    text-align: center;
 }
 
 .selected {

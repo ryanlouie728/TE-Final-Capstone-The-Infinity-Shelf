@@ -1,10 +1,8 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1>The Infinity Shelf
-        <img id="thanos" src="images/thanos-gangnam.gif" height="100px">
-      </h1>
-     
+      <h1>The Infinity Shelf</h1>
+      <img id="thanos" src="https://media.tenor.com/DRbhYjCbnD0AAAAi/thanos-gangnam-style.gif">
     </header>
     <div id="nav">
       <div class="nav-link-holder">
@@ -54,6 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Bebas Neue", sans-serif;
+  letter-spacing: .1rem;
 }
 
 #app {
@@ -71,20 +70,32 @@ body {
 }
 #header {
   grid-area: title;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+}
 
+#header > img {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  
+  
 }
 
 
 #nav {
   grid-area: nav;
-  padding: 0px 5px;
+  padding: 5px 5px;
   height: 30px;
   background-color: var(--light-accent);
-  border-top: solid 2px var(--dark-accent);
-  border-bottom: solid 2px var(--dark-accent);
+  border: solid 2px var(--dark-accent);
   display: flex;
   align-items: center;
   border-radius: 9px;
+  
 }
 
 .nav-link-holder {
@@ -97,18 +108,20 @@ body {
   padding: 0px 5px;
   cursor:pointer;
   border-radius: 9px;
+  letter-spacing: .125rem;
 }
 
 .nav-link-holder:hover {
   background-color: var(--main-background);
   color: var(--dark-accent);
+ 
 }
 
 .nav-link-holder > * {
   font-weight: bold;
   text-decoration: none;
   color: var(--white);
-  letter-spacing: .125rem;
+  
 }
 
 .nav-link-holder:hover > * {
