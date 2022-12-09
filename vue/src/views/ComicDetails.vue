@@ -92,6 +92,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  
 }
 
 #cover {

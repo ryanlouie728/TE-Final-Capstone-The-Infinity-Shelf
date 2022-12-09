@@ -8,7 +8,7 @@
     </div>
     <div id="comic-list-holder">
       <div v-if="comicsEmpty" id="empty-message">
-        <p>No Search Results</p>
+        <p>No Search Results Found</p>
       </div>
       <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
     </div>
