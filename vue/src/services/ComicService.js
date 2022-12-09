@@ -21,4 +21,7 @@ export default {
     getComicById(id) {
         return http.get(`/comics/${id}`);
     },
+    deleteComic(collectionId, comicId){
+        return http.delete(`/collections/${collectionId}/${comicId}`);
+    }
 }
