@@ -1,19 +1,11 @@
 <template>
-  <div class="friend-page" v-if="loaded">
+  <div id="friend-page" class="friend-page" v-show="loaded">
     <add-friend
       v-if="addingFriend" 
       @cancelled="addingFriend = false"
       @added="getFriendPage(); addingFriend=false;"
     />
-    <div class="friends-page-list" id="friend-list">
-        <h4 class="title">Friends</h4>
-        <friend v-for="friend in this.friendPage.friends" v-bind:friend="friend" v-bind:key="friend.friendId"/>
-        <div
-          v-if="this.$store.state.user.username == this.$route.params.username"
-          class="add-friend-button"
-          v-on:click.prevent="addingFriend = true"
-        >+</div>
-    </div>
+    
     <div 
       class="friends-page-list" 
       id="request-list"
@@ -36,6 +28,15 @@
       v-for="request in this.friendPage.pending" v-bind:key="request.requestId" v-bind:request="request" 
         @cancelled="getFriendPage()"
       />
+    </div>
+    <div class="friends-page-list" id="friend-list">
+        <h4 class="title">Friends</h4>
+        <friend v-for="friend in this.friendPage.friends" v-bind:friend="friend" v-bind:key="friend.friendId"/>
+        <div
+          v-if="this.$store.state.user.username == this.$route.params.username"
+          class="add-friend-button"
+          v-on:click.prevent="addingFriend = true"
+        >+</div>
     </div>
   </div>
 </template>
@@ -65,7 +66,7 @@ export default {
   },
   methods: {
     getId() {
-      UserService.getIdByUsername(this.$store.state.user.username)
+      UserService.getIdByUsername(this.$route.params.username)
       .then(response => {
         if (response.status == 200) {
           this.userId = response.data;
@@ -78,18 +79,16 @@ export default {
       .then(response => {
         if (response.status == 200) {
           this.friendPage = response.data;
-          this.loaded = true;
+          this.setStyle();
         }
       })
-      .catch(error => {
-        console.log(error);
-      })
     },
-    requestAccepted(requestId) {
-      console.log('accept' + requestId)
-    },
-    requestRejected(requestId) {
-      console.log('reject' + requestId)
+    setStyle() {
+      let friendsButton = document.getElementById('friends-button')
+      let friendsPage = document.querySelector('.friend-page')
+      friendsPage.style.top = friendsButton.offsetTop + 20 + 'px';
+      friendsPage.style.left = '0px';
+      this.loaded = true;
     }
   },
   mounted() {
@@ -100,7 +99,15 @@ export default {
 
 <style>
 .friend-page {
-  position: fixed;
+  overflow: auto;
+  height: 50vh;
+  width: 175px;
+  background-color: var(--light-accent);
+  position: relative;
+  border-radius: 10px;
+  display: block;
+  position: absolute;
+  /* transform: translate(28px, 0px); */
 }
 
 .friends-page-list {

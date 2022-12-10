@@ -184,6 +184,14 @@ body {
   background-color: var(--dark-accent);
 }
 
+.button-active {
+  background-color: var(--dark-accent);
+}
+
+.button-active:hover {
+  background-color: var(--dark-accent);
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
