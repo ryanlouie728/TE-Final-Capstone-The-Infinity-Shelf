@@ -4,7 +4,7 @@
         id="friends-button"
         class="nav-link-holder"
         v-if="this.$store.state.token != ''"
-        v-on:click.prevent="showFriends = !showFriends"
+        v-on:click.self="showFriends = !showFriends"
         :class="{'button-active': showFriends}"
     >Friends
     <friend-page 
