@@ -30,7 +30,7 @@ export default {
     components: {FriendPage},
     data() {
         return {
-            showFriends: true
+            showFriends: false
         }
     }
 }

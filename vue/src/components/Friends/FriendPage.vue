@@ -100,7 +100,7 @@ export default {
 <style>
 .friend-page {
   overflow: auto;
-  height: 50vh;
+  height: 450px;
   width: 175px;
   background-color: var(--light-accent);
   position: relative;
