@@ -12,8 +12,8 @@ INSERT INTO users (username,password_hash,role) VALUES ('test-user', '$2a$10$6ok
 INSERT INTO collection (user_id, coll_name) VALUES (3, 'base');
 INSERT INTO user_collection (user_id, coll_id) VALUES (3, 3);
 
-INSERT INTO user_friend (user_id, friend_id) VALUES (1, 3);
-INSERT INTO user_friend (user_id, friend_id) VALUES (3, 1);
+INSERT INTO user_friend (user_id, friend_id) VALUES (1, 4);
+INSERT INTO user_friend (user_id, friend_id) VALUES (4, 1);
 
 INSERT INTO users (username,password_hash,role) VALUES ('braunsben', '$2a$10$6okttCWmnMxktiDBdLzbKOB9xHKxZyyfpJ/UUZwQUGyyZGBMgpJnG', 'ROLE_USER');
 INSERT INTO collection (user_id, coll_name) VALUES (4, 'base');
