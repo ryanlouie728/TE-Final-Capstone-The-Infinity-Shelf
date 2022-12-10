@@ -51,11 +51,9 @@ export default {
                 this.$emit('clicked')
             } else {
                 let comic = this.comics.find(comic => {
-                    console.log(comic)
                     return (comic.id == clicked.id) && (comic.collectionId == clicked.collectionId);
                 })
                 this.selected.push(comic)
-                console.log(this.selected);
             }
             
         },
@@ -85,10 +83,11 @@ export default {
         submitSelect() {
             if (this.removing) {
                 for (let comic of this.selected) {
-                    CollectionService.removeComicFromCollection(this.base.collectionId, comic.id).then(
-                        this.resetComicsEvent(),
-                        this.toggleRemove()
-                    )
+                    CollectionService.removeComicFromCollection(this.base.collectionId, comic.id)
+                    .then(() => {
+                      this.resetComicsEvent()
+                      this.toggleRemove()
+                    })
                 }
             }
         },

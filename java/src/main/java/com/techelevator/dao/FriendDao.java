@@ -21,7 +21,11 @@ public interface FriendDao {
 
     void rejectFriendRequest(Integer requestId);
 
+    void cancelFriendRequest(Integer requestId);
+
     Boolean userIsRecipientOfRequest(Integer userId, Integer requestId);
+
+    Boolean userIsSenderOfRequest(Integer userId, Integer requestId);
 
     Boolean usersAreFriends(Integer userOne, Integer userTwo);
 

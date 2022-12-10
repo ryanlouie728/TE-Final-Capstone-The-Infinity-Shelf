@@ -143,6 +143,22 @@ body {
   border-radius: 9px 9px 9px 9px;
 }
 
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--medium-accent);
+  color: var(--white);
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  background-color: var(--dark-accent);
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }

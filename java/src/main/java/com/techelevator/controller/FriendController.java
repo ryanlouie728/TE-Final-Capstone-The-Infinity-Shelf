@@ -51,7 +51,7 @@ public class FriendController {
         }
     }
 
-    @PostMapping("/reject/{requestId}")
+    @PutMapping("/reject/{requestId}")
     public void rejectFriendRequest(Principal principal, @PathVariable Integer requestId) {
         Integer userId = userDao.findIdByUsername(principal.getName());
         if (!friendDao.userIsRecipientOfRequest(userId, requestId)) {
@@ -61,5 +61,14 @@ public class FriendController {
         }
     }
 
+    @PutMapping("/cancel/{requestId}")
+    public void cancelFriendRequest(Principal principal, @PathVariable Integer requestId) {
+        Integer userId = userDao.findIdByUsername(principal.getName());
+        if (!friendDao.userIsSenderOfRequest(userId, requestId)) {
+            throw new IllegalArgumentException(String.format("User '%s' cannot cancel request '%s'", principal.getName(), requestId));
+        } else {
+            friendDao.cancelFriendRequest(requestId);
+        }
+    }
 
 }

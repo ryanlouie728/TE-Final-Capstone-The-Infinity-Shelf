@@ -9,7 +9,10 @@
         @resetComics="getUser()"
         />
         <h2>Uncatagorized Comics</h2>
-        <comic-list ref="uncategorized" v-bind:drag="this.$store.state.user.username == this.$route.params.username" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="this.$store.state.user.username == this.$route.params.username" v-bind:showRemove="this.$store.state.user.username == this.$route.params.username"
+        <comic-list 
+            ref="uncategorized"
+            @resetComics="getUser()"
+            v-bind:drag="this.$store.state.user.username == this.$route.params.username" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="this.$store.state.user.username == this.$route.params.username" v-bind:showRemove="(this.$store.state.user.username == this.$route.params.username) && (this.user.base.comics.length > 0)"
         v-bind:base="this.user.base"
         @addComic="addingComic = true"/>
     </div>
@@ -18,15 +21,11 @@
     @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
     <sidebar />
-
-    <!-- <div id="sidebar">
-        <div id="friend-list">
-            <h4 id="friend-list-title">Friends</h4>
-            <div class="friend" v-for="friend in this.user.friends" v-bind:key="friend.id">
-                <p>{{ friend.friendName }}</p>
-            </div>
-        </div>
-    </div> -->
+    <!-- <confirm 
+        v-bind:message="'Do you wish to continue?'"
+        v-bind:function="this.print"
+        v-bind:arguments="['one', 'two']"
+    /> -->
   </div>
 </template>
 
@@ -136,6 +135,10 @@ export default {
                 comic.style.top = '';
                 comic.style.left = '';
             }
+        },
+        print(one, two) {
+            console.log(one);
+            console.log(two);
         }
     },
     created() {
