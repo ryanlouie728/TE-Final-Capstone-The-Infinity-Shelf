@@ -8,7 +8,7 @@
         :class="{'button-active': showFriends}"
     >Friends
     <friend-page 
-        v-show="showFriends"
+        v-if="showFriends"
     />
     </div>
     
