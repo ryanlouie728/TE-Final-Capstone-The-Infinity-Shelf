@@ -12,7 +12,19 @@
 <script>
 export default {
   name: 'friend-list',
-  props: ['friends']
+  props: ['friends'],
+  data() {
+    return {
+      friendPage: {
+        friends: [],
+        pending: [],
+        requests: []
+      }
+    }
+  },
+  created() {
+    
+  }
 }
 </script>
 

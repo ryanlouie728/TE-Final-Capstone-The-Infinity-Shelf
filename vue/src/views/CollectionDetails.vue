@@ -134,7 +134,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #left-pane {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

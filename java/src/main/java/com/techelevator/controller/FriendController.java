@@ -12,6 +12,7 @@ import java.security.Principal;
 @RestController
 @CrossOrigin
 @RequestMapping("/friends")
+@PreAuthorize("isAuthenticated()")
 public class FriendController {
 
     //TODO: figure out why I have to use autowired and not a constructor
@@ -26,8 +27,11 @@ public class FriendController {
     }
 
     @PostMapping("/request/{requestId}")
-    public void makeFriendRequest(Principal principal, @PathVariable Integer requestId) {
+    public void createFriendRequest(Principal principal, @PathVariable Integer requestId) {
         Integer userId = userDao.findIdByUsername(principal.getName());
+        if (friendDao.usersAreFriends(userId, requestId)) {
+            throw new IllegalArgumentException("Users are already friends");
+        }
         friendDao.createFriendRequest(userId, requestId);
     }
 
@@ -38,8 +42,23 @@ public class FriendController {
     }
 
     @PostMapping("/accept/{requestId}")
-    public void acceptFriendRequest(@PathVariable Integer requestId) {
-        friendDao.acceptFriendRequest(requestId);
+    public void acceptFriendRequest(Principal principal, @PathVariable Integer requestId) {
+        Integer userId = userDao.findIdByUsername(principal.getName());
+        if (!friendDao.userIsRecipientOfRequest(userId, requestId)) {
+            throw new IllegalArgumentException(String.format("User '%s' cannot accept request '%s'", principal.getName(), requestId));
+        } else {
+            friendDao.acceptFriendRequest(requestId);
+        }
+    }
+
+    @PostMapping("/reject/{requestId}")
+    public void rejectFriendRequest(Principal principal, @PathVariable Integer requestId) {
+        Integer userId = userDao.findIdByUsername(principal.getName());
+        if (!friendDao.userIsRecipientOfRequest(userId, requestId)) {
+            throw new IllegalArgumentException(String.format("User '%s' cannot reject request '%s'", principal.getName(), requestId));
+        } else {
+            friendDao.rejectFriendRequest(requestId);
+        }
     }
 
 

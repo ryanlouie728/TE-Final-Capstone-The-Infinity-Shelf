@@ -54,6 +54,27 @@ public class JdbcFriendDao implements FriendDao {
     }
 
     @Override
+    public Boolean userIsRecipientOfRequest(Integer userId, Integer requestId) {
+        String sql =
+                "SELECT to_id " +
+                "FROM friend_request " +
+                "WHERE request_id = ?;";
+        Integer to_id = jdbcTemplate.queryForObject(sql, Integer.class, requestId);
+        return to_id == userId;
+    }
+
+    @Override
+    public Boolean usersAreFriends(Integer userOne, Integer userTwo) {
+        String sql =
+                "SELECT user_id " +
+                "FROM user_friend " +
+                "WHERE user_id = ? " +
+                "AND friend_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userOne, userTwo);
+        return rowSet.next();
+    }
+
+    @Override
     public List<FriendRequestDto> getToRequestsByUserId(Integer userId) {
         String sql =
                 "SELECT request_id, to_id, from_id, status " +
@@ -92,6 +113,15 @@ public class JdbcFriendDao implements FriendDao {
                 "INSERT INTO user_friend (user_id, friend_id) " +
                 "VALUES (?, ?); ";
         jdbcTemplate.update(sql, toId, fromId, fromId, toId);
+    }
+
+    @Override
+    public void rejectFriendRequest(Integer requestId) {
+        String sql =
+                "UPDATE friend_request " +
+                "SET status = 'rejected' " +
+                "WHERE request_id = ?;";
+        jdbcTemplate.update(sql, requestId);
     }
 
     @Override

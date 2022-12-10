@@ -19,4 +19,10 @@ public interface FriendDao {
 
     void acceptFriendRequest(Integer requestId);
 
+    void rejectFriendRequest(Integer requestId);
+
+    Boolean userIsRecipientOfRequest(Integer userId, Integer requestId);
+
+    Boolean usersAreFriends(Integer userOne, Integer userTwo);
+
 }
