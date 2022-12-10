@@ -1,8 +1,18 @@
 <template>
   <div class="friend-page" v-if="loaded">
+    <add-friend
+      v-if="addingFriend" 
+      @cancelled="addingFriend = false"
+      @added="getFriendPage(); addingFriend=false;"
+    />
     <div class="friends-page-list" id="friend-list">
         <h4 class="title">Friends</h4>
         <friend v-for="friend in this.friendPage.friends" v-bind:friend="friend" v-bind:key="friend.friendId"/>
+        <div
+          v-if="this.$store.state.user.username == this.$route.params.username"
+          class="add-friend-button"
+          v-on:click.prevent="addingFriend = true"
+        >+</div>
     </div>
     <div 
       class="friends-page-list" 
@@ -36,12 +46,14 @@ import UserService from '../../services/UserService'
 import Friend from './Friend.vue'
 import FriendRequest from './FriendRequest.vue'
 import FriendPending from './FriendPending.vue'
+import AddFriend from './AddFriend.vue'
 
 export default {
   name: 'friend-list',
-  components: { Friend, FriendRequest, FriendPending },
+  components: { Friend, FriendRequest, FriendPending, AddFriend },
   data() {
     return {
+      addingFriend: false,
       userId: '',
       loaded: false,
       friendPage: {
@@ -100,4 +112,24 @@ export default {
     font-size: 2rem;
     font-weight: bolder;
 }
+
+.add-friend-button {
+  box-sizing: border-box;
+  width: 75%;
+  height: 37.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: var(--medium-accent);
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.add-friend-button:hover {
+  background-color: var(--dark-accent);
+}
+
 </style>

@@ -8,6 +8,9 @@ export default {
     getFriendPageByUserId(userId) {
         return http.get(`/friends/${userId}`)
     },
+    createFriendRequest(friendId) {
+        return http.post(`/friends/request/${friendId}`)
+    },
     acceptRequest(requestId) {
         return http.post(`/friends/accept/${requestId}`)
     },
