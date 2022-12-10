@@ -3,6 +3,7 @@
     <button 
         class="nav-link-holder"
         v-if="this.$store.state.token != ''"
+        v-on:click.prevent="showFriends = true"
     >Friends</button>
     <div class="nav-link-holder" v-if="this.$store.state.token != ''">
         <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
@@ -12,7 +13,7 @@
     </div>
         
     <friend-page 
-        
+        v-if="showFriends"
     />
   </div>
 </template>
@@ -24,7 +25,7 @@ export default {
     components: {FriendPage},
     data() {
         return {
-
+            showFriends: false
         }
     }
 }

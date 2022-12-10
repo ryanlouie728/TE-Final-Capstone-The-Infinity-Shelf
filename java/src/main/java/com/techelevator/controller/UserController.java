@@ -5,6 +5,7 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.FriendDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.UserDto;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/users")
+@PreAuthorize("isAuthenticated()")
 public class UserController {
 
     private final UserDao userDao;

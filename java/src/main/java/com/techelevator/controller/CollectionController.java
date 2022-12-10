@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.CollectionDao;
 import com.techelevator.model.CollectionDto;
 import com.techelevator.model.SimpleCollectionDto;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

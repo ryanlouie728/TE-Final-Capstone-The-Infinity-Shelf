@@ -81,6 +81,9 @@ export default {
           this.loaded = true;
         }
       })
+      .catch(error => {
+        console.log(error);
+      })
     },
     requestAccepted(requestId) {
       console.log('accept' + requestId)
@@ -96,6 +99,10 @@ export default {
 </script>
 
 <style>
+.friend-page {
+  position: fixed;
+}
+
 .friends-page-list {
     width: auto;
     padding: 10px;

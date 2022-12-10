@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.TradeDao;
 import com.techelevator.model.trade.TradeDto;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/trades")
+@PreAuthorize("isAuthenticated()")
 public class TradeController {
     private TradeDao tradeDao;
 
