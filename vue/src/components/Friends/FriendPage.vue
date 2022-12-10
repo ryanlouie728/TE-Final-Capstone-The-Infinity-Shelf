@@ -17,7 +17,7 @@
     <div 
       class="friends-page-list" 
       id="request-list"
-      v-if="(this.$store.state.user.username == this.$route.params.username) && (friendPage.requests.length > 0)"
+      v-if="friendPage.requests.length > 0"
     >
       <h4 class="title">Requests</h4>
       <friend-request 
@@ -29,7 +29,7 @@
     <div 
       class="friends-page-list" 
       id="pending-list"
-      v-if="(this.$store.state.user.username == this.$route.params.username) && (friendPage.pending.length > 0)"
+      v-if="friendPage.pending.length > 0"
     >
       <h4 class="title">Pending</h4>
       <friend-pending 
@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     getId() {
-      UserService.getIdByUsername(this.$route.params.username)
+      UserService.getIdByUsername(this.$store.state.user.username)
       .then(response => {
         if (response.status == 200) {
           this.userId = response.data;

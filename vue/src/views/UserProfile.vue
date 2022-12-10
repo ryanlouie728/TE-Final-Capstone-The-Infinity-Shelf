@@ -20,12 +20,12 @@
     <create-collection v-if="creatingCollection" 
     @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
-    <sidebar />
     <!-- <confirm 
         v-bind:message="'Do you wish to continue?'"
         v-bind:function="this.print"
         v-bind:arguments="['one', 'two']"
     /> -->
+    
   </div>
 </template>
 
@@ -37,10 +37,9 @@ import AddComic from '../components/AddComic.vue'
 
 import UserService from '../services/UserService';
 import CollectionService from '../services/CollectionService';
-import Sidebar from '../components/Sidebar.vue';
 
 export default {
-    components: { CollectionList, CreateCollection, ComicList, AddComic, Sidebar},
+    components: { CollectionList, CreateCollection, ComicList, AddComic },
     name: "user-profile",
     data() {
         return {
@@ -150,9 +149,10 @@ export default {
 
 <style>
 .user-profile {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 #collection-list {
@@ -160,7 +160,7 @@ export default {
     margin-bottom: 5px;
 }
 #left-pane {
-    width: 100%;
+    width: 66%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

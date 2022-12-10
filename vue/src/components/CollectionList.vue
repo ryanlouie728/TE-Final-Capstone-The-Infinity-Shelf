@@ -1,9 +1,9 @@
 <template>
     <div id = "collection-list">
-        <!-- <div class="banner">
+        <div class="banner">
             <h2 v-if="this.$route.name == 'collections'">Public Collections</h2>
             <h2 v-if="this.$route.name == 'user-profile'">Your Collections</h2>
-        </div> -->
+        </div>
         <div 
             class="collection" 
             v-for="coll in this.collections" 
