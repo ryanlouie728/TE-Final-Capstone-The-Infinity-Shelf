@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <friend-list v-bind:friends="friends" />
+    <friend-list />
   </div>
 </template>
 
@@ -9,7 +9,6 @@ import FriendList from './FriendList.vue'
 
 export default {
     components: { FriendList },
-    props: ['friends'],
     name: 'sidebar'
 }
 </script>

@@ -37,7 +37,7 @@ public class FriendController {
 
 
     @GetMapping("/{userId}")
-    public FriendsPageDto getFriendsPageByUserId(@PathVariable Integer userId) {
+    public FriendsPageDto getFriendPageByUserId(@PathVariable Integer userId) {
         return friendDao.getFriendPageByUserId(userId);
     }
 

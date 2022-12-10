@@ -24,7 +24,7 @@
         <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
       </div>
     </div>
-    <router-view id="router-view" />
+    <router-view id="router-view" :key="this.$route.path" />
     <footer id="footer">
       <h4>Copyright</h4>
     </footer>
@@ -135,21 +135,6 @@ body {
 
 #router-view {
   grid-area: body;
-}
-
-#sidebar {
-  width: 200px;
-  background-color: var(--light-accent);
-  border: solid 2px var(--dark-accent);
-  border-radius: 9px 9px 0 0;
-}
-
-#sidebar > button {
-  display: block;
-  margin-top: 10px;
-  margin-inline: auto;
-  width: max-content;
-  cursor: pointer;
 }
 
 #footer {

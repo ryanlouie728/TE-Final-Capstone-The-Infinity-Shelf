@@ -2,14 +2,14 @@
   <div @mouseup="mouseUp()" class = "user-profile">
     <div id="left-pane">
         <collection-list 
-        v-bind:showAdd="true"
+        v-bind:showAdd="this.$store.state.user.username == this.$route.params.username"
         ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" 
         @dropped="comicDropped()"
         @addCollection="creatingCollection = true"
         @resetComics="getUser()"
         />
         <h2>Uncatagorized Comics</h2>
-        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="true" v-bind:showRemove="true"
+        <comic-list ref="uncategorized" v-bind:drag="this.$store.state.user.username == this.$route.params.username" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="this.$store.state.user.username == this.$route.params.username" v-bind:showRemove="this.$store.state.user.username == this.$route.params.username"
         v-bind:base="this.user.base"
         @addComic="addingComic = true"/>
     </div>
@@ -17,7 +17,7 @@
     <create-collection v-if="creatingCollection" 
     @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
-    <sidebar v-bind:friends="this.user.friends" />
+    <sidebar />
 
     <!-- <div id="sidebar">
         <div id="friend-list">
@@ -49,6 +49,7 @@ export default {
             trading: false,
             addingComic: false,
             dragging: false,
+            userId: '',
             user: {
                 base: {
                     comics: []
@@ -58,16 +59,28 @@ export default {
         }
     }, 
     methods: {
+        getId() {
+            UserService.getIdByUsername(this.$route.params.username)
+            .then(response => {
+                if (response.status == 200) {
+                this.userId = response.data;
+                this.getUser();
+                }
+            })
+        },
         getUser() {
-            UserService.getProfileById(this.$store.state.user.id)
+            UserService.getProfileById(this.userId)
             .then(response => {
                 if (response.status == 200) {
                     this.user = response.data;
                 }
             })
             .then(() => {
-                this.$refs.uncategorized.addDragEvents();
-                this.resetComicFormat();
+                if (typeof this.$refs.uncategorized !== 'undefined') {
+                    this.$refs.uncategorized.addDragEvents();
+                    this.resetComicFormat();
+                }
+                
             })
         },
         collectionCreated() {
@@ -126,11 +139,9 @@ export default {
         }
     },
     created() {
-        this.getUser();
-        
+        this.getId();
     }
 }
-
 
 </script>
 
