@@ -65,6 +65,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 75px 50px 1fr 100px;
+  row-gap: 5px;
   grid-template-areas: 
     "title"
     "nav"
@@ -85,14 +86,14 @@ body {
   height: 80px;
   display: flex;
   flex-direction: row;
-
 }
 
 
 #nav {
+  box-sizing: border-box;
   grid-area: nav;
-  padding: 5px 5px;
-  height: 30px;
+  padding: 3px 5px;
+  height: 50px;
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
   display: flex;
@@ -152,10 +153,9 @@ body {
 }
 
 #footer {
-  
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
-  border-radius: 9px 0 9px 9px;
+  border-radius: 9px 9px 9px 9px;
 }
 
 ::-webkit-scrollbar {

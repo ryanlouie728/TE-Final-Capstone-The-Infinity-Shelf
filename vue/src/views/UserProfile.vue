@@ -135,6 +135,12 @@ export default {
 </script>
 
 <style>
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 #collection-list {
     flex-grow: 0;
     margin-bottom: 5px;
