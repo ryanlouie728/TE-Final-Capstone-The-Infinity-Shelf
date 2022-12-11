@@ -6,14 +6,14 @@
       v-bind:key="(comic.id + '-' + comic.collectionId)"
       v-on:click.prevent="clicked(comic)"
       v-on:mousedown="mouseDown(comic)"
-      :class="{ selected: selected.includes(comic)}"
+      :class="{ selected: selected.includes(comic), 'only-thumbnail': onlyThumbnail}"
     >
       <img
         class="thumbnail"
         v-if="comic.thumbnailUrl"
         v-bind:src="comic.thumbnailUrl"
       />
-      <div class="comic-text">
+      <div v-if="!onlyThumbnail" class="comic-text">
         <h3 class="comic-title">{{ comic.title }}</h3>
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
@@ -35,7 +35,7 @@
 <script>
 import CollectionService from '../services/CollectionService';
 export default {
-    props: ['comics', 'drag', 'showAdd', 'showRemove', 'base'],
+    props: ['comics', 'drag', 'showAdd', 'showRemove', 'base', 'onlyThumbnail'],
     name: 'comic-list',
     data() {
         return {
@@ -158,6 +158,7 @@ function dragElement(elmnt, reset) {
 </script>
 
 <style>
+
 .comic-list {
   display: flex;
   flex-direction: row;
@@ -232,6 +233,12 @@ function dragElement(elmnt, reset) {
 
 .selected:hover {
     background-color: var(--medium-accent);
+}
+
+.only-thumbnail {
+  background-color: transparent;
+  border: none;
+  height: fit-content;
 }
 
 

@@ -3,128 +3,186 @@
     class="update-collection"
     v-on:keyup.enter="update"
     v-on:keyup.esc="cancel"
+    v-on:click.self="cancel"
   >
-    <form action="update()">
-      <label for="title-input">Title: </label>
-      <input
-        v-model="collectionUpdate.collectionName"
-        id="title-input"
-        name="title-input"
-        type="text"
-      />
-      <label for="description-input">Description: </label>
-      <textarea
-        v-model="collectionUpdate.collectionDescription"
-        @keyup.enter="update()"
+    <div class="screen-holder">
+      <form action="update()">
+        <div id="title-input-pair">
+          <label class="input-label" for="title-input">Title: </label>
+          <input
+            v-model="collectionUpdate.collectionName"
+            id="title-input"
+            name="title-input"
+            type="text"
+          />
+        </div>
         
-      />
-      <label for="privacy-boolean">Collection Privacy</label>
-      <input
-        type="radio"
-        name="public"
-        id="public"
-        value="true"
-        v-model="privacy"
-      />
-      <label for="public">Public</label>
-      <input
-        type="radio"
-        name="private"
-        id="private"
-        value="false"
-        v-model="privacy"
-      />
-      <label for="private">Private</label>
+        <label class="input-label" for="description-input">Description: </label>
+        <textarea
+          v-model="collectionUpdate.collectionDescription"
+          @keyup.enter="update()"
+        />
 
-      <label for="collection-cover">Select A Collection Cover Image</label>
-      <ul name="collection-cover" id="collection-cover">
-        <template v-for="comic in collection.comics">
-          <li v-bind:key="comic.id" v-if="!isSelected(comic)">
-            <img
-              class="cover-images"
-              v-on:click="setCover(comic)"
-              v-bind:src="comic.thumbnailUrl"
+        <div id="privacy-input-holder">
+          <label class="input-label" for="privacy-boolean">Collection Privacy:</label>
+          <div class="privacy-option">
+            <label for="public">Public:</label>
+            <input
+              type="radio"
+              name="public"
+              id="public"
+              value="true"
+              v-model="privacy"
             />
-          </li>
-        </template>
-      </ul>
-    </form>
+          </div>
+          
+          <div class="privacy-option">
+            <label for="private">Private:</label>
+            <input
+              type="radio"
+              name="private"
+              id="private"
+              value="false"
+              v-model="privacy"
+            />
+          </div>        
+        </div>
+        
 
-    <div class="button-holder">
-      <!-- <button v-on:click.prevent="update()">Update</button> -->
-      <!-- <button v-on:click.prevent="cancel()">Cancel</button> -->
-      <app-button v-on:click.prevent="update()" buttonText="Update"/>
-      <app-button v-on:click.prevent="cancel()" buttonText="Cancel"/>
-      
+        <label class="input-label" for="collection-cover">Select A Collection Cover Image:</label>
+        <comic-list
+          id="cover-select-list"
+          @clicked="setCover(clickedComic)"
+          ref="comics"
+          :comics="collection.comics"
+          :showAdd="false"
+          :drag="false"
+          :showRemove="false"
+          :base="false"
+          :onlyThumbnail="true"
+        />
+      </form>
+
+      <div class="button-holder">
+        <app-button v-on:click.prevent="confirming = true" buttonText="Update"/>
+        <app-button v-on:click.prevent="cancel()" buttonText="Cancel"/>
+      </div>    
     </div>
-  </div>
+    <confirm
+        v-if="this.confirming"
+        :message="'Confirm Update?'"
+        :function="update"
+        :arguments="[]"
+        @cancel="confirming = false"
+      />
+    </div>
 </template>
 
 <script>
 import CollectionService from "../services/CollectionService";
 import AppButton from "./Button.vue";
+import ComicList from './ComicList';
+import Confirm from './Confirm.vue';
 
 export default {
   name: "update-collection",
-  components: { AppButton },
+  components: { AppButton, ComicList, Confirm },
   props: ["collection"],
   data() {
     return {
       privacy: this.collection.collectionPublic,
       coverUrl: "",
-      collectionUpdate: {
-        collectionName: "",
-        collectionDescription: "",
-        collectionPublic: this.collection.collectionPublic,
-      },
+      confirming: false,
+      collectionUpdate: this.collection,
     };
   },
   methods: {
     setCover(comic) {
       this.coverUrl = comic.thumbnailUrl;
     },
-    isSelected(comic) {
-      if (comic.thumbnailUrl === this.collection.collectionCoverUrl) {
-        return true;
-      } else {
-        return false;
-      }
-    },
     update() {
-      const collUpdate = {
-        userId: this.collection.userId,
-        collectionName:
-          this.collectionUpdate.collectionName != ""
-            ? this.collectionUpdate.collectionName
-            : this.collection.collectionName,
-        collectionDescription:
-          this.collectionUpdate.collectionDescription != ""
-            ? this.collectionUpdate.collectionDescription
-            : this.collection.collectionDescription,
-        collectionId: this.collection.collectionId,
-        collectionPublic: this.privacy,
-        collectionCoverUrl:
-          this.coverUrl != ""
-            ? this.coverUrl
-            : this.collection.collectionCoverUrl,
-        comics: this.collection.comics,
-        characterCounts: this.collection.characterCounts,
-        creatorCounts: this.collection.creatorCounts,
-      };
-      CollectionService.updateCollection(collUpdate).then((response) => {
+      this.confirming = false;
+      CollectionService.updateCollection(this.collectionUpdate).then((response) => {
         if (response.status == 200) {
-          window.location.reload();
+          this.$emit('updated')
         }
       });
     },
     cancel() {
-      window.location.reload();
+      this.$emit('cancelled')
     },
   },
+  computed: {
+    clickedComic() {
+      let comic = this.collection.comics.find(comic => {
+        return comic.id == this.$refs.comics.clickedId;
+      })
+      console.log(this.collection)
+      return comic
+    }
+  }
 };
 </script>
 
 <style>
+.update-collection {
+  background-color: var(--background-blur);
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen-holder {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  color: var(--white);
+  padding: 20px;
+  width: 300px;
+  height: fit-content;
+  max-height: 500px;
+  overflow-y: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--light-accent);
+}
+
+#cover-select-list {
+  height: 200px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+#privacy-input-holder {
+  display: flex;
+  flex-direction: column;
+}
+
+.privacy-option {
+  width: 75px;
+  text-align: right;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.privacy-option > label {
+  width: 75px;
+}
+
+.input-label {
+  font-size: 1.25rem;
+
+}
+
 .cover-images {
   height: 164px;
   width: 104px;

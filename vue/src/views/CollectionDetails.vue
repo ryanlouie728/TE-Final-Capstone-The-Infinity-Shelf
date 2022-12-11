@@ -18,8 +18,13 @@
         <p>This collection is {{ collectionPrivacy() }}</p>
       </div>
       <div id="update-collection">
-        <app-button v-on:click="updatingCollection =!updatingCollection" buttonText="Update Collection"/>
-        <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
+        <app-button v-on:click="updatingCollection = true" buttonText="Update Collection"/>
+        <update-collection 
+          v-if="updatingCollection" 
+          v-bind:collection="this.collection" 
+          @cancelled="updatingCollection = false"
+          @updated="updatingCollection = false; getCollection()"
+        />
       </div>
       <div id="remove-collection">
         <remove-collection v-bind:collection="this.collection" />
@@ -48,17 +53,7 @@
         >
           <h5 class="count-name">{{ creator.name }}</h5>
         </div>
-        
-    </div>
-    <!-- <div id="sidebar">
-      
-         <div class="count-list">
-          <h5 class="count-title">Collection Description</h5>
-          <div class="description-text">
-            <p>{{ collection.collectionDescription }}</p>
-          </div>
-        </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>

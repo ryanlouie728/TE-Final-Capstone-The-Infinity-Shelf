@@ -30,6 +30,7 @@
 </template>
 
 <script>
+
 import UserBar from './components/UserBar.vue'
 export default {
   components: { UserBar }
@@ -46,6 +47,7 @@ export default {
   --light-accent: #5D5D81;
   --main-background: #BFCDE0;
   --white: #FEFCFD;
+  --background-blur: rgba(0,0,0,0.4);
 }
 
 html {
