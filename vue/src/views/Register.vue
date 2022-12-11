@@ -50,25 +50,32 @@
           required
         />
       </div>
+      <div class="register">
       <router-link :to="{ name: 'login' }" id="account"
         >Have an account?</router-link
-      >
-      <button
+      ></div>
+      
+      <!-- <button
         id="register"
         class="btn btn-lg btn-primary btn-block"
         type="submit"
       >
         Create Account
-      </button>
+      </button> -->
+      <div class="submit">
+        <app-button type="submit" buttonText="Create Account" />
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 import authService from "../services/AuthService";
+import AppButton from "../components/Button.vue";
 
 export default {
   name: "register",
+  components: { AppButton },
   data() {
     return {
       user: {
@@ -115,17 +122,30 @@ export default {
 </script>
 
 <style>
-.form-register {
+.text-center {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  align-items: center;
 }
-#username, #password, #confirmPassword{
+.text-center div {
+  margin: 10px;;
+}
+#username,
+#password,
+#confirmPassword {
   margin-left: 5px;
 }
-.username-group, .password-group, .confirm-password-group {
+.username-group,
+.password-group,
+.confirm-password-group {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+#banner,
+.register,
+.submit {
+  text-align: center;
 }
 </style>

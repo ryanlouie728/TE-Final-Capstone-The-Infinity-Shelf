@@ -45,11 +45,15 @@
           required
         />
       </div>
-      <router-link :to="{ name: 'register' }" id="register"
-        >Need an account?</router-link
-      >
+      <div class="register">
+        <router-link :to="{ name: 'register' }" id="register"
+          >Need an account?</router-link
+        >
+      </div>
       <!-- <button id="sign-in" class="sign-in" type="submit">Sign in</button> -->
-      <app-button type="submit" buttonText="Sign in"/>
+      <div class="submit">
+        <app-button type="submit" buttonText="Sign in" />
+      </div>
     </form>
   </div>
 </template>
@@ -93,17 +97,28 @@ export default {
 };
 </script>
 <style>
-.form-signin {
+.text-center {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  align-items: center;
 }
-#username, #password{
+.text-center div {
+  margin: 10px;;
+}
+#username,
+#password {
   margin-left: 5px;
 }
-.username-group, .password-group {
+.username-group,
+.password-group {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+#banner,
+.register,
+.submit {
+  text-align: center;
 }
 </style>

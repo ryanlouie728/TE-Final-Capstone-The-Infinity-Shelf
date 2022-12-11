@@ -3,7 +3,7 @@
     <div id="left-pane">
       <collection-list v-bind:collections="collections" />
     </div>
-    <div id="sidebar"></div>
+    <!-- <div id="sidebar"></div> -->
   </div>
 </template>
   
@@ -37,6 +37,23 @@ export default {
 </script>
   
 <style>
+.public-collections {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
+#collection-list {
+    flex-grow: 0;
+    margin-bottom: 5px;
+}
 
+#left-pane {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
 </style>

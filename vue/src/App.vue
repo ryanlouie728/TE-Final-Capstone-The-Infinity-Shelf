@@ -16,12 +16,12 @@
       <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'trade'}">Trade</router-link>
       </div>
-      <div class="nav-link-holder" v-if="this.$store.state.token != ''">
+      <!-- <div class="nav-link-holder" v-if="this.$store.state.token != ''">
         <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
       </div>
       <div class="nav-link-holder" v-if="this.$store.state.token == ''">
         <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
-      </div>
+      </div> -->
         </div>
       </div>
       <user-bar 
@@ -32,7 +32,7 @@
     </header>
     <router-view id="router-view" :key="this.$route.path" />
     <footer id="footer">
-      <h4>Copyright</h4>
+      <h4>&copy;</h4>
     </footer>
   </div>
 </template>
@@ -164,6 +164,8 @@ body {
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
   border-radius: 9px 9px 9px 9px;
+  padding-left: 10px;
+  height: max-content;
 }
 
 .button {
