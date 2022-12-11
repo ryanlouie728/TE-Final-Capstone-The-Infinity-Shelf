@@ -13,7 +13,7 @@
 
           <div
             class="count-row"
-            v-for="character in this.comic.characters"
+            v-for="character in this.comic.characters.slice(0,10)"
             v-bind:key="character.name"
           >
             <h4 class="count-name">{{ character.name }}</h4>
@@ -24,7 +24,7 @@
         <h2 class="creator-title">Creators</h2>
         <div
           class="count-row"
-          v-for="creator in this.comic.creators"
+          v-for="creator in this.comic.creators.slice(0, 10)"
           v-bind:key="creator.name"
         >
           <h3 class="count-role">{{ creator.role.toUpperCase() }}:</h3>
@@ -123,18 +123,18 @@ body {
 #creator-text {
   width: 50%;
   max-width: 200px;
-  max-height: 500px;
+  /* max-height: 500px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-right: 10px;
 }
 
-.count-row {
+/* .count-row {
   display: flex;
   flex-wrap: wrap;
 }
-
+/* 
 .count-row h3{
   margin: 2px;
 }
@@ -142,7 +142,7 @@ body {
 .count-row h4{
   margin: 4px 2px 2px 2px;
 
-}
+} */ */
 
 #character-text {
   flex-grow: 1;
