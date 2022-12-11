@@ -16,17 +16,9 @@
       <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'trade'}">Trade</router-link>
       </div>
-      <!-- <div class="nav-link-holder" v-if="this.$store.state.token != ''">
-        <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
-      </div>
-      <div class="nav-link-holder" v-if="this.$store.state.token == ''">
-        <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
-      </div> -->
         </div>
       </div>
-      <user-bar 
-      
-      />
+      <user-bar />
 
       <img id="thanos" src="https://media.tenor.com/DRbhYjCbnD0AAAAi/thanos-gangnam-style.gif">
     </header>

@@ -43,7 +43,6 @@
 
 <script>
 import FriendService from '../../services/FriendService'
-import UserService from '../../services/UserService'
 import Friend from './Friend.vue'
 import FriendRequest from './FriendRequest.vue'
 import FriendPending from './FriendPending.vue'
@@ -65,17 +64,8 @@ export default {
     }
   },
   methods: {
-    getId() {
-      UserService.getIdByUsername(this.$route.params.username)
-      .then(response => {
-        if (response.status == 200) {
-          this.userId = response.data;
-          this.getFriendPage();
-        }
-      })
-    },
     getFriendPage() {
-      FriendService.getFriendPageByUserId(this.userId)
+      FriendService.getFriendPageByUserId(this.$store.state.user.id)
       .then(response => {
         if (response.status == 200) {
           this.friendPage = response.data;
@@ -86,13 +76,13 @@ export default {
     setStyle() {
       let friendsButton = document.getElementById('friends-button')
       let friendsPage = document.querySelector('.friend-page')
-      friendsPage.style.top = friendsButton.offsetTop + 20 + 'px';
+      friendsPage.style.top = friendsButton.offsetTop + 15 + 'px';
       friendsPage.style.left = '0px';
       this.loaded = true;
     }
   },
   mounted() {
-    this.getId();
+    this.getFriendPage();
   }
 }
 </script>
