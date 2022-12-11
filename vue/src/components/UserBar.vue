@@ -1,9 +1,17 @@
 <template>
   <div class="user-bar">
-    <button 
+    <div 
+        id="friends-button"
         class="nav-link-holder"
         v-if="this.$store.state.token != ''"
-    >Friends</button>
+        v-on:click.self="showFriends = !showFriends"
+        :class="{'button-active': showFriends}"
+    >Friends
+    <friend-page 
+        v-if="showFriends"
+    />
+    </div>
+    
     <div class="nav-link-holder" v-if="this.$store.state.token != ''">
         <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
     </div>
@@ -11,9 +19,7 @@
         <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
     </div>
         
-    <friend-page 
-        
-    />
+    
   </div>
 </template>
 
@@ -24,7 +30,7 @@ export default {
     components: {FriendPage},
     data() {
         return {
-
+            showFriends: false
         }
     }
 }
@@ -40,4 +46,9 @@ export default {
     justify-content: flex-end;
 }
 
+
+#friends-button {
+    overflow: visible;
+    position: relative;
+}
 </style>

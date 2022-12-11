@@ -20,7 +20,10 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    collections: []
+    collections: [],
+    axios: axios.create({
+      baseURL: "http://localhost:9000"
+    })
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

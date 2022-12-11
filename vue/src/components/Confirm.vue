@@ -1,9 +1,11 @@
 <template>
-  <div class="confirm">
-    <p>{{message}}</p>
-    <div class="confirm-buttons">
-        <button v-on:click.prevent="confirm()" class="confirm-button">Confirm</button>
-        <button v-on:click.prevent="$emit('cancel')" class="confirm-button">Cancel</button>
+  <div v-on:click.self="$emit('cancel')" class="confirm">
+    <div class="confirm-holder">
+        <p>{{message}}</p>
+        <div class="confirm-buttons">
+            <button v-on:click.prevent="confirm()" class="confirm-button">Confirm</button>
+            <button v-on:click.prevent="$emit('cancel')" class="confirm-button">Cancel</button>
+        </div>
     </div>
   </div>
 </template>
@@ -22,6 +24,18 @@ export default {
 
 <style>
 .confirm {
+    background-color: var(--background-blur);
+    top: 0%;
+    left: 0%;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-holder {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

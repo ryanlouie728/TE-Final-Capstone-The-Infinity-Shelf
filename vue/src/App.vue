@@ -16,17 +16,9 @@
       <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'trade'}">Trade</router-link>
       </div>
-      <!-- <div class="nav-link-holder" v-if="this.$store.state.token != ''">
-        <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
-      </div>
-      <div class="nav-link-holder" v-if="this.$store.state.token == ''">
-        <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
-      </div> -->
         </div>
       </div>
-      <user-bar 
-      
-      />
+      <user-bar />
 
       <img id="thanos" src="https://media.tenor.com/DRbhYjCbnD0AAAAi/thanos-gangnam-style.gif">
     </header>
@@ -38,6 +30,7 @@
 </template>
 
 <script>
+
 import UserBar from './components/UserBar.vue'
 export default {
   components: { UserBar }
@@ -54,6 +47,7 @@ export default {
   --light-accent: #5D5D81;
   --main-background: #BFCDE0;
   --white: #FEFCFD;
+  --background-blur: rgba(0,0,0,0.4);
 }
 
 html {
@@ -181,6 +175,14 @@ body {
 }
 
 .button:hover {
+  background-color: var(--dark-accent);
+}
+
+.button-active {
+  background-color: var(--dark-accent);
+}
+
+.button-active:hover {
   background-color: var(--dark-accent);
 }
 
