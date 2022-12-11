@@ -86,8 +86,7 @@ export default {
                 for (let comic of this.selected) {
                     CollectionService.removeComicFromCollection(this.base.collectionId, comic.id)
                     .then(() => {
-                      this.resetComicsEvent()
-                      this.toggleRemove()
+                      this.resetComicsEvent();
                     })
                 }
             }

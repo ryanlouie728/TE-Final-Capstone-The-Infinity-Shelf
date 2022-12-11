@@ -163,7 +163,18 @@ export default {
       let reader = new FileReader();
 
       reader.addEventListener('load', () => {
-        console.log(reader.result)
+        if (reader.result) {
+          let comics = reader.result.split(',')
+          for (let id of comics) {
+            CollectionService.addComicToCollection(this.collection.collectionId, id)
+            .then(response => {
+              if (response.status == 200) {
+                this.getCollection();
+              }
+            })
+          }
+        }
+        
       })
       reader.readAsText(file)
     }
