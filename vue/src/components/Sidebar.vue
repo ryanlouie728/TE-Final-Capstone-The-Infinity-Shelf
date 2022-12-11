@@ -1,15 +1,14 @@
 <template>
   <div class="sidebar">
-    <friend-list v-bind:friends="friends" />
+    <friend-page />
   </div>
 </template>
 
 <script>
-import FriendList from './FriendList.vue'
+import FriendPage from './Friends/FriendPage.vue'
 
 export default {
-    components: { FriendList },
-    props: ['friends'],
+    components: { FriendPage },
     name: 'sidebar'
 }
 </script>

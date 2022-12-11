@@ -2,7 +2,7 @@
   <div class="add-comic" id="add-comic">
     <div id="drag-handle">Add Comic to Collection</div>
     <div id="search-bar">
-      <input id="search-bar-input" v-model="title" type="text" @keyup.enter="search()" ref="refText">
+      <input id="search-bar-input" v-model="title" type="text" @keyup.enter="search()" @keyup.esc="cancel()" ref="refText">
       <button id="search" v-on:click.prevent="search()">Search</button>
       <button v-on:click.prevent="cancel()">Cancel</button>
     </div>
@@ -116,8 +116,9 @@ function dragElement(elmnt) {
   height: 500px;
   background-color: var(--light-accent);
   position: fixed;
-  left: calc(50vw - 100px);
-  top: calc(50vh - 100px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: left;

@@ -2,14 +2,17 @@
   <div @mouseup="mouseUp()" class = "user-profile">
     <div id="left-pane">
         <collection-list 
-        v-bind:showAdd="true"
+        v-bind:showAdd="this.$store.state.user.username == this.$route.params.username"
         ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" 
         @dropped="comicDropped()"
         @addCollection="creatingCollection = true"
         @resetComics="getUser()"
         />
         <h2>Uncatagorized Comics</h2>
-        <comic-list ref="uncategorized" v-bind:drag="true" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="true" v-bind:showRemove="true"
+        <comic-list 
+            ref="uncategorized"
+            @resetComics="getUser()"
+            v-bind:drag="this.$store.state.user.username == this.$route.params.username" v-bind:comics="this.user.base.comics" @down="comicClicked()" v-bind:showAdd="this.$store.state.user.username == this.$route.params.username" v-bind:showRemove="(this.$store.state.user.username == this.$route.params.username) && (this.user.base.comics.length > 0)"
         v-bind:base="this.user.base"
         @addComic="addingComic = true"/>
     </div>
@@ -17,16 +20,12 @@
     <create-collection v-if="creatingCollection" 
     @collectionCreated="collectionCreated()"/>
     <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.user.base" />
-    <sidebar v-bind:friends="this.user.friends" />
-
-    <!-- <div id="sidebar">
-        <div id="friend-list">
-            <h4 id="friend-list-title">Friends</h4>
-            <div class="friend" v-for="friend in this.user.friends" v-bind:key="friend.id">
-                <p>{{ friend.friendName }}</p>
-            </div>
-        </div>
-    </div> -->
+    <!-- <confirm 
+        v-bind:message="'Do you wish to continue?'"
+        v-bind:function="this.print"
+        v-bind:arguments="['one', 'two']"
+    /> -->
+    
   </div>
 </template>
 
@@ -38,10 +37,9 @@ import AddComic from '../components/AddComic.vue'
 
 import UserService from '../services/UserService';
 import CollectionService from '../services/CollectionService';
-import Sidebar from '../components/Sidebar.vue';
 
 export default {
-    components: { CollectionList, CreateCollection, ComicList, AddComic, Sidebar},
+    components: { CollectionList, CreateCollection, ComicList, AddComic },
     name: "user-profile",
     data() {
         return {
@@ -49,6 +47,7 @@ export default {
             trading: false,
             addingComic: false,
             dragging: false,
+            userId: '',
             user: {
                 base: {
                     comics: []
@@ -58,16 +57,28 @@ export default {
         }
     }, 
     methods: {
+        getId() {
+            UserService.getIdByUsername(this.$route.params.username)
+            .then(response => {
+                if (response.status == 200) {
+                this.userId = response.data;
+                this.getUser();
+                }
+            })
+        },
         getUser() {
-            UserService.getProfileById(this.$store.state.user.id)
+            UserService.getProfileById(this.userId)
             .then(response => {
                 if (response.status == 200) {
                     this.user = response.data;
                 }
             })
             .then(() => {
-                this.$refs.uncategorized.addDragEvents();
-                this.resetComicFormat();
+                if (typeof this.$refs.uncategorized !== 'undefined') {
+                    this.$refs.uncategorized.addDragEvents();
+                    this.resetComicFormat();
+                }
+                
             })
         },
         collectionCreated() {
@@ -123,24 +134,33 @@ export default {
                 comic.style.top = '';
                 comic.style.left = '';
             }
+        },
+        print(one, two) {
+            console.log(one);
+            console.log(two);
         }
     },
     created() {
-        this.getUser();
-        
+        this.getId();
     }
 }
-
 
 </script>
 
 <style>
+.user-profile {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 #collection-list {
     flex-grow: 0;
     margin-bottom: 5px;
 }
 #left-pane {
-    width: 100%;
+    width: 66%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

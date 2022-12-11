@@ -69,7 +69,8 @@ public class JdbcUserDao implements UserDao {
                 "SELECT user_id, username " +
                 "FROM users " +
                 "WHERE username ILIKE ? " +
-                "AND role NOT ILIKE '%admin%';";
+                "AND role NOT ILIKE '%admin%' " +
+                "LIMIT 50;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, username);
         return userDtoListMapper(rowSet);
     }

@@ -1,15 +1,14 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1>The Infinity Shelf</h1>
-      <img id="thanos" src="https://media.tenor.com/DRbhYjCbnD0AAAAi/thanos-gangnam-style.gif">
-    </header>
-    <div id="nav">
-      <div class="nav-link-holder">
+      <div id="title-nav-block">
+        <h1>The Infinity Shelf</h1>
+        <div id="nav-links">
+          <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'collections' }">All Collections</router-link>
+        <router-link class="nav-link" v-bind:to="{ name: 'collections' }">Browse</router-link>
       </div>
       <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'user-profile', params: { username: this.$store.state.user.username } }">Profile</router-link>
@@ -23,13 +22,28 @@
       <div class="nav-link-holder" v-if="this.$store.state.token == ''">
         <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
       </div>
-    </div>
-    <router-view id="router-view" />
+        </div>
+      </div>
+      <user-bar 
+      
+      />
+
+      <img id="thanos" src="https://media.tenor.com/DRbhYjCbnD0AAAAi/thanos-gangnam-style.gif">
+    </header>
+    <router-view id="router-view" :key="this.$route.path" />
     <footer id="footer">
       <h4>Copyright</h4>
     </footer>
   </div>
 </template>
+
+<script>
+import UserBar from './components/UserBar.vue'
+export default {
+  components: { UserBar }
+
+}
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Bubbles&display=swap");
@@ -64,21 +78,19 @@ body {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 75px 50px 1fr 100px;
+  grid-template-rows: 75px 1fr 100px;
+  row-gap: 5px;
   grid-template-areas: 
     "title"
-    "nav"
     "body"
     "footer";
 }
 #header {
-  grid-area: title;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;
-
 }
 
 h1:hover {
@@ -90,29 +102,38 @@ h1:hover {
   height: 80px;
   display: flex;
   flex-direction: row;
-
 }
 
-
-#nav {
-  grid-area: nav;
-  padding: 5px 5px;
-  height: 30px;
-  background-color: var(--light-accent);
-  border: solid 2px var(--dark-accent);
+#nav-links {
   display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  height: 75px;
   align-items: center;
-  border-radius: 9px;
-  
 }
+
+#title-nav-block {
+  grid-area: title;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .nav-link-holder {
-  height: 80%;
+  box-sizing: border-box;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--white);
+  height: 50%;
   background-color: var(--medium-accent);
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 5px;
+<<<<<<< HEAD
   padding: 1px 15px;
   cursor:pointer;
   border-radius: 9px;
@@ -125,43 +146,60 @@ h1:hover {
   font-size: 150%;
   
  
+=======
+  padding: 0px 15px;
+  cursor: pointer;
+  border-radius: 9px;
+  font-size: 1rem;
+  text-align: center;
+  width: 70px;
+  border: none;
 }
+
+#thanos {
+  margin-right: 18px;
+}
+
+.nav-link-holder:hover {
+  background-color: var(--light-accent);
+>>>>>>> e1fbaee874d2ee14a1c90a39501c10a09c05760b
+}
+
 
 .nav-link-holder > * {
   font-weight: bold;
   text-decoration: none;
   color: var(--white);
-  
 }
 
 .nav-link-holder:hover > * {
-  color: var(--dark-accent);
+  color: var(--white);
 }
 
 #router-view {
   grid-area: body;
 }
 
-#sidebar {
-  width: 200px;
-  background-color: var(--light-accent);
-  border: solid 2px var(--dark-accent);
-  border-radius: 9px 9px 0 0;
-}
-
-#sidebar > button {
-  display: block;
-  margin-top: 10px;
-  margin-inline: auto;
-  width: max-content;
-  cursor: pointer;
-}
-
 #footer {
-  
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
-  border-radius: 9px 0 9px 9px;
+  border-radius: 9px 9px 9px 9px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--medium-accent);
+  color: var(--white);
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  background-color: var(--dark-accent);
 }
 
 ::-webkit-scrollbar {
