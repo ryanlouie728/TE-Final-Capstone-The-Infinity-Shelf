@@ -2,28 +2,34 @@
   <div class="comic-details">
     <div id="main-panel">
       <div id="cover-holder">
-        <img id="cover" v-bind:src="this.comic.thumbnailUrl" />
-        <h1 id="comic-title">{{ this.comic.title }}</h1>
+        <img id="cover" v-bind:src="comic.thumbnailUrl" />
+        <h1 id="comic-title">{{ comic.title }}</h1>
       </div>
       <div id="comic-detail">
         <h2 class="desc-title">Comic Description</h2>
-        <p>{{ this.comic.description }}</p>
+        <h4>{{comic.description  === null || comic.description === "" ? 'No Description Available' : comic.description }}</h4>
       </div>
       <div id="character-text">
         <h2 class="character-title">Characters</h2>
+        <div v-if="charactersEmpty" id="empty-message">
+          <h4>No Characters Listed</h4>
+        </div>
         <div
           class="count-row"
-          v-for="character in this.comic.characters.slice(0, 6)"
+          v-for="character in comic.characters.slice(0, 6)"
           v-bind:key="character.name"
-        >
+        > 
           <h4 class="count-name">{{ character.name }}</h4>
         </div>
       </div>
       <div id="creator-text">
         <h2 class="creator-title">Creators</h2>
+        <div v-if="creatorsEmpty" id="empty-message">
+          <h4>No Creators Listed</h4>
+        </div>
         <div
           class="count-row"
-          v-for="creator in this.comic.creators.slice(0, 6)"
+          v-for="creator in comic.creators.slice(0, 6)"
           v-bind:key="creator.name"
         >
           <h3 class="count-role">{{ creator.role.toUpperCase() }}:</h3>
@@ -44,6 +50,8 @@ export default {
       comic: {
         creators: [],
         characters: [],
+        charactersEmpty: false,
+        creatorsEmpty: false,
       },
     };
   },
@@ -52,6 +60,14 @@ export default {
       ComicService.getComicById(this.$route.params.id).then((response) => {
         if (response.status == 200) {
           this.comic = response.data;
+          if (this.comic.characters.length === 0 && this.comic.creators.length === 0) {
+            this.charactersEmpty = true;
+            this.creatorsEmpty = true;
+          } else if (this.comic.characters.length === 0) {
+            this.charactersEmpty = true;
+          } else if (this.comic.creators.length === 0 ) {
+            this.creatorsEmpty = true;
+          }
         }
       });
     },
@@ -142,5 +158,9 @@ body {
 }
 .count-role {
   margin-top: 10px;
+}
+
+#empty-message {
+text-align: start;
 }
 </style>
