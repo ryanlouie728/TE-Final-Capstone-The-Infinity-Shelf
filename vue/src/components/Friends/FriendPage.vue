@@ -90,7 +90,8 @@ export default {
 <style>
 .friend-page {
   overflow: auto;
-  height: 450px;
+  height: fit-content;
+  max-height: 450px;
   width: 175px;
   background-color: var(--light-accent);
   position: relative;
