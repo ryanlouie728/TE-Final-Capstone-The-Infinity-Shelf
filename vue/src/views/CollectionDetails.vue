@@ -27,10 +27,20 @@
         />
         <remove-collection v-bind:collection="this.collection" />
         <app-button v-on:click.prevent="exportAsCsv" buttonText="Export Collection" />
+        <app-button v-on:click.prevent="selectFile" buttonText="Import CSV" />
       </div>
       <div id="add-comic">
         <h2 banner>Comics in the {{ this.collection.collectionName }} Collection</h2>
-        <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true" />
+        <comic-list 
+          v-bind:base="this.collection"
+          v-bind:showAdd="true"
+          v-bind:showRemove="this.collection.comics.length > 0" 
+          ref="comics" 
+          @resetComics="getCollection()"
+          @clicked="comicClicked()" 
+          v-bind:comics="this.collection.comics" 
+          @addComic="addingComic = true" 
+        />
         <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
       </div>
       <div class="character-list">
@@ -72,6 +82,7 @@ export default {
   data() {
     return {
       collection: {
+        comics: [],
         characterCounts: [],
         creatorCounts: [],
       },
@@ -135,7 +146,28 @@ export default {
       link.download = this.collection.collectionName + "-" + this.collection.collectionId + '.csv';
       link.click();
       URL.revokeObjectURL(link.href);
+    },
+    selectFile() {
+      let selector = document.createElement('input');
+      selector.style.display = 'none';
+      selector.id = 'csv-import'
+      selector.type = 'file';
+      selector.onchange = this.importCsv;
+      document.body.appendChild(selector);
+      selector.click();
+      //console.log(selector.files)
+    },
+    importCsv() {
+      //let file = document.getElementById('csv-import').files[0]
+      let file = document.getElementById('csv-import').files[0]
+      let reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+        console.log(reader.result)
+      })
+      reader.readAsText(file)
     }
+
   },
   created() {
     this.getCollection();

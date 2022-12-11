@@ -82,6 +82,7 @@ export default {
         },
         submitSelect() {
             if (this.removing) {
+                this.removing = false;
                 for (let comic of this.selected) {
                     CollectionService.removeComicFromCollection(this.base.collectionId, comic.id)
                     .then(() => {
