@@ -208,12 +208,13 @@ function dragElement(elmnt, reset) {
 }
 
 .comic-list-action-card {
+  box-sizing: border-box;
   border: solid 2px var(--dark-accent);
   justify-content: center;
   border-radius: 9px;
 }
 .comic-list-action-card:hover {
-    background-color: var(--main-background);
+  background-color: var(--medium-accent);
 }
 
 .comic-list-action-card > h5 {

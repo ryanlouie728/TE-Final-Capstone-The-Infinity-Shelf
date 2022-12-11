@@ -9,13 +9,13 @@
         />
       </div>
       <div id="coll-desc">
-        <h1>{{ this.collection.collectionName }} Collection</h1>
-        <h2>Description</h2>
+        <div id="coll-desc-title">
+          <h1>{{ this.collection.collectionName }}</h1>
+          <h3 v-if="!this.collection.collectionPublic">(PRIVATE)</h3>
+          <h3 v-if="this.collection.collectionPublic">(PUBLIC)</h3>
+        </div>
+        
         <p>{{ this.collection.collectionDescription }}</p>
-      </div>
-      <div id="privacy">
-        <h3>Privacy</h3>
-        <p>This collection is {{ collectionPrivacy() }}</p>
       </div>
       <update-collection 
         v-if="updatingCollection" 
@@ -200,10 +200,11 @@ export default {
   grid-template-areas:
     "img add-comic add-comic"
     "coll-desc  character-list creator-list"
-    "privacy update-coll remove-coll";
+    "coll-desc update-coll remove-coll";
 }
 #add-comic{
   grid-area: add-comic;
+  overflow: auto;
 }
 
 .collection-button-holder {
@@ -230,19 +231,38 @@ export default {
 }
 #coll-desc {
   grid-area: coll-desc;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
-#privacy {
-  grid-area: privacy;
+
+#coll-desc-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+#coll-desc-title h1 {
+  margin-right: 10px;
+}
+
 #remove-collection {
   grid-area: remove-coll;
   display: flex;
   align-items: center;
 }
-#character-list {
+.character-list {
   grid-area: character-list;
+  text-align: center;
 }
-#creator-list{
+.creator-list {
   grid-area: creator-list;
+  text-align: center;
 }
+
+.creator-list * {
+  margin: 0px;
+  padding: 0px;
+}
+
 </style>

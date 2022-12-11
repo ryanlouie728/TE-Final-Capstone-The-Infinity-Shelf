@@ -1,6 +1,6 @@
 <template>
     <div class="remove-collection">
-        <app-button v-on:click="confirming = true" buttonText="Remove" />
+        <app-button v-on:click="confirming = true" buttonText="Delete" />
         <confirm 
             v-if="confirming"
             @cancel="confirming = false"
