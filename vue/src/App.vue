@@ -81,6 +81,11 @@ body {
 
 }
 
+h1:hover {
+  text-decoration-color: orange;
+  text-decoration: none;
+}
+
 #header > img {
   height: 80px;
   display: flex;
@@ -108,16 +113,17 @@ body {
   justify-content: center;
   align-items: center;
   margin-right: 5px;
-  padding: 0px 15px;
+  padding: 1px 15px;
   cursor:pointer;
   border-radius: 9px;
-  letter-spacing: .125rem;
+  letter-spacing: .14rem;
 }
 
 .nav-link-holder:hover {
   background-color: var(--main-background);
   color: var(--dark-accent);
   font-size: 150%;
+  
  
 }
 
@@ -173,5 +179,6 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 
 </style>

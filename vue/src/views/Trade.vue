@@ -159,6 +159,7 @@ export default {
     box-sizing: border-box;
     padding: 10px;
     width: 100%;
+    
 }
 
 .trade-title-block {
@@ -181,6 +182,7 @@ export default {
     overflow: auto;
     width: 47.5%;
     border: inset 2px var(--medium-accent);
+    border-radius: 9px;
 }
 
 .trade-comic-list .comic {
