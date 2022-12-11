@@ -22,7 +22,7 @@ export default {
   methods: {
     getCollections() {
       collectionService
-        .listPublic(this.$store.state.user.id)
+        .listPublic()
         .then((response) => {
           if (response.status == 200) {
             this.collections = response.data;

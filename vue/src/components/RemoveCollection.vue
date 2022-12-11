@@ -1,6 +1,6 @@
 <template>
     <div class="remove-collection">
-        <app-button v-on:click="confirming = true" buttonText="Remove Collection" />
+        <app-button v-on:click="confirming = true" buttonText="Remove" />
         <confirm 
             v-if="confirming"
             @cancel="confirming = false"
@@ -39,6 +39,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.buttonStyle {
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
 </style>

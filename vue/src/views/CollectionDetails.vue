@@ -17,19 +17,22 @@
         <h3>Privacy</h3>
         <p>This collection is {{ collectionPrivacy() }}</p>
       </div>
-      <div class="collection-button-holder">
-        <app-button v-on:click="updatingCollection = true" buttonText="Update Collection"/>
-        <update-collection 
-          v-if="updatingCollection" 
-          v-bind:collection="this.collection" 
-          @cancelled="updatingCollection = false; getCollection()"
-          @updated="updatingCollection = false; getCollection()"
-        />
-        <remove-collection v-bind:collection="this.collection" />
-        <app-button v-on:click.prevent="exportAsCsv" buttonText="Export Collection" />
-        <app-button v-on:click.prevent="selectFile" buttonText="Import CSV" />
-      </div>
+      <update-collection 
+        v-if="updatingCollection" 
+        v-bind:collection="this.collection" 
+        @cancelled="updatingCollection = false; getCollection()"
+        @updated="updatingCollection = false; getCollection()"
+      />
       <div id="add-comic">
+        <div 
+        class="collection-button-holder"
+        v-if="this.collection.userId == this.$store.state.user.id"
+        >
+          <app-button v-on:click="updatingCollection = true" buttonText="Update"/>
+          <remove-collection v-bind:collection="this.collection" />
+          <app-button v-on:click.prevent="exportAsCsv" buttonText="Export" />
+          <app-button v-on:click.prevent="selectFile" buttonText="Import" />
+        </div>
         <h2 banner>Comics in the {{ this.collection.collectionName }} Collection</h2>
         <comic-list 
           v-bind:base="this.collection"
@@ -208,9 +211,14 @@ export default {
 
 }
 
-.collection-button-holder button {
+.collection-button-holder * {
+  padding: 0px;
+  font-size: 1.5rem;
+  width: 100px;
   height: 30px;
+  margin-right: 5px;
 }
+
 
 #img {
   grid-area: img;

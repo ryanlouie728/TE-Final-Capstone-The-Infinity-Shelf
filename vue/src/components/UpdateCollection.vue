@@ -32,7 +32,7 @@
               name="public"
               id="public"
               value="true"
-              v-model="privacy"
+              v-model="collectionUpdate.collectionPublic"
             />
           </div>
           
@@ -43,7 +43,7 @@
               name="private"
               id="private"
               value="false"
-              v-model="privacy"
+              v-model="collectionUpdate.collectionPublic"
             />
           </div>        
         </div>
