@@ -47,23 +47,23 @@
         <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
       </div>
       <div class="character-list">
-        <h3 class="count-title">Top Character Appearances</h3>
+        <h2 class="count-title">Top Character Appearances</h2>
         <div
           class="count-row"
           v-for="character in this.collection.characterCounts.slice(0, 5)"
           v-bind:key="character.name"
         >
-          <h5 class="count-name">{{ character.name }}</h5>
+          <h4 class="count-name">{{ character.name }}</h4>
         </div>
       </div>
       <div class="creator-list">
-        <h3 class="count-title">Top Creator Appearances</h3>
+        <h2 class="count-title">Top Creator Appearances</h2>
         <div
           class="count-row"
           v-for="creator in this.collection.creatorCounts.slice(0, 5)"
           v-bind:key="creator.name"
         >
-          <h5 class="count-name">{{ creator.name }}</h5>
+          <h4 class="count-name">{{ creator.name }}</h4>
         </div>
       </div>
     </div>
@@ -258,16 +258,28 @@ export default {
 }
 .character-list {
   grid-area: character-list;
-  text-align: center;
+  width: 50%;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .creator-list {
   grid-area: creator-list;
-  text-align: center;
+  width: 50%;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
 }
-
+.character-list * {
+  margin: 0px;
+  padding: 5px;
+}
 .creator-list * {
   margin: 0px;
-  padding: 0px;
+  padding: 5px;
 }
 
 </style>

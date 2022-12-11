@@ -5,35 +5,39 @@
         <img id="cover" v-bind:src="comic.thumbnailUrl" />
         <h1 id="comic-title">{{ comic.title }}</h1>
       </div>
-      <div id="comic-detail">
-        <h2 class="desc-title">Comic Description</h2>
-        <h4>{{comic.description  === null || comic.description === "" ? 'No Description Available' : comic.description }}</h4>
-      </div>
-      <div id="character-text">
-        <h2 class="character-title">Characters</h2>
-        <div v-if="charactersEmpty" id="empty-message">
-          <h4>No Characters Listed</h4>
+      <div class="information">
+        <div id="comic-detail">
+          <h2 class="desc-title">Comic Description</h2>
+          <h4>{{comic.description  === null || comic.description === "" ? 'No Description Available' : comic.description }}</h4>
         </div>
-        <div
-          class="count-row"
-          v-for="character in comic.characters.slice(0, 6)"
-          v-bind:key="character.name"
-        > 
-          <h4 class="count-name">{{ character.name }}</h4>
-        </div>
-      </div>
-      <div id="creator-text">
-        <h2 class="creator-title">Creators</h2>
-        <div v-if="creatorsEmpty" id="empty-message">
-          <h4>No Creators Listed</h4>
-        </div>
-        <div
-          class="count-row"
-          v-for="creator in comic.creators.slice(0, 6)"
-          v-bind:key="creator.name"
-        >
-          <h3 class="count-role">{{ creator.role.toUpperCase() }}:</h3>
-          <h4 class="count-name">{{ creator.name }}</h4>
+        <div class="char-creator">
+          <div id="character-text">
+            <h2 class="character-title">Characters</h2>
+            <div v-if="charactersEmpty" id="empty-message">
+              <h4>No Characters Listed</h4>
+            </div>
+            <div
+              class="count-row"
+              v-for="character in comic.characters.slice(0, 6)"
+              v-bind:key="character.name"
+            > 
+              <h4 class="count-name">{{ character.name }}</h4>
+            </div>
+          </div>
+          <div id="creator-text">
+            <h2 class="creator-title">Creators</h2>
+            <div v-if="creatorsEmpty" id="empty-message">
+              <h4>No Creators Listed</h4>
+            </div>
+            <div
+              class="count-row"
+              v-for="creator in comic.creators.slice(0, 6)"
+              v-bind:key="creator.name"
+            >
+              <h3 class="count-role">{{ creator.role.toUpperCase() }}:</h3>
+              <h4 class="count-name">{{ creator.name }}</h4>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -67,6 +71,9 @@ export default {
             this.charactersEmpty = true;
           } else if (this.comic.creators.length === 0 ) {
             this.creatorsEmpty = true;
+          } else {
+            this.charactersEmpty = false;
+            this.creatorsEmpty = false;
           }
         }
       });
@@ -103,18 +110,27 @@ body {
   align-content: flex-start;
 }
 
-#main-panel div {
-  margin-right: 20px;
-}
 
 #cover-holder {
-  width: 50%;
-  max-width: 300px;
+  width: 33%;
+  max-width: 500px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+.information {
+  width: 66%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.char-creator {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
 }
 
 #cover {
@@ -123,14 +139,12 @@ body {
 }
 
 #comic-title {
-  margin: 10px;
   font-size: 1.75rem;
 }
 
 #creator-text {
   width: 50%;
-
-  max-height: 500px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -138,27 +152,27 @@ body {
 
 #character-text {
   width: 50%;
-
-  max-height: 500px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+.count-row {
+  display: flex;
+  max-height: 200px;
+  flex-wrap: wrap;
+}
+
+.count-role {
+  margin-right: 5px;
 }
 
 #comic-detail {
-  width: 50%;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.count-list {
-  font-size: 1rem;
-}
-.count-role {
-  margin-top: 10px;
-}
 
 #empty-message {
 text-align: start;
