@@ -93,11 +93,6 @@ body {
   align-items: center;
 }
 
-h1:hover {
-  text-decoration-color: orange;
-  text-decoration: none;
-}
-
 #header > img {
   height: 80px;
   display: flex;
@@ -133,20 +128,6 @@ h1:hover {
   justify-content: center;
   align-items: center;
   margin-right: 5px;
-<<<<<<< HEAD
-  padding: 1px 15px;
-  cursor:pointer;
-  border-radius: 9px;
-  letter-spacing: .14rem;
-}
-
-.nav-link-holder:hover {
-  background-color: var(--main-background);
-  color: var(--dark-accent);
-  font-size: 150%;
-  
- 
-=======
   padding: 0px 15px;
   cursor: pointer;
   border-radius: 9px;
@@ -162,7 +143,6 @@ h1:hover {
 
 .nav-link-holder:hover {
   background-color: var(--light-accent);
->>>>>>> e1fbaee874d2ee14a1c90a39501c10a09c05760b
 }
 
 

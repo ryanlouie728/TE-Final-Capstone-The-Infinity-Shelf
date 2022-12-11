@@ -3,12 +3,16 @@
     <div id="drag-handle">Add Comic to Collection</div>
     <div id="search-bar">
       <input id="search-bar-input" v-model="title" type="text" @keyup.enter="search()" @keyup.esc="cancel()" ref="refText">
-      <button id="search" v-on:click.prevent="search()">Search</button>
-      <button v-on:click.prevent="cancel()">Cancel</button>
+      <!-- <button id="search" v-on:click.prevent="search()">Search</button> -->
+      <!-- <button v-on:click.prevent="cancel()">Cancel</button> -->
+      <app-button @click.prevent="search()" buttonText="Search"/>
+      <app-button @click.prevent="cancel()" buttonText="Cancel" />
+      
     </div>
     <div id="comic-list-holder">
       <div v-if="comicsEmpty" id="empty-message">
         <p>No Search Results Found</p>
+        <p>Please Try Again</p>
       </div>
       <comic-list ref="comics" @clicked="comicClicked()" v-bind:comics="this.comics" />
     </div>
@@ -16,12 +20,13 @@
 </template>
 
 <script>
-import ComicList from './ComicList.vue'
+import ComicList from './ComicList.vue';
 import ComicService from '../services/ComicService';
 import CollectionService from '../services/CollectionService';
+import AppButton from './Button.vue';
 
 export default {
-  components: { ComicList },
+  components: { ComicList, AppButton },
   props: ['collection'],
   data() {
     return {

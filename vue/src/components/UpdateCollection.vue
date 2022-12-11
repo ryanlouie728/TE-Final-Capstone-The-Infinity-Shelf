@@ -16,6 +16,7 @@
       <textarea
         v-model="collectionUpdate.collectionDescription"
         @keyup.enter="update()"
+        
       />
       <label for="privacy-boolean">Collection Privacy</label>
       <input
@@ -50,17 +51,22 @@
     </form>
 
     <div class="button-holder">
-      <button v-on:click.prevent="update()">Update</button>
-      <button v-on:click.prevent="cancel()">Cancel</button>
+      <!-- <button v-on:click.prevent="update()">Update</button> -->
+      <!-- <button v-on:click.prevent="cancel()">Cancel</button> -->
+      <app-button v-on:click.prevent="update()" buttonText="Update"/>
+      <app-button v-on:click.prevent="cancel()" buttonText="Cancel"/>
+      
     </div>
   </div>
 </template>
 
 <script>
 import CollectionService from "../services/CollectionService";
+import AppButton from "./Button.vue";
 
 export default {
   name: "update-collection",
+  components: { AppButton },
   props: ["collection"],
   data() {
     return {
@@ -125,5 +131,9 @@ export default {
 }
 ul {
   list-style-type: none;
+}
+textarea{
+  width: 300px;
+  height: 100px;
 }
 </style>

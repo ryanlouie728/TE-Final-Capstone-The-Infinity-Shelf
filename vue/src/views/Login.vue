@@ -48,17 +48,19 @@
       <router-link :to="{ name: 'register' }" id="register"
         >Need an account?</router-link
       >
-      <button id="sign-in" class="sign-in" type="submit">Sign in</button>
+      <!-- <button id="sign-in" class="sign-in" type="submit">Sign in</button> -->
+      <app-button type="submit" buttonText="Sign in"/>
     </form>
   </div>
 </template>
 
 <script>
 import authService from "../services/AuthService";
+import AppButton from "../components/Button.vue";
 
 export default {
   name: "login",
-  components: {},
+  components: { AppButton },
   data() {
     return {
       user: {

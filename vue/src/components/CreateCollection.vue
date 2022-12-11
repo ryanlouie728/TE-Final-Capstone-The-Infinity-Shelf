@@ -5,8 +5,10 @@
     <label for="description-input">Description</label>
     <textarea v-model="collection.collectionDescription" />
     <div class="button-holder">
-        <button v-on:click.prevent="create()">Create</button>
-        <button v-on:click.prevent="cancel()">Cancel</button>
+        <app-button v-on:click.prevent="create()" buttonText="Create"/>
+        <app-button v-on:click.prevent="cancel()" buttonText="Cancel"/>
+        <!-- <button v-on:click.prevent="create()">Create</button>
+        <button v-on:click.prevent="cancel()">Cancel</button> -->
     </div>
     
   </div>
@@ -14,8 +16,10 @@
 
 <script>
 import CollectionService from '../services/CollectionService';
+import AppButton from './Button.vue';
 export default {
     name: 'create-collection',
+    components: { AppButton },
     props: ['creatingCollection'],
     data() {
         return{
@@ -75,7 +79,10 @@ export default {
     resize: none;
 }
 .button-holder {
+    width: 80%;
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 

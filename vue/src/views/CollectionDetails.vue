@@ -18,9 +18,7 @@
         <p>This collection is {{ collectionPrivacy() }}</p>
       </div>
       <div id="update-collection">
-        <button v-on:click="updatingCollection = !updatingCollection">
-          Update Collection
-        </button>
+        <app-button v-on:click="updatingCollection =!updatingCollection" buttonText="Update Collection"/>
         <update-collection v-if="updatingCollection" v-bind:collection="this.collection" />
       </div>
       <div id="remove-collection">
@@ -54,12 +52,12 @@
             <h6 class="count-name">{{ creator.name }}</h6>
           </div>
         </div>
-        <div class="count-list">
+        <!-- <div class="count-list">
           <h5 class="count-title">Collection Description</h5>
           <div class="description-text">
             <p>{{ collection.collectionDescription }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -71,9 +69,10 @@ import AddComic from "../components/AddComic.vue";
 import CollectionService from "../services/CollectionService";
 import UpdateCollection from "../components/UpdateCollection.vue";
 import RemoveCollection from "../components/RemoveCollection.vue";
+import AppButton from "../components/Button.vue";
 
 export default {
-  components: { ComicList, AddComic, UpdateCollection, RemoveCollection },
+  components: { ComicList, AddComic, UpdateCollection, RemoveCollection, AppButton },
   props: ["collection-details"],
   name: "collection-details",
   data() {
@@ -184,6 +183,8 @@ export default {
 .count-name {
   margin: 0px;
   margin-bottom: 2px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #counts {
