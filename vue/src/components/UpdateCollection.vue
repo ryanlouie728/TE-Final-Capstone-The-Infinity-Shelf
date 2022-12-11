@@ -91,14 +91,13 @@ export default {
   data() {
     return {
       privacy: this.collection.collectionPublic,
-      coverUrl: "",
       confirming: false,
       collectionUpdate: this.collection,
     };
   },
   methods: {
     setCover(comic) {
-      this.coverUrl = comic.thumbnailUrl;
+      this.collectionUpdate.collectionCoverUrl = comic.thumbnailUrl;
     },
     update() {
       this.confirming = false;
@@ -111,15 +110,21 @@ export default {
     cancel() {
       this.$emit('cancelled')
     },
+    setSelected(comic) {
+      this.$refs.comics.selected = [comic];
+    }
   },
   computed: {
     clickedComic() {
       let comic = this.collection.comics.find(comic => {
         return comic.id == this.$refs.comics.clickedId;
       })
-      console.log(this.collection)
+      this.setSelected(comic);
       return comic
     }
+  },
+  watch: {
+
   }
 };
 </script>

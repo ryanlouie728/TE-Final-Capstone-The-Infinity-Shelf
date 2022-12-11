@@ -165,6 +165,7 @@ function dragElement(elmnt, reset) {
   width: 100%;
   flex-wrap: wrap;
   align-content: flex-start;
+  user-select: none;
 }
 
 .comic {
@@ -227,6 +228,12 @@ function dragElement(elmnt, reset) {
     text-align: center;
 }
 
+.only-thumbnail {
+  background-color: transparent;
+  border: none;
+  height: fit-content;
+}
+
 .selected {
     background-color: var(--medium-accent);
 }
@@ -235,11 +242,7 @@ function dragElement(elmnt, reset) {
     background-color: var(--medium-accent);
 }
 
-.only-thumbnail {
-  background-color: transparent;
-  border: none;
-  height: fit-content;
-}
+
 
 
 </style>
