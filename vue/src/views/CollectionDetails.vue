@@ -8,8 +8,8 @@
           id="cover-image"
         />
       </div>
-      <div id="desc">
-        <h1>{{ this.collection.collectionName }}</h1>
+      <div id="coll-desc">
+        <h1>{{ this.collection.collectionName }} Collection</h1>
         <h2>Description</h2>
         <p>{{ this.collection.collectionDescription }}</p>
       </div>
@@ -29,36 +29,36 @@
         <comic-list v-bind:showAdd="true" ref="comics" @clicked="comicClicked()" v-bind:comics="this.collection.comics" @addComic="addingComic = true" />
         <add-comic v-if="addingComic" @added="comicAdded()" v-bind:collection="this.collection" />
       </div>
+      <div class="character-list">
+        <h3 class="count-title">Top Character Appearances</h3>
+        <div
+          class="count-row"
+          v-for="character in this.collection.characterCounts.slice(0, 5)"
+          v-bind:key="character.name"
+        >
+          <h5 class="count-name">{{ character.name }}</h5>
+        </div>
+      </div>
+      <div class="creator-list">
+        <h3 class="count-title">Top Creator Appearances</h3>
+        <div
+          class="count-row"
+          v-for="creator in this.collection.creatorCounts.slice(0, 5)"
+          v-bind:key="creator.name"
+        >
+          <h5 class="count-name">{{ creator.name }}</h5>
+        </div>
+        
     </div>
-    <div id="sidebar">
-      <div id="counts">
-        <div class="count-list">
-          <h5 class="count-title">Top Character Appearances</h5>
-          <div
-            class="count-row"
-            v-for="character in this.collection.characterCounts.slice(0, 5)"
-            v-bind:key="character.name"
-          >
-            <h6 class="count-name">{{ character.name }}</h6>
-          </div>
-        </div>
-        <div class="count-list">
-          <h5 class="count-title">Top Creator Appearances</h5>
-          <div
-            class="count-row"
-            v-for="creator in this.collection.creatorCounts.slice(0, 5)"
-            v-bind:key="creator.name"
-          >
-            <h6 class="count-name">{{ creator.name }}</h6>
-          </div>
-        </div>
-        <!-- <div class="count-list">
+    <!-- <div id="sidebar">
+      
+         <div class="count-list">
           <h5 class="count-title">Collection Description</h5>
           <div class="description-text">
             <p>{{ collection.collectionDescription }}</p>
           </div>
-        </div> -->
-      </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -134,38 +134,55 @@ export default {
 </script>
 
 <style scoped>
+
 #left-pane {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 5px;;
   grid-template-areas:
-    "img desc desc"
-    "img desc desc"
-    "privacy update remove-collection"
-    "add-comic add-comic add-comic";
+    "img add-comic add-comic"
+    "coll-desc  character-list creator-list"
+    "privacy update-coll remove-coll";
 }
 #add-comic{
   grid-area: add-comic;
 }
 #update-collection {
-  grid-area: update;
+  grid-area: update-coll;
+  display: flex;
+  align-items: center;
 }
 #img {
   grid-area: img;
+  display: block;
+  text-align: center;
 }
-#desc {
-  grid-area: desc;
+#cover-image {
+  height: 500px;
+}
+#coll-desc {
+  grid-area: coll-desc;
 }
 #privacy {
   grid-area: privacy;
 }
 #remove-collection {
-  grid-area: remove-collection;
-}
-
-#router-view {
+  grid-area: remove-coll;
   display: flex;
+  align-items: center;
+}
+#character-list {
+  grid-area: character-list;
+}
+#creator-list{
+  grid-area: creator-list;
 }
 
+/* #router-view {
+  display: flex;
+} */
+/* 
 .count-list {
   margin: 5px;
   border: solid 2px var(--main-background);
@@ -185,13 +202,6 @@ export default {
   margin-bottom: 2px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
-#counts {
-  width: 200px;
-}
-#cover-image {
-  height: 316px;
-  width: 200px;
-}
 </style>
