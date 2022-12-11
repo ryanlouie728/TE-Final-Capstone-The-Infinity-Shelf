@@ -1,5 +1,16 @@
 <template>
   <div class="comic-list">
+    <div v-on:click.prevent="addComicEvent()" class="comic comic-list-action-card" id="add-comic-card" v-if="showAdd">
+        <h5>+</h5>
+        <p>Add New Comic</p>
+    </div> 
+    <div v-on:click.prevent="toggleRemove()" class="comic comic-list-action-card" id="remove-comic-card" v-if="showRemove" :class="{ selected: removing}">
+        <h5>-</h5>
+        <p>Remove Comic</p>
+    </div>
+    <div v-on:click.prevent="submitSelect()" class="comic comic-list-action-card" id="remove-comic-card" v-if="(showRemove && removing)">
+        <p>Submit</p>
+    </div>
     <div
       class="comic"
       v-for="comic in this.comics"
@@ -18,17 +29,7 @@
         <!-- <p class="comic-description">{{comic.description}}</p> -->
       </div>
     </div>
-    <div v-on:click.prevent="addComicEvent()" class="comic comic-list-action-card" id="add-comic-card" v-if="showAdd">
-        <h5>+</h5>
-        <p>Add New Comic</p>
-    </div> 
-    <div v-on:click.prevent="toggleRemove()" class="comic comic-list-action-card" id="remove-comic-card" v-if="showRemove" :class="{ selected: removing}">
-        <h5>-</h5>
-        <p>Remove Comic</p>
-    </div>
-    <div v-on:click.prevent="submitSelect()" class="comic comic-list-action-card" id="remove-comic-card" v-if="(showRemove && removing)">
-        <p>Submit</p>
-    </div>
+    
   </div>
 </template>
 

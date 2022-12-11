@@ -204,7 +204,12 @@ export default {
 }
 #add-comic{
   grid-area: add-comic;
-  overflow: auto;
+  
+}
+
+#add-comic > .comic-list {
+  overflow-y: auto;
+  height: 425px;
 }
 
 .collection-button-holder {
