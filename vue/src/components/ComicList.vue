@@ -171,8 +171,6 @@ function dragElement(elmnt, reset) {
 .comic {
   cursor: pointer;
   box-sizing: border-box;
-  border: solid 2px var(--dark-accent);
-  background-color: #fdf5e8;
   width: 120px;
   height: 215px;
   display: flex;
@@ -187,6 +185,7 @@ function dragElement(elmnt, reset) {
 
 .comic:hover {
   background-color: var(--medium-accent);
+  color: var(--white);
 }
 
 .comic-title {
@@ -209,8 +208,9 @@ function dragElement(elmnt, reset) {
 }
 
 .comic-list-action-card {
-    justify-content: center;
-    border-radius: 9px;
+  border: solid 2px var(--dark-accent);
+  justify-content: center;
+  border-radius: 9px;
 }
 .comic-list-action-card:hover {
     background-color: var(--main-background);
