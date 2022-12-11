@@ -106,6 +106,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 }
 
 

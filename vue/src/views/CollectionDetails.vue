@@ -17,7 +17,7 @@
         <h3>Privacy</h3>
         <p>This collection is {{ collectionPrivacy() }}</p>
       </div>
-      <div id="update-collection">
+      <div class="collection-button-holder">
         <app-button v-on:click="updatingCollection = true" buttonText="Update Collection"/>
         <update-collection 
           v-if="updatingCollection" 
@@ -25,8 +25,6 @@
           @cancelled="updatingCollection = false; getCollection()"
           @updated="updatingCollection = false; getCollection()"
         />
-      </div>
-      <div id="remove-collection">
         <remove-collection v-bind:collection="this.collection" />
       </div>
       <div id="add-comic">
@@ -121,9 +119,26 @@ export default {
       this.addingComic = false;
       this.getCollection();
     },
+    exportAsCsv() {
+      let fileText = '';
+      for (let comic of this.collection.comics) {
+        fileText += comic.id + ','
+      }
+      fileText = fileText.slice(0, fileText.lastIndexOf(','));
+      this.downloadStringAsFile(fileText)
+    },
+    downloadStringAsFile(text) {
+      const link = document.createElement("a");
+      const file = new Blob([text], { type: 'text/plain' });
+      link.href = URL.createObjectURL(file);
+      link.download = this.collection.collectionName + "-" + this.collection.collectionId + '.csv';
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
   },
   created() {
     this.getCollection();
+    
   },
 };
 </script>
@@ -143,11 +158,16 @@ export default {
 #add-comic{
   grid-area: add-comic;
 }
-#update-collection {
-  grid-area: update-coll;
+
+.collection-button-holder {
   display: flex;
-  align-items: center;
+  
 }
+
+.collection-button-holder button {
+  height: 30px;
+}
+
 #img {
   grid-area: img;
   display: block;

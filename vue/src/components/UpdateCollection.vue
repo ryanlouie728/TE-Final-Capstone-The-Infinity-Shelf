@@ -122,9 +122,6 @@ export default {
       this.setSelected(comic);
       return comic
     }
-  },
-  watch: {
-
   }
 };
 </script>

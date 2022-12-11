@@ -36,6 +36,7 @@ export default {
 }
 
 .confirm-holder {
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
