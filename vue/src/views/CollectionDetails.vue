@@ -26,6 +26,7 @@
           @updated="updatingCollection = false; getCollection()"
         />
         <remove-collection v-bind:collection="this.collection" />
+        <app-button v-on:click.prevent="exportAsCsv" buttonText="Export Collection" />
       </div>
       <div id="add-comic">
         <h2 banner>Comics in the {{ this.collection.collectionName }} Collection</h2>
@@ -161,7 +162,7 @@ export default {
 
 .collection-button-holder {
   display: flex;
-  
+
 }
 
 .collection-button-holder button {
@@ -193,30 +194,4 @@ export default {
 #creator-list{
   grid-area: creator-list;
 }
-
-/* #router-view {
-  display: flex;
-} */
-/* 
-.count-list {
-  margin: 5px;
-  border: solid 2px var(--main-background);
-  text-align: center;
-  padding: 5px;
-  border-radius: 9px;
-}
-
-.count-title {
-  margin: 5px 5px;
-  font-weight: bolder;
-  font-size: 1rem;
-}
-
-.count-name {
-  margin: 0px;
-  margin-bottom: 2px;
-  margin-left: auto;
-  margin-right: auto;
-} */
-
 </style>
