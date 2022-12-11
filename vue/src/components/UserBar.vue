@@ -44,6 +44,7 @@ export default {
     height: 100%;
     align-items: center;
     justify-content: flex-end;
+    user-select: none;
 }
 
 

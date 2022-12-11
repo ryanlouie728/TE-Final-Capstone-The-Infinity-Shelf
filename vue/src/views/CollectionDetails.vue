@@ -22,7 +22,7 @@
         <update-collection 
           v-if="updatingCollection" 
           v-bind:collection="this.collection" 
-          @cancelled="updatingCollection = false"
+          @cancelled="updatingCollection = false; getCollection()"
           @updated="updatingCollection = false; getCollection()"
         />
       </div>

@@ -20,7 +20,7 @@
       </div>
       <user-bar />
 
-      <img id="thanos" src="https://media.tenor.com/DRbhYjCbnD0AAAAi/thanos-gangnam-style.gif">
+      <img id="thanos" src='./images/thanos-gangnam.gif'>
     </header>
     <router-view id="router-view" :key="this.$route.path" />
     <footer id="footer">
