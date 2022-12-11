@@ -13,20 +13,17 @@
         <h2 class="character-title">Characters</h2>
         <div
           class="count-row"
-          v-for="character in this.comic.characters.slice(0, 5)"
+          v-for="character in this.comic.characters.slice(0, 6)"
           v-bind:key="character.name"
         >
           <h4 class="count-name">{{ character.name }}</h4>
-          <div v-if="fieldEmpty" id="empty-message">
-            <p>No Information Found</p>
-          </div>
         </div>
       </div>
       <div id="creator-text">
         <h2 class="creator-title">Creators</h2>
         <div
           class="count-row"
-          v-for="creator in this.comic.creators.slice(0, 5)"
+          v-for="creator in this.comic.creators.slice(0, 6)"
           v-bind:key="creator.name"
         >
           <h3 class="count-role">{{ creator.role.toUpperCase() }}:</h3>
@@ -47,7 +44,6 @@ export default {
       comic: {
         creators: [],
         characters: [],
-        fieldEmpty: false,
       },
     };
   },
@@ -56,11 +52,6 @@ export default {
       ComicService.getComicById(this.$route.params.id).then((response) => {
         if (response.status == 200) {
           this.comic = response.data;
-          if (this.comic.characters.length == 0) {
-            this.comicsEmpty = true;
-          } else {
-            this.comicsEmpty = false;
-          }
         }
       });
     },
@@ -83,18 +74,21 @@ body {
 }
 
 .comic-details {
-  display: flex;
-  flex-direction: row;
-}
-#main-panel {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+#main-panel {
+  width: 66%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
 #main-panel div {
-  padding: 5px;
+  margin-right: 20px;
 }
 
 #cover-holder {
@@ -108,7 +102,7 @@ body {
 }
 
 #cover {
-  width: 75%;
+  width: 100%;
   height: auto;
 }
 
@@ -119,56 +113,34 @@ body {
 
 #creator-text {
   width: 50%;
-  max-width: 200px;
-  /* max-height: 500px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 10px;
-}
 
-/* .count-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-/* 
-.count-row h3{
-  margin: 2px;
-}
-
-.count-row h4{
-  margin: 4px 2px 2px 2px;
-
-} */
-*/ #character-text {
-  flex-grow: 1;
-  width: 50%;
-  max-width: 350px;
   max-height: 500px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
-  margin-right: 10px;
+  justify-content: flex-start;
 }
 
-/* .character-title {
-  display: block;
-} */
-#comic-detail {
+#character-text {
   width: 50%;
-  max-width: 400px;
+
+  max-height: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-right: 10px;
+  justify-content: flex-start;
+}
+
+#comic-detail {
+  width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .count-list {
   font-size: 1rem;
 }
 .count-role {
-  margin: 0px;
   margin-top: 10px;
 }
 </style>
