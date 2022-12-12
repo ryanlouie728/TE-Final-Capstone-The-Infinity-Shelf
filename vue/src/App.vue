@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    
     <header id="header">
+      <img id="iron-man" src='./images/Iron-man.gif'>
       <div id="title-nav-block">
         <h1>The Infinity Shelf</h1>
         <div id="nav-links">
@@ -113,7 +115,7 @@ body {
 .nav-link-holder {
   box-sizing: border-box;
   font-family: "Bebas Neue", sans-serif;
-  letter-spacing: .1rem;
+  letter-spacing: .125rem;
   font-weight: bold;
   text-decoration: none;
   color: var(--white);
@@ -134,6 +136,7 @@ body {
 
 #thanos {
   margin-right: 18px;
+  
 }
 
 .nav-link-holder:hover {
