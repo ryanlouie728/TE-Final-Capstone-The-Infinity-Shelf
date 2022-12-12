@@ -9,16 +9,22 @@
     >
         <p>{{message}}</p>
         <div class="confirm-buttons">
-            <button v-on:click.prevent="confirm()" class="confirm-button">Confirm</button>
-            <button v-on:click.prevent="$emit('cancel')" class="confirm-button">Cancel</button>
+            <!-- <button v-on:click.prevent="confirm()" class="confirm-button">Confirm</button>
+            <button v-on:click.prevent="$emit('cancel')" class="confirm-button">Cancel</button> -->
+            <app-button v-on:click.prevent="confirm()" buttonText="Confirm"/>
+            <app-button v-on:click.prevent="$emit('cancel')" buttonText="Cancel"/>
         </div>
     </div>
   </div>
 </template>
 
+
+
 <script>
+import AppButton from './Button.vue';
 export default {
     name: 'confirm',
+    components: { AppButton },
     props: ['message', 'function', 'arguments', 'hiddenHolder'],
     methods: {
         confirm() {
@@ -57,6 +63,7 @@ export default {
     transform: translate(-50%, -50%);
     background-color: var(--light-accent);
     position: fixed;
+
 }
 
 .hidden-holder {
@@ -67,8 +74,9 @@ export default {
     margin-bottom: 10px;
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    
 }
 
 .confirm-button:first-child {
@@ -84,6 +92,7 @@ export default {
     color: var(--white);
     font-weight: bolder;
     cursor: pointer;
+ 
 }
 
 .confirm-button:hover {
