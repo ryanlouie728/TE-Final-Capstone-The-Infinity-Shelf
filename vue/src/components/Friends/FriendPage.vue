@@ -3,7 +3,8 @@
     <add-friend
       v-if="addingFriend" 
       @cancelled="addingFriend = false"
-      @added="getFriendPage(); addingFriend=false;"
+      @added="getFriendPage(); 
+      addingFriend=false;"
     />
     
     <div 
@@ -88,7 +89,7 @@ export default {
 
 <style>
 .friend-page {
-  overflow: auto;
+  overflow-y: auto;
   height: fit-content;
   max-height: 450px;
   width: 175px;
@@ -97,7 +98,7 @@ export default {
   border-radius: 10px;
   display: block;
   position: absolute;
-  filter: drop-shadow(2px 2px 1px var(--medium-accent));
+  /* filter: drop-shadow(2px 2px 1px var(--medium-accent)); */
 }
 
 .friends-page-list {
