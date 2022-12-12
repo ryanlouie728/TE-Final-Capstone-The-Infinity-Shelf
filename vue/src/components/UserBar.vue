@@ -2,7 +2,7 @@
   <div class="user-bar">
     <div 
         id="friends-button"
-        class="nav-link"
+        class="buttonStyle"
         v-if="this.$store.state.token != ''"
         v-on:click.self="showFriends = !showFriends"
         :class="{'button-active': showFriends}"
@@ -12,11 +12,11 @@
     />
     </div>
     
-    <div class="nav-link-holder" v-if="this.$store.state.token != ''">
-        <router-link class="nav-link" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
+    <div class="user-link-holder" v-if="this.$store.state.token != ''">
+        <router-link class="buttonStyle" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
     </div>
-    <div class="nav-link-holder" v-if="this.$store.state.token == ''">
-        <router-link class="nav-link" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
+    <div class="user-link-holder" v-if="this.$store.state.token == ''">
+        <router-link class="buttonStyle" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
     </div>
         
     
@@ -36,7 +36,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.user-link-holder {
+    display: flex;
+
+}
 
 .user-bar {
     flex-grow: 1;
@@ -52,4 +57,30 @@ export default {
     overflow: visible;
     position: relative;
 }
+
+.buttonStyle {
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    background-color: var(--dark-accent);
+    color: var(--white);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.buttonStyle:hover {
+    background-color: var(--medium-accent);
+}
+
+.button-active {
+  background-color: var(--medium-accent);
+}
+
+.button-active:hover {
+  background-color: var(--dark-accent);
+}
+
 </style>

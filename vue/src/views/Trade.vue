@@ -70,6 +70,7 @@ export default {
         },
         setUserComics(collections) {
             this.userComics = []
+            console.log(this.user)
             for (let collection of collections) {
                 this.userComics.push(...collection.comics)
             }

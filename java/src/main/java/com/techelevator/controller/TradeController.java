@@ -1,15 +1,10 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CollectionDao;
-import com.techelevator.dao.ComicDao;
 import com.techelevator.dao.TradeDao;
-import com.techelevator.dao.UserDao;
 import com.techelevator.model.trade.TradeComicDto;
 import com.techelevator.model.trade.TradeDto;
-import com.techelevator.model.trade.TradeUserDto;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -17,6 +12,8 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/trades")
 public class TradeController {
+
+
     private TradeDao tradeDao;
     private CollectionDao collectionDao;
 
@@ -32,7 +29,6 @@ public class TradeController {
 
     @PostMapping("/create")
     public Boolean createTrade(@RequestBody TradeDto trade) {
-
         return tradeDao.createTrade(trade);
     }
 
@@ -41,9 +37,9 @@ public class TradeController {
         if (!tradeDao.tradeExists(tradeId)) {
             throw new IllegalArgumentException("Trade does not exist");
         }
-//        else if (!tradeDao.tradeIsPending(tradeId)) {
-//            throw new IllegalArgumentException("Trade must be pending to accept");
-//        }
+        else if (!tradeDao.tradeIsPending(tradeId)) {
+            throw new IllegalArgumentException("Trade must be pending to accept");
+        }
         TradeDto trade = tradeDao.getTradeById(tradeId);
         for (TradeComicDto comic : trade.getComics()) {
             Integer newBaseId = collectionDao.getBaseCollectionIdByUserId(comic.getTo().getId());
@@ -52,5 +48,13 @@ public class TradeController {
             }
         }
         return tradeDao.acceptTrade(tradeId);
+    }
+
+    @PutMapping("/reject/{tradeId}")
+    public Boolean rejectTrade(@PathVariable Integer tradeId) {
+        if (!tradeDao.tradeIsPending(tradeId)) {
+            throw new IllegalArgumentException("Trade must be pending to reject");
+        }
+        return tradeDao.rejectTrade(tradeId);
     }
 }
