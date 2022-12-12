@@ -1,6 +1,11 @@
 <template>
     <div class="remove-collection">
-        <app-button v-on:click="confirming = true" buttonText="Delete" />
+        <icon-button 
+            buttonText="Delete"
+            iconName="delete"
+            v-on:click="confirming = true"
+        />
+        <!-- <app-button v-on:click="confirming = true" buttonText="Delete" /> -->
         <confirm 
             v-if="confirming"
             @cancel="confirming = false"
@@ -13,12 +18,13 @@
 
 <script>
 import CollectionService from '../services/CollectionService';
-import AppButton from './Button.vue';
+//import AppButton from './Button.vue';
 import Confirm from './Confirm.vue'
+import IconButton from './IconButton.vue'
 
 export default {
     name: 'remove-collection',
-    components: { AppButton, Confirm },
+    components: { Confirm, IconButton },
     props: ['collection'],
     data() {
         return {
@@ -39,11 +45,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.buttonStyle {
-    font-size: 1.5rem;
-    width: 100%;
-    height: 100%;
-    padding: 0px;
-}
+<style>
+
 </style>

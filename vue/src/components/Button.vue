@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .buttonStyle {
     padding: 5px 10px;
     border-radius: 9px;
@@ -23,6 +23,7 @@ export default {
     color: var(--white);
     text-align: center;
     vertical-align: middle;
+   
 }
 
 .buttonStyle:hover {

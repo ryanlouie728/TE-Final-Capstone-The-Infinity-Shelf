@@ -1,5 +1,29 @@
 <template>
-  <div id="collection-details">
+  <div class="collection-details">
+    <div 
+        class="collection-button-holder"
+        v-if="this.collection.userId == this.$store.state.user.id"
+        >
+          <icon-button 
+            v-on:click="updatingCollection = true"
+            :buttonText="'Edit'"
+            :iconName="'edit'"
+          />
+          <icon-button 
+            v-on:click="exportAsCsv"
+            :buttonText="'Export'"
+            :iconName="'download'"
+          />
+          <icon-button 
+            v-on:click="selectFile"
+            :buttonText="'Import'"
+            :iconName="'upload'"
+          />
+          <!-- <app-button v-on:click="updatingCollection = true" buttonText="Update"/> -->
+          <remove-collection v-bind:collection="this.collection" />
+          <!-- <app-button v-on:click.prevent="exportAsCsv" buttonText="Export" /> -->
+          <!-- <app-button v-on:click.prevent="selectFile" buttonText="Import" /> -->
+    </div>
     <div id="left-pane">
       <div id="img">
         <img
@@ -24,15 +48,7 @@
         @updated="updatingCollection = false; getCollection()"
       />
       <div id="add-comic">
-        <div 
-        class="collection-button-holder"
-        v-if="this.collection.userId == this.$store.state.user.id"
-        >
-          <app-button v-on:click="updatingCollection = true" buttonText="Update"/>
-          <remove-collection v-bind:collection="this.collection" />
-          <app-button v-on:click.prevent="exportAsCsv" buttonText="Export" />
-          <app-button v-on:click.prevent="selectFile" buttonText="Import" />
-        </div>
+
         <h2 banner>Comics in the {{ this.collection.collectionName }} Collection</h2>
         <comic-list 
           v-bind:base="this.collection"
@@ -76,10 +92,10 @@ import AddComic from "../components/AddComic.vue";
 import CollectionService from "../services/CollectionService";
 import UpdateCollection from "../components/UpdateCollection.vue";
 import RemoveCollection from "../components/RemoveCollection.vue";
-import AppButton from "../components/Button.vue";
+import IconButton from '../components/IconButton.vue'
 
 export default {
-  components: { ComicList, AddComic, UpdateCollection, RemoveCollection, AppButton },
+  components: { ComicList, AddComic, UpdateCollection, RemoveCollection, IconButton },
   props: ["collection-details"],
   name: "collection-details",
   data() {
@@ -192,9 +208,14 @@ export default {
 
 <style scoped>
 
+.collection-details {
+  position: static;
+}
+
+
 #left-pane {
-  display: grid;
   width: 100%;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 5px;;
   grid-template-areas:
@@ -204,7 +225,6 @@ export default {
 }
 #add-comic{
   grid-area: add-comic;
-  
 }
 
 #add-comic > .comic-list {
@@ -213,20 +233,15 @@ export default {
 }
 
 .collection-button-holder {
+  border-top: solid 2px var(--medium-accent);
+  width: 185px;
+  grid-area: sidebar;
   display: flex;
-
+  flex-direction: column;
+  position: fixed;
+  top: 210px;
+  left: 10px;
 }
-
-.collection-button-holder * {
-  padding: 0px;
-  margin: 1px;
-  font-size: 1.5rem;
-  width: 100px;
-  height: 30px;
-  margin-right: 5px;
-  text-align: center;
-}
-
 
 #img {
   grid-area: img;

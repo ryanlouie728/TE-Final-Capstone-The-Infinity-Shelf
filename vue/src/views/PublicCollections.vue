@@ -48,12 +48,4 @@ export default {
     flex-grow: 0;
     margin-bottom: 5px;
 }
-
-#left-pane {
-    width: 66%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: flex-start;
-}
 </style>
