@@ -21,7 +21,8 @@ export default {
     font-family: "Bebas Neue", sans-serif;
     background-color: var(--dark-accent);
     color: var(--white);
-    cursor: pointer
+    text-align: center;
+    vertical-align: middle;
 }
 
 .buttonStyle:hover {
