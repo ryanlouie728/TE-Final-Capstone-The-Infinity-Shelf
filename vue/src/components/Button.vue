@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .buttonStyle {
     padding: 5px 10px;
     border-radius: 9px;
