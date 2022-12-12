@@ -238,8 +238,16 @@ export default {
     display: flex;
     flex-direction: column;
     background-color: var(--light-accent);
+    border-radius: 9px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--dark-accent);
 }
 
+.trade > input {
+    width: 30%;
+    margin: auto;
+}
 .trade-block {
     box-sizing: border-box;
     padding: 10px;

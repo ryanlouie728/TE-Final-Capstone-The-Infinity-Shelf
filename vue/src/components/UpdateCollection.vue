@@ -142,12 +142,13 @@ export default {
 .screen-holder {
   display: flex;
   flex-direction: column;
+  border-style: solid;
   border-radius: 10px;
-  color: var(--white);
+  color: var(--dark-acent);
   padding: 20px;
   width: 300px;
   height: fit-content;
-  max-height: 500px;
+  max-height: 525px;
   overflow-y: auto;
   position: fixed;
   top: 50%;
@@ -198,11 +199,17 @@ ul {
   display: flex;
   width: 100%;
   flex-direction: row;
+  justify-content: space-evenly;
   
 }
 textarea{
-  width: 300px;
+  width: 100%;
   height: 100px;
   font-family:Arial, Helvetica, sans-serif;
+}
+#title-input{
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 </style>

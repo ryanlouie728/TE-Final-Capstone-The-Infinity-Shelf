@@ -23,6 +23,7 @@ export default {
     color: var(--white);
     text-align: center;
     vertical-align: middle;
+   
 }
 
 .buttonStyle:hover {
