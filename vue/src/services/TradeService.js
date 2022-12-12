@@ -9,5 +9,14 @@ const http = axios.create({
 export default {
     createTrade(trade) {
         return http.post(`/trades/create`, trade)
+    },
+    getPendingByUserId(userId) {
+        return http.get(`/trades/pending/${userId}`)
+    },
+    acceptTrade(tradeId) {
+        return http.put(`/trades/accept/${tradeId}`)
+    },
+    rejectTrade(tradeId) {
+        return http.put(`/trades/reject/${tradeId}`)
     }
 }

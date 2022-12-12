@@ -15,6 +15,7 @@ export default {
 
 <style>
 .icon-button {
+    user-select: none;
     display: flex;
     box-sizing: border-box;
     /* background-color: transparent; */

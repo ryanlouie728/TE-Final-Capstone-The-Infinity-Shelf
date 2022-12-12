@@ -87,13 +87,6 @@ export default {
 </script>
 
 <style>
-body {
-  max-height: 100vh;
-}
-
-#app {
-  max-height: 100vh;
-}
 
 .comic-details {
   width: 100%;

@@ -38,6 +38,33 @@ public class JdbcTradeDao implements TradeDao {
     }
 
     @Override
+    public List<TradeDto> getPendingByUserId(Integer userId) {
+        String sql =
+                "SELECT trade.trade_id, trade.status " +
+                "FROM trade " +
+                "JOIN trade_user ON trade.trade_id = trade_user.trade_id " +
+                "WHERE trade_user.user_id = ? " +
+                "AND trade_user.role = 'sender' " +
+                "AND trade.status = 'pending' ;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+
+        return tradeListMapper(rowSet);
+    }
+
+    @Override
+    public List<TradeDto> getRequestsByUserId(Integer userId) {
+        String sql =
+                "SELECT trade.trade_id, trade.status " +
+                "FROM trade " +
+                "JOIN trade_user ON trade.trade_id = trade_user.trade_id " +
+                "WHERE trade_user.user_id = ? " +
+                "AND trade_user.role = 'recipient' " +
+                "AND trade.status = 'pending' ;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        return tradeListMapper(rowSet);
+    }
+
+    @Override
     public Boolean acceptTrade(Integer tradeId) {
         try {
             String sql =

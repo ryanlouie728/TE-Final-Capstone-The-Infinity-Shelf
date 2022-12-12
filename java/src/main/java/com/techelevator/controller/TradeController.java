@@ -6,7 +6,9 @@ import com.techelevator.model.trade.TradeComicDto;
 import com.techelevator.model.trade.TradeDto;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -56,5 +58,13 @@ public class TradeController {
             throw new IllegalArgumentException("Trade must be pending to reject");
         }
         return tradeDao.rejectTrade(tradeId);
+    }
+
+    @GetMapping("/pending/{userId}")
+    public Map<String, List<TradeDto>> getPendingByUserId(@PathVariable Integer userId) {
+        Map<String, List<TradeDto>> out = new HashMap<>();
+        out.put("pending", tradeDao.getPendingByUserId(userId));
+        out.put("requests", tradeDao.getRequestsByUserId(userId));
+        return out;
     }
 }
