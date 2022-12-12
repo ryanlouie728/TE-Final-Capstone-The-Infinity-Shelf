@@ -5,14 +5,16 @@
         ref="selector"
     />
     <div id="button-holder">
-        <button 
+        <!-- <button 
             class="button"
             v-on:click.prevent="confirming=true"
-        >Add</button>
-        <button 
+        >Add</button> -->
+        <app-button v-on:click.prevent="confirming=true" buttonText="Add"/>
+        <!-- <button 
             class="button"
             v-on:click.prevent="$emit('cancelled')"
-        >Cancel</button>
+        >Cancel</button> -->
+        <app-button v-on:click.prevent="$emit('cancelled')" buttonText="Cancel"/>
     </div>
     
     <confirm 
@@ -29,9 +31,10 @@
 import FriendService from '../../services/FriendService'
 import Confirm from '../Confirm.vue'
 import UserSelector from '../UserSelector.vue'
+import AppButton from '../Button.vue'
 
 export default {
-    components: { Confirm, UserSelector },
+    components: { Confirm, UserSelector, AppButton },
     name: 'add-friend',
     data() {
         return {
