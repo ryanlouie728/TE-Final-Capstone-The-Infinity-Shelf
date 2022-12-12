@@ -75,6 +75,15 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public List<CollectionDto> getAllCollections() {
+        String sql =
+                "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
+                "FROM collection ";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
+        return collectionListMapper(rowSet);
+    }
+
+    @Override
     public void updateCollection(SimpleCollectionDto collection) {
         String sql =
                 "UPDATE collection " +

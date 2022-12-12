@@ -29,4 +29,6 @@ public interface CollectionDao {
 
     Boolean collectionHasComic(Integer collectionId, Integer comicId);
 
+    List<CollectionDto> getAllCollections();
+
 }
