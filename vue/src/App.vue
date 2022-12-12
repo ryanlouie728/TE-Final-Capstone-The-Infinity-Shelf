@@ -99,6 +99,7 @@ body {
   grid-template-columns: 200px 1fr 200px;
   grid-template-rows: 50px 1fr 100px;
   row-gap: 20px;
+  column-gap: 10px;
   grid-template-areas: 
     "title title title"
     "nav body sidebar"

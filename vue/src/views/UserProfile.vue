@@ -160,7 +160,7 @@ export default {
     margin-bottom: 5px;
 }
 #left-pane {
-    width: 66%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
