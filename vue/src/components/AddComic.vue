@@ -128,6 +128,7 @@ function dragElement(elmnt) {
   flex-direction: column;
   align-items: left;
   border: solid 2px black;
+  border-radius: 9px;
 }
 #search-bar {
   width: 100%;
