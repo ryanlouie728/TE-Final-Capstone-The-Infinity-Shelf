@@ -213,6 +213,7 @@ function dragElement(elmnt, reset) {
   border: solid 2px var(--dark-accent);
   justify-content: center;
   border-radius: 9px;
+  
 }
 .comic-list-action-card:hover {
   background-color: var(--medium-accent);
@@ -225,7 +226,7 @@ function dragElement(elmnt, reset) {
 }
 
 .comic-list-action-card > p {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     margin: 0px;
     text-align: center;
 }
