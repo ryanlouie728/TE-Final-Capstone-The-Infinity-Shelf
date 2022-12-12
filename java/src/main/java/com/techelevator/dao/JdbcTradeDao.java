@@ -226,7 +226,7 @@ public class JdbcTradeDao implements TradeDao {
             comic.setComicDto(comicDao.getComicById(rowSet.getInt("comic_id")));
             comic.setFrom(userDao.getUserDtoById(rowSet.getInt("from_id")));
             comic.setTo(userDao.getUserDtoById(rowSet.getInt("to_id")));
-
+            comic.setCollectionId(rowSet.getInt("coll_id"));
             return comic;
         } catch (Exception e) {
             System.out.println(e.getMessage());
