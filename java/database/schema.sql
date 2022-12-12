@@ -57,11 +57,13 @@ CREATE TABLE trade_comic (
     from_id int NOT NULL,
     to_id int NOT NULL,
     comic_id int NOT NULL,
+    coll_id int NOT NULL,
     CONSTRAINT PK_trade_comic PRIMARY KEY (trade_id, comic_id),
     CONSTRAINT FK_trade_comic_trade FOREIGN KEY (trade_id) REFERENCES trade(trade_id),
     CONSTRAINT FK_trade_comic_from FOREIGN KEY (from_id) REFERENCES users(user_id),
     CONSTRAINT FK_trade_comic_to FOREIGN KEY (to_id) REFERENCES users(user_id),
-    CONSTRAINT FK_trade_comic_comic FOREIGN KEY (comic_id) REFERENCES comic(comic_id)
+    CONSTRAINT FK_trade_comic_comic FOREIGN KEY (comic_id) REFERENCES comic(comic_id),
+    CONSTRAINT FK_trade_comic_coll FOREIGN KEY (coll_id) REFERENCES collection(coll_id)
 );
 
 CREATE TABLE collection (
