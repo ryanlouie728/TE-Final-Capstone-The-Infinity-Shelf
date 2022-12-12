@@ -6,17 +6,25 @@
         v-if="this.$store.state.token != ''"
         v-on:click.self="showFriends = !showFriends"
         :class="{'button-active': showFriends}"
-    >Friends
-    <friend-page 
-        v-if="showFriends"
-    />
+    >
+        <i class="material-icons">group</i>
+        Friends
+        <friend-page 
+            v-if="showFriends"
+        />
     </div>
     
     <div class="user-link-holder" v-if="this.$store.state.token != ''">
-        <router-link class="buttonStyle" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">Logout</router-link>
+        <router-link class="buttonStyle" v-bind:to="{ name: 'logout' }" v-if="this.$store.state.token != ''">
+            <i class="material-icons">logout</i>
+            Logout
+        </router-link>
     </div>
     <div class="user-link-holder" v-if="this.$store.state.token == ''">
-        <router-link class="buttonStyle" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">Login</router-link>
+        <router-link class="buttonStyle" v-bind:to="{ name: 'login' }" v-if="this.$store.state.token == ''">
+            <i class="material-icons">logout</i>
+            Login
+        </router-link>
     </div>
         
     
@@ -54,8 +62,13 @@ export default {
 
 
 #friends-button {
-    overflow: visible;
     position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#friends-button > i {
+    margin-right: 10px;
 }
 
 .buttonStyle {
@@ -69,10 +82,15 @@ export default {
     color: var(--white);
     text-align: center;
     vertical-align: middle;
+    display: flex;
+    align-items: center;
 }
 
 .buttonStyle:hover {
     background-color: var(--medium-accent);
+}
+.buttonStyle > i {
+    margin-right: 10px;
 }
 
 .button-active {

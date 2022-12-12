@@ -75,7 +75,7 @@ export default {
     setStyle() {
       let friendsButton = document.getElementById('friends-button')
       let friendsPage = document.querySelector('.friend-page')
-      friendsPage.style.top = friendsButton.offsetTop + 15 + 'px';
+      friendsPage.style.top = friendsButton.offsetTop + 32 + 'px';
       friendsPage.style.left = '0px';
       this.loaded = true;
     }
@@ -97,7 +97,7 @@ export default {
   border-radius: 10px;
   display: block;
   position: absolute;
-  /* transform: translate(28px, 0px); */
+  filter: drop-shadow(2px 2px 1px var(--medium-accent));
 }
 
 .friends-page-list {
@@ -109,12 +109,12 @@ export default {
 }
 
 .friends-page-list > .title {
-    color: var(--white);
-    margin-top: 20px;
-    margin-bottom: 5px;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
+  color: var(--white);
+  margin-top: 20px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 .add-friend-button {
