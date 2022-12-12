@@ -6,7 +6,6 @@
       @added="getFriendPage(); 
       addingFriend=false;"
     />
-    
     <div 
       class="friends-page-list" 
       id="request-list"
@@ -94,7 +93,6 @@ export default {
   max-height: 450px;
   width: 175px;
   background-color: var(--light-accent);
-  position: relative;
   border-radius: 10px;
   display: block;
   position: absolute;

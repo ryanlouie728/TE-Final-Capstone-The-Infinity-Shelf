@@ -15,7 +15,11 @@
                 />
             </div>
             <i class="material-icons">sync_alt</i>
-            <div class="trade-user"></div>
+            <div class="trade-user">
+                <comic-list
+                    v-bind:comics="userGainComics"
+                />
+            </div>
         </div>
 
         <div 
@@ -74,6 +78,7 @@ export default {
             }).userDto.id
             this.comics = [];
             for (let comic of this.trade.comics) {
+                console.log(comic)
                 if (comic.from.username == this.$store.state.user.username) {
                     this.userGaveComics.push(comic.comicDto);
                     this.otherUser = comic.to.username
