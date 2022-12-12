@@ -238,7 +238,7 @@ export default {
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   top: 210px;
   left: 10px;
 }
