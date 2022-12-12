@@ -1,11 +1,8 @@
 <template>
   <div id="app">
-    
-    <header id="header">
-      <img id="iron-man" src='./images/Iron-man.gif'>
-      <div id="title-nav-block">
-        <h1>The Infinity Shelf</h1>
-        <div id="nav-links">
+
+    <nav>
+      <div id="nav-links">
           <div class="nav-link-holder">
         <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
       </div>
@@ -19,9 +16,14 @@
         <router-link class="nav-link" v-bind:to="{ name: 'trade'}">Trade</router-link>
       </div>
         </div>
+    </nav>
+    
+    <header id="header">
+      <img id="iron-man" src='./images/Iron-man.gif'>
+      <div id="title-nav-block">
+        <h1>The Infinity Shelf</h1>
       </div>
       <user-bar />
-
       <img id="thanos" src='./images/thanos-gangnam.gif'>
     </header>
     <router-view id="router-view" :key="this.$route.path" />
@@ -79,37 +81,53 @@ body {
 
 #app {
   box-sizing: border-box;
-  padding: 8px;
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 75px 1fr 100px;
-  row-gap: 5px;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: 50px 1fr 100px;
+  row-gap: 20px;
   grid-template-areas: 
-    "title"
-    "body"
-    "footer";
+    "title title title"
+    "nav body sidebar"
+    "footer footer footer";
 }
 #header {
+  grid-area: title;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--light-accent);
 }
 
 #header > img {
-  height: 80px;
-  display: flex;
-  flex-direction: row;
+  height: 40px;
+}
+
+nav {
+  grid-area: nav;
 }
 
 #nav-links {
   display: flex;
-  justify-content: space-between;
-  margin-left: 20px;
-  height: 75px;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+#nav-links > div {
+  width: 100%;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav-links > div > a {
+  width: 80%;
 }
 
 #title-nav-block {
@@ -119,7 +137,6 @@ body {
   align-items: center;
   user-select: none;
 }
-
 
 .nav-link {
   box-sizing: border-box;
@@ -180,6 +197,7 @@ body {
 }
 
 #footer {
+  grid-area: footer;
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
   border-radius: 9px 9px 9px 9px;
@@ -218,13 +236,6 @@ body {
   background-color: var(--dark-accent);
 }
 
-.button-active {
-  background-color: var(--dark-accent);
-}
-
-.button-active:hover {
-  background-color: var(--dark-accent);
-}
 
 ::-webkit-scrollbar {
     width: 10px;
