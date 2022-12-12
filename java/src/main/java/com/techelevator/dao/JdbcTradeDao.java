@@ -42,8 +42,23 @@ public class JdbcTradeDao implements TradeDao {
         try {
             String sql =
                     "UPDATE trade " +
-                            "SET status = 'accepted' " +
-                            "WHERE trade_id = ?;";
+                    "SET status = 'accepted' " +
+                    "WHERE trade_id = ?;";
+            jdbcTemplate.update(sql, tradeId);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean rejectTrade(Integer tradeId) {
+        try {
+            String sql =
+                    "UPDATE trade " +
+                    "SET status = 'rejected' " +
+                    "WHERE trade_id = ?;";
             jdbcTemplate.update(sql, tradeId);
             return true;
         } catch (Exception e) {
@@ -62,7 +77,7 @@ public class JdbcTradeDao implements TradeDao {
                     "AND coll_id = ?; " +
                     "INSERT INTO collection_comic (coll_id, comic_id) " +
                     "VALUES (?, ?);";
-            jdbcTemplate.update(sql, comic.getComicDto().getId(), comic.getComicDto().getCollectionId(), newBaseId, comic.getComicDto().getId());
+            jdbcTemplate.update(sql, comic.getComicDto().getId(), comic.getCollectionId(), newBaseId, comic.getComicDto().getId());
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -126,9 +141,9 @@ public class JdbcTradeDao implements TradeDao {
 
             String sql =
                     "INSERT INTO trade_user (trade_id, user_id, role) " +
-                            "VALUES (?, ?, ?); " +
-                            "INSERT INTO trade_user (trade_id, user_id, role) " +
-                            "VALUES (?, ?, ?); ";
+                    "VALUES (?, ?, ?); " +
+                    "INSERT INTO trade_user (trade_id, user_id, role) " +
+                    "VALUES (?, ?, ?); ";
             jdbcTemplate.update(sql, trade.getTradeId(), trade.getUsers().get(0).getUserDto().getId(), trade.getUsers().get(0).getRole(), trade.getTradeId(), trade.getUsers().get(1).getUserDto().getId(), trade.getUsers().get(1).getRole());
             return true;
         } catch (Exception e) {
@@ -141,9 +156,9 @@ public class JdbcTradeDao implements TradeDao {
         try {
             for (TradeComicDto comic : trade.getComics()) {
                 String sql =
-                        "INSERT INTO trade_comic (trade_id, from_id, to_id, comic_id) " +
-                        "VALUES (?, ?, ?, ?);";
-                jdbcTemplate.update(sql, trade.getTradeId(), comic.getFrom().getId(), comic.getTo().getId(), comic.getComicDto().getId());
+                        "INSERT INTO trade_comic (trade_id, from_id, to_id, comic_id, coll_id) " +
+                        "VALUES (?, ?, ?, ?, ?);";
+                jdbcTemplate.update(sql, trade.getTradeId(), comic.getFrom().getId(), comic.getTo().getId(), comic.getComicDto().getId(), comic.getCollectionId());
             }
             return true;
         } catch (Exception e) {
@@ -156,7 +171,7 @@ public class JdbcTradeDao implements TradeDao {
     @Override
     public Boolean createTrade(TradeDto trade) {
         for (TradeComicDto comic : trade.getComics()) {
-            if (!collectionDao.collectionHasComic(comic.getComicDto().getCollectionId(), comic.getComicDto().getId())) {
+            if (!collectionDao.collectionHasComic(comic.getCollectionId(), comic.getComicDto().getId())) {
                 return false;
             }
         }
