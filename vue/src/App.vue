@@ -4,16 +4,28 @@
     <nav>
       <div id="nav-links">
           <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+        <router-link class="nav-link" v-bind:to="{ name: 'home' }">
+          <i class="material-icons">home</i>
+          <p>Home</p>
+        </router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'collections' }">Browse</router-link>
+        <router-link class="nav-link" v-bind:to="{ name: 'collections' }">
+          <i class="material-icons">search</i>
+          <p>Browse</p>
+        </router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'user-profile', params: { username: this.$store.state.user.username } }">Profile</router-link>
+        <router-link class="nav-link" v-bind:to="{ name: 'user-profile', params: { username: this.$store.state.user.username } }">
+          <i class="material-icons">person</i>
+          <p>Profile</p>
+        </router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'trade'}">Trade</router-link>
+        <router-link class="nav-link" v-bind:to="{ name: 'trade'}">
+          <i class="material-icons">sync_alt</i>
+          <p>Trade</p>
+        </router-link>
       </div>
         </div>
     </nav>
@@ -120,14 +132,34 @@ nav {
 
 #nav-links > div {
   width: 100%;
-  margin-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #nav-links > div > a {
-  width: 80%;
+  margin-left: 10px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#nav-links > div > a > i {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 10px;
+  color: var(--dark-accent);
+}
+#nav-links > div > a > p {
+  margin: 0px;
+  margin-top: 3px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 #title-nav-block {
@@ -144,9 +176,8 @@ nav {
   letter-spacing: .125rem;
   font-weight: bold;
   text-decoration: none;
-  color: var(--white);
   height: 35px;
-  background-color: var(--medium-accent);
+  background-color: var(--main-background);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -160,9 +191,12 @@ nav {
   border: none;
 }
 
+.nav-link p {
+  color: var(--dark-accent);
+}
+
 #thanos {
   margin-right: 18px;
-  
 }
 
 .nav-link:hover {
