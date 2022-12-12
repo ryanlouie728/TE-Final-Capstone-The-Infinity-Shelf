@@ -23,7 +23,7 @@
         </div>
 
         <div 
-            v-if="recipient == this.$store.state.user.id && showDetails"
+            v-if="recipient == this.$store.state.user.id && showDetails && showButtons"
             class="accept-reject"
         >
             <app-button
@@ -34,8 +34,15 @@
                 buttonText="Reject"
                 v-on:click="startConfirm('Reject Trade?', reject)"
             />
-
-            
+        </div>
+        <div 
+            v-if="recipient != this.$store.state.user.id && showDetails && showButtons"
+            class="cancel"
+        >
+            <app-button
+                buttonText="Cancel"
+                v-on:click="startConfirm('Cancel Trade?', cancel)"
+            />
         </div>
         <confirm 
             v-if="confirming"
@@ -58,7 +65,7 @@ import TradeService from '../../services/TradeService'
 export default {
     components: { ComicList, AppButton, Confirm },
     name: 'trade-card',
-    props: ['trade'],
+    props: ['trade', 'showButtons'],
     data() {
         return {
             recipient: 0,
@@ -78,7 +85,6 @@ export default {
             }).userDto.id
             this.comics = [];
             for (let comic of this.trade.comics) {
-                console.log(comic)
                 if (comic.from.username == this.$store.state.user.username) {
                     this.userGaveComics.push(comic.comicDto);
                     this.otherUser = comic.to.username
@@ -104,6 +110,14 @@ export default {
         },
         reject() {
             TradeService.rejectTrade(this.trade.tradeId)
+            .then(response => {
+                if (response.status == 200) {
+                    this.$emit('refresh');
+                }
+            })
+        },
+        cancel() {
+            TradeService.cancelTrade(this.trade.tradeId)
             .then(response => {
                 if (response.status == 200) {
                     this.$emit('refresh');
@@ -184,6 +198,15 @@ export default {
 }
 
 .accept-reject > button {
+    margin-right: 5px;
+    width: 100px;
+}
+
+.cancel {
+    margin-top: 10px;
+}
+
+.cancel > button {
     margin-right: 5px;
     width: 100px;
 }

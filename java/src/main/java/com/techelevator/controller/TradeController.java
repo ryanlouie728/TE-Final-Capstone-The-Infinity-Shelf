@@ -60,6 +60,14 @@ public class TradeController {
         return tradeDao.rejectTrade(tradeId);
     }
 
+    @PutMapping("/cancel/{tradeId}")
+    public Boolean cancelTrade(@PathVariable Integer tradeId) {
+        if (!tradeDao.tradeIsPending(tradeId)) {
+            throw new IllegalArgumentException("Trade must be pending to cancel");
+        }
+        return tradeDao.rejectTrade(tradeId);
+    }
+
     @GetMapping("/pending/{userId}")
     public Map<String, List<TradeDto>> getPendingByUserId(@PathVariable Integer userId) {
         Map<String, List<TradeDto>> out = new HashMap<>();

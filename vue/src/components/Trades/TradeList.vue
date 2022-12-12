@@ -4,6 +4,7 @@
         <trade-card 
             v-bind:trade="trade"
             @refresh="$emit('refresh')"
+            v-bind:showButtons="showButtons"
         />
     </div>
   </div>
@@ -18,7 +19,7 @@ import TradeCard from './TradeCard.vue'
 export default {
   components: {TradeCard  },
     name: 'trade-list',
-    props: ['trades'],
+    props: ['trades', 'showButtons'],
     data() {
         return {
             showComics: false,

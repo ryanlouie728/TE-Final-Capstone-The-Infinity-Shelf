@@ -218,6 +218,12 @@ components: { ComicList, AppButton, Confirm },
 }
 
 .create-trade > input {
+    background-color: var(--medium-accent);
+    font-size: 1.5rem;
+    color: var(--white);
+    border: none;
+    padding-left: 10px;
+    border-radius: 15px;
     width: 30%;
     margin: auto;
 }

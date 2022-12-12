@@ -18,5 +18,8 @@ export default {
     },
     rejectTrade(tradeId) {
         return http.put(`/trades/reject/${tradeId}`)
+    },
+    cancelTrade(tradeId) {
+        return http.put(`/trades/cancel/${tradeId}`)
     }
 }

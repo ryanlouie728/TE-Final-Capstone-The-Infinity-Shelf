@@ -18,6 +18,8 @@ public interface TradeDao {
 
     Boolean rejectTrade(Integer tradeId);
 
+    Boolean cancelTrade(Integer tradeId);
+
     TradeDto getTradeById(Integer tradeId);
 
     Boolean transferComic(TradeComicDto comic, Integer newBaseId);

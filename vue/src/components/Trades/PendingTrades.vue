@@ -4,11 +4,13 @@
         <trade-list 
             @refresh="getTrades()"
             v-bind:trades="requests"
+            v-bind:showButtons="true"
         />
         <h2 v-if="pending.length > 0">Pending</h2>
         <trade-list 
             @refresh="getTrades()"
             v-bind:trades="pending"
+            v-bind:showButtons="true"
         />
         
     </div>

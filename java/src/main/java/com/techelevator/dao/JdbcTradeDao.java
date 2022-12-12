@@ -95,6 +95,21 @@ public class JdbcTradeDao implements TradeDao {
     }
 
     @Override
+    public Boolean cancelTrade(Integer tradeId) {
+        try {
+            String sql =
+                    "UPDATE trade " +
+                    "SET status = 'cancelled' " +
+                    "WHERE trade_id = ?;";
+            jdbcTemplate.update(sql, tradeId);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
     public Boolean transferComic(TradeComicDto comic, Integer newBaseId) {
         try {
             String sql =
