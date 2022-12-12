@@ -102,7 +102,7 @@ body {
   justify-content: center;
 }
 #main-panel {
-  width: 66%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -111,7 +111,7 @@ body {
 
 #cover-holder {
   width: 33%;
-  max-width: 500px;
+  max-width: 400px;
   margin-right: 20px;
   display: flex;
   flex-direction: column;
