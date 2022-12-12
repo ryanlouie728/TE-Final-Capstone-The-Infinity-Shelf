@@ -2,7 +2,7 @@
   <div class="user-bar">
     <div 
         id="friends-button"
-        class="nav-link-holder"
+        class="nav-link"
         v-if="this.$store.state.token != ''"
         v-on:click.self="showFriends = !showFriends"
         :class="{'button-active': showFriends}"

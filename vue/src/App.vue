@@ -24,7 +24,16 @@
     </header>
     <router-view id="router-view" :key="this.$route.path" />
     <footer id="footer">
-      <h4>&copy;</h4>
+      <h3>The Infinity Shelf &copy; 2022</h3>
+      <div class="creators-footer">
+        <h4>Created By: </h4>
+        <div class="creators-footer-names">
+          <h5 id="names">Ben Brauns</h5>
+          <h5 id="names">Hannah Reed</h5>
+          <h5 id="names">Ryan Louie</h5>
+          <h5 id="names">Zach Smith</h5>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
@@ -110,14 +119,14 @@ body {
 }
 
 
-.nav-link-holder {
+.nav-link {
   box-sizing: border-box;
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: .1rem;
   font-weight: bold;
   text-decoration: none;
   color: var(--white);
-  height: 50%;
+  height: 35px;
   background-color: var(--medium-accent);
   display: flex;
   justify-content: center;
@@ -128,7 +137,7 @@ body {
   border-radius: 9px;
   font-size: 1rem;
   text-align: center;
-  width: 70px;
+  width: 75px;
   border: none;
 }
 
@@ -136,7 +145,7 @@ body {
   margin-right: 18px;
 }
 
-.nav-link-holder:hover {
+.nav-link:hover {
   background-color: var(--light-accent);
 }
 
@@ -155,14 +164,6 @@ body {
   grid-area: body;
 }
 
-#footer {
-  background-color: var(--light-accent);
-  border: solid 2px var(--dark-accent);
-  border-radius: 9px 9px 9px 9px;
-  padding-left: 10px;
-  height: max-content;
-}
-
 .button {
   display: flex;
   align-items: center;
@@ -173,6 +174,41 @@ body {
   color: var(--white);
   cursor: pointer;
   border: none;
+}
+
+#footer {
+  background-color: var(--light-accent);
+  border: solid 2px var(--dark-accent);
+  border-radius: 9px 9px 9px 9px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: max-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.creators-footer {
+
+  display: flex;
+  flex-direction: row;
+  max-height: 100px;
+  align-items: center;
+  padding-right: 77px
+}
+.creators-footer-names {
+  display: flex;
+  flex-direction: column;
+  max-height: 125px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding-left: 15px
+}
+
+#names {
+  padding-right: 5px;
+  height: fit-content;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .button:hover {
