@@ -3,10 +3,11 @@
     <router-link class="friend-request-link button" v-bind:to="{ name: 'user-profile', params: {username: this.request.toName }}">
             <p>{{ this.request.toName }}</p>
     </router-link>
-    <button 
+    <!-- <button 
         class="friend-pending-cancel button"
         v-on:click.prevent="startConfirm('Cancel this Request?')"
-    >Cancel</button>
+    >Cancel</button> -->
+    <app-button v-on:click.prevent="startConfirm('Cancel this Request?')" buttonText="Cancel"/>
     <confirm
         v-if="this.confirming"
         v-bind:message="this.confirmMessage"
@@ -20,10 +21,11 @@
 <script>
 import FriendService from '../../services/FriendService'
 import Confirm from '../Confirm.vue'
+import AppButton from '../Button.vue'
 
 
 export default {
-    components: { Confirm },
+    components: { Confirm, AppButton },
     name: 'friend-pending',
     props: ['request'],
     data() {

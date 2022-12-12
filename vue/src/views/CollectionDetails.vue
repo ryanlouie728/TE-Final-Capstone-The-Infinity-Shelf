@@ -219,10 +219,12 @@ export default {
 
 .collection-button-holder * {
   padding: 0px;
+  margin: 1px;
   font-size: 1.5rem;
   width: 100px;
   height: 30px;
   margin-right: 5px;
+  text-align: center;
 }
 
 

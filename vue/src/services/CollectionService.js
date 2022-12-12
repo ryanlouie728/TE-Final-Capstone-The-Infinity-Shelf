@@ -31,5 +31,8 @@ export default {
     },
     getCollectionsByUserId(userId) {
         return http.get(`/collections/user/${userId}`)
+    },
+    getAggregateStats() {
+        return http.get('/collections/aggregate')
     }
 }
