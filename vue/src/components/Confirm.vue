@@ -1,6 +1,12 @@
 <template>
-  <div v-on:click.self="$emit('cancel')" class="confirm">
-    <div class="confirm-holder">
+    <div 
+        v-on:click.self="$emit('cancel')" 
+        class="confirm"
+        v-bind:class="{ 'hidden-holder': hiddenHolder }"
+    >
+    <div 
+        class="confirm-holder"
+    >
         <p>{{message}}</p>
         <div class="confirm-buttons">
             <!-- <button v-on:click.prevent="confirm()" class="confirm-button">Confirm</button>
@@ -19,7 +25,7 @@ import AppButton from './Button.vue';
 export default {
     name: 'confirm',
     components: { AppButton },
-    props: ['message', 'function', 'arguments'],
+    props: ['message', 'function', 'arguments', 'hiddenHolder'],
     methods: {
         confirm() {
             this.function(...this.arguments);
@@ -58,6 +64,10 @@ export default {
     background-color: var(--light-accent);
     position: fixed;
 
+}
+
+.hidden-holder {
+    background-color: transparent;
 }
 
 .confirm-buttons {

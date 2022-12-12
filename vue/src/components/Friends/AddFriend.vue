@@ -22,6 +22,7 @@
         v-bind:message="'Add Friend?'"
         v-bind:function="this.addFriend"
         v-bind:arguments="[]"
+        :hidden-holder="true"
         @cancel="confirming=false"
     />
   </div>
