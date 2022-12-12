@@ -12,7 +12,7 @@
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
             <div class="collection-text">
                 <h3 class="collection-name"> {{ coll.collectionName }} </h3>
-                <p class="collection-description"> {{ coll.collectionDescription }} </p>
+                <p class="collection-description"> {{coll.collectionDescription.substring(0,10)}}<span v-if="coll.collectionDescription.length > 10">...</span> </p>
             </div>
         </div>
         <div v-if="showAdd" v-on:click.prevent="addCollectionEvent()" class="collection" id="add-collection-card">

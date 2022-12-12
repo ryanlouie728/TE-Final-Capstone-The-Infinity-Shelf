@@ -1,6 +1,8 @@
 <template>
   <div class="home">
     <div id="left-pane">
+      <h1>The Infinity Shelf</h1>
+      <img id="iron-man" src='../images/gauntlet.png' />
       <h2>Aggregate Stats</h2>
       <div class="stat-info">
         <div class="character">
@@ -84,5 +86,12 @@ export default {
   align-content: flex-start;
   flex-grow: 1;
   justify-content: space-around;
+}
+h1 {
+  font-size: 40px;
+}
+img {
+  height: 40px;
+  width: 40px;
 }
 </style>

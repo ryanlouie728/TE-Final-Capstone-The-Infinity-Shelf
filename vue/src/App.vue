@@ -45,8 +45,8 @@
         <h4>Created By: </h4>
         <div class="creators-footer-names">
           <h5 id="names">Ben Brauns</h5>
-          <h5 id="names">Hannah Reed</h5>
           <h5 id="names">Ryan Louie</h5>
+          <h5 id="names">Hannah Reed</h5>
           <h5 id="names">Zach Smith</h5>
         </div>
       </div>
@@ -240,36 +240,28 @@ nav {
   grid-area: footer;
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
-  border-radius: 9px 9px 9px 9px;
-  padding-left: 5px;
-  padding-right: 5px;
   height: max-content;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 .creators-footer {
 
   display: flex;
-  flex-direction: row;
-  max-height: 100px;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding-right: 77px
 }
 .creators-footer-names {
   display: flex;
-  flex-direction: column;
-  max-height: 125px;
-  flex-wrap: wrap;
+  flex-direction: row;
   align-items: flex-start;
-  padding-left: 15px
 }
 
 #names {
-  padding-right: 5px;
   height: fit-content;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  padding-right: 10px;
 }
 
 .button:hover {
