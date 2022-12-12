@@ -8,12 +8,12 @@
       <div class="information">
         <div id="comic-detail">
           <h2 class="desc-title">Comic Description</h2>
-          <h4>{{comic.description  === null || comic.description === "" ? 'No Description Available' : comic.description }}</h4>
+          <h4>{{comic.description  == null || comic.description == "" ? 'No Description Available' : comic.description }}</h4>
         </div>
         <div class="char-creator">
           <div id="character-text">
             <h2 class="character-title">Characters</h2>
-            <div v-if="charactersEmpty" id="empty-message">
+            <div v-if="charactersEmpty" id="message">
               <h4>No Characters Listed</h4>
             </div>
             <div
@@ -26,7 +26,7 @@
           </div>
           <div id="creator-text">
             <h2 class="creator-title">Creators</h2>
-            <div v-if="creatorsEmpty" id="empty-message">
+            <div v-if="creatorsEmpty" id="message">
               <h4>No Creators Listed</h4>
             </div>
             <div
@@ -54,9 +54,9 @@ export default {
       comic: {
         creators: [],
         characters: [],
-        charactersEmpty: false,
-        creatorsEmpty: false,
-      },
+      },     
+      charactersEmpty: false,
+      creatorsEmpty: false,
     };
   },
   methods: {
@@ -64,12 +64,12 @@ export default {
       ComicService.getComicById(this.$route.params.id).then((response) => {
         if (response.status == 200) {
           this.comic = response.data;
-          if (this.comic.characters.length === 0 && this.comic.creators.length === 0) {
+          if (this.comic.characters.length == 0 && this.comic.creators.length == 0) {
             this.charactersEmpty = true;
             this.creatorsEmpty = true;
-          } else if (this.comic.characters.length === 0) {
+          } else if (this.comic.characters.length == 0) {
             this.charactersEmpty = true;
-          } else if (this.comic.creators.length === 0 ) {
+          } else if (this.comic.creators.length == 0) {
             this.creatorsEmpty = true;
           } else {
             this.charactersEmpty = false;
@@ -78,8 +78,7 @@ export default {
         }
       });
     },
-    getCreators() {},
-    getCharacters() {},
+
   },
   created() {
     this.getComic();
@@ -109,7 +108,6 @@ body {
   justify-content: flex-start;
   align-content: flex-start;
 }
-
 
 #cover-holder {
   width: 33%;
@@ -173,8 +171,8 @@ body {
   justify-content: flex-start;
 }
 
-
-#empty-message {
-text-align: start;
+#message {
+  text-align: start;
 }
+
 </style>
