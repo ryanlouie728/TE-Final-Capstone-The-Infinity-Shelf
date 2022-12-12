@@ -160,6 +160,7 @@ export default {
   height: 200px;
   overflow: auto;
   margin-bottom: 10px;
+  justify-content: space-evenly;
 }
 
 #privacy-input-holder {
@@ -191,6 +192,13 @@ export default {
 }
 ul {
   list-style-type: none;
+}
+
+.button-holder{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  
 }
 textarea{
   width: 300px;

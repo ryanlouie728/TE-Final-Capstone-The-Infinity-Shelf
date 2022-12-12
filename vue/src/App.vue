@@ -59,6 +59,7 @@ export default {
   --medium-accent: #3B3355;
   --light-accent: #5D5D81;
   --main-background: #BFCDE0;
+  /* --main-background: #A9BCD0; */
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
 }
