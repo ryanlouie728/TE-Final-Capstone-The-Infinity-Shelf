@@ -110,14 +110,14 @@ body {
 }
 
 
-.nav-link-holder {
+.nav-link {
   box-sizing: border-box;
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: .1rem;
   font-weight: bold;
   text-decoration: none;
   color: var(--white);
-  height: 50%;
+  height: 35px;
   background-color: var(--medium-accent);
   display: flex;
   justify-content: center;
@@ -128,7 +128,7 @@ body {
   border-radius: 9px;
   font-size: 1rem;
   text-align: center;
-  width: 70px;
+  width: 75px;
   border: none;
 }
 
@@ -136,7 +136,7 @@ body {
   margin-right: 18px;
 }
 
-.nav-link-holder:hover {
+.nav-link:hover {
   background-color: var(--light-accent);
 }
 
