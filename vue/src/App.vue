@@ -74,6 +74,14 @@ export default {
   /* --main-background: #A9BCD0; */
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
+/* alt colors?
+  light blue #00B1EA
+  red #ED1B24
+  yellow #FFEF00
+  green #94CB6D
+  dark blue #0171BE
+ */
+
 }
 
 html {
@@ -236,6 +244,7 @@ nav {
   grid-area: footer;
   background-color: var(--light-accent);
   border: solid 2px var(--dark-accent);
+
   height: max-content;
   display: flex;
   justify-content: center;

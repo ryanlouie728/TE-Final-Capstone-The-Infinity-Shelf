@@ -2,14 +2,14 @@
   <div class="home">
     <div id="left-pane">
       <h1>The Infinity Shelf</h1>
-      <img id="iron-man" src='../images/gauntlet.png' />
-      <h2>Aggregate Stats</h2>
+      <p>Description of our website</p>
+      <p>New Releases from API?</p>
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">Characters and their Appearances</h3>
           <div
             class="count-row"
-            v-for="character in aggregate.characters.slice(0, 7)"
+            v-for="character in aggregate.characters.slice(0, 5)"
             v-bind:key="character.name"
           >
             <h4 class="count-name">
@@ -21,7 +21,7 @@
           <h3 class="creator-title">Creators and their Appearances</h3>
           <div
             class="count-row"
-            v-for="creator in aggregate.creators.slice(0, 7)"
+            v-for="creator in aggregate.creators.slice(0, 5)"
             v-bind:key="creator.name"
           >
             <h4 class="count-name">
@@ -72,7 +72,7 @@ export default {
 }
 
 #left-pane {
-  width: 66%;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
