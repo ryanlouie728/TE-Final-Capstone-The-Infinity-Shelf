@@ -45,10 +45,6 @@
         <h4>Created By: </h4>
         <div class="creators-footer-names">
           <p>Ben Brauns | Ryan Louie | Hannah Reed | Zach Smith</p>
-          <!-- <h5 id="names">Ben Brauns</h5>
-          <h5 id="names">Ryan Louie</h5>
-          <h5 id="names">Hannah Reed</h5>
-          <h5 id="names">Zach Smith</h5> -->
         </div>
       </div>
     </footer>
@@ -82,6 +78,10 @@ export default {
   
 }
 
+#app {
+  height: 100vh;
+}
+
 html {
   box-sizing: border-box;
   min-height: 100vh;
@@ -104,7 +104,7 @@ body {
   flex-grow: 1;
   display: grid;
   grid-template-columns: 200px 1fr 200px;
-  grid-template-rows: 50px 1fr 100px;
+  grid-template-rows: 50px 1fr 75px;
   row-gap: 20px;
   column-gap: 10px;
   grid-template-areas: 
@@ -244,6 +244,7 @@ nav {
 }
 
 #footer {
+  height: 75px;
   grid-area: footer;
   background-color: var(--light-accent);
   /* border: solid 2px var(--dark-accent); */
@@ -255,10 +256,10 @@ nav {
 }
 
 #footer > h3 {
-  margin: 5px 0px 0px 0px;
+  margin: 3px 0px 0px 0px;
 }
 
-.creators-footer > *{
+.creators-footer > * {
   margin: 0px;
 }
 
