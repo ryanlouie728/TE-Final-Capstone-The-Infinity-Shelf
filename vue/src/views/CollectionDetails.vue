@@ -241,6 +241,7 @@ export default {
   position: fixed;
   top: 210px;
   left: 10px;
+  font-weight: bold;
 }
 
 #img {

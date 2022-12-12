@@ -70,8 +70,8 @@ export default {
   --dark-accent: #000505;
   --medium-accent: #3B3355;
   --light-accent: #5D5D81;
-  --main-background: #BFCDE0;
-  /* --main-background: #A9BCD0; */
+  /* --main-background: #BFCDE0; */
+  --main-background: #d3e0ee;
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
 }
@@ -199,6 +199,10 @@ nav {
 
 #thanos {
   margin-right: 18px;
+}
+
+#iron-man {
+  margin-left: 10px;
 }
 
 .nav-link:hover {
