@@ -213,6 +213,7 @@ function dragElement(elmnt, reset) {
   border: solid 2px var(--dark-accent);
   justify-content: center;
   border-radius: 9px;
+  background-color: var(--white);
   
 }
 .comic-list-action-card:hover {

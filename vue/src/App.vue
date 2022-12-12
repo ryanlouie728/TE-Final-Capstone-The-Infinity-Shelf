@@ -44,10 +44,11 @@
       <div class="creators-footer">
         <h4>Created By: </h4>
         <div class="creators-footer-names">
-          <h5 id="names">Ben Brauns</h5>
-          <h5 id="names">Hannah Reed</h5>
+          <p>Ben Brauns | Ryan Louie | Hannah Reed | Zach Smith</p>
+          <!-- <h5 id="names">Ben Brauns</h5>
           <h5 id="names">Ryan Louie</h5>
-          <h5 id="names">Zach Smith</h5>
+          <h5 id="names">Hannah Reed</h5>
+          <h5 id="names">Zach Smith</h5> -->
         </div>
       </div>
     </footer>
@@ -68,12 +69,17 @@ export default {
 
 :root{
   --dark-accent: #000505;
+  
   --medium-accent: #3B3355;
+  
   --light-accent: #5D5D81;
-  --main-background: #BFCDE0;
-  /* --main-background: #A9BCD0; */
+  /* --light-accent: #F0131E; */
+  /* --main-background: #BFCDE0; */
+  --main-background: #d3e0ee;
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
+  --brass-accent: #B4A24C;
+  
 }
 
 html {
@@ -89,6 +95,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Bebas Neue", sans-serif;
+  text-decoration-color: var(--white);
   letter-spacing: .1rem;
 }
 
@@ -201,6 +208,10 @@ nav {
   margin-right: 18px;
 }
 
+#iron-man {
+  margin-left: 10px;
+}
+
 .nav-link:hover {
   background-color: var(--light-accent);
 }
@@ -235,37 +246,40 @@ nav {
 #footer {
   grid-area: footer;
   background-color: var(--light-accent);
-  border: solid 2px var(--dark-accent);
-  border-radius: 9px 9px 9px 9px;
-  padding-left: 5px;
-  padding-right: 5px;
+  /* border: solid 2px var(--dark-accent); */
   height: max-content;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+#footer > h3 {
+  margin: 5px 0px 0px 0px;
+}
+
+.creators-footer > *{
+  margin: 0px;
+}
+
+.creators-footer-names > *{
+  margin: 0px 0px 5px 0px;
 }
 .creators-footer {
-
   display: flex;
-  flex-direction: row;
-  max-height: 100px;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding-right: 77px
 }
 .creators-footer-names {
   display: flex;
-  flex-direction: column;
-  max-height: 125px;
-  flex-wrap: wrap;
+  flex-direction: row;
   align-items: flex-start;
-  padding-left: 15px
 }
 
 #names {
-  padding-right: 5px;
   height: fit-content;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  padding-right: 10px;
 }
 
 .button:hover {

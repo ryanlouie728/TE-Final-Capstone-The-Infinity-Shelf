@@ -65,6 +65,7 @@ export default {
 .collection {
     border: solid 2px var(--dark-accent);
     background-color: #fdf5e8;
+    background-color: white;
     height: 75px;
     padding: 5px;
     display: flex;
