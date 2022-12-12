@@ -266,7 +266,6 @@ nav {
   margin: 0px 0px 5px 0px;
 }
 .creators-footer {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
