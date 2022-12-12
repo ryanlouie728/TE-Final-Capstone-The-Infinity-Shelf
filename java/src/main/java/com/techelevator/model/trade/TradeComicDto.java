@@ -8,6 +8,7 @@ public class TradeComicDto {
     private ComicDto comicDto;
     private UserDto from;
     private UserDto to;
+    private Integer collectionId;
 
     public ComicDto getComicDto() {
         return comicDto;
@@ -31,5 +32,13 @@ public class TradeComicDto {
 
     public void setTo(UserDto to) {
         this.to = to;
+    }
+
+    public Integer getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(Integer collectionId) {
+        this.collectionId = collectionId;
     }
 }

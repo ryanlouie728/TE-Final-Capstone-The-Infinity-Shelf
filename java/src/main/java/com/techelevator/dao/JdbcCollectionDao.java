@@ -26,7 +26,7 @@ public class JdbcCollectionDao implements CollectionDao {
                 "SELECT coll_id " +
                 "FROM collection_comic " +
                 "WHERE coll_id = ? " +
-                "AND comic_ic = ?;";
+                "AND comic_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId, comicId);
         return rowSet.next();
     }

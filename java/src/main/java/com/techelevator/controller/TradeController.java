@@ -1,21 +1,28 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.CollectionDao;
+import com.techelevator.dao.ComicDao;
 import com.techelevator.dao.TradeDao;
+import com.techelevator.dao.UserDao;
+import com.techelevator.model.trade.TradeComicDto;
 import com.techelevator.model.trade.TradeDto;
+import com.techelevator.model.trade.TradeUserDto;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/trades")
-@PreAuthorize("isAuthenticated()")
 public class TradeController {
     private TradeDao tradeDao;
+    private CollectionDao collectionDao;
 
-    public TradeController(TradeDao tradeDao) {
+    public TradeController(TradeDao tradeDao, CollectionDao collectionDao) {
         this.tradeDao = tradeDao;
+        this.collectionDao = collectionDao;
     }
 
     @GetMapping("/{userId}")
@@ -23,9 +30,27 @@ public class TradeController {
         return tradeDao.getTradesByUserId(userId);
     }
 
-    @PostMapping("/trades")
+    @PostMapping("/create")
     public Boolean createTrade(@RequestBody TradeDto trade) {
 
-        return true;
+        return tradeDao.createTrade(trade);
+    }
+
+    @PutMapping("/accept/{tradeId}")
+    public Boolean acceptTrade(@PathVariable Integer tradeId) {
+        if (!tradeDao.tradeExists(tradeId)) {
+            throw new IllegalArgumentException("Trade does not exist");
+        }
+//        else if (!tradeDao.tradeIsPending(tradeId)) {
+//            throw new IllegalArgumentException("Trade must be pending to accept");
+//        }
+        TradeDto trade = tradeDao.getTradeById(tradeId);
+        for (TradeComicDto comic : trade.getComics()) {
+            Integer newBaseId = collectionDao.getBaseCollectionIdByUserId(comic.getTo().getId());
+            if (!tradeDao.transferComic(comic, newBaseId)) {
+                return false;
+            }
+        }
+        return tradeDao.acceptTrade(tradeId);
     }
 }

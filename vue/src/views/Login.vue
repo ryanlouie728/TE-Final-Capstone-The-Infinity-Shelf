@@ -84,6 +84,7 @@ export default {
             this.$store.commit("SET_USER", response.data.user);
             this.$router.push("/");
           }
+          console.log(this.$store.state.user)
         })
         .catch((error) => {
           const response = error.response;
