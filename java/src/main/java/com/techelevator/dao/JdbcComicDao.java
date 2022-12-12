@@ -113,6 +113,37 @@ public class JdbcComicDao implements ComicDao {
         }
     }
 
+
+    private Boolean comicTradePending(ComicDto comic) {
+        String sql =
+                "SELECT comic_id " +
+                "FROM trade_comic " +
+                "JOIN trade ON trade_comic.trade_id = trade.trade_id " +
+                "WHERE comic_id = ? " +
+                "AND coll_id = ? " +
+                "AND trade.status = 'pending';";
+        return jdbcTemplate.queryForRowSet(sql, comic.getId(), comic.getCollectionId()).next();
+    }
+
+    @Override
+    public List<ComicDto> getComicsByUserIdNotInTrade(Integer userId) {
+        String sql =
+                "SELECT comic.comic_id, comic.title, comic.issue_number, comic.description, comic.thumbnail, cc.coll_id " +
+                "FROM comic " +
+                "JOIN collection_comic AS cc ON comic.comic_id = cc.comic_id " +
+                "JOIN collection ON cc.coll_id = collection.coll_id " +
+                "WHERE collection.user_id = ?;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
+        List<ComicDto> all = comicListMapper(rowSet);
+        List<ComicDto> out = new ArrayList<>();
+        for (ComicDto comic : all) {
+            if (!comicTradePending(comic)) {
+                out.add(comic);
+            }
+        }
+        return out;
+    }
+
     @Override
     public List<SimpleComicDto> listSimpleByTitle(String title) {
         title = "%" + title + "%";

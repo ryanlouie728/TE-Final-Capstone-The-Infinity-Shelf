@@ -247,7 +247,6 @@ nav {
   height: 75px;
   grid-area: footer;
   background-color: var(--light-accent);
-  /* border: solid 2px var(--dark-accent); */
   height: max-content;
   display: flex;
   justify-content: center;

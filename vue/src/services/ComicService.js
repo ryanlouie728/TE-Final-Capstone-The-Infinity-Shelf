@@ -20,5 +20,8 @@ export default {
     },
     getComicById(id) {
         return http.get(`/comics/${id}`);
+    },
+    getComicsByUserIdNotInTrade(userId) {
+        return http.get(`/comics/user/${userId}`)
     }
 }

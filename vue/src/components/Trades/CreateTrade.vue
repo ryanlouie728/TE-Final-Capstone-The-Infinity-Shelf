@@ -51,7 +51,6 @@
 import ComicService from '../../services/ComicService';
 import UserService from '../../services/UserService';
 import ComicList from '../ComicList.vue';
-import CollectionService from '../../services/CollectionService';
 import AppButton from '../Button.vue'
 import TradeService from '../../services/TradeService';
 import Confirm from '../Confirm.vue'
@@ -81,19 +80,13 @@ components: { ComicList, AppButton, Confirm },
         }
     },
     methods: {
-        getUserCollections() {
-            CollectionService.getCollectionsByUserId(this.$store.state.user.id)
-            .then(respone => {
-                if (respone.status == 200) {
-                    this.setUserComics(respone.data)
+        getUserComics() {
+            ComicService.getComicsByUserIdNotInTrade(this.$store.state.user.id)
+            .then(response => {
+                if (response.status == 200) {
+                    this.userComics = response.data;
                 }
             })
-        },
-        setUserComics(collections) {
-            this.userComics = []
-            for (let collection of collections) {
-                this.userComics.push(...collection.comics)
-            }
         },
         getUsers() {
             UserService.getByUsername(this.userInput)
@@ -135,25 +128,10 @@ components: { ComicList, AppButton, Confirm },
             let selected = this.users.find(user => {
                 return user.username == this.userInput;
             })
-            if (this.userInput == "" || typeof selected == 'undefined') {
-                this.tradeComics = [];
-                return;
-            }
-            UserService.getProfileById(selected.id)
-            .then(response => {
+            ComicService.getComicsByUserIdNotInTrade(selected.id)
+            .then (response => {
                 if (response.status == 200) {
-                    this.tradeComics = [];
-                    this.tradeComics.push(...response.data.base.comics)
-                    for (let collection of response.data.collections) {
-                        ComicService.listSimpleByCollectionId(collection.collectionId)
-                        .then(response => {
-                            if (response.status == 200) {
-                                this.tradeComics.push(...response.data)
-                            }
-                        })
-                    }
-                } else {
-                    this.tradeComics = [];
+                    this.tradeComics = response.data;
                 }
             })
         },
@@ -223,11 +201,11 @@ components: { ComicList, AppButton, Confirm },
         }
     },
     created() {
-        this.getUserCollections()
+        this.getUserComics();
+        //this.getUserCollections()
     },
     mounted() {
         this.getUsers();
-        //this.getCurrentUserComics();
     }
 }
 </script>
@@ -237,11 +215,6 @@ components: { ComicList, AppButton, Confirm },
     width: 100%;
     display: flex;
     flex-direction: column;
-    /* background-color: var(--light-accent);
-    border-radius: 9px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: var(--dark-accent); */
 }
 
 .create-trade > input {

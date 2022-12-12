@@ -14,6 +14,8 @@ public interface ComicDao {
 
     List<SimpleComicDto> listSimpleByCollectionList(List<SimpleCollectionDto> collections);
 
+    List<ComicDto> getComicsByUserIdNotInTrade(Integer userId);
+
     void createComic(SimpleComicDto comic);
 
     void createComicList(List<ComicDto> comics);

@@ -54,4 +54,9 @@ public class ComicController {
         return comicDao.getComicById(comicId);
     }
 
+    @GetMapping("/user/{userId}")
+    public List<ComicDto> getAllAvailableComicsByUserId(@PathVariable Integer userId) {
+        return comicDao.getComicsByUserIdNotInTrade(userId);
+    }
+
 }
