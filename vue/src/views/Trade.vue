@@ -6,7 +6,7 @@
     </datalist>
     <div class="trade-block" id="current-comics">
         <div class="trade-title-block">
-            <h3>{{user.username}}</h3>
+            <h3>{{this.$store.state.user.username}}</h3>
             <h3>{{userInput}}</h3>
         </div>
         <div class="trade-list-block">
@@ -21,7 +21,7 @@
     <div class="trade-block" id="proposed-trade">
 
         <div class="trade-title-block">
-            <h3>{{user.username}}</h3>
+            <h3>{{this.$store.state.user.username}}</h3>
             <h3>{{userInput}}</h3>
         </div>
         <div class="trade-list-block">
@@ -33,6 +33,16 @@
             </div>
         </div>
     </div>
+    <app-button
+        v-on:click.prevent="confirming = true"
+    />
+    <confirm 
+        v-if="confirming"
+        :message="'Create Trade Request?'"
+        :function="populateTrade"
+        :arguments="[]"
+        @cancel="confirming = false"
+    />
   </div>
 </template>
 
@@ -41,12 +51,16 @@ import ComicService from '../services/ComicService';
 import UserService from '../services/UserService';
 import ComicList from '../components/ComicList.vue';
 import CollectionService from '../services/CollectionService';
+import AppButton from '../components/Button.vue'
+import TradeService from '../services/TradeService';
+import Confirm from '../components/Confirm.vue'
 
 export default {
-  components: { ComicList },
+  components: { ComicList, AppButton, Confirm },
     name: 'trade',
     data() {
         return {
+            confirming: false,
             user: {
                 collections: []
             },
@@ -56,7 +70,13 @@ export default {
             userComics: [],
             userSelectedComics: [],
             tradeComics: [],
-            tradeSelectedComics: []
+            tradeSelectedComics: [],
+            trade: {
+                tradeId: 0,
+                comics: [],
+                users: [],
+                status: 'pending'
+            }
         }
     },
     methods: {
@@ -70,7 +90,6 @@ export default {
         },
         setUserComics(collections) {
             this.userComics = []
-            console.log(this.user)
             for (let collection of collections) {
                 this.userComics.push(...collection.comics)
             }
@@ -119,11 +138,11 @@ export default {
                 this.tradeComics = [];
                 return;
             }
-            
             UserService.getProfileById(selected.id)
             .then(response => {
                 if (response.status == 200) {
                     this.tradeComics = [];
+                    this.tradeComics.push(...response.data.base.comics)
                     for (let collection of response.data.collections) {
                         ComicService.listSimpleByCollectionId(collection.collectionId)
                         .then(response => {
@@ -135,6 +154,71 @@ export default {
                 } else {
                     this.tradeComics = [];
                 }
+            })
+        },
+        populateTrade() {
+            this.confirming = false;
+            let selected = this.users.find(user => {
+                return user.username == this.userInput;
+            })
+            this.trade.users = []
+            this.trade.userSelectedComics = []
+            this.trade.tradeSelectedComics = []
+            this.trade.users.push({
+                userDto: {
+                    id: this.$store.state.user.id
+                },
+                role: 'sender'
+            })
+            this.trade.users.push({
+                userDto: {
+                    id: selected.id
+                },
+                role: 'recipient'
+            })
+
+            for (let comic of this.userSelectedComics) {
+                this.trade.comics.push({
+                    comicDto: {
+                        id: comic.id
+                    },
+                    from: {
+                        id: this.$store.state.user.id
+                    },
+                    to: {
+                        id: selected.id
+                    },
+                    collectionId: comic.collectionId
+                })
+            }
+            for (let comic of this.tradeSelectedComics) {
+                this.trade.comics.push({
+                    comicDto: {
+                        id: comic.id
+                    },
+                    from: {
+                        id: selected.id
+                    },
+                    to: {
+                        id: this.$store.state.user.id
+                    },
+                    collectionId: comic.collectionId
+                })
+            }
+            this.createTrade();
+        },
+        createTrade() {
+            TradeService.createTrade(this.trade)
+            .then(response => {
+                if (response.status == 200) {
+                    this.userInput = ''
+                    this.userSelectedComics = []
+                    this.tradeSelectedComics = []
+                    console.log(response.data)
+                }
+            })
+            .catch(error => {
+                console.log(error)
             })
         }
     },
