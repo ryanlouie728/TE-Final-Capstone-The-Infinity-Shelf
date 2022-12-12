@@ -195,5 +195,6 @@ ul {
 textarea{
   width: 300px;
   height: 100px;
+  font-family:Arial, Helvetica, sans-serif;
 }
 </style>
