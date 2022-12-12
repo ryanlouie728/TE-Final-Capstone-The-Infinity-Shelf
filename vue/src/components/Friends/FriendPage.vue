@@ -33,7 +33,6 @@
         <h4 class="title">Friends</h4>
         <friend v-for="friend in this.friendPage.friends" v-bind:friend="friend" v-bind:key="friend.friendId"/>
         <div
-          v-if="this.$store.state.user.username == this.$route.params.username"
           class="add-friend-button"
           v-on:click.prevent="addingFriend = true"
         >+</div>
