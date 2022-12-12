@@ -67,9 +67,9 @@ public class CollectionController {
     }
 
     @GetMapping("/aggregate")
-    public Map<String, LinkedHashMap<String, Integer>> getAggregateStats() {
+    public Map<String,  List<Count>> getAggregateStats() {
         List<CollectionDto> collections = collectionDao.getAllCollections();
-        Map<String, LinkedHashMap<String, Integer>> out = new HashMap<>();
+        Map<String, List<Count>> out = new HashMap<>();
         Map<String, Integer> creators = new HashMap<>();
         for (CollectionDto collection : collections) {
             for (Count creator : collection.getCreatorCounts()) {
@@ -96,10 +96,10 @@ public class CollectionController {
         return out;
     }
 
-    private LinkedHashMap<String, Integer> sortMap(Map<String, Integer> in) {
-        LinkedHashMap<String, Integer> out = new LinkedHashMap<>();
+    private List<Count> sortMap(Map<String, Integer> in) {
+        List<Count> out = new ArrayList<>();
         for (Map.Entry<String,Integer> entry : entriesSortedByValues(in)) {
-            out.put(entry.getKey(), entry.getValue());
+            out.add(new Count(entry.getKey(), entry.getValue()));
         }
         return out;
     }

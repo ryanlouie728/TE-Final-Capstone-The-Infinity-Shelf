@@ -7,8 +7,29 @@
 </template>
 
 <script>
+import CollectionService from '../services/CollectionService';
+
 export default {
   name: "home",
+  data() {
+    return {
+      aggergate: {}
+    }
+  },
+  methods: {
+    getAggregate() {
+      CollectionService.getAggregateStats()
+      .then(response => {
+        if (response.status == 200) {
+          this.aggergate = response.data
+          console.log(this.aggergate)
+        }
+      })
+    }
+  },
+  created() {
+    this.getAggregate();
+  }
 };
 </script>
 
