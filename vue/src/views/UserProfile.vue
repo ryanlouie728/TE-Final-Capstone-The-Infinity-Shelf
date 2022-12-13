@@ -156,6 +156,9 @@ export default {
 }
 
 #collection-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     flex-grow: 0;
     margin-bottom: 5px;
 }

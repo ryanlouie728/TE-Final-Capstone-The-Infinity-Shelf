@@ -4,25 +4,25 @@
     <nav>
       <div id="nav-links">
           <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'home' }">
+        <router-link v-bind:class="{'nav-link-current': this.$route.name == 'home'}" class="nav-link" v-bind:to="{ name: 'home' }">
           <i class="material-icons">home</i>
           <p>Home</p>
         </router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'collections' }">
+        <router-link v-bind:class="{'nav-link-current': this.$route.name == 'collections'}" class="nav-link" v-bind:to="{ name: 'collections' }">
           <i class="material-icons">search</i>
           <p>Browse</p>
         </router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'user-profile', params: { username: this.$store.state.user.username } }">
+        <router-link v-bind:class="{'nav-link-current': this.$route.name == 'user-profile'}" class="nav-link" v-bind:to="{ name: 'user-profile', params: { username: this.$store.state.user.username } }">
           <i class="material-icons">person</i>
           <p>Profile</p>
         </router-link>
       </div>
       <div class="nav-link-holder">
-        <router-link class="nav-link" v-bind:to="{ name: 'trade'}">
+        <router-link v-bind:class="{'nav-link-current': this.$route.name == 'trade'}" class="nav-link" v-bind:to="{ name: 'trade'}">
           <i class="material-icons">sync_alt</i>
           <p>Trade</p>
         </router-link>
@@ -65,17 +65,9 @@ export default {
 
 :root{
   --dark-accent: #000505;
-  
   --medium-accent: #3B3355;
-  
   --light-accent: #5D5D81;
-
-  /** muted red */
-  /* --light-accent: #f0313b; */
-
-
-  /* --main-background: #BFCDE0; */
-  --main-background: #e0e8f0;
+  --main-background: #d3e0ee;
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
   --brass-accent: #B4A24C;
@@ -176,7 +168,7 @@ nav {
   align-items: center;
   height: 100%;
   margin-right: 10px;
-  color: var(--dark-accent);
+  /* color: var(--dark-accent); */
 }
 #nav-links > div > a > p {
   margin: 0px;
@@ -214,10 +206,10 @@ nav {
   width: 75px;
   border: none;
 }
-
-.nav-link p {
+.nav-link * {
   color: var(--dark-accent);
 }
+
 
 #thanos {
   margin-right: 18px;
@@ -317,6 +309,24 @@ nav {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.nav-link-current {
+  background-color: var(--dark-accent);
+  color: var(--white);
+}
+
+.nav-link-current:hover {
+  background-color: var(--dark-accent);
+}
+
+.nav-link-current p {
+  color: var(--white);
+}
+.nav-link-current i {
+  color: var(--white);
+}
+
+
 
 
 </style>

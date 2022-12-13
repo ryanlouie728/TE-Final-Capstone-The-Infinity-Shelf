@@ -19,10 +19,7 @@
             :buttonText="'Import'"
             :iconName="'upload'"
           />
-          <!-- <app-button v-on:click="updatingCollection = true" buttonText="Update"/> -->
           <remove-collection v-bind:collection="this.collection" />
-          <!-- <app-button v-on:click.prevent="exportAsCsv" buttonText="Export" /> -->
-          <!-- <app-button v-on:click.prevent="selectFile" buttonText="Import" /> -->
     </div>
     <div id="left-pane">
       <div id="img">
@@ -217,7 +214,7 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 5px;;
+  row-gap: 5px;
   grid-template-areas:
     "img add-comic add-comic"
     "coll-desc  character-list creator-list"

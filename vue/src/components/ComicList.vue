@@ -161,6 +161,7 @@ function dragElement(elmnt, reset) {
 <style>
 
 .comic-list {
+  padding-top: 10px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -182,9 +183,11 @@ function dragElement(elmnt, reset) {
   margin-bottom: 2px;
   padding: 5px 0px;
   border-radius: 9px;
+  transition: all 200ms ease;
 }
 
 .comic:hover {
+  transform: translateY(-5px);
   background-color: var(--medium-accent);
   color: var(--white);
 }
