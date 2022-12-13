@@ -65,12 +65,8 @@ export default {
 
 :root{
   --dark-accent: #000505;
-  
   --medium-accent: #3B3355;
-  
   --light-accent: #5D5D81;
-  /* --light-accent: #F0131E; */
-  /* --main-background: #BFCDE0; */
   --main-background: #d3e0ee;
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);

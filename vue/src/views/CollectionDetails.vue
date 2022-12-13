@@ -19,10 +19,7 @@
             :buttonText="'Import'"
             :iconName="'upload'"
           />
-          <!-- <app-button v-on:click="updatingCollection = true" buttonText="Update"/> -->
           <remove-collection v-bind:collection="this.collection" />
-          <!-- <app-button v-on:click.prevent="exportAsCsv" buttonText="Export" /> -->
-          <!-- <app-button v-on:click.prevent="selectFile" buttonText="Import" /> -->
     </div>
     <div id="left-pane">
       <div id="img">

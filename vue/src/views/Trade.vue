@@ -94,7 +94,7 @@ export default {
     cursor: pointer;
 }
 .tab-bar-option:hover {
-    background-color: var(--dark-accent);
+    background-color: var(--medium-accent);
     color: var(--white);
 }
 
@@ -103,7 +103,7 @@ export default {
 }
 
 .tab-bar-option-selected {
-    background-color: var(--dark-accent);
+    background-color: var(--medium-accent);
     color: var(--white);
 }
 
