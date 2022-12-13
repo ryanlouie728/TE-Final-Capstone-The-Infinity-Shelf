@@ -62,5 +62,7 @@ export default {
 </script>
 
 <style>
-
+.trade-history {
+    text-align: center;
+}
 </style>

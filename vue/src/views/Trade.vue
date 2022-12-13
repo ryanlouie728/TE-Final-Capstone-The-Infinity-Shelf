@@ -46,7 +46,7 @@ export default {
     name: 'trade',
     data() {
         return {
-            tab: 'history'
+            tab: 'create'
         }
 
     },
@@ -62,20 +62,23 @@ export default {
 <style>
 .tab-content {
     width: 100%;
-    height: 99%;
     max-height: calc(100% - 35px);
     /* background-color: var(--light-accent); */
     border-radius: 10px;
     box-sizing: border-box;
     padding: 5px;
-    overflow-y: auto;
 }
 
 
 .tab-bar {
-    width: 100%;
+    border-top: solid 2px var(--medium-accent);
+    position: absolute;
+    top: 210px;
+    left: 10px;
+    width: 185px;
     height: 35px;
     display: flex;
+    flex-direction: column;
     background-color: transparent;
 }
 
@@ -83,13 +86,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-right: 5px;
-    margin-bottom: 5px;
     box-sizing: border-box;
     border-radius: 5px;
-    width: 125px;
-    height: 30px;
-    background-color: var(--light-accent);
+    width: 100%;
+    height: 35px;
+    background-color: transparent;
     cursor: pointer;
 }
 .tab-bar-option:hover {

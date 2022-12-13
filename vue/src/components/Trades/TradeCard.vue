@@ -147,6 +147,7 @@ export default {
     justify-content: center;
     margin: 5px 0;
     background-color: var(--light-accent);
+    color: white;
 }
 
 .trade-summary:hover {
