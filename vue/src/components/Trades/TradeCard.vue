@@ -181,10 +181,11 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;   
 }
 
 .trade-user {
+    padding: 5px;
     overflow-y: auto;
     border-radius: 10px;
     height: 225px;
@@ -193,6 +194,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: stretch-in 0.1s linear, scroll-bar-off 0.1s linear;
 }
 .accept-reject {
     margin-top: 10px;
@@ -212,6 +214,34 @@ export default {
     width: 100px;
 }
 
+@keyframes scroll-bar-off {
+    0% {
+        overflow-y: hidden;
+    }
+    99% {
+        overflow-y: hidden;
+    }
+    100% {
+        overflow-y: auto;
+    }
+}
 
+@keyframes stretch-in {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 225px;
+  }
+}
+
+@keyframes stretch-out {
+    from {
+        height: 225px;
+    }
+    to {
+        height: 0px;
+    }
+}
 
 </style>

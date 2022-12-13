@@ -239,6 +239,7 @@ export default {
   top: 210px;
   left: 10px;
   font-weight: bold;
+  animation: fade-in 0.1s linear;
 }
 
 #img {

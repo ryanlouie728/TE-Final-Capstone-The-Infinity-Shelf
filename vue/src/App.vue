@@ -288,15 +288,23 @@ nav {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--medium-accent);
+  background: transparent;
+  border-radius: 10px;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
   background: #888;
+  border-radius: 10px;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-clip: padding-box;
 }
 
 .nav-link-current {
@@ -315,7 +323,13 @@ nav {
   color: var(--white);
 }
 
-
-
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  } 
+  to {
+    opacity: 1;
+  }
+}
 
 </style>

@@ -46,7 +46,7 @@ export default {
     name: 'trade',
     data() {
         return {
-            tab: 'create'
+            tab: 'pending'
         }
 
     },
@@ -92,6 +92,7 @@ export default {
     height: 35px;
     background-color: transparent;
     cursor: pointer;
+    animation: fade-in 0.1s linear;
 }
 .tab-bar-option:hover {
     background-color: var(--medium-accent);
@@ -106,6 +107,7 @@ export default {
     background-color: var(--medium-accent);
     color: var(--white);
 }
+
 
 
 </style>
