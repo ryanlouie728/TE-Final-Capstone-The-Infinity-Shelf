@@ -82,7 +82,7 @@ export default {
 .stat-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 h1 {
   font-size: 40px;
