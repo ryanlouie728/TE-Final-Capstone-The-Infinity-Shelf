@@ -44,7 +44,7 @@
       <div class="creators-footer">
         <h4>Created By: </h4>
         <div class="creators-footer-names">
-          <p>Ben Brauns | Ryan Louie | Hannah Reed | Zach Smith</p>
+          <p>Ben Brauns | Hannah Reed | Ryan Louie | Zach Smith</p>
         </div>
       </div>
     </footer>
