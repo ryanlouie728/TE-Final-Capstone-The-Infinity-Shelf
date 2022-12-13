@@ -11,7 +11,7 @@
           <label class="input-label" for="title-input">Title: </label>
           <input
             v-model="collectionUpdate.collectionName"
-            id="title-input"
+            id="title-input-update-collection"
             name="title-input"
             type="text"
           />
@@ -187,6 +187,12 @@ export default {
 
 }
 
+#title-input-update-collection{
+  width: 97%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 .cover-images {
   height: 164px;
   width: 104px;
@@ -208,9 +214,11 @@ textarea{
   font-family:Arial, Helvetica, sans-serif;
 }
 #title-input{
-  width: 97%;
+  width: 90%;
   margin-top: 2px;
   margin-bottom: 2px;
 
 }
+
+
 </style>

@@ -88,6 +88,8 @@ export default {
 
 .buttonStyle:hover {
     background-color: var(--medium-accent);
+   
+
     
 }
 .buttonStyle > i {
