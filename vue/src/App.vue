@@ -69,12 +69,26 @@ export default {
   --medium-accent: #3B3355;
   
   --light-accent: #5D5D81;
-  /* --light-accent: #F0131E; */
+
+  /** muted red */
+  /* --light-accent: #f0313b; */
+
+
   /* --main-background: #BFCDE0; */
-  --main-background: #d3e0ee;
+  --main-background: #e0e8f0;
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
   --brass-accent: #B4A24C;
+
+  /** captain falcon blue */
+  /* --main-background: #535278; */
+
+  /* off yellow */
+  /* --main-background: #f9f998; */
+
+/** captain falcon yellow */
+  /* --light-accent: #edc81b; */
+  /* --light-accent: #d4af37; */
   
 }
 
@@ -112,6 +126,7 @@ body {
     "nav body sidebar"
     "footer footer footer";
 }
+
 #header {
   grid-area: title;
   display: flex;
