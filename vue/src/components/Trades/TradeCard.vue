@@ -1,6 +1,8 @@
 <template>
     <div class="trade-card">
-        <div v-bind:class="{selected: showDetails}" v-on:click.prevent="showDetails = !showDetails" class="trade-summary">
+        <div v-bind:class="{selected: showDetails}" v-on:click.prevent="tradeClicked($event.path.find(element => {
+            return element.classList.contains('trade-card');   
+        }))" class="trade-summary">
             <h3>{{this.$store.state.user.username}} ({{userGaveComics.length}})</h3>
             <div class="icon-holder">
                 <i v-if="!showDetails" class="material-icons">sync_alt</i>
@@ -8,7 +10,7 @@
             <h3>{{otherUser}} ({{userGainComics.length}})</h3>
         </div>
         
-        <div v-if="showDetails" class="trade-detail">
+        <div v-bind:id="trade.id" v-show="showDetails" class="trade-detail">
             <div class="trade-user">
                 <comic-list
                     v-bind:comics="userGaveComics"
@@ -123,6 +125,24 @@ export default {
                     this.$emit('refresh');
                 }
             })
+        },
+        hide(card) {
+            card.children[1].classList.remove('stretch-out')
+            for (let child of card.children[1].children) {
+                child.classList.remove('stretch-out');
+            }
+            this.showDetails = false;
+        },
+        tradeClicked(card) {
+            if (!this.showDetails) {
+                this.showDetails = true;
+            } else {
+                card.children[1].classList.add('stretch-out')
+                for (let child of card.children[1].children) {
+                    child.classList.add('stretch-out');
+                }
+                setTimeout(this.hide, 100, card);
+            }
         }
     },
     created() {
@@ -212,6 +232,10 @@ export default {
 .cancel > button {
     margin-right: 5px;
     width: 100px;
+}
+
+.stretch-out {
+    animation: stretch-out 0.1s forwards;
 }
 
 @keyframes scroll-bar-off {
