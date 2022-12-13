@@ -61,6 +61,11 @@ public class CollectionController {
         return collectionDao.getByCollectionId(collectionId);
     }
 
+    @GetMapping("/public/{collectionId}")
+    public CollectionDto getPublicCollectionById(@PathVariable Integer collectionId) {
+        return collectionDao.getPublicCollectionById(collectionId);
+    }
+
     @GetMapping("/user/{userId}")
     public List<CollectionDto> getCollectionsByUserId(@PathVariable Integer userId) {
         return collectionDao.getCollectionsByUserId(userId);

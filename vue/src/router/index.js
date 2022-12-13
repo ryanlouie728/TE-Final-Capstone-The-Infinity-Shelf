@@ -52,6 +52,14 @@ const router = new Router({
       }
     },
     {
+      path: '/collections/public/:id',
+      name: 'collection-details-public',
+      component: CollectionDetails,
+      meta:{
+        requiresAuth: false
+      }
+    },
+    {
       path: '/collections/:id',
       name: 'collection-details',
       component: CollectionDetails,
@@ -104,10 +112,10 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
-  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  // const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
 
   // // If it does and they are not logged in, send the user to "/login"
-  if (requiresAuth && store.state.token === '') {
+  if (to.meta.requiresAuth && store.state.token === '') {
     next({name: "login"})
   } else {
     // Else let them go to their next destination

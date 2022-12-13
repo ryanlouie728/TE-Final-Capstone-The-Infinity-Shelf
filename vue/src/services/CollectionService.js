@@ -11,6 +11,9 @@ export default {
     listPublic() {
         return http.get(`/collections`)
     },
+    displayPublicCollection(collectionId){
+        return http.get(`collections/public/${collectionId}`)
+    },
     createCollection(collection) {
         return http.post('/collections', collection);
     },

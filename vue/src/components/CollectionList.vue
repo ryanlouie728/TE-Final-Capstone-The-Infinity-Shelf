@@ -34,12 +34,20 @@ export default {
     },
     methods: {
         openCollection(id) {
+
+            if(this.$store.state.token === ''){
+                this.$router.push({
+                    name: 'collection-details-public',
+                    params: {id: id}
+                });
+            }else{
             this.$router.push({
                 name: 'collection-details',
                 params: {
                     id: id
                 }
-            })
+            });
+            }
         },
         mouseOver(id) {
             if (this.dragging) {
