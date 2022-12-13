@@ -62,6 +62,7 @@ export default {
 
 <style>
 .add-friend {
+    z-index: 5;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
