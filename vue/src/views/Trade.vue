@@ -86,8 +86,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-right: 5px;
-    margin-bottom: 5px;
     box-sizing: border-box;
     border-radius: 5px;
     width: 100%;
