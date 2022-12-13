@@ -78,7 +78,8 @@ export default {
     border-radius: 9px;
     cursor: pointer;
     font-family: "Bebas Neue", sans-serif;
-    background-color: var(--dark-accent);
+    /* background-color: var(--dark-accent); */
+    background-color: red;
     color: var(--white);
     text-align: center;
     vertical-align: middle;
