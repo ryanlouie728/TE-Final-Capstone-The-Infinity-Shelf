@@ -18,7 +18,9 @@
           for free to add friends, trade, and explore collections
         </p>
       </div>
-      <img class="slideshow-image" :src="image">
+      <div class="slideshow">
+        <img class="slideshow-image" :src="image" />
+      </div>
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">
@@ -67,7 +69,6 @@ export default {
   data() {
     return {
       currentIndex: 0,
-      currentPicture: '',
       pictures: [
         'borat.jpg',
         'no-cover.jpg',
@@ -83,11 +84,10 @@ export default {
   },
   methods: {
     rotatePicture() {
+      this.currentIndex++;
       if (this.currentIndex > this.pictures.length - 1) {
         this.currentIndex = 0
       }
-      this.currentPicture = this.pictures[this.currentIndex];
-      this.currentIndex++;
       setTimeout(this.rotatePicture, 5000)
     },
     getAggregate() {
@@ -117,9 +117,14 @@ export default {
 </script>
 
 <style scoped>
+.slideshow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 .slideshow-image {
-  height: 500px;
-  width: 500px;
+  height: 200px;
+  width: auto;
 }
 .home {
   width: 100%;
