@@ -198,22 +198,6 @@ export default {
   },
   created() {
     this.getCollection();   
-  },
-  mounted() {
-    for (let link of document.querySelector('.collection-button-holder').children) {
-      link.addEventListener('mouseenter', () => {
-          if (!link.classList.contains('tab-bar-option-selected')) {
-              link.classList.remove('tab-link-hover-out');
-              link.classList.add('tab-link-hover-in');
-          }
-      })
-      link.addEventListener('mouseleave', () => {
-          if (!link.classList.contains('tab-bar-option-selected')) {
-              link.classList.add('tab-link-hover-out');
-              link.classList.remove('tab-link-hover-in');
-          }
-      })
-    }
   }
 };
 </script>
@@ -313,29 +297,5 @@ export default {
   padding: 5px;
 }
 
-.tab-link-hover-in {
-  animation: hover-fade-in 0.1s linear;
-}
-.tab-link-hover-out {
-  animation: hover-fade-out 0.1s linear;
-}
-
-@keyframes hover-fade-in {
-  from {
-    background-color: var(--main-background);
-  }
-  to {
-    background-color: var(--medium-accent);
-  }
-}
-
-@keyframes hover-fade-out {
-  from {
-    background-color: var(--medium-accent);
-  }
-  to {
-    background-color: var(--main-background);
-  }
-}
 
 </style>
