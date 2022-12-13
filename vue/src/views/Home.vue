@@ -70,10 +70,13 @@ export default {
     return {
       currentIndex: 0,
       pictures: [
+        'Captain-America.jpg',
         'borat.jpg',
         'no-cover.jpg',
         'Amazing-Spider-Man-Fantastic-Four.jpg',
-        'Amazing-Spider-Man.jpg'
+        'Amazing-Spider-Man.jpg',
+        'Journey-Into-Thor.jpg',
+        'X-Men-First-Appearance.jpg'
       ],
       paths: [],
       aggregate: {
