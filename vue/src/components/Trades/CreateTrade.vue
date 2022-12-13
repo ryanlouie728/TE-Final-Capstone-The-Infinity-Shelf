@@ -128,6 +128,9 @@ components: { ComicList, AppButton, Confirm },
             let selected = this.users.find(user => {
                 return user.username == this.userInput;
             })
+            if (typeof selected == 'undefined') {
+                return
+            }
             ComicService.getComicsByUserIdNotInTrade(selected.id)
             .then (response => {
                 if (response.status == 200) {
