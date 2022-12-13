@@ -217,7 +217,7 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 5px;;
+  row-gap: 5px;
   grid-template-areas:
     "img add-comic add-comic"
     "coll-desc  character-list creator-list"
