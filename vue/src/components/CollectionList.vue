@@ -1,6 +1,6 @@
 <template>
     <div id = "collection-list">
-        <div v-if="showAdd" v-on:click.prevent="addCollectionEvent()" class="collection" id="add-collection-card">
+        <div v-if="showAdd" v-on:click.prevent="addCollectionEvent()" class="collection add-card" id="add-collection-card">
             <h5>Add New Collection</h5>
         </div>
         <div 
@@ -12,8 +12,9 @@
             @mouseover="mouseOver(coll.collectionId)"
             @mouseOut="dragTargetId = ''"
         > 
-            <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
-            <div class="no-thumbnail" v-if="coll.collectionCoverUrl == null"><p>No Thumbnail</p></div>
+            <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl"/>
+            <img class="collection-thumbnail" v-if="!coll.collectionCoverUrl" src="../images/no-cover.jpg"/>
+            <!-- <div class="no-thumbnail" v-if="coll.collectionCoverUrl == null"><p>No Thumbnail</p></div> -->
             <div class="collection-text">
                 <h3 class="collection-name"> {{ coll.collectionName }} </h3>
                 <p class="collection-description"> {{coll.collectionDescription.substring(0,200)}}<span v-if="coll.collectionDescription.length > 200">...</span> </p>
@@ -67,7 +68,6 @@ export default {
 }
 
 .collection {
-    border: solid 2px var(--dark-accent);
     background-color: transparent;
     height: 175px;
     padding: 5px;
@@ -80,6 +80,14 @@ export default {
     border-radius: 9px;
     width: 400px;
     transition: all 200ms ease;
+}
+
+.add-card {
+    height: 171px;
+    width: 396px;
+    padding: 0px;
+    margin: 5px 5px;
+    border: solid 2px var(--dark-accent);
 }
 
 .collection:hover {
@@ -96,14 +104,15 @@ export default {
     overflow: hidden;
     max-width: 275px;
     width: 275px;
-    height: 99%;
+    height: 100%;
     display: flex;
     word-wrap: break-word;
     flex-direction: column;
     background-color: var(--light-accent);
+    box-sizing: border-box;
+    padding-top: 7px;
     padding-left: 15px;
     border-radius: 9px;
-    border: 2px solid black;
     color: var(--white);
 }
 
@@ -130,7 +139,7 @@ export default {
     margin-right: 10px;
     border-radius: 9px;
     background-color: gray;
-    border: 1px solid black;
+    border: 1px solid var(--dark-accent);
 }
 
 .banner {
@@ -150,4 +159,5 @@ export default {
 #add-collection-card > h5 {
     font-size: 1.25rem;
 }
+
 </style>
