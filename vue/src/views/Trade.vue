@@ -53,17 +53,14 @@ export default {
     methods: {
     },
     created() {
-    },
-    mounted() {
     }
 }
 </script>
 
-<style>
+<style scoped>
 .tab-content {
     width: 100%;
     max-height: calc(100% - 35px);
-    /* background-color: var(--light-accent); */
     border-radius: 10px;
     box-sizing: border-box;
     padding: 5px;
@@ -92,10 +89,12 @@ export default {
     height: 35px;
     background-color: transparent;
     cursor: pointer;
+    padding-left: 15px;
     animation: fade-in 0.1s linear;
+    transition: all 0.1s ease;
 }
 .tab-bar-option:hover {
-    background-color: var(--medium-accent);
+    background-color: var(--light-accent);
     color: var(--white);
 }
 
@@ -106,6 +105,10 @@ export default {
 .tab-bar-option-selected {
     background-color: var(--medium-accent);
     color: var(--white);
+}
+
+.tab-bar-option-selected:hover {
+    background-color: var(--medium-accent);
 }
 
 

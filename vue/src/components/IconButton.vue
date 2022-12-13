@@ -22,6 +22,7 @@ export default {
     background-color: var(--main-background);
     color: var(--dark-accent);
     height: 35px;
+    transition: all 0.1s ease;
 }
 
 .icon-button:hover {

@@ -2,7 +2,7 @@
   <div class="collection-details">
     <div 
         class="collection-button-holder"
-        v-if="this.collection.userId == this.$store.state.user.id"
+        v-show="this.collection.userId == this.$store.state.user.id"
         >
           <icon-button 
             v-on:click="updatingCollection = true"
@@ -197,9 +197,8 @@ export default {
 
   },
   created() {
-    this.getCollection();
-    
-  },
+    this.getCollection();   
+  }
 };
 </script>
 
@@ -231,7 +230,6 @@ export default {
 .collection-button-holder {
   border-top: solid 2px var(--medium-accent);
   width: 185px;
-  grid-area: sidebar;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -298,5 +296,6 @@ export default {
   margin: 0px;
   padding: 5px;
 }
+
 
 </style>
