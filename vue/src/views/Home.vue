@@ -82,6 +82,7 @@ export default {
 .stat-info {
   display: flex;
   flex-direction: row;
+  min-height: fit-content;
   justify-content: space-around;
 }
 h1 {
@@ -96,7 +97,7 @@ p {
   font-size: 20px;
 }
 .count-lines{
-  max-height: 50px;
+  min-height: fit-content;;
 
 }
 </style>

@@ -135,6 +135,7 @@ export default {
 
 #creator-text {
   width: 50%;
+  min-width: fit-content;
   max-height: fit-content;
   display: flex;
   flex-direction: column;
@@ -143,6 +144,7 @@ export default {
 
 #character-text {
   width: 50%;
+  min-width: fit-content;
   max-height: fit-content;
   display: flex;
   flex-direction: column;
