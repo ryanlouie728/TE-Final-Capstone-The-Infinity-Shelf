@@ -1,6 +1,7 @@
 <template>
   <div class="public-collections">
     <div id="left-pane">
+      <h1>Public Collections</h1>
       <collection-list v-bind:collections="collections" />
     </div>
     <!-- <div id="sidebar"></div> -->
@@ -37,6 +38,9 @@ export default {
 </script>
   
 <style>
+h1{
+  text-align: center;
+}
 .public-collections {
     width: 100%;
     display: flex;
