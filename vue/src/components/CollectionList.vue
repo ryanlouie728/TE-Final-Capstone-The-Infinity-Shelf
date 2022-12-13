@@ -5,7 +5,7 @@
         </div>
         <div 
             class="collection" 
-            v-for="coll in this.collections" 
+            v-for="coll in this.filterdCollections" 
             v-bind:key="coll.collectionId" 
             v-on:click="openCollection(coll.collectionId)"
             v-on:mouseup="mouseUp()" 
@@ -54,6 +54,16 @@ export default {
         addCollectionEvent() {
             this.$emit('addCollection')
         }
+    },
+    computed: {
+        filterdCollections() {
+            return this.collections.filter(coll => {
+                if (this.$route.params.username) {
+                    return coll.collectionPublic || this.$route.params.username == this.$store.state.user.username;
+                }
+                return coll.collectionPublic;
+            })
+        } 
     }
 }
 </script>

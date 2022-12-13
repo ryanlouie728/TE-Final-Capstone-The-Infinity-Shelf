@@ -12,7 +12,7 @@
         <p>Submit</p>
     </div>
     <div
-      class="comic"
+      class="comic comic-animate"
       v-for="comic in this.comics"
       v-bind:key="(comic.id + '-' + comic.collectionId)"
       v-on:click.prevent="clicked(comic)"
@@ -112,26 +112,35 @@ function dragElement(elmnt, reset) {
   function makeElementFixed() {
     
     let left = elmnt.offsetLeft;
-    let top = elmnt.offsetTop;
+    let top = elmnt.offsetTop - document.body.scrollTop;
     elmnt.style.position = 'absolute';
     elmnt.style.zIndex = -1;
     elmnt.style.top = top + 'px';
     elmnt.style.left = left + 'px';
   }
 
-
+  function getComic(e) {
+    for (let element of e.path) {
+      if (element.classList.contains('comic')) {
+        return element;
+      }
+    }
+  }
 
   function dragMouseDown(e) {
     if (!window.event.ctrlKey) {
         return;
     }
+    getComic(e).classList.remove('comic-animate')
     makeElementFixed();
     e = e || window.event;
     e.preventDefault();
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
+    document.onmouseup = function () {
+      closeDragElement(e);
+    };
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
@@ -149,7 +158,8 @@ function dragElement(elmnt, reset) {
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
-  function closeDragElement() {
+  function closeDragElement(e) {
+    getComic(e).classList.add('comic-animate')
     elmnt.style.display = 'none';
     document.onmouseup = null;
     document.onmousemove = null;
@@ -183,13 +193,21 @@ function dragElement(elmnt, reset) {
   margin-bottom: 2px;
   padding: 5px 0px;
   border-radius: 9px;
-  transition: all 200ms ease;
+  
 }
 
 .comic:hover {
-  transform: translateY(-5px);
+  
   background-color: var(--medium-accent);
   color: var(--white);
+}
+
+.comic-animate {
+  transition: all 200ms ease;
+}
+
+.comic-animate:hover {
+  transform: translateY(-5px);
 }
 
 .comic-title {
