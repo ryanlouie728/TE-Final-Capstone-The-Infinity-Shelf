@@ -91,10 +91,12 @@ export default {
 html {
   box-sizing: border-box;
   min-height: 100vh;
+  overflow-x: hidden;
   background-color: var(--main-background);
 }
 
 body {
+  overflow: overlay;
   box-sizing: border-box;
   margin: 0px;
   min-height: 100vh;
