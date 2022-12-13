@@ -79,9 +79,11 @@ export default {
     pointer-events: all;
     border-radius: 9px;
     width: 400px;
+    transition: all 200ms ease;
 }
 
 .collection:hover {
+    transform: translateY(-3px);
     background-color: var(--medium-accent);
     color: var(--white);
 }
@@ -91,9 +93,12 @@ export default {
 }
 
 .collection-text {
+    overflow: hidden;
+    max-width: 275px;
     width: 275px;
     height: 99%;
     display: flex;
+    word-wrap: break-word;
     flex-direction: column;
     background-color: beige;
     padding-left: 15px;
