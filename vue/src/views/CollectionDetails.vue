@@ -46,7 +46,7 @@
       />
       <div id="add-comic">
 
-        <h2 banner>Comics in the {{ this.collection.collectionName }} Collection</h2>
+        <h2 banner>Comics in {{ this.collection.collectionName }} Collection</h2>
         <comic-list 
           v-bind:base="this.collection"
           v-bind:showAdd="true"
