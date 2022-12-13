@@ -3,7 +3,7 @@
     <label for="title-input">Collection Title:</label>
     <input v-model="collection.collectionName" id="title-input" name="title-input" type="text"/>
     <label for="description-input">Description</label>
-    <textarea v-model="collection.collectionDescription" />
+    <textarea v-model="collection.collectionDescription" maxlength="250"/>
     <div class="button-holder">
         <app-button v-on:click.prevent="create()" buttonText="Create"/>
         <app-button v-on:click.prevent="cancel()" buttonText="Cancel"/>

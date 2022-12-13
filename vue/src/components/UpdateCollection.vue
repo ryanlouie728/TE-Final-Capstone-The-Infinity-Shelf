@@ -18,7 +18,7 @@
         </div>
         
         <label class="input-label" for="description-input">Description: </label>
-        <textarea
+        <textarea maxlength="250"
           v-model="collectionUpdate.collectionDescription"
           @keyup.enter="update()"
         />

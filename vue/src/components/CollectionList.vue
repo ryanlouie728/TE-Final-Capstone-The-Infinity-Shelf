@@ -10,9 +10,10 @@
             @mouseOut="dragTargetId = ''"
         > 
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl">
+            <div class="no-thumbnail" v-if="coll.collectionCoverUrl == null"><p>No Thumbnail</p></div>
             <div class="collection-text">
                 <h3 class="collection-name"> {{ coll.collectionName }} </h3>
-                <p class="collection-description"> {{coll.collectionDescription.substring(0,10)}}<span v-if="coll.collectionDescription.length > 10">...</span> </p>
+                <p class="collection-description"> {{coll.collectionDescription.substring(0,200)}}<span v-if="coll.collectionDescription.length > 200">...</span> </p>
             </div>
         </div>
         <div v-if="showAdd" v-on:click.prevent="addCollectionEvent()" class="collection" id="add-collection-card">
@@ -58,22 +59,26 @@ export default {
 
 <style>
 #collection-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     flex-grow: 1;
     margin-right: 5px;
 }
 
 .collection {
     border: solid 2px var(--dark-accent);
-    background-color: #fdf5e8;
     background-color: white;
-    height: 75px;
+    height: 175px;
     padding: 5px;
     display: flex;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
+    margin-left: 3px;
     flex-direction: row;
     cursor: pointer;
     pointer-events: all;
     border-radius: 9px;
+    width: 400px;
 }
 
 .collection:hover {
@@ -86,8 +91,14 @@ export default {
 }
 
 .collection-text {
+    width: 275px;
+    height: 99%;
     display: flex;
     flex-direction: column;
+    background-color: beige;
+    padding-left: 15px;
+    border-radius: 9px;
+    border: 2px solid black;
 }
 
 .collection-name {
@@ -102,6 +113,18 @@ export default {
     height: 100%;
     width: auto;
     margin-right: 10px;
+    border-radius: 9px;
+}
+
+.no-thumbnail{
+    line-height: 140px;
+    text-align: center;
+    height: 100%;
+    width: 123px;
+    margin-right: 10px;
+    border-radius: 9px;
+    background-color: gray;
+    border: 1px solid black;
 }
 
 .banner {
