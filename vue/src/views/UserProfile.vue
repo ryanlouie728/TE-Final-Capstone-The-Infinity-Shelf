@@ -1,6 +1,7 @@
 <template>
   <div @mouseup="mouseUp()" class = "user-profile">
     <div id="left-pane">
+        <h1>{{this.user.username}}'s Collections</h1>
         <collection-list 
         v-bind:showAdd="this.$store.state.user.username == this.$route.params.username"
         ref="collections" v-bind:dragging="this.dragging" v-bind:collections="this.user.collections" 
@@ -148,6 +149,9 @@ export default {
 </script>
 
 <style>
+h1{
+    text-align: center;
+}
 .user-profile {
     width: 100%;
     display: flex;
