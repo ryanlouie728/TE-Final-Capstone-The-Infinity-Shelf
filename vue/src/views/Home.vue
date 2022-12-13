@@ -2,7 +2,14 @@
   <div class="home">
     <div id="left-pane">
       <h1>The Infinity Shelf</h1>
-      <p>This application allows users to manage their comic book collections and arrange trades with other users.</p>
+      <div class="about">
+          <p>Welcome to the <strong>Infinity Shelf</strong>, a Marvel fanatic haven. Personalize and keep track of all your favorite Marvel comics in private or public collections.</p>
+          <p><router-link style="text-decoration: none;" :to="{ name: 'register' }" id="register">Sign-up</router-link> 
+          for free to add friends, trade, and explore collections
+          </p>
+      </div>
+      
+      
       <p>New Releases from API? Random 5 comics that are loaded? <strong>SOmething visual here?</strong></p>
       <img src="../images/borat.jpg" alt="something visual">
       <div class="stat-info">
@@ -93,7 +100,9 @@ export default {
   justify-content: space-around;
 }
 h1 {
-  font-size: 40px;
+  font-size: 50px;
+  display: flex;
+  align-items: left;
 }
 img {
   height: 40px;
@@ -102,9 +111,20 @@ img {
 
 p {
   font-size: 20px;
+  padding-left: 20px;
+}
+
+.about {
+  border-style: solid;
+  border-radius: 9px;
+  border-color: var(--light-accent);
+  background-color: var(--light-accent);
+  text-decoration-color: white;
+
 }
 .count-lines{
   min-height: fit-content;;
-
 }
+
+
 </style>
