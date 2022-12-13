@@ -18,27 +18,7 @@
           for free to add friends, trade, and explore collections
         </p>
       </div>
-      <div class="slideshow-container">
-
-                <div class="mySlides fade">
-                  <div class="numbertext">1 / 3</div>
-                  <img src="../images/Amazing-Spider-Man.jpg" style="width:100%">
-                  <div class="text">Caption Text</div>
-                </div>
-
-                <div class="mySlides fade">
-                  <div class="numbertext">2 / 3</div>
-                  <img src="../images/X-Men-First-Appearance.jpg" style="width:100%">
-                  <div class="text">Caption Two</div>
-                </div>
-
-                <div class="mySlides fade">
-                  <div class="numbertext">3 / 3</div>
-                  <img src="../images/Amazing-Spider-Man-Fantastic-Four.jpg" style="width:100%">
-                  <div class="text">Caption Three</div>
-                </div>
-
-      </div>
+      <img class="slideshow-image" :src="image">
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">
@@ -76,17 +56,40 @@
 <script>
 import CollectionService from "../services/CollectionService";
 
+function getImageUrl(image) {
+  var images = require.context("../images/", false)
+  return images('./' + image)
+}
+
+
 export default {
   name: "home",
   data() {
     return {
+      currentIndex: 0,
+      currentPicture: '',
+      pictures: [
+        'borat.jpg',
+        'no-cover.jpg',
+        'Amazing-Spider-Man-Fantastic-Four.jpg',
+        'Amazing-Spider-Man.jpg'
+      ],
+      paths: [],
       aggregate: {
         creators: [],
-        characters: [],
+        characters: []
       },
     };
   },
   methods: {
+    rotatePicture() {
+      if (this.currentIndex > this.pictures.length - 1) {
+        this.currentIndex = 0
+      }
+      this.currentPicture = this.pictures[this.currentIndex];
+      this.currentIndex++;
+      setTimeout(this.rotatePicture, 5000)
+    },
     getAggregate() {
       CollectionService.getAggregateStats().then((response) => {
         if (response.status == 200) {
@@ -94,47 +97,35 @@ export default {
           console.log(this.aggregate);
         }
       });
-    },
+    }
+  },
+  computed: {
+    image() {
+      return this.paths[this.currentIndex]
+    }
   },
   created() {
-    this.getAggregate();
+    for (let picture of this.pictures) {
+      this.paths.push(getImageUrl(picture))
+    }
   },
   mounted(){
-    let slideIndex = 0;
-    showSlides();
+    this.rotatePicture();
 
-    function showSlides() {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}    
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";  
-      dots[slideIndex-1].className += " active";
-      setTimeout(showSlides, 2000); // Change image every 2 seconds
-    }
   }
 };
 </script>
 
 <style scoped>
+.slideshow-image {
+  height: 500px;
+  width: 500px;
+}
 .home {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-
-#left-pane img {
-  margin: auto;
-  height: auto;
-  width: 400px;
 }
 
 #left-pane {
@@ -165,16 +156,7 @@ p {
 }
 
 .about {
-  /* border-style: solid;
-  border-radius: 9px;
-  border-color: var(--light-accent);
-  background-color: var(--light-accent);
-<<<<<<< HEAD
-  text-decoration-color: white; */
-
-=======
   text-decoration-color: white;
->>>>>>> a35f9c271f9f10a939afdc12b9e6fb08eb5cde85
 }
 .count-lines {
   min-height: fit-content;
