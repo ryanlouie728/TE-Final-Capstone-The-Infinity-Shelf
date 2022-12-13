@@ -8,10 +8,27 @@
           for free to add friends, trade, and explore collections
           </p>
       </div>
-      
-      
-      <p>New Releases from API? Random 5 comics that are loaded? <strong>SOmething visual here?</strong></p>
-      <img src="../images/borat.jpg" alt="something visual">
+      <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                  <div class="numbertext">1 / 3</div>
+                  <img src="../images/Amazing-Spider-Man.jpg" style="width:100%">
+                  <div class="text">Caption Text</div>
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">2 / 3</div>
+                  <img src="../images/X-Men-First-Appearance.jpg" style="width:100%">
+                  <div class="text">Caption Two</div>
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">3 / 3</div>
+                  <img src="../images/Amazing-Spider-Man-Fantastic-Four.jpg" style="width:100%">
+                  <div class="text">Caption Three</div>
+                </div>
+
+      </div>
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">Top 5 Characters throughout Collections</h3>
@@ -115,11 +132,11 @@ p {
 }
 
 .about {
-  border-style: solid;
+  /* border-style: solid;
   border-radius: 9px;
   border-color: var(--light-accent);
   background-color: var(--light-accent);
-  text-decoration-color: white;
+  text-decoration-color: white; */
 
 }
 .count-lines{
