@@ -18,27 +18,9 @@
           for free to add friends, trade, and explore collections
         </p>
       </div>
-      <!-- <div class="slideshow-container">
-
-            <div class="mySlides fade">
-              <div class="numbertext">1 / 3</div>
-              <img src="../images/Amazing-Spider-Man.jpg" style="width:100%">
-              <div class="text">Caption Text</div>
-            </div>
-
-            <div class="mySlides fade">
-              <div class="numbertext">2 / 3</div>
-              <img src="../images/X-Men-First-Appearance.jpg" style="width:100%">
-              <div class="text">Caption Two</div>
-            </div>
-
-            <div class="mySlides fade">
-              <div class="numbertext">3 / 3</div>
-              <img src="../images/Amazing-Spider-Man-Fantastic-Four.jpg" style="width:100%">
-              <div class="text">Caption Three</div>
-            </div>
-
-      </div> -->
+      <div class="slideshow">
+        <img class="slideshow-image" :src="image" />
+      </div>
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">
@@ -76,17 +58,41 @@
 <script>
 import CollectionService from "../services/CollectionService";
 
+function getImageUrl(image) {
+  var images = require.context("../images/", false)
+  return images('./' + image)
+}
+
+
 export default {
   name: "home",
   data() {
     return {
+      currentIndex: 0,
+      pictures: [
+        'Captain-America.jpg',
+        'borat.jpg',
+        'no-cover.jpg',
+        'Amazing-Spider-Man-Fantastic-Four.jpg',
+        'Amazing-Spider-Man.jpg',
+        'Journey-Into-Thor.jpg',
+        'X-Men-First-Appearance.jpg'
+      ],
+      paths: [],
       aggregate: {
         creators: [],
-        characters: [],
+        characters: []
       },
     };
   },
   methods: {
+    rotatePicture() {
+      this.currentIndex++;
+      if (this.currentIndex > this.pictures.length - 1) {
+        this.currentIndex = 0
+      }
+      setTimeout(this.rotatePicture, 5000)
+    },
     getAggregate() {
       CollectionService.getAggregateStats().then((response) => {
         if (response.status == 200) {
@@ -94,28 +100,43 @@ export default {
           console.log(this.aggregate);
         }
       });
-    },
+    }
+  },
+  computed: {
+    image() {
+      return this.paths[this.currentIndex]
+    }
   },
   created() {
-    this.getAggregate();
+    for (let picture of this.pictures) {
+      this.paths.push(getImageUrl(picture))
+    }
   },
   mounted(){
+<<<<<<< HEAD
+=======
+    this.rotatePicture();
+    this.getAggregate();
+>>>>>>> a9ca8f5d4d0cd9090f01c902169e2555fd1f0a5f
   }
 };
 </script>
 
 <style scoped>
+.slideshow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.slideshow-image {
+  height: 200px;
+  width: auto;
+}
 .home {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-
-#left-pane img {
-  margin: auto;
-  height: auto;
-  width: 400px;
 }
 
 #left-pane {
@@ -145,6 +166,12 @@ p {
   padding-left: 20px;
 }
 
+<<<<<<< HEAD
+=======
+.about {
+  text-decoration-color: white;
+}
+>>>>>>> a9ca8f5d4d0cd9090f01c902169e2555fd1f0a5f
 .count-lines {
   min-height: fit-content;
 }
