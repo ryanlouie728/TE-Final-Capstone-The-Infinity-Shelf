@@ -65,7 +65,7 @@ public class TradeController {
         if (!tradeDao.tradeIsPending(tradeId)) {
             throw new IllegalArgumentException("Trade must be pending to cancel");
         }
-        return tradeDao.rejectTrade(tradeId);
+        return tradeDao.cancelTrade(tradeId);
     }
 
     @GetMapping("/pending/{userId}")
@@ -74,5 +74,10 @@ public class TradeController {
         out.put("pending", tradeDao.getPendingByUserId(userId));
         out.put("requests", tradeDao.getRequestsByUserId(userId));
         return out;
+    }
+
+    @GetMapping("/history/{userId}")
+    public List<TradeDto> getTradeHistory(@PathVariable Integer userId) {
+        return tradeDao.getTradeHistoryByUserId(userId);
     }
 }

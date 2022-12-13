@@ -21,5 +21,8 @@ export default {
     },
     cancelTrade(tradeId) {
         return http.put(`/trades/cancel/${tradeId}`)
+    },
+    getTradeHistoryByUserId(userId) {
+        return http.get(`/trades/history/${userId}`)
     }
 }

@@ -9,6 +9,7 @@ public interface TradeDao {
     List<TradeDto> getTradesByUserId(Integer userId);
     List<TradeDto> getPendingByUserId(Integer userId);
     List<TradeDto> getRequestsByUserId(Integer userId);
+    List<TradeDto> getTradeHistoryByUserId(Integer userId);
 
     Boolean createTrade(TradeDto trade);
 

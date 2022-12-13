@@ -30,7 +30,7 @@
         <pending-trades />
     </div>
     <div class="tab-content" v-if="tab == 'history'">
-
+        <trade-history />
     </div>
   </div>
 </template>
@@ -39,13 +39,14 @@
 import CreateTrade from '../components/Trades/CreateTrade.vue'
 import IconButton from '../components/IconButton.vue';
 import PendingTrades from '../components/Trades/PendingTrades.vue'
+import TradeHistory from '../components/Trades/TradeHistory.vue';
 
 export default {
-    components: {CreateTrade, IconButton, PendingTrades},
+    components: {CreateTrade, IconButton, PendingTrades, TradeHistory},
     name: 'trade',
     data() {
         return {
-            tab: 'create'
+            tab: 'history'
         }
 
     },
