@@ -78,8 +78,7 @@ export default {
     border-radius: 9px;
     cursor: pointer;
     font-family: "Bebas Neue", sans-serif;
-    /* background-color: var(--dark-accent); */
-    background-color: red;
+    background-color: var(--dark-accent);
     color: var(--white);
     text-align: center;
     vertical-align: middle;
@@ -89,6 +88,8 @@ export default {
 
 .buttonStyle:hover {
     background-color: var(--medium-accent);
+   
+
     
 }
 .buttonStyle > i {
