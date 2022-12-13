@@ -60,12 +60,16 @@ export default {
     setNavLinkEvents() {
       for (let link of document.querySelectorAll('.nav-link')) {
         link.addEventListener('mouseenter', () => {
-          link.classList.remove('nav-link-hover-out');
-          link.classList.add('nav-link-hover-in');
+          if (!link.classList.contains('nav-link-current')) {
+            link.classList.remove('nav-link-hover-out');
+            link.classList.add('nav-link-hover-in');
+          }
         })
         link.addEventListener('mouseleave', () => {
-          link.classList.add('nav-link-hover-out');
-          link.classList.remove('nav-link-hover-in');
+          if (!link.classList.contains('nav-link-current')) {
+            link.classList.add('nav-link-hover-out');
+            link.classList.remove('nav-link-hover-in');
+          }
         })
       }
     }
