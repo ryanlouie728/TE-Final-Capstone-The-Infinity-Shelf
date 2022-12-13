@@ -68,7 +68,7 @@ export default {
 
 .collection {
     border: solid 2px var(--dark-accent);
-    background-color: white;
+    background-color: transparent;
     height: 175px;
     padding: 5px;
     display: flex;
@@ -100,10 +100,11 @@ export default {
     display: flex;
     word-wrap: break-word;
     flex-direction: column;
-    background-color: beige;
+    background-color: var(--light-accent);
     padding-left: 15px;
     border-radius: 9px;
     border: 2px solid black;
+    color: var(--white);
 }
 
 .collection-name {
