@@ -55,15 +55,28 @@ export default {
     created() {
     },
     mounted() {
+        for (let link of document.querySelectorAll('.tab-bar-option')) {
+            link.addEventListener('mouseenter', () => {
+                if (!link.classList.contains('tab-bar-option-selected')) {
+                    link.classList.remove('tab-link-hover-out');
+                    link.classList.add('tab-link-hover-in');
+                }
+            })
+            link.addEventListener('mouseleave', () => {
+                if (!link.classList.contains('tab-bar-option-selected')) {
+                    link.classList.add('tab-link-hover-out');
+                    link.classList.remove('tab-link-hover-in');
+                }
+            })
+        }
     }
 }
 </script>
 
-<style>
+<style scoped>
 .tab-content {
     width: 100%;
     max-height: calc(100% - 35px);
-    /* background-color: var(--light-accent); */
     border-radius: 10px;
     box-sizing: border-box;
     padding: 5px;
@@ -92,6 +105,7 @@ export default {
     height: 35px;
     background-color: transparent;
     cursor: pointer;
+    padding-left: 15px;
     animation: fade-in 0.1s linear;
 }
 .tab-bar-option:hover {
@@ -108,6 +122,29 @@ export default {
     color: var(--white);
 }
 
+.tab-link-hover-in {
+  animation: hover-fade-in 0.1s linear;
+}
+.tab-link-hover-out {
+  animation: hover-fade-out 0.1s linear;
+}
 
+@keyframes hover-fade-in {
+  from {
+    background-color: var(--main-background);
+  }
+  to {
+    background-color: var(--medium-accent);
+  }
+}
+
+@keyframes hover-fade-out {
+  from {
+    background-color: var(--medium-accent);
+  }
+  to {
+    background-color: var(--main-background);
+  }
+}
 
 </style>

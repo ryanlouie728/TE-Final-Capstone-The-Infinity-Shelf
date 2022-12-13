@@ -191,7 +191,6 @@ nav {
   align-items: center;
   height: 100%;
   margin-right: 10px;
-  /* color: var(--dark-accent); */
 }
 #nav-links > div > a > p {
   margin: 0px;

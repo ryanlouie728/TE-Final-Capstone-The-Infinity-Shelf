@@ -46,5 +46,13 @@ export default {
 </script>
 
 <style>
+.remove-collection {
+    background-color: transparent;
+    border-radius: 10px;
+}
 
+.remove-collection > div {
+    background-color: transparent;
+    border-radius: inherit;
+}
 </style>
