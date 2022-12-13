@@ -55,8 +55,24 @@
 
 import UserBar from './components/UserBar.vue'
 export default {
-  components: { UserBar }
-
+  components: { UserBar },
+  methods: {
+    setNavLinkEvents() {
+      for (let link of document.querySelectorAll('.nav-link')) {
+        link.addEventListener('mouseenter', () => {
+          link.classList.remove('nav-link-hover-out');
+          link.classList.add('nav-link-hover-in');
+        })
+        link.addEventListener('mouseleave', () => {
+          link.classList.add('nav-link-hover-out');
+          link.classList.remove('nav-link-hover-in');
+        })
+      }
+    }
+  },
+  mounted() {
+    this.setNavLinkEvents();
+  }
 }
 </script>
 
@@ -225,6 +241,12 @@ nav {
   background-color: var(--light-accent);
 }
 
+.nav-link-hover-in {
+  animation: hover-fade-in 0.1s linear;
+}
+.nav-link-hover-out {
+  animation: hover-fade-out 0.1s linear;
+}
 
 .nav-link-holder > * {
   font-weight: bold;
@@ -342,6 +364,24 @@ nav {
   } 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes hover-fade-in {
+  from {
+    background-color: var(--main-background);
+  }
+  to {
+    background-color: var(--light-accent);
+  }
+}
+
+@keyframes hover-fade-out {
+  from {
+    background-color: var(--light-accent);
+  }
+  to {
+    background-color: var(--main-background);
   }
 }
 
