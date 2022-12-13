@@ -49,8 +49,8 @@
         <h2 banner>Comics in {{ this.collection.collectionName }} Collection</h2>
         <comic-list 
           v-bind:base="this.collection"
-          v-bind:showAdd="true"
-          v-bind:showRemove="this.collection.comics.length > 0" 
+          v-bind:showAdd="true && this.$store.state.user.id == this.collection.userId"
+          v-bind:showRemove="this.collection.comics.length > 0 && this.$store.state.user.id == this.collection.userId" 
           ref="comics" 
           @resetComics="getCollection()"
           @clicked="comicClicked()" 
@@ -238,6 +238,7 @@ export default {
   top: 210px;
   left: 10px;
   font-weight: bold;
+  animation: fade-in 0.1s linear;
 }
 
 #img {
