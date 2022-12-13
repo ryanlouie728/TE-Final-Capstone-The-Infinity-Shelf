@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
     <nav>
       <div id="nav-links">
           <div class="nav-link-holder">
@@ -33,7 +32,9 @@
     <header id="header">
       <img id="iron-man" src='./images/Iron-man.gif'>
       <div id="title-nav-block">
-        <h1>The Infinity Shelf</h1>
+        <router-link v-bind:to="{ name: 'home' }"> 
+          <h1>The Infinity Shelf</h1>
+        </router-link>
       </div>
       <user-bar />
       <img id="thanos" src='./images/thanos-gangnam.gif'>
@@ -206,6 +207,11 @@ nav {
   justify-content: space-between;
   align-items: center;
   user-select: none;
+}
+
+#title-nav-block > a {
+  text-decoration: none;
+  color: var(--dark-accent);
 }
 
 .nav-link {
