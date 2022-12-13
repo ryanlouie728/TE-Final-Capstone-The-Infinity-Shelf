@@ -3,10 +3,20 @@
     <div id="left-pane">
       <h1>The Infinity Shelf</h1>
       <div class="about">
-          <p>Welcome to the <strong>Infinity Shelf</strong>, a Marvel fanatic haven. Personalize and keep track of all your favorite Marvel comics in private or public collections.</p>
-          <p><router-link style="text-decoration: none;" :to="{ name: 'register' }" id="register">Sign-up</router-link> 
+        <p>
+          Welcome to the <strong>Infinity Shelf</strong>, a Marvel fanatic
+          haven. Personalize and keep track of all your favorite Marvel comics
+          in private or public collections.
+        </p>
+        <p>
+          <router-link
+            style="text-decoration: none"
+            :to="{ name: 'register' }"
+            id="register"
+            >Sign-up</router-link
+          >
           for free to add friends, trade, and explore collections
-          </p>
+        </p>
       </div>
       <div class="slideshow-container">
 
@@ -31,15 +41,17 @@
       </div>
       <div class="stat-info">
         <div class="character">
-          <h3 class="character-title">Top 5 Characters throughout Collections</h3>
+          <h3 class="character-title">
+            Top 5 Characters throughout Collections
+          </h3>
           <div
             class="count-lines"
             v-for="character in aggregate.characters.slice(0, 5)"
             v-bind:key="character.name"
           >
             <h4 class="count-name">
-              {{ character.name}} <br>
-              {{ 'Appearances Count: ' + character.count}}
+              {{ character.name }} <br />
+              {{ "Appearances Count: " + character.count }}
             </h4>
           </div>
         </div>
@@ -51,8 +63,8 @@
             v-bind:key="creator.name"
           >
             <h4 class="count-name">
-              {{ creator.name}} <br>
-              {{ 'Appearances Count: ' + creator.count}}
+              {{ creator.name }} <br />
+              {{ "Appearances Count: " + creator.count }}
             </h4>
           </div>
         </div>
@@ -87,6 +99,27 @@ export default {
   created() {
     this.getAggregate();
   },
+  mounted(){
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}    
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+      setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+  }
 };
 </script>
 
@@ -98,10 +131,10 @@ export default {
   justify-content: center;
 }
 
-#left-pane img{
+#left-pane img {
   margin: auto;
   height: auto;
-  width:400px;
+  width: 400px;
 }
 
 #left-pane {
@@ -136,12 +169,14 @@ p {
   border-radius: 9px;
   border-color: var(--light-accent);
   background-color: var(--light-accent);
+<<<<<<< HEAD
   text-decoration-color: white; */
 
+=======
+  text-decoration-color: white;
+>>>>>>> a35f9c271f9f10a939afdc12b9e6fb08eb5cde85
 }
-.count-lines{
-  min-height: fit-content;;
+.count-lines {
+  min-height: fit-content;
 }
-
-
 </style>
