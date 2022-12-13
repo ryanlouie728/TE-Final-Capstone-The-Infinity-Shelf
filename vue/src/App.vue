@@ -71,6 +71,16 @@ export default {
   --white: #FEFCFD;
   --background-blur: rgba(0,0,0,0.4);
   --brass-accent: #B4A24C;
+
+  /** captain falcon blue */
+  /* --main-background: #535278; */
+
+  /* off yellow */
+  /* --main-background: #f9f998; */
+
+/** captain falcon yellow */
+  /* --light-accent: #edc81b; */
+  /* --light-accent: #d4af37; */
   
 }
 
@@ -108,6 +118,7 @@ body {
     "nav body sidebar"
     "footer footer footer";
 }
+
 #header {
   grid-area: title;
   display: flex;

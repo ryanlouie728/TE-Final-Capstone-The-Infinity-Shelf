@@ -217,8 +217,7 @@ export default {
   row-gap: 5px;
   grid-template-areas:
     "img add-comic add-comic"
-    "coll-desc  character-list creator-list"
-    "coll-desc update-coll remove-coll";
+    "coll-desc  character-list creator-list";
 }
 #add-comic{
   grid-area: add-comic;
@@ -275,7 +274,8 @@ export default {
 .character-list {
   grid-area: character-list;
   width: 50%;
-  max-height: 300px;
+  min-width: fit-content;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -283,7 +283,8 @@ export default {
 .creator-list {
   grid-area: creator-list;
   width: 50%;
-  max-height: 300px;
+  min-width: fit-content;
+  min-height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

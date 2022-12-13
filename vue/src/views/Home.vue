@@ -3,7 +3,8 @@
     <div id="left-pane">
       <h1>The Infinity Shelf</h1>
       <p>This application allows users to manage their comic book collections and arrange trades with other users.</p>
-      <p>New Releases from API? Random 5 comics that are loaded? SOmething visual here?</p>
+      <p>New Releases from API? Random 5 comics that are loaded? <strong>SOmething visual here?</strong></p>
+      <img src="../images/borat.jpg" alt="something visual">
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">Top 5 Characters throughout Collections</h3>
@@ -73,6 +74,12 @@ export default {
   justify-content: center;
 }
 
+#left-pane img{
+  margin: auto;
+  height: auto;
+  width:400px;
+}
+
 #left-pane {
   display: flex;
   flex-direction: column;
@@ -82,6 +89,7 @@ export default {
 .stat-info {
   display: flex;
   flex-direction: row;
+  min-height: fit-content;
   justify-content: space-around;
 }
 h1 {
@@ -96,7 +104,7 @@ p {
   font-size: 20px;
 }
 .count-lines{
-  max-height: 50px;
+  min-height: fit-content;;
 
 }
 </style>

@@ -203,12 +203,12 @@ ul {
   
 }
 textarea{
-  width: 100%;
+  width: 98%;
   height: 100px;
   font-family:Arial, Helvetica, sans-serif;
 }
 #title-input{
-  width: 100%;
+  width: 97%;
   margin-top: 2px;
   margin-bottom: 2px;
 
