@@ -6,8 +6,8 @@
         </datalist>
         <div class="trade-block" id="current-comics">
             <div class="trade-title-block">
-                <h3>{{this.$store.state.user.username}}</h3>
-                <h3>{{userInput}}</h3>
+                <h3>{{this.$store.state.user.username}}'s Comics</h3>
+                <h3>{{userInput}}'s Comics</h3>
             </div>
             <div class="trade-list-block">
                 <div class="trade-comic-list-holder">
@@ -21,8 +21,8 @@
         <div class="trade-block" id="proposed-trade">
 
             <div class="trade-title-block">
-                <h3>{{this.$store.state.user.username}}</h3>
-                <h3>{{userInput}}</h3>
+                <h3>Comics {{this.$store.state.user.username}} wants to trade</h3>
+                <h3>Comics {{userInput}} wants to trade</h3>
             </div>
             <div class="trade-list-block">
                 <div class="trade-comic-list-holder">
