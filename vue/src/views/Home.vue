@@ -15,7 +15,7 @@
             id="register"
             >Sign-up</router-link
           >
-          for free to add friends, trade, and explore collections
+          for free to add friends, trade, and explore collections.
         </p>
       </div>
       <div class="slideshow">
@@ -24,7 +24,7 @@
       <div class="stat-info">
         <div class="character">
           <h3 class="character-title">
-            Top 5 Characters throughout Collections
+            Top 5 Characters In All Collections
           </h3>
           <div
             class="count-lines"
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="creator">
-          <h3 class="creator-title">Top 5 Creators throughout Collections</h3>
+          <h3 class="creator-title">Top 5 Creators In All Collections</h3>
           <div
             class="count-lines"
             v-for="creator in aggregate.creators.slice(0, 5)"
@@ -73,9 +73,12 @@ export default {
         'Captain-America.jpg',
         'Avengers.jpg',
         'Amazing-Spider-Man-Fantastic-Four.jpg',
+        'Human-Torch.jpg',
         'Amazing-Spider-Man.jpg',
         'Journey-Into-Thor.jpg',
-        'X-Men-First-Appearance.jpg'
+        'X-Men-First-Appearance.jpg',
+        'Incredible-Hulk.jpg'
+
       ],
       paths: [],
       aggregate: {
@@ -90,7 +93,7 @@ export default {
       if (this.currentIndex > this.pictures.length - 1) {
         this.currentIndex = 0
       }
-      setTimeout(this.rotatePicture, 3000)
+      setTimeout(this.rotatePicture, 2500)
     },
     getAggregate() {
       CollectionService.getAggregateStats().then((response) => {
@@ -160,13 +163,15 @@ img {
 p {
   font-size: 20px;
   padding-left: 20px;
+  
 }
 
-.about {
-  text-decoration-color: white;
-}
 .count-lines {
   min-height: fit-content;
+}
+
+h3 {
+  font-size: 25px;
 }
 
 

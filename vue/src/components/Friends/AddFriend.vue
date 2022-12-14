@@ -69,6 +69,8 @@ export default {
     transform: translate(-50%, -50%);
     background-color: var(--light-accent);
     position: fixed;
+    
+
 }
 
 .add-friend > h2 {
