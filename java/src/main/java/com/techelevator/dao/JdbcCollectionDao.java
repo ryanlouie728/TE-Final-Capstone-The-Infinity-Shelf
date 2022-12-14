@@ -157,6 +157,19 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
+    public CollectionDto getPublicCollectionById(Integer collectionId){
+        String sql =
+                "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +
+                "FROM collection " +
+                "WHERE coll_id = ? AND coll_public = true;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, collectionId);
+        if(rowSet.next()){
+            return collectionMapper(rowSet);
+        }
+        return null;
+    }
+
+    @Override
     public List<CollectionDto> getCollectionsByUserId(Integer userId) {
         String sql =
                 "SELECT coll_id, user_id, coll_name, coll_description, coll_cover, coll_public " +

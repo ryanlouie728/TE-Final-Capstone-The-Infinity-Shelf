@@ -71,8 +71,8 @@ export default {
       currentIndex: 0,
       pictures: [
         'Captain-America.jpg',
-        'borat.jpg',
-        'no-cover.jpg',
+        // 'borat.jpg',
+        // 'no-cover.jpg',
         'Amazing-Spider-Man-Fantastic-Four.jpg',
         'Amazing-Spider-Man.jpg',
         'Journey-Into-Thor.jpg',
@@ -126,8 +126,8 @@ export default {
   width: 100%;
 }
 .slideshow-image {
-  height: 200px;
-  width: auto;
+  height: auto;
+  width: 800px;
 }
 .home {
   width: 100%;
