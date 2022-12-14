@@ -6,8 +6,10 @@
         </datalist>
         <div class="trade-block" id="current-comics">
             <div class="trade-title-block">
-                <h3>{{this.$store.state.user.username}}'s Comics</h3>
-                <h3>{{userInput}}'s Comics</h3>
+                <div class="left">
+                <h3>{{this.$store.state.user.username}}'s Comics</h3></div>
+                <div class="right">
+                <h3 v-if="userInput!=''">{{userInput}}'s Comics</h3></div>
             </div>
             <div class="trade-list-block">
                 <div class="trade-comic-list-holder">
@@ -21,8 +23,10 @@
         <div class="trade-block" id="proposed-trade">
 
             <div class="trade-title-block">
-                <h3>Comics {{this.$store.state.user.username}} wants to trade</h3>
-                <h3>Comics {{userInput}} wants to trade</h3>
+                <div class="left">
+                <h3>Comics {{this.$store.state.user.username}} wants to trade</h3></div>
+                <div class="left">
+                <h3 v-if="userInput!=''">Comics {{userInput}} wants to trade</h3></div>
             </div>
             <div class="trade-list-block">
                 <div class="trade-comic-list-holder">
@@ -244,7 +248,14 @@ components: { ComicList, AppButton, Confirm },
 
 .trade-list-block {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+}
+
+.left {
+    text-align: center;
+}
+.right {
+    text-align: center;
 }
 
 #user-select {
