@@ -7,6 +7,7 @@
       id="title-input"
       name="title-input"
       type="text"
+      maxlength="50"
     />
     <label for="description-input">Description</label>
     <textarea v-model="collection.collectionDescription" maxlength="250" />

@@ -31,4 +31,6 @@ public interface CollectionDao {
 
     List<CollectionDto> getAllCollections();
 
+    CollectionDto getPublicCollectionById(Integer collectionId);
+
 }

@@ -14,6 +14,7 @@
             id="title-input-update-collection"
             name="title-input"
             type="text"
+            maxlength="50"
           />
         </div>
         
