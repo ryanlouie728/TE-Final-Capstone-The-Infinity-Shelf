@@ -75,7 +75,7 @@ export default {
     setStyle() {
       let friendsButton = document.getElementById('friends-button')
       let friendsPage = document.querySelector('.friend-page')
-      friendsPage.style.top = friendsButton.offsetTop + 32 + 'px';
+      friendsPage.style.top = friendsButton.offsetTop + 40 + 'px';
       friendsPage.style.left = '0px';
       this.loaded = true;
     }

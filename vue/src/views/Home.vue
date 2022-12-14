@@ -154,6 +154,7 @@ h1 {
   font-size: 50px;
   display: flex;
   align-items: left;
+  margin-bottom: 10px;
 }
 img {
   height: 40px;
