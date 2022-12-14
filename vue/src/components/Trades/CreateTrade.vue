@@ -1,6 +1,6 @@
 <template>
     <div class="create-trade">
-        <input v-on:keyup="getUsers()" @change="userSelected" v-model="userInput" type="text" list="usernames">
+        <input id="trade-username" v-on:keyup="getUsers()" @change="userSelected" v-model="userInput" type="text" list="usernames">
         <datalist id="usernames">
             <option v-for="user in this.users"  v-bind:key="user.id" :value="user.username">{{user.username}}</option>
         </datalist>
@@ -214,6 +214,9 @@ components: { ComicList, AppButton, Confirm },
 </script>
 
 <style>
+/* #trade-username {
+    font-family: "Bebas Neue", sans-serif;
+} */
 .create-trade {
     width: 100%;
     display: flex;

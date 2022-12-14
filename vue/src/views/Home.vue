@@ -71,8 +71,7 @@ export default {
       currentIndex: 0,
       pictures: [
         'Captain-America.jpg',
-        // 'borat.jpg',
-        // 'no-cover.jpg',
+        'Avengers.jpg',
         'Amazing-Spider-Man-Fantastic-Four.jpg',
         'Amazing-Spider-Man.jpg',
         'Journey-Into-Thor.jpg',
@@ -91,7 +90,7 @@ export default {
       if (this.currentIndex > this.pictures.length - 1) {
         this.currentIndex = 0
       }
-      setTimeout(this.rotatePicture, 5000)
+      setTimeout(this.rotatePicture, 3000)
     },
     getAggregate() {
       CollectionService.getAggregateStats().then((response) => {
