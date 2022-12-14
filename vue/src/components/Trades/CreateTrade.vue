@@ -218,9 +218,9 @@ components: { ComicList, AppButton, Confirm },
 </script>
 
 <style>
-/* #trade-username {
+#trade-username {
     font-family: "Bebas Neue", sans-serif;
-} */
+}
 .create-trade {
     width: 100%;
     display: flex;

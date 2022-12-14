@@ -23,6 +23,7 @@ export default {
   height: 50px;
   justify-content: center;
   align-items: center;
+  
 }
 
 .friend-link {
