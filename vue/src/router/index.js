@@ -73,7 +73,7 @@ const router = new Router({
       name: 'comic-details',
       component: ComicDetails,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
