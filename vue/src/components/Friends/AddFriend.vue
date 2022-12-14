@@ -5,15 +5,7 @@
         ref="selector"
     />
     <div id="button-holder">
-        <!-- <button 
-            class="button"
-            v-on:click.prevent="confirming=true"
-        >Add</button> -->
         <app-button v-on:click.prevent="confirming=true" buttonText="Add"/>
-        <!-- <button 
-            class="button"
-            v-on:click.prevent="$emit('cancelled')"
-        >Cancel</button> -->
         <app-button v-on:click.prevent="$emit('cancelled')" buttonText="Cancel"/>
     </div>
     
