@@ -46,7 +46,7 @@ export default {
     name: 'trade',
     data() {
         return {
-            tab: 'create'
+            tab: 'pending'
         }
 
     },

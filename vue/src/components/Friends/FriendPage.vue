@@ -94,6 +94,8 @@ export default {
   width: 175px;
   background-color: var(--light-accent);
   border-radius: 10px;
+  border-style: solid;
+  border-color: black;
   display: block;
   position: absolute;
   /* filter: drop-shadow(2px 2px 1px var(--medium-accent)); */

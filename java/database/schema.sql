@@ -69,7 +69,7 @@ CREATE TABLE trade_comic (
     to_id int NOT NULL,
     comic_id int NOT NULL,
     coll_id int NOT NULL,
-    CONSTRAINT PK_trade_comic PRIMARY KEY (trade_id, comic_id),
+    CONSTRAINT PK_trade_comic PRIMARY KEY (trade_id, comic_id, coll_id),
     CONSTRAINT FK_trade_comic_trade FOREIGN KEY (trade_id) REFERENCES trade(trade_id),
     CONSTRAINT FK_trade_comic_from FOREIGN KEY (from_id) REFERENCES users(user_id),
     CONSTRAINT FK_trade_comic_to FOREIGN KEY (to_id) REFERENCES users(user_id),

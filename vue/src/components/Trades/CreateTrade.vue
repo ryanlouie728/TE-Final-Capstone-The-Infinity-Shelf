@@ -191,6 +191,7 @@ components: { ComicList, AppButton, Confirm },
                     collectionId: comic.collectionId
                 })
             }
+            console.log(this.trade)
             this.createTrade();
         },
         createTrade() {
@@ -218,9 +219,9 @@ components: { ComicList, AppButton, Confirm },
 </script>
 
 <style>
-/* #trade-username {
+#trade-username {
     font-family: "Bebas Neue", sans-serif;
-} */
+}
 .create-trade {
     width: 100%;
     display: flex;
