@@ -14,7 +14,6 @@
         > 
             <img class="collection-thumbnail" v-if="coll.collectionCoverUrl" v-bind:src="coll.collectionCoverUrl"/>
             <img class="collection-thumbnail" v-if="!coll.collectionCoverUrl" src="../images/no-cover.jpg"/>
-            <!-- <div class="no-thumbnail" v-if="coll.collectionCoverUrl == null"><p>No Thumbnail</p></div> -->
             <div class="collection-text">
                 <h3 class="collection-name"> {{ coll.collectionName }} </h3>
                 <p class="collection-description"> {{coll.collectionDescription.substring(0,200)}}<span v-if="coll.collectionDescription.length > 200">...</span> </p>
@@ -34,7 +33,6 @@ export default {
     },
     methods: {
         openCollection(id) {
-
             if(this.$store.state.token === ''){
                 this.$router.push({
                     name: 'collection-details-public',
