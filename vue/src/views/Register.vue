@@ -122,6 +122,12 @@ export default {
 </script>
 
 <style>
+.alert-danger {
+  color: red;
+  text-align: center;
+  font-size: 20px;
+}
+
 .text-center {
   width: 100%;
   display: flex;
