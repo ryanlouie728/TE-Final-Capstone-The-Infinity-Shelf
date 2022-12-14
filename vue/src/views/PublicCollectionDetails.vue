@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="private" v-if="collection = {}">
+    <div class="private" v-if="collection == []">
       <h1>
         You are attempting to access a collection that is either Private or does
         not exist
