@@ -112,10 +112,10 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
-  // const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
 
   // // If it does and they are not logged in, send the user to "/login"
-  if (to.meta.requiresAuth && store.state.token === '') {
+  if (requiresAuth && store.state.token === '') {
     next({name: "login"})
   } else {
     // Else let them go to their next destination
