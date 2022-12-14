@@ -13,7 +13,7 @@ CREATE TABLE comic (
 CREATE TABLE collection (
 	coll_id serial,
 	user_id int NOT NULL,
-	coll_name VARCHAR(150),
+	coll_name VARCHAR(50),
 	coll_description VARCHAR(250),
 	coll_cover VARCHAR(250),
 	CONSTRAINT PK_collection PRIMARY KEY (coll_id),
