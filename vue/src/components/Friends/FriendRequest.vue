@@ -42,6 +42,7 @@ export default {
         this.confirming = true
       },
       requestAccepted() {
+        console.log(this.$store.state.user.username)
         FriendService.acceptRequest(this.request.requestId)
         .then(() => {
           this.$emit('accepted')

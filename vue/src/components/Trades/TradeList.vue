@@ -28,6 +28,8 @@ export default {
     methods: {
 
     },
+    mounted() {
+    },
     created() {
         
     }

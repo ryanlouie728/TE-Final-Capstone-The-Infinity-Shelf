@@ -191,6 +191,7 @@ components: { ComicList, AppButton, Confirm },
                     collectionId: comic.collectionId
                 })
             }
+            console.log(this.trade)
             this.createTrade();
         },
         createTrade() {
