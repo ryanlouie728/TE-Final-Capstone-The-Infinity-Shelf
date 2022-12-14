@@ -113,11 +113,8 @@ export default {
     }
   },
   mounted(){
-<<<<<<< HEAD
-=======
     this.rotatePicture();
     this.getAggregate();
->>>>>>> a9ca8f5d4d0cd9090f01c902169e2555fd1f0a5f
   }
 };
 </script>
@@ -166,12 +163,9 @@ p {
   padding-left: 20px;
 }
 
-<<<<<<< HEAD
-=======
 .about {
   text-decoration-color: white;
 }
->>>>>>> a9ca8f5d4d0cd9090f01c902169e2555fd1f0a5f
 .count-lines {
   min-height: fit-content;
 }
