@@ -10,6 +10,7 @@ import CollectionDetails from '../views/CollectionDetails.vue'
 import PublicCollections from '../views/PublicCollections.vue'
 import ComicDetails from '../views/ComicDetails.vue'
 import Trade from '../views/Trade.vue'
+import PublicCollectionDetails from '../views/PublicCollectionDetails.vue'
 
 
 Vue.use(Router)
@@ -54,7 +55,7 @@ const router = new Router({
     {
       path: '/collections/public/:id',
       name: 'collection-details-public',
-      component: CollectionDetails,
+      component: PublicCollectionDetails,
       meta:{
         requiresAuth: false
       }
