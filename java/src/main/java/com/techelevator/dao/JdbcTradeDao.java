@@ -47,7 +47,6 @@ public class JdbcTradeDao implements TradeDao {
                 "AND trade_user.role = 'sender' " +
                 "AND trade.status = 'pending' ;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, userId);
-
         return tradeListMapper(rowSet);
     }
 
@@ -292,10 +291,15 @@ public class JdbcTradeDao implements TradeDao {
     private TradeComicDto tradeComicMapper(SqlRowSet rowSet) {
         try {
             TradeComicDto comic = new TradeComicDto();
-            comic.setComicDto(comicDao.getComicById(rowSet.getInt("comic_id")));
+            comic.setCollectionId(rowSet.getInt("coll_id"));
+            ComicDto comicDto = comicDao.getComicById(rowSet.getInt("comic_id"));
+            comicDto.setCollectionId(comic.getCollectionId());
+            comic.setComicDto(comicDto);
+
+
             comic.setFrom(userDao.getUserDtoById(rowSet.getInt("from_id")));
             comic.setTo(userDao.getUserDtoById(rowSet.getInt("to_id")));
-            comic.setCollectionId(rowSet.getInt("coll_id"));
+
             return comic;
         } catch (Exception e) {
             System.out.println(e.getMessage());

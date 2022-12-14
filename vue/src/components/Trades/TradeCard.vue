@@ -85,16 +85,15 @@ export default {
             this.recipient = this.trade.users.find(user => {               
                 return user.role == 'recipient';
             }).userDto.id
-            this.comics = [];
+            
             for (let comic of this.trade.comics) {
                 if (comic.from.username == this.$store.state.user.username) {
                     this.userGaveComics.push(comic.comicDto);
                     this.otherUser = comic.to.username
                 } else {
-                    this.userGainComics.push(comic.comicDto)
+                    this.userGainComics.push(comic.comicDto);
                     this.otherUser = comic.from.username
                 }
-                
             }
         },
         startConfirm(message, newFunction) {

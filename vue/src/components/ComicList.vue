@@ -64,6 +64,7 @@ export default {
             }
             this.clickedId = clicked.id;
             this.$emit('down');
+            //console.log(this.comics)
         },
         addDragEvents() {
             if (this.drag) {
