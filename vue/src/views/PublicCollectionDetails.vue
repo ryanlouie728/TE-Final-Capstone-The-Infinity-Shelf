@@ -93,7 +93,7 @@
         You are attempting to access a collection that is either Private or does
         not exist
       </h1>
-      <h3>Go back from whence ye came!</h3>
+      <h3><router-link to="/">Go back</router-link> from whence ye came!</h3>
     </div>
   </div>
 </template>
@@ -224,7 +224,12 @@ export default {
 }
 
 .private {
+  padding-top: 150px;
   text-align: center;
+}
+
+.private a{
+  text-decoration: none;
 }
 
 #left-pane {
